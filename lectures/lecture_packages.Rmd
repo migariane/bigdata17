@@ -117,31 +117,31 @@ http://r-pkgs.had.co.nz/git.html
 ## RStudio and GitHub integration (1 / 7)
 
 <div class="centered">
-<img src="02_packages/create_git_package_1.png" width="600px"/>
+<img src="doc_packages/create_git_package_1.png" width="600px"/>
 </div>
 
 ## RStudio and GitHub integration (2 / 7)
 
 <div class="centered">
-<img src="02_packages/create_git_package_2.png" width="600px"/>
+<img src="doc_packages/create_git_package_2.png" width="600px"/>
 </div>
 
 ## RStudio and GitHub integration (3 / 7)
 
 <div class="centered">
-<img src="02_packages/create_git_package_3.png" width="600px"/>
+<img src="doc_packages/create_git_package_3.png" width="600px"/>
 </div>
 
 ## RStudio and GitHub integration (4 / 7)
 
 <div class="centered">
-<img src="02_packages/create_git_package_4.png" width="600px"/>
+<img src="doc_packages/create_git_package_4.png" width="600px"/>
 </div>
 
 ## RStudio and GitHub integration (5 / 7)
 
 <div class="centered">
-<img src="02_packages/create_git_package_5.png" width="600px"/>
+<img src="doc_packages/create_git_package_5.png" width="600px"/>
 </div>
 
 ## Command line
@@ -157,13 +157,13 @@ git push -u origin master
 ## RStudio and GitHub integration (6 / 7)
 
 <div class="centered">
-<img src="02_packages/create_git_package_6.png" width="600px"/>
+<img src="doc_packages/create_git_package_6.png" width="600px"/>
 </div>
 
 ## RStudio and GitHub integration (7 / 7)
 
 <div class="centered">
-<img src="02_packages/create_git_package_7.png" width="600px"/>
+<img src="doc_packages/create_git_package_7.png" width="600px"/>
 </div>
 
 ## Installing from GitHub
@@ -343,7 +343,7 @@ linmodEst <- function(x, y) {
 ## Configure Build Tools
 
 <div class="centered">
-<img src="02_packages/configure_build_tools.png" width="400px"/>
+<img src="doc_packages/configure_build_tools.png" width="400px"/>
 </div>
 
 ## `man/linmodEst.Rd`
@@ -379,7 +379,7 @@ linmodEst(y, X)
 ## Formatted output
 
 <div class="centered">
-<img src="02_packages/formatted_help.png" width="400px"/>
+<img src="doc_packages/formatted_help.png" width="400px"/>
 </div>
 
 ## `DESCRIPTION`
