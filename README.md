@@ -4,6 +4,7 @@ Computing for Big Data - 2017/2018
 Week 1 - Basic tools
   
     Lecture 1.	Unix scripting, make  
+    
     Lecture 2.	Version control: Git and GitHub
 
 Week 2 - Creating and maintaining R packages
