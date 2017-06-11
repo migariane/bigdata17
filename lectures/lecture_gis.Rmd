@@ -1,5 +1,5 @@
 ---
-title: "Git & GitHub"
+title: "GIS"
 author: "Christine Choirat"
 date: "June 11, 2017"
 output: html_document
