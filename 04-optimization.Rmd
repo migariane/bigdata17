@@ -1,0 +1,15 @@
+# Optimization {#optimization}
+
+In this Chapter, we are going to see how to measure and improve code performance
+
+## Measuring performance
+
+### Profiling
+
+### Benchmarking
+
+## Improving performance
+
+### Introduction to C/C++
+
+### Rcpp
