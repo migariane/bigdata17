@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-08-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -49,6 +49,43 @@
 
 
 
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -68,8 +105,60 @@
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
-<li class="chapter" data-level="3" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>3</b> Basic tools</a></li>
-<li class="chapter" data-level="4" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>4</b> Packages</a></li>
+<li class="chapter" data-level="3" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>3</b> Basic tools</a><ul>
+<li class="chapter" data-level="3.1" data-path="basics.html"><a href="basics.html#command-line-tools"><i class="fa fa-check"></i><b>3.1</b> Command line tools</a></li>
+<li class="chapter" data-level="3.2" data-path="basics.html"><a href="basics.html#git-and-github"><i class="fa fa-check"></i><b>3.2</b> Git and GitHub</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>4</b> Packages</a><ul>
+<li class="chapter" data-level="4.1" data-path="packages.html"><a href="packages.html#why"><i class="fa fa-check"></i><b>4.1</b> Why?</a></li>
+<li class="chapter" data-level="4.2" data-path="packages.html"><a href="packages.html#structure"><i class="fa fa-check"></i><b>4.2</b> Structure</a></li>
+<li class="chapter" data-level="4.3" data-path="packages.html"><a href="packages.html#building-steps"><i class="fa fa-check"></i><b>4.3</b> Building steps</a></li>
+<li class="chapter" data-level="4.4" data-path="packages.html"><a href="packages.html#r-cmd-build"><i class="fa fa-check"></i><b>4.4</b> <code>R CMD build</code></a></li>
+<li class="chapter" data-level="4.5" data-path="packages.html"><a href="packages.html#r-cmd-install"><i class="fa fa-check"></i><b>4.5</b> <code>R CMD INSTALL</code></a></li>
+<li class="chapter" data-level="4.6" data-path="packages.html"><a href="packages.html#r-cmd-check"><i class="fa fa-check"></i><b>4.6</b> <code>R CMD check</code></a></li>
+<li class="chapter" data-level="4.7" data-path="packages.html"><a href="packages.html#building-steps-with-devtools"><i class="fa fa-check"></i><b>4.7</b> Building steps with <code>devtools</code></a></li>
+<li class="chapter" data-level="4.8" data-path="packages.html"><a href="packages.html#creating-an-r-package"><i class="fa fa-check"></i><b>4.8</b> Creating an R package</a><ul>
+<li class="chapter" data-level="4.8.1" data-path="packages.html"><a href="packages.html#utilspackage.skeleton"><i class="fa fa-check"></i><b>4.8.1</b> <code>utils::package.skeleton</code></a></li>
+<li class="chapter" data-level="4.8.2" data-path="packages.html"><a href="packages.html#devtoolscreate"><i class="fa fa-check"></i><b>4.8.2</b> <code>devtools::create</code></a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="packages.html"><a href="packages.html#submitting-to-cran"><i class="fa fa-check"></i><b>4.9</b> Submitting to CRAN</a></li>
+<li class="chapter" data-level="4.10" data-path="packages.html"><a href="packages.html#using-github"><i class="fa fa-check"></i><b>4.10</b> Using GitHub</a></li>
+<li class="chapter" data-level="4.11" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-1-7"><i class="fa fa-check"></i><b>4.11</b> RStudio and GitHub integration (1 / 7)</a></li>
+<li class="chapter" data-level="4.12" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-2-7"><i class="fa fa-check"></i><b>4.12</b> RStudio and GitHub integration (2 / 7)</a></li>
+<li class="chapter" data-level="4.13" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-3-7"><i class="fa fa-check"></i><b>4.13</b> RStudio and GitHub integration (3 / 7)</a></li>
+<li class="chapter" data-level="4.14" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-4-7"><i class="fa fa-check"></i><b>4.14</b> RStudio and GitHub integration (4 / 7)</a></li>
+<li class="chapter" data-level="4.15" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-5-7"><i class="fa fa-check"></i><b>4.15</b> RStudio and GitHub integration (5 / 7)</a></li>
+<li class="chapter" data-level="4.16" data-path="packages.html"><a href="packages.html#command-line"><i class="fa fa-check"></i><b>4.16</b> Command line</a></li>
+<li class="chapter" data-level="4.17" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-6-7"><i class="fa fa-check"></i><b>4.17</b> RStudio and GitHub integration (6 / 7)</a></li>
+<li class="chapter" data-level="4.18" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-7-7"><i class="fa fa-check"></i><b>4.18</b> RStudio and GitHub integration (7 / 7)</a></li>
+<li class="chapter" data-level="4.19" data-path="packages.html"><a href="packages.html#installing-from-github"><i class="fa fa-check"></i><b>4.19</b> Installing from GitHub</a></li>
+<li class="chapter" data-level="4.20" data-path="packages.html"><a href="packages.html#gitignore-rstudio-default"><i class="fa fa-check"></i><b>4.20</b> <code>.gitignore</code> (RStudio default)</a></li>
+<li class="chapter" data-level="4.21" data-path="packages.html"><a href="packages.html#gitignore-github-default"><i class="fa fa-check"></i><b>4.21</b> <code>.gitignore</code> (GitHub default)</a></li>
+<li class="chapter" data-level="4.22" data-path="packages.html"><a href="packages.html#rstudio-projects"><i class="fa fa-check"></i><b>4.22</b> RStudio projects</a></li>
+<li class="chapter" data-level="4.23" data-path="packages.html"><a href="packages.html#project-options"><i class="fa fa-check"></i><b>4.23</b> Project options</a></li>
+<li class="chapter" data-level="4.24" data-path="packages.html"><a href="packages.html#package-documentation"><i class="fa fa-check"></i><b>4.24</b> Package documentation</a></li>
+<li class="chapter" data-level="4.25" data-path="packages.html"><a href="packages.html#process-example"><i class="fa fa-check"></i><b>4.25</b> Process example</a></li>
+<li class="chapter" data-level="4.26" data-path="packages.html"><a href="packages.html#adding-linreg.r-in-r-directory"><i class="fa fa-check"></i><b>4.26</b> Adding <code>linreg.R</code> in <code>R/</code> directory</a></li>
+<li class="chapter" data-level="4.27" data-path="packages.html"><a href="packages.html#running-our-function"><i class="fa fa-check"></i><b>4.27</b> Running our function</a></li>
+<li class="chapter" data-level="4.28" data-path="packages.html"><a href="packages.html#and-compare-with-lm-1-2"><i class="fa fa-check"></i><b>4.28</b> And compare with <code>lm</code> (1 / 2)</a></li>
+<li class="chapter" data-level="4.29" data-path="packages.html"><a href="packages.html#and-compare-with-lm-2-2"><i class="fa fa-check"></i><b>4.29</b> And compare with <code>lm</code> (2 / 2)</a></li>
+<li class="chapter" data-level="4.30" data-path="packages.html"><a href="packages.html#adding-roxygen2-documentation"><i class="fa fa-check"></i><b>4.30</b> Adding ROxygen2 documentation</a></li>
+<li class="chapter" data-level="4.31" data-path="packages.html"><a href="packages.html#configure-build-tools"><i class="fa fa-check"></i><b>4.31</b> Configure Build Tools</a></li>
+<li class="chapter" data-level="4.32" data-path="packages.html"><a href="packages.html#manlinmodest.rd"><i class="fa fa-check"></i><b>4.32</b> <code>man/linmodEst.Rd</code></a></li>
+<li class="chapter" data-level="4.33" data-path="packages.html"><a href="packages.html#formatted-output"><i class="fa fa-check"></i><b>4.33</b> Formatted output</a></li>
+<li class="chapter" data-level="4.34" data-path="packages.html"><a href="packages.html#description"><i class="fa fa-check"></i><b>4.34</b> <code>DESCRIPTION</code></a></li>
+<li class="chapter" data-level="4.35" data-path="packages.html"><a href="packages.html#namespace"><i class="fa fa-check"></i><b>4.35</b> <code>NAMESPACE</code></a></li>
+<li class="chapter" data-level="4.36" data-path="packages.html"><a href="packages.html#s3-basics"><i class="fa fa-check"></i><b>4.36</b> S3 basics</a></li>
+<li class="chapter" data-level="4.37" data-path="packages.html"><a href="packages.html#s3-basics-1"><i class="fa fa-check"></i><b>4.37</b> S3 basics</a></li>
+<li class="chapter" data-level="4.38" data-path="packages.html"><a href="packages.html#s3-and-s4-generics"><i class="fa fa-check"></i><b>4.38</b> S3 and S4 generics</a></li>
+<li class="chapter" data-level="4.39" data-path="packages.html"><a href="packages.html#print"><i class="fa fa-check"></i><b>4.39</b> <code>print</code></a></li>
+<li class="chapter" data-level="4.40" data-path="packages.html"><a href="packages.html#print-1"><i class="fa fa-check"></i><b>4.40</b> <code>print</code></a></li>
+<li class="chapter" data-level="4.41" data-path="packages.html"><a href="packages.html#other-methods"><i class="fa fa-check"></i><b>4.41</b> Other methods</a></li>
+<li class="chapter" data-level="4.42" data-path="packages.html"><a href="packages.html#formulas-and-model-frames"><i class="fa fa-check"></i><b>4.42</b> Formulas and model frames</a></li>
+<li class="chapter" data-level="4.43" data-path="packages.html"><a href="packages.html#unit-tests-and-testthat"><i class="fa fa-check"></i><b>4.43</b> Unit tests and <code>testthat</code></a></li>
+<li class="chapter" data-level="4.44" data-path="packages.html"><a href="packages.html#test_coef.r"><i class="fa fa-check"></i><b>4.44</b> <code>test_coef.R</code></a></li>
+<li class="chapter" data-level="4.45" data-path="packages.html"><a href="packages.html#vignettes"><i class="fa fa-check"></i><b>4.45</b> Vignettes</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="optimization.html"><a href="optimization.html"><i class="fa fa-check"></i><b>5</b> Optimization</a><ul>
 <li class="chapter" data-level="5.1" data-path="optimization.html"><a href="optimization.html#measuring-performance"><i class="fa fa-check"></i><b>5.1</b> Measuring performance</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="optimization.html"><a href="optimization.html#profiling"><i class="fa fa-check"></i><b>5.1.1</b> Profiling</a></li>
@@ -80,10 +169,15 @@
 <li class="chapter" data-level="5.2.2" data-path="optimization.html"><a href="optimization.html#rcpp"><i class="fa fa-check"></i><b>5.2.2</b> Rcpp</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>6</b> Databases</a></li>
+<li class="chapter" data-level="6" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>6</b> Databases</a><ul>
+<li class="chapter" data-level="6.1" data-path="databases.html"><a href="databases.html#overview"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="databases.html"><a href="databases.html#sql"><i class="fa fa-check"></i><b>6.2</b> SQL</a></li>
+<li class="chapter" data-level="6.3" data-path="databases.html"><a href="databases.html#nosql"><i class="fa fa-check"></i><b>6.3</b> noSQL</a></li>
+<li class="chapter" data-level="6.4" data-path="databases.html"><a href="databases.html#r-interfaces"><i class="fa fa-check"></i><b>6.4</b> R interfaces</a></li>
+</ul></li>
 <li class="chapter" data-level="7" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>7</b> Big data</a></li>
 <li class="chapter" data-level="8" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>8</b> Visualization</a></li>
-<li class="chapter" data-level="9" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>9</b> Placeholder</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -173,6 +267,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

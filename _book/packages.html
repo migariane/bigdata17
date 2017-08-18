@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-07-30">
+<meta name="date" content="2017-08-18">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -105,7 +105,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
-<li class="chapter" data-level="3" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>3</b> Basic tools</a></li>
+<li class="chapter" data-level="3" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>3</b> Basic tools</a><ul>
+<li class="chapter" data-level="3.1" data-path="basics.html"><a href="basics.html#command-line-tools"><i class="fa fa-check"></i><b>3.1</b> Command line tools</a></li>
+<li class="chapter" data-level="3.2" data-path="basics.html"><a href="basics.html#git-and-github"><i class="fa fa-check"></i><b>3.2</b> Git and GitHub</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>4</b> Packages</a><ul>
 <li class="chapter" data-level="4.1" data-path="packages.html"><a href="packages.html#why"><i class="fa fa-check"></i><b>4.1</b> Why?</a></li>
 <li class="chapter" data-level="4.2" data-path="packages.html"><a href="packages.html#structure"><i class="fa fa-check"></i><b>4.2</b> Structure</a></li>
@@ -156,11 +159,25 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.44" data-path="packages.html"><a href="packages.html#test_coef.r"><i class="fa fa-check"></i><b>4.44</b> <code>test_coef.R</code></a></li>
 <li class="chapter" data-level="4.45" data-path="packages.html"><a href="packages.html#vignettes"><i class="fa fa-check"></i><b>4.45</b> Vignettes</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="optimization.html"><a href="optimization.html"><i class="fa fa-check"></i><b>5</b> Optimization</a></li>
-<li class="chapter" data-level="6" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>6</b> Databases</a></li>
+<li class="chapter" data-level="5" data-path="optimization.html"><a href="optimization.html"><i class="fa fa-check"></i><b>5</b> Optimization</a><ul>
+<li class="chapter" data-level="5.1" data-path="optimization.html"><a href="optimization.html#measuring-performance"><i class="fa fa-check"></i><b>5.1</b> Measuring performance</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="optimization.html"><a href="optimization.html#profiling"><i class="fa fa-check"></i><b>5.1.1</b> Profiling</a></li>
+<li class="chapter" data-level="5.1.2" data-path="optimization.html"><a href="optimization.html#benchmarking"><i class="fa fa-check"></i><b>5.1.2</b> Benchmarking</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="optimization.html"><a href="optimization.html#improving-performance"><i class="fa fa-check"></i><b>5.2</b> Improving performance</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="optimization.html"><a href="optimization.html#introduction-to-cc"><i class="fa fa-check"></i><b>5.2.1</b> Introduction to C/C++</a></li>
+<li class="chapter" data-level="5.2.2" data-path="optimization.html"><a href="optimization.html#rcpp"><i class="fa fa-check"></i><b>5.2.2</b> Rcpp</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>6</b> Databases</a><ul>
+<li class="chapter" data-level="6.1" data-path="databases.html"><a href="databases.html#overview"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
+<li class="chapter" data-level="6.2" data-path="databases.html"><a href="databases.html#sql"><i class="fa fa-check"></i><b>6.2</b> SQL</a></li>
+<li class="chapter" data-level="6.3" data-path="databases.html"><a href="databases.html#nosql"><i class="fa fa-check"></i><b>6.3</b> noSQL</a></li>
+<li class="chapter" data-level="6.4" data-path="databases.html"><a href="databases.html#r-interfaces"><i class="fa fa-check"></i><b>6.4</b> R interfaces</a></li>
+</ul></li>
 <li class="chapter" data-level="7" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>7</b> Big data</a></li>
 <li class="chapter" data-level="8" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>8</b> Visualization</a></li>
-<li class="chapter" data-level="9" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>9</b> Placeholder</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -577,9 +594,7 @@ LazyData:<span class="st"> </span><span class="ot">TRUE</span></code></pre></div
 }
 
 <span class="kw">hello</span>()</code></pre></div>
-<pre><code>## [1] &quot;Hello World!&quot;
-## attr(,&quot;class&quot;)
-## [1] &quot;hi&quot;</code></pre>
+<pre><code>## [1] &quot;Surprise!&quot;</code></pre>
 </div>
 <div id="s3-basics-1" class="section level2">
 <h2><span class="header-section-number">4.37</span> S3 basics</h2>
@@ -728,6 +743,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

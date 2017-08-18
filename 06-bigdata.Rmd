@@ -1,3 +1,20 @@
 # Big data {#bigdata}
 
-We have finished a nice book.
+In this Chapter, we are going to review different approaches to handle and perform analyses on *data that does not fit in memory*.
+
+We will illustrate the different tools with data from the MovieLens datasets (https://grouplens.org/datasets/movielens/) that collect datasets from the website https://movielens.org/.
+
+There are datasets of different sizes notably:
+
+1. Small (1MB)
+2. Benchmark (~190MB zipped)
+
+## Sampling
+
+## Pure R solutions
+
+## JVM solutions
+
+### h20
+
+### Spark
