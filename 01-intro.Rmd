@@ -70,20 +70,20 @@ There are datasets of different sizes, notably:
 2. Benchmark (~190MB zipped)
 
 ```{r}
-ratings <- read.csv("data/ml-latest-small/ratings.csv")
+ratings <- read.csv("data17/ml-latest-small/ratings.csv")
 head(ratings)
 ```
 ```{r}
-links <- read.csv("data/ml-latest-small/links.csv")
+links <- read.csv("data17/ml-latest-small/links.csv")
 head(links)
 ```
 
 ```{r}
-movies <- read.csv("data/ml-latest-small/movies.csv")
+movies <- read.csv("data17/ml-latest-small/movies.csv")
 head(movies)
 ```
 ```{r}
-tags <- read.csv("data/ml-latest-small/tags.csv")
+tags <- read.csv("data17/ml-latest-small/tags.csv")
 head(tags)
 ```
 
