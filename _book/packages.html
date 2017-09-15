@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Computing for Big Data (BST-262)</title>
   <meta name="description" content="These are the class notes for BST-262.">
-  <meta name="generator" content="bookdown 0.4.1 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Computing for Big Data (BST-262)" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-08-18">
+<meta name="date" content="2017-09-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -103,80 +103,105 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li><a href="./">Computing for Big Data</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
-<li class="chapter" data-level="3" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>3</b> Basic tools</a><ul>
-<li class="chapter" data-level="3.1" data-path="basics.html"><a href="basics.html#command-line-tools"><i class="fa fa-check"></i><b>3.1</b> Command line tools</a></li>
-<li class="chapter" data-level="3.2" data-path="basics.html"><a href="basics.html#git-and-github"><i class="fa fa-check"></i><b>3.2</b> Git and GitHub</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>4</b> Packages</a><ul>
-<li class="chapter" data-level="4.1" data-path="packages.html"><a href="packages.html#why"><i class="fa fa-check"></i><b>4.1</b> Why?</a></li>
-<li class="chapter" data-level="4.2" data-path="packages.html"><a href="packages.html#structure"><i class="fa fa-check"></i><b>4.2</b> Structure</a></li>
-<li class="chapter" data-level="4.3" data-path="packages.html"><a href="packages.html#building-steps"><i class="fa fa-check"></i><b>4.3</b> Building steps</a></li>
-<li class="chapter" data-level="4.4" data-path="packages.html"><a href="packages.html#r-cmd-build"><i class="fa fa-check"></i><b>4.4</b> <code>R CMD build</code></a></li>
-<li class="chapter" data-level="4.5" data-path="packages.html"><a href="packages.html#r-cmd-install"><i class="fa fa-check"></i><b>4.5</b> <code>R CMD INSTALL</code></a></li>
-<li class="chapter" data-level="4.6" data-path="packages.html"><a href="packages.html#r-cmd-check"><i class="fa fa-check"></i><b>4.6</b> <code>R CMD check</code></a></li>
-<li class="chapter" data-level="4.7" data-path="packages.html"><a href="packages.html#building-steps-with-devtools"><i class="fa fa-check"></i><b>4.7</b> Building steps with <code>devtools</code></a></li>
-<li class="chapter" data-level="4.8" data-path="packages.html"><a href="packages.html#creating-an-r-package"><i class="fa fa-check"></i><b>4.8</b> Creating an R package</a><ul>
-<li class="chapter" data-level="4.8.1" data-path="packages.html"><a href="packages.html#utilspackage.skeleton"><i class="fa fa-check"></i><b>4.8.1</b> <code>utils::package.skeleton</code></a></li>
-<li class="chapter" data-level="4.8.2" data-path="packages.html"><a href="packages.html#devtoolscreate"><i class="fa fa-check"></i><b>4.8.2</b> <code>devtools::create</code></a></li>
-</ul></li>
-<li class="chapter" data-level="4.9" data-path="packages.html"><a href="packages.html#submitting-to-cran"><i class="fa fa-check"></i><b>4.9</b> Submitting to CRAN</a></li>
-<li class="chapter" data-level="4.10" data-path="packages.html"><a href="packages.html#using-github"><i class="fa fa-check"></i><b>4.10</b> Using GitHub</a></li>
-<li class="chapter" data-level="4.11" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-1-7"><i class="fa fa-check"></i><b>4.11</b> RStudio and GitHub integration (1 / 7)</a></li>
-<li class="chapter" data-level="4.12" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-2-7"><i class="fa fa-check"></i><b>4.12</b> RStudio and GitHub integration (2 / 7)</a></li>
-<li class="chapter" data-level="4.13" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-3-7"><i class="fa fa-check"></i><b>4.13</b> RStudio and GitHub integration (3 / 7)</a></li>
-<li class="chapter" data-level="4.14" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-4-7"><i class="fa fa-check"></i><b>4.14</b> RStudio and GitHub integration (4 / 7)</a></li>
-<li class="chapter" data-level="4.15" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-5-7"><i class="fa fa-check"></i><b>4.15</b> RStudio and GitHub integration (5 / 7)</a></li>
-<li class="chapter" data-level="4.16" data-path="packages.html"><a href="packages.html#command-line"><i class="fa fa-check"></i><b>4.16</b> Command line</a></li>
-<li class="chapter" data-level="4.17" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-6-7"><i class="fa fa-check"></i><b>4.17</b> RStudio and GitHub integration (6 / 7)</a></li>
-<li class="chapter" data-level="4.18" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-7-7"><i class="fa fa-check"></i><b>4.18</b> RStudio and GitHub integration (7 / 7)</a></li>
-<li class="chapter" data-level="4.19" data-path="packages.html"><a href="packages.html#installing-from-github"><i class="fa fa-check"></i><b>4.19</b> Installing from GitHub</a></li>
-<li class="chapter" data-level="4.20" data-path="packages.html"><a href="packages.html#gitignore-rstudio-default"><i class="fa fa-check"></i><b>4.20</b> <code>.gitignore</code> (RStudio default)</a></li>
-<li class="chapter" data-level="4.21" data-path="packages.html"><a href="packages.html#gitignore-github-default"><i class="fa fa-check"></i><b>4.21</b> <code>.gitignore</code> (GitHub default)</a></li>
-<li class="chapter" data-level="4.22" data-path="packages.html"><a href="packages.html#rstudio-projects"><i class="fa fa-check"></i><b>4.22</b> RStudio projects</a></li>
-<li class="chapter" data-level="4.23" data-path="packages.html"><a href="packages.html#project-options"><i class="fa fa-check"></i><b>4.23</b> Project options</a></li>
-<li class="chapter" data-level="4.24" data-path="packages.html"><a href="packages.html#package-documentation"><i class="fa fa-check"></i><b>4.24</b> Package documentation</a></li>
-<li class="chapter" data-level="4.25" data-path="packages.html"><a href="packages.html#process-example"><i class="fa fa-check"></i><b>4.25</b> Process example</a></li>
-<li class="chapter" data-level="4.26" data-path="packages.html"><a href="packages.html#adding-linreg.r-in-r-directory"><i class="fa fa-check"></i><b>4.26</b> Adding <code>linreg.R</code> in <code>R/</code> directory</a></li>
-<li class="chapter" data-level="4.27" data-path="packages.html"><a href="packages.html#running-our-function"><i class="fa fa-check"></i><b>4.27</b> Running our function</a></li>
-<li class="chapter" data-level="4.28" data-path="packages.html"><a href="packages.html#and-compare-with-lm-1-2"><i class="fa fa-check"></i><b>4.28</b> And compare with <code>lm</code> (1 / 2)</a></li>
-<li class="chapter" data-level="4.29" data-path="packages.html"><a href="packages.html#and-compare-with-lm-2-2"><i class="fa fa-check"></i><b>4.29</b> And compare with <code>lm</code> (2 / 2)</a></li>
-<li class="chapter" data-level="4.30" data-path="packages.html"><a href="packages.html#adding-roxygen2-documentation"><i class="fa fa-check"></i><b>4.30</b> Adding ROxygen2 documentation</a></li>
-<li class="chapter" data-level="4.31" data-path="packages.html"><a href="packages.html#configure-build-tools"><i class="fa fa-check"></i><b>4.31</b> Configure Build Tools</a></li>
-<li class="chapter" data-level="4.32" data-path="packages.html"><a href="packages.html#manlinmodest.rd"><i class="fa fa-check"></i><b>4.32</b> <code>man/linmodEst.Rd</code></a></li>
-<li class="chapter" data-level="4.33" data-path="packages.html"><a href="packages.html#formatted-output"><i class="fa fa-check"></i><b>4.33</b> Formatted output</a></li>
-<li class="chapter" data-level="4.34" data-path="packages.html"><a href="packages.html#description"><i class="fa fa-check"></i><b>4.34</b> <code>DESCRIPTION</code></a></li>
-<li class="chapter" data-level="4.35" data-path="packages.html"><a href="packages.html#namespace"><i class="fa fa-check"></i><b>4.35</b> <code>NAMESPACE</code></a></li>
-<li class="chapter" data-level="4.36" data-path="packages.html"><a href="packages.html#s3-basics"><i class="fa fa-check"></i><b>4.36</b> S3 basics</a></li>
-<li class="chapter" data-level="4.37" data-path="packages.html"><a href="packages.html#s3-basics-1"><i class="fa fa-check"></i><b>4.37</b> S3 basics</a></li>
-<li class="chapter" data-level="4.38" data-path="packages.html"><a href="packages.html#s3-and-s4-generics"><i class="fa fa-check"></i><b>4.38</b> S3 and S4 generics</a></li>
-<li class="chapter" data-level="4.39" data-path="packages.html"><a href="packages.html#print"><i class="fa fa-check"></i><b>4.39</b> <code>print</code></a></li>
-<li class="chapter" data-level="4.40" data-path="packages.html"><a href="packages.html#print-1"><i class="fa fa-check"></i><b>4.40</b> <code>print</code></a></li>
-<li class="chapter" data-level="4.41" data-path="packages.html"><a href="packages.html#other-methods"><i class="fa fa-check"></i><b>4.41</b> Other methods</a></li>
-<li class="chapter" data-level="4.42" data-path="packages.html"><a href="packages.html#formulas-and-model-frames"><i class="fa fa-check"></i><b>4.42</b> Formulas and model frames</a></li>
-<li class="chapter" data-level="4.43" data-path="packages.html"><a href="packages.html#unit-tests-and-testthat"><i class="fa fa-check"></i><b>4.43</b> Unit tests and <code>testthat</code></a></li>
-<li class="chapter" data-level="4.44" data-path="packages.html"><a href="packages.html#test_coef.r"><i class="fa fa-check"></i><b>4.44</b> <code>test_coef.R</code></a></li>
-<li class="chapter" data-level="4.45" data-path="packages.html"><a href="packages.html#vignettes"><i class="fa fa-check"></i><b>4.45</b> Vignettes</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="optimization.html"><a href="optimization.html"><i class="fa fa-check"></i><b>5</b> Optimization</a><ul>
-<li class="chapter" data-level="5.1" data-path="optimization.html"><a href="optimization.html#measuring-performance"><i class="fa fa-check"></i><b>5.1</b> Measuring performance</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="optimization.html"><a href="optimization.html#profiling"><i class="fa fa-check"></i><b>5.1.1</b> Profiling</a></li>
-<li class="chapter" data-level="5.1.2" data-path="optimization.html"><a href="optimization.html#benchmarking"><i class="fa fa-check"></i><b>5.1.2</b> Benchmarking</a></li>
-</ul></li>
-<li class="chapter" data-level="5.2" data-path="optimization.html"><a href="optimization.html#improving-performance"><i class="fa fa-check"></i><b>5.2</b> Improving performance</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="optimization.html"><a href="optimization.html#introduction-to-cc"><i class="fa fa-check"></i><b>5.2.1</b> Introduction to C/C++</a></li>
-<li class="chapter" data-level="5.2.2" data-path="optimization.html"><a href="optimization.html#rcpp"><i class="fa fa-check"></i><b>5.2.2</b> Rcpp</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#prerequisites"><i class="fa fa-check"></i><b>1.1</b> Prerequisites</a></li>
+<li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#syllabus"><i class="fa fa-check"></i><b>1.2</b> Syllabus</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#evaluation"><i class="fa fa-check"></i><b>1.3</b> Evaluation</a></li>
+<li class="chapter" data-level="1.4" data-path="intro.html"><a href="intro.html#software-packages"><i class="fa fa-check"></i><b>1.4</b> Software packages</a></li>
+<li class="chapter" data-level="1.5" data-path="intro.html"><a href="intro.html#datasets"><i class="fa fa-check"></i><b>1.5</b> Datasets</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="intro.html"><a href="intro.html#movielens"><i class="fa fa-check"></i><b>1.5.1</b> MovieLens</a></li>
+<li class="chapter" data-level="1.5.2" data-path="intro.html"><a href="intro.html#airlines-data"><i class="fa fa-check"></i><b>1.5.2</b> Airlines data</a></li>
+<li class="chapter" data-level="1.5.3" data-path="intro.html"><a href="intro.html#census"><i class="fa fa-check"></i><b>1.5.3</b> Census</a></li>
+<li class="chapter" data-level="1.5.4" data-path="intro.html"><a href="intro.html#health-claims"><i class="fa fa-check"></i><b>1.5.4</b> Health claims</a></li>
+<li class="chapter" data-level="1.5.5" data-path="intro.html"><a href="intro.html#gis-pm2.5-exposure"><i class="fa fa-check"></i><b>1.5.5</b> GIS: PM<sub>2.5</sub> exposure</a></li>
+<li class="chapter" data-level="1.5.6" data-path="intro.html"><a href="intro.html#methylation"><i class="fa fa-check"></i><b>1.5.6</b> Methylation?</a></li>
+<li class="chapter" data-level="1.5.7" data-path="intro.html"><a href="intro.html#genomics"><i class="fa fa-check"></i><b>1.5.7</b> Genomics??</a></li>
+<li class="chapter" data-level="1.5.8" data-path="intro.html"><a href="intro.html#gwas"><i class="fa fa-check"></i><b>1.5.8</b> GWAS</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>6</b> Databases</a><ul>
-<li class="chapter" data-level="6.1" data-path="databases.html"><a href="databases.html#overview"><i class="fa fa-check"></i><b>6.1</b> Overview</a></li>
-<li class="chapter" data-level="6.2" data-path="databases.html"><a href="databases.html#sql"><i class="fa fa-check"></i><b>6.2</b> SQL</a></li>
-<li class="chapter" data-level="6.3" data-path="databases.html"><a href="databases.html#nosql"><i class="fa fa-check"></i><b>6.3</b> noSQL</a></li>
-<li class="chapter" data-level="6.4" data-path="databases.html"><a href="databases.html#r-interfaces"><i class="fa fa-check"></i><b>6.4</b> R interfaces</a></li>
+<li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basic tools</a><ul>
+<li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#command-line-tools"><i class="fa fa-check"></i><b>2.1</b> Command line tools</a></li>
+<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#git-and-github"><i class="fa fa-check"></i><b>2.2</b> Git and GitHub</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>7</b> Big data</a></li>
-<li class="chapter" data-level="8" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>8</b> Visualization</a></li>
+<li class="chapter" data-level="3" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>3</b> Packages</a><ul>
+<li class="chapter" data-level="3.1" data-path="packages.html"><a href="packages.html#why"><i class="fa fa-check"></i><b>3.1</b> Why?</a></li>
+<li class="chapter" data-level="3.2" data-path="packages.html"><a href="packages.html#structure"><i class="fa fa-check"></i><b>3.2</b> Structure</a></li>
+<li class="chapter" data-level="3.3" data-path="packages.html"><a href="packages.html#building-steps"><i class="fa fa-check"></i><b>3.3</b> Building steps</a></li>
+<li class="chapter" data-level="3.4" data-path="packages.html"><a href="packages.html#r-cmd-build"><i class="fa fa-check"></i><b>3.4</b> <code>R CMD build</code></a></li>
+<li class="chapter" data-level="3.5" data-path="packages.html"><a href="packages.html#r-cmd-install"><i class="fa fa-check"></i><b>3.5</b> <code>R CMD INSTALL</code></a></li>
+<li class="chapter" data-level="3.6" data-path="packages.html"><a href="packages.html#r-cmd-check"><i class="fa fa-check"></i><b>3.6</b> <code>R CMD check</code></a></li>
+<li class="chapter" data-level="3.7" data-path="packages.html"><a href="packages.html#building-steps-with-devtools"><i class="fa fa-check"></i><b>3.7</b> Building steps with <code>devtools</code></a></li>
+<li class="chapter" data-level="3.8" data-path="packages.html"><a href="packages.html#creating-an-r-package"><i class="fa fa-check"></i><b>3.8</b> Creating an R package</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="packages.html"><a href="packages.html#utilspackage.skeleton"><i class="fa fa-check"></i><b>3.8.1</b> <code>utils::package.skeleton</code></a></li>
+<li class="chapter" data-level="3.8.2" data-path="packages.html"><a href="packages.html#devtoolscreate"><i class="fa fa-check"></i><b>3.8.2</b> <code>devtools::create</code></a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="packages.html"><a href="packages.html#submitting-to-cran"><i class="fa fa-check"></i><b>3.9</b> Submitting to CRAN</a></li>
+<li class="chapter" data-level="3.10" data-path="packages.html"><a href="packages.html#using-github"><i class="fa fa-check"></i><b>3.10</b> Using GitHub</a></li>
+<li class="chapter" data-level="3.11" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-1-7"><i class="fa fa-check"></i><b>3.11</b> RStudio and GitHub integration (1 / 7)</a></li>
+<li class="chapter" data-level="3.12" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-2-7"><i class="fa fa-check"></i><b>3.12</b> RStudio and GitHub integration (2 / 7)</a></li>
+<li class="chapter" data-level="3.13" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-3-7"><i class="fa fa-check"></i><b>3.13</b> RStudio and GitHub integration (3 / 7)</a></li>
+<li class="chapter" data-level="3.14" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-4-7"><i class="fa fa-check"></i><b>3.14</b> RStudio and GitHub integration (4 / 7)</a></li>
+<li class="chapter" data-level="3.15" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-5-7"><i class="fa fa-check"></i><b>3.15</b> RStudio and GitHub integration (5 / 7)</a></li>
+<li class="chapter" data-level="3.16" data-path="packages.html"><a href="packages.html#command-line"><i class="fa fa-check"></i><b>3.16</b> Command line</a></li>
+<li class="chapter" data-level="3.17" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-6-7"><i class="fa fa-check"></i><b>3.17</b> RStudio and GitHub integration (6 / 7)</a></li>
+<li class="chapter" data-level="3.18" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-7-7"><i class="fa fa-check"></i><b>3.18</b> RStudio and GitHub integration (7 / 7)</a></li>
+<li class="chapter" data-level="3.19" data-path="packages.html"><a href="packages.html#installing-from-github"><i class="fa fa-check"></i><b>3.19</b> Installing from GitHub</a></li>
+<li class="chapter" data-level="3.20" data-path="packages.html"><a href="packages.html#gitignore-rstudio-default"><i class="fa fa-check"></i><b>3.20</b> <code>.gitignore</code> (RStudio default)</a></li>
+<li class="chapter" data-level="3.21" data-path="packages.html"><a href="packages.html#gitignore-github-default"><i class="fa fa-check"></i><b>3.21</b> <code>.gitignore</code> (GitHub default)</a></li>
+<li class="chapter" data-level="3.22" data-path="packages.html"><a href="packages.html#rstudio-projects"><i class="fa fa-check"></i><b>3.22</b> RStudio projects</a></li>
+<li class="chapter" data-level="3.23" data-path="packages.html"><a href="packages.html#project-options"><i class="fa fa-check"></i><b>3.23</b> Project options</a></li>
+<li class="chapter" data-level="3.24" data-path="packages.html"><a href="packages.html#package-documentation"><i class="fa fa-check"></i><b>3.24</b> Package documentation</a></li>
+<li class="chapter" data-level="3.25" data-path="packages.html"><a href="packages.html#process-example"><i class="fa fa-check"></i><b>3.25</b> Process example</a></li>
+<li class="chapter" data-level="3.26" data-path="packages.html"><a href="packages.html#adding-linreg.r-in-r-directory"><i class="fa fa-check"></i><b>3.26</b> Adding <code>linreg.R</code> in <code>R/</code> directory</a></li>
+<li class="chapter" data-level="3.27" data-path="packages.html"><a href="packages.html#running-our-function"><i class="fa fa-check"></i><b>3.27</b> Running our function</a></li>
+<li class="chapter" data-level="3.28" data-path="packages.html"><a href="packages.html#and-compare-with-lm-1-2"><i class="fa fa-check"></i><b>3.28</b> And compare with <code>lm</code> (1 / 2)</a></li>
+<li class="chapter" data-level="3.29" data-path="packages.html"><a href="packages.html#and-compare-with-lm-2-2"><i class="fa fa-check"></i><b>3.29</b> And compare with <code>lm</code> (2 / 2)</a></li>
+<li class="chapter" data-level="3.30" data-path="packages.html"><a href="packages.html#adding-roxygen2-documentation"><i class="fa fa-check"></i><b>3.30</b> Adding ROxygen2 documentation</a></li>
+<li class="chapter" data-level="3.31" data-path="packages.html"><a href="packages.html#configure-build-tools"><i class="fa fa-check"></i><b>3.31</b> Configure Build Tools</a></li>
+<li class="chapter" data-level="3.32" data-path="packages.html"><a href="packages.html#manlinmodest.rd"><i class="fa fa-check"></i><b>3.32</b> <code>man/linmodEst.Rd</code></a></li>
+<li class="chapter" data-level="3.33" data-path="packages.html"><a href="packages.html#formatted-output"><i class="fa fa-check"></i><b>3.33</b> Formatted output</a></li>
+<li class="chapter" data-level="3.34" data-path="packages.html"><a href="packages.html#description"><i class="fa fa-check"></i><b>3.34</b> <code>DESCRIPTION</code></a></li>
+<li class="chapter" data-level="3.35" data-path="packages.html"><a href="packages.html#namespace"><i class="fa fa-check"></i><b>3.35</b> <code>NAMESPACE</code></a></li>
+<li class="chapter" data-level="3.36" data-path="packages.html"><a href="packages.html#s3-basics"><i class="fa fa-check"></i><b>3.36</b> S3 basics</a></li>
+<li class="chapter" data-level="3.37" data-path="packages.html"><a href="packages.html#s3-basics-1"><i class="fa fa-check"></i><b>3.37</b> S3 basics</a></li>
+<li class="chapter" data-level="3.38" data-path="packages.html"><a href="packages.html#s3-and-s4-generics"><i class="fa fa-check"></i><b>3.38</b> S3 and S4 generics</a></li>
+<li class="chapter" data-level="3.39" data-path="packages.html"><a href="packages.html#print"><i class="fa fa-check"></i><b>3.39</b> <code>print</code></a></li>
+<li class="chapter" data-level="3.40" data-path="packages.html"><a href="packages.html#print-1"><i class="fa fa-check"></i><b>3.40</b> <code>print</code></a></li>
+<li class="chapter" data-level="3.41" data-path="packages.html"><a href="packages.html#other-methods"><i class="fa fa-check"></i><b>3.41</b> Other methods</a></li>
+<li class="chapter" data-level="3.42" data-path="packages.html"><a href="packages.html#formulas-and-model-frames"><i class="fa fa-check"></i><b>3.42</b> Formulas and model frames</a></li>
+<li class="chapter" data-level="3.43" data-path="packages.html"><a href="packages.html#unit-tests-and-testthat"><i class="fa fa-check"></i><b>3.43</b> Unit tests and <code>testthat</code></a></li>
+<li class="chapter" data-level="3.44" data-path="packages.html"><a href="packages.html#test_coef.r"><i class="fa fa-check"></i><b>3.44</b> <code>test_coef.R</code></a></li>
+<li class="chapter" data-level="3.45" data-path="packages.html"><a href="packages.html#vignettes"><i class="fa fa-check"></i><b>3.45</b> Vignettes</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="optimization.html"><a href="optimization.html"><i class="fa fa-check"></i><b>4</b> Optimization</a><ul>
+<li class="chapter" data-level="4.1" data-path="optimization.html"><a href="optimization.html#measuring-performance"><i class="fa fa-check"></i><b>4.1</b> Measuring performance</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="optimization.html"><a href="optimization.html#profiling"><i class="fa fa-check"></i><b>4.1.1</b> Profiling</a></li>
+<li class="chapter" data-level="4.1.2" data-path="optimization.html"><a href="optimization.html#benchmarking"><i class="fa fa-check"></i><b>4.1.2</b> Benchmarking</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="optimization.html"><a href="optimization.html#improving-performance"><i class="fa fa-check"></i><b>4.2</b> Improving performance</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="optimization.html"><a href="optimization.html#introduction-to-cc"><i class="fa fa-check"></i><b>4.2.1</b> Introduction to C/C++</a></li>
+<li class="chapter" data-level="4.2.2" data-path="optimization.html"><a href="optimization.html#rcpp"><i class="fa fa-check"></i><b>4.2.2</b> Rcpp</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>5</b> Databases</a><ul>
+<li class="chapter" data-level="5.1" data-path="databases.html"><a href="databases.html#overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2" data-path="databases.html"><a href="databases.html#sql"><i class="fa fa-check"></i><b>5.2</b> SQL</a></li>
+<li class="chapter" data-level="5.3" data-path="databases.html"><a href="databases.html#nosql"><i class="fa fa-check"></i><b>5.3</b> noSQL</a></li>
+<li class="chapter" data-level="5.4" data-path="databases.html"><a href="databases.html#r-interfaces"><i class="fa fa-check"></i><b>5.4</b> R interfaces</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>6</b> Big data</a><ul>
+<li class="chapter" data-level="6.1" data-path="bigdata.html"><a href="bigdata.html#reading-big-data-that-fits-in-memory"><i class="fa fa-check"></i><b>6.1</b> Reading big data (that fits in memory)</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="bigdata.html"><a href="bigdata.html#r-package-comparison"><i class="fa fa-check"></i><b>6.1.1</b> R package comparison</a></li>
+<li class="chapter" data-level="6.1.2" data-path="bigdata.html"><a href="bigdata.html#python"><i class="fa fa-check"></i><b>6.1.2</b> Python</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="bigdata.html"><a href="bigdata.html#sampling-can-be-read-not-analyzed-easily"><i class="fa fa-check"></i><b>6.2</b> Sampling (can be read, not analyzed easily)</a></li>
+<li class="chapter" data-level="6.3" data-path="bigdata.html"><a href="bigdata.html#pure-r-solutions"><i class="fa fa-check"></i><b>6.3</b> Pure R solutions</a></li>
+<li class="chapter" data-level="6.4" data-path="bigdata.html"><a href="bigdata.html#jvm-solutions"><i class="fa fa-check"></i><b>6.4</b> JVM solutions</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="bigdata.html"><a href="bigdata.html#h20"><i class="fa fa-check"></i><b>6.4.1</b> h20</a></li>
+<li class="chapter" data-level="6.4.2" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.4.2</b> Spark</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>7</b> Visualization</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -199,9 +224,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
             <section class="normal" id="section-">
 <div id="packages" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> Packages</h1>
+<h1><span class="header-section-number">Chapter 3</span> Packages</h1>
 <div id="why" class="section level2">
-<h2><span class="header-section-number">4.1</span> Why?</h2>
+<h2><span class="header-section-number">3.1</span> Why?</h2>
 <ul>
 <li><p>Organize your code</p></li>
 <li><p>Distribute your code</p></li>
@@ -209,7 +234,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </div>
 <div id="structure" class="section level2">
-<h2><span class="header-section-number">4.2</span> Structure</h2>
+<h2><span class="header-section-number">3.2</span> Structure</h2>
 <ul>
 <li>Folder hierarchy
 <ul>
@@ -228,7 +253,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </div>
 <div id="building-steps" class="section level2">
-<h2><span class="header-section-number">4.3</span> Building steps</h2>
+<h2><span class="header-section-number">3.3</span> Building steps</h2>
 <ul>
 <li><p><code>R CMD build</code></p></li>
 <li><p><code>R CMD INSTALL</code></p></li>
@@ -236,24 +261,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </div>
 <div id="r-cmd-build" class="section level2">
-<h2><span class="header-section-number">4.4</span> <code>R CMD build</code></h2>
+<h2><span class="header-section-number">3.4</span> <code>R CMD build</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">R CMD build --help</code></pre></div>
 <p><em>Build R packages from package sources in the directories specified by ‘pkgdirs’</em></p>
 </div>
 <div id="r-cmd-install" class="section level2">
-<h2><span class="header-section-number">4.5</span> <code>R CMD INSTALL</code></h2>
+<h2><span class="header-section-number">3.5</span> <code>R CMD INSTALL</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">R CMD INSTALL --help</code></pre></div>
 <p><em>Install the add-on packages specified by pkgs. The elements of pkgs can be relative or absolute paths to directories with the package sources, or to gzipped package ‘tar’ archives. The library tree to install to can be specified via ‘–library’. By default, packages are installed in the library tree rooted at the first directory in .libPaths() for an R session run in the current environment.</em></p>
 </div>
 <div id="r-cmd-check" class="section level2">
-<h2><span class="header-section-number">4.6</span> <code>R CMD check</code></h2>
+<h2><span class="header-section-number">3.6</span> <code>R CMD check</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">R CMD check --help</code></pre></div>
 <p><a href="http://r-pkgs.had.co.nz/check.html" class="uri">http://r-pkgs.had.co.nz/check.html</a></p>
 <p><em>Check R packages from package sources, which can be directories or package ‘tar’ archives with extension ‘.tar.gz’, ‘.tar.bz2’, ‘.tar.xz’ or ‘.tgz’.</em></p>
 <p><em>A variety of diagnostic checks on directory structure, index and control files are performed. The package is installed into the log directory and production of the package PDF manual is tested. All examples and tests provided by the package are tested to see if they run successfully. By default code in the vignettes is tested, as is re-building the vignette PDFs.</em></p>
 </div>
 <div id="building-steps-with-devtools" class="section level2">
-<h2><span class="header-section-number">4.7</span> Building steps with <code>devtools</code></h2>
+<h2><span class="header-section-number">3.7</span> Building steps with <code>devtools</code></h2>
 <ul>
 <li><p><code>devtools::build</code></p></li>
 <li><p><code>devtools::install</code></p></li>
@@ -262,9 +287,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </div>
 <div id="creating-an-r-package" class="section level2">
-<h2><span class="header-section-number">4.8</span> Creating an R package</h2>
+<h2><span class="header-section-number">3.8</span> Creating an R package</h2>
 <div id="utilspackage.skeleton" class="section level3">
-<h3><span class="header-section-number">4.8.1</span> <code>utils::package.skeleton</code></h3>
+<h3><span class="header-section-number">3.8.1</span> <code>utils::package.skeleton</code></h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">package.skeleton</span>() <span class="co"># &quot;in &quot;fresh&quot; session (&quot;anRpackage&quot;)</span>
 <span class="kw">package.skeleton</span>(<span class="st">&quot;pkgname&quot;</span>) <span class="co"># in &quot;fresh&quot; session</span>
 
@@ -276,55 +301,55 @@ e &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <span class="kw">package.skeleton</span>(<span class="dt">list =</span> <span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;g&quot;</span>,<span class="st">&quot;d&quot;</span>,<span class="st">&quot;e&quot;</span>), <span class="dt">name =</span> <span class="st">&quot;pkgname&quot;</span>)</code></pre></div>
 </div>
 <div id="devtoolscreate" class="section level3">
-<h3><span class="header-section-number">4.8.2</span> <code>devtools::create</code></h3>
+<h3><span class="header-section-number">3.8.2</span> <code>devtools::create</code></h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">create</span>(<span class="st">&quot;path/to/package/pkgname&quot;</span>)</code></pre></div>
 </div>
 </div>
 <div id="submitting-to-cran" class="section level2">
-<h2><span class="header-section-number">4.9</span> Submitting to CRAN</h2>
+<h2><span class="header-section-number">3.9</span> Submitting to CRAN</h2>
 <div class="centered">
 <p><img src="http://etc.ancient.eu/wp-content/uploads/2014/12/Hydra-1024x521.jpg" width="600px"/></p>
 </div>
 <p><a href="http://r-pkgs.had.co.nz/release.html" class="uri">http://r-pkgs.had.co.nz/release.html</a></p>
 </div>
 <div id="using-github" class="section level2">
-<h2><span class="header-section-number">4.10</span> Using GitHub</h2>
+<h2><span class="header-section-number">3.10</span> Using GitHub</h2>
 <p><a href="http://r-pkgs.had.co.nz/git.html" class="uri">http://r-pkgs.had.co.nz/git.html</a></p>
 <iframe src="http://r-pkgs.had.co.nz/git.html">
 </iframe>
 </div>
 <div id="rstudio-and-github-integration-1-7" class="section level2">
-<h2><span class="header-section-number">4.11</span> RStudio and GitHub integration (1 / 7)</h2>
+<h2><span class="header-section-number">3.11</span> RStudio and GitHub integration (1 / 7)</h2>
 <div class="centered">
 <p><img src="doc_packages/create_git_package_1.png" width="600px"/></p>
 </div>
 </div>
 <div id="rstudio-and-github-integration-2-7" class="section level2">
-<h2><span class="header-section-number">4.12</span> RStudio and GitHub integration (2 / 7)</h2>
+<h2><span class="header-section-number">3.12</span> RStudio and GitHub integration (2 / 7)</h2>
 <div class="centered">
 <p><img src="doc_packages/create_git_package_2.png" width="600px"/></p>
 </div>
 </div>
 <div id="rstudio-and-github-integration-3-7" class="section level2">
-<h2><span class="header-section-number">4.13</span> RStudio and GitHub integration (3 / 7)</h2>
+<h2><span class="header-section-number">3.13</span> RStudio and GitHub integration (3 / 7)</h2>
 <div class="centered">
 <p><img src="doc_packages/create_git_package_3.png" width="600px"/></p>
 </div>
 </div>
 <div id="rstudio-and-github-integration-4-7" class="section level2">
-<h2><span class="header-section-number">4.14</span> RStudio and GitHub integration (4 / 7)</h2>
+<h2><span class="header-section-number">3.14</span> RStudio and GitHub integration (4 / 7)</h2>
 <div class="centered">
 <p><img src="doc_packages/create_git_package_4.png" width="600px"/></p>
 </div>
 </div>
 <div id="rstudio-and-github-integration-5-7" class="section level2">
-<h2><span class="header-section-number">4.15</span> RStudio and GitHub integration (5 / 7)</h2>
+<h2><span class="header-section-number">3.15</span> RStudio and GitHub integration (5 / 7)</h2>
 <div class="centered">
 <p><img src="doc_packages/create_git_package_5.png" width="600px"/></p>
 </div>
 </div>
 <div id="command-line" class="section level2">
-<h2><span class="header-section-number">4.16</span> Command line</h2>
+<h2><span class="header-section-number">3.16</span> Command line</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">git init
 git add *
 git commit -m <span class="st">&quot;First commit&quot;</span>
@@ -332,31 +357,31 @@ git remote add origin git@github.com:harvard-P01/pkgtemplate.git
 git push -u origin master</code></pre></div>
 </div>
 <div id="rstudio-and-github-integration-6-7" class="section level2">
-<h2><span class="header-section-number">4.17</span> RStudio and GitHub integration (6 / 7)</h2>
+<h2><span class="header-section-number">3.17</span> RStudio and GitHub integration (6 / 7)</h2>
 <div class="centered">
 <p><img src="doc_packages/create_git_package_6.png" width="600px"/></p>
 </div>
 </div>
 <div id="rstudio-and-github-integration-7-7" class="section level2">
-<h2><span class="header-section-number">4.18</span> RStudio and GitHub integration (7 / 7)</h2>
+<h2><span class="header-section-number">3.18</span> RStudio and GitHub integration (7 / 7)</h2>
 <div class="centered">
 <p><img src="doc_packages/create_git_package_7.png" width="600px"/></p>
 </div>
 </div>
 <div id="installing-from-github" class="section level2">
-<h2><span class="header-section-number">4.19</span> Installing from GitHub</h2>
+<h2><span class="header-section-number">3.19</span> Installing from GitHub</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;harvard-P01/pkgtemplate&quot;</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;harvard-P01/pkgtemplate&quot;</span>,
                          <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
 <div id="gitignore-rstudio-default" class="section level2">
-<h2><span class="header-section-number">4.20</span> <code>.gitignore</code> (RStudio default)</h2>
+<h2><span class="header-section-number">3.20</span> <code>.gitignore</code> (RStudio default)</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.Rproj.user
 .Rhistory
 .RData</code></pre></div>
 </div>
 <div id="gitignore-github-default" class="section level2">
-<h2><span class="header-section-number">4.21</span> <code>.gitignore</code> (GitHub default)</h2>
+<h2><span class="header-section-number">3.21</span> <code>.gitignore</code> (GitHub default)</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># History files</span>
 .Rhistory
 .Rapp.history
@@ -372,7 +397,7 @@ vignettes/<span class="er">*</span>.html
 vignettes/<span class="er">*</span>.pdf</code></pre></div>
 </div>
 <div id="rstudio-projects" class="section level2">
-<h2><span class="header-section-number">4.22</span> RStudio projects</h2>
+<h2><span class="header-section-number">3.22</span> RStudio projects</h2>
 <ul>
 <li><p><code>.Rproj</code> file extension, in our example <code>pkgtemplate.Rproj</code></p></li>
 <li>A project has its own:
@@ -386,7 +411,7 @@ vignettes/<span class="er">*</span>.pdf</code></pre></div>
 </ul>
 </div>
 <div id="project-options" class="section level2">
-<h2><span class="header-section-number">4.23</span> Project options</h2>
+<h2><span class="header-section-number">3.23</span> Project options</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Version:<span class="st"> </span><span class="fl">1.0</span>
 
 RestoreWorkspace:<span class="st"> </span>Default
@@ -409,7 +434,7 @@ PackageUseDevtools:<span class="st"> </span>Yes
 PackageInstallArgs:<span class="st"> </span>--no-multiarch --with-keep.source</code></pre></div>
 </div>
 <div id="package-documentation" class="section level2">
-<h2><span class="header-section-number">4.24</span> Package documentation</h2>
+<h2><span class="header-section-number">3.24</span> Package documentation</h2>
 <ul>
 <li><p>Functions and methods</p></li>
 <li>Vignettes
@@ -420,14 +445,14 @@ PackageInstallArgs:<span class="st"> </span>--no-multiarch --with-keep.source</c
 </ul>
 </div>
 <div id="process-example" class="section level2">
-<h2><span class="header-section-number">4.25</span> Process example</h2>
+<h2><span class="header-section-number">3.25</span> Process example</h2>
 <p>Creating R Packages: A Tutorial (Friedrich Leisch, 2009 )</p>
 <ul>
 <li><a href="https://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf" class="uri">https://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf</a></li>
 </ul>
 </div>
 <div id="adding-linreg.r-in-r-directory" class="section level2">
-<h2><span class="header-section-number">4.26</span> Adding <code>linreg.R</code> in <code>R/</code> directory</h2>
+<h2><span class="header-section-number">3.26</span> Adding <code>linreg.R</code> in <code>R/</code> directory</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmodEst &lt;-<span class="st"> </span>function(x, y) {
   ## compute QR-decomposition of x
   qx &lt;-<span class="st"> </span><span class="kw">qr</span>(x)
@@ -448,7 +473,7 @@ PackageInstallArgs:<span class="st"> </span>--no-multiarch --with-keep.source</c
 }</code></pre></div>
 </div>
 <div id="running-our-function" class="section level2">
-<h2><span class="header-section-number">4.27</span> Running our function</h2>
+<h2><span class="header-section-number">3.27</span> Running our function</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(cats, <span class="dt">package =</span> <span class="st">&quot;MASS&quot;</span>)
 <span class="kw">linmodEst</span>(<span class="kw">cbind</span>(<span class="dv">1</span>, cats$Bwt), cats$Hwt)</code></pre></div>
 <pre><code>## $coefficients
@@ -466,7 +491,7 @@ PackageInstallArgs:<span class="st"> </span>--no-multiarch --with-keep.source</c
 ## [1] 142</code></pre>
 </div>
 <div id="and-compare-with-lm-1-2" class="section level2">
-<h2><span class="header-section-number">4.28</span> And compare with <code>lm</code> (1 / 2)</h2>
+<h2><span class="header-section-number">3.28</span> And compare with <code>lm</code> (1 / 2)</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Hwt ~<span class="st"> </span>Bwt, <span class="dt">data=</span>cats)
 lm1</code></pre></div>
 <pre><code>## 
@@ -481,7 +506,7 @@ lm1</code></pre></div>
 ##  -0.3566624   4.0340627</code></pre>
 </div>
 <div id="and-compare-with-lm-2-2" class="section level2">
-<h2><span class="header-section-number">4.29</span> And compare with <code>lm</code> (2 / 2)</h2>
+<h2><span class="header-section-number">3.29</span> And compare with <code>lm</code> (2 / 2)</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vcov</span>(lm1)</code></pre></div>
 <pre><code>##             (Intercept)         Bwt
 ## (Intercept)   0.4792475 -0.17058197
@@ -490,7 +515,7 @@ lm1</code></pre></div>
 <pre><code>## [1] 1.452373</code></pre>
 </div>
 <div id="adding-roxygen2-documentation" class="section level2">
-<h2><span class="header-section-number">4.30</span> Adding ROxygen2 documentation</h2>
+<h2><span class="header-section-number">3.30</span> Adding ROxygen2 documentation</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#&#39; Linear regression</span>
 <span class="co">#&#39;</span>
 <span class="co">#&#39; Runs an OLS regression not unlike \code{\link{lm}}</span>
@@ -528,13 +553,13 @@ linmodEst &lt;-<span class="st"> </span>function(x, y) {
 }</code></pre></div>
 </div>
 <div id="configure-build-tools" class="section level2">
-<h2><span class="header-section-number">4.31</span> Configure Build Tools</h2>
+<h2><span class="header-section-number">3.31</span> Configure Build Tools</h2>
 <div class="centered">
 <p><img src="doc_packages/configure_build_tools.png" width="400px"/></p>
 </div>
 </div>
 <div id="manlinmodest.rd" class="section level2">
-<h2><span class="header-section-number">4.32</span> <code>man/linmodEst.Rd</code></h2>
+<h2><span class="header-section-number">3.32</span> <code>man/linmodEst.Rd</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">% Generated by <span class="kw">roxygen2</span> (<span class="fl">4.1.1</span>):<span class="st"> </span>do not edit by hand
 % Please edit documentation in R/linmodEst.R
 \name{linmodEst}
@@ -562,13 +587,13 @@ y &lt;-<span class="st"> </span>mtcars[, <span class="st">&quot;mpg&quot;</span>
 }</code></pre></div>
 </div>
 <div id="formatted-output" class="section level2">
-<h2><span class="header-section-number">4.33</span> Formatted output</h2>
+<h2><span class="header-section-number">3.33</span> Formatted output</h2>
 <div class="centered">
 <p><img src="doc_packages/formatted_help.png" width="400px"/></p>
 </div>
 </div>
 <div id="description" class="section level2">
-<h2><span class="header-section-number">4.34</span> <code>DESCRIPTION</code></h2>
+<h2><span class="header-section-number">3.34</span> <code>DESCRIPTION</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Package:<span class="st"> </span>pkgtemplate
 Type:<span class="st"> </span>Package
 Title:<span class="st"> </span>What the Package <span class="kw">Does</span> (Title Case)
@@ -581,12 +606,12 @@ License:<span class="st"> </span>What license is it under?
 LazyData:<span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
 </div>
 <div id="namespace" class="section level2">
-<h2><span class="header-section-number">4.35</span> <code>NAMESPACE</code></h2>
+<h2><span class="header-section-number">3.35</span> <code>NAMESPACE</code></h2>
 <p><code>export</code>’s automatically generated when parsing ROxygens2 snippets</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">export</span>(linmodEst)</code></pre></div>
 </div>
 <div id="s3-basics" class="section level2">
-<h2><span class="header-section-number">4.36</span> S3 basics</h2>
+<h2><span class="header-section-number">3.36</span> S3 basics</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hello &lt;-<span class="st"> </span>function() {
  s &lt;-<span class="st"> &quot;Hello World!&quot;</span>
  <span class="kw">class</span>(s) &lt;-<span class="st"> &quot;hi&quot;</span>
@@ -594,10 +619,12 @@ LazyData:<span class="st"> </span><span class="ot">TRUE</span></code></pre></div
 }
 
 <span class="kw">hello</span>()</code></pre></div>
-<pre><code>## [1] &quot;Surprise!&quot;</code></pre>
+<pre><code>## [1] &quot;Hello World!&quot;
+## attr(,&quot;class&quot;)
+## [1] &quot;hi&quot;</code></pre>
 </div>
 <div id="s3-basics-1" class="section level2">
-<h2><span class="header-section-number">4.37</span> S3 basics</h2>
+<h2><span class="header-section-number">3.37</span> S3 basics</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">print.hi &lt;-<span class="st"> </span>function(...) {
   <span class="kw">print</span>(<span class="st">&quot;Surprise!&quot;</span>)
 }
@@ -606,7 +633,7 @@ LazyData:<span class="st"> </span><span class="ot">TRUE</span></code></pre></div
 <pre><code>## [1] &quot;Surprise!&quot;</code></pre>
 </div>
 <div id="s3-and-s4-generics" class="section level2">
-<h2><span class="header-section-number">4.38</span> S3 and S4 generics</h2>
+<h2><span class="header-section-number">3.38</span> S3 and S4 generics</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmod &lt;-<span class="st"> </span>function(x, ...)
   <span class="kw">UseMethod</span>(<span class="st">&quot;linmod&quot;</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmod.default &lt;-<span class="st"> </span>function(x, y, ...) {
@@ -621,7 +648,7 @@ LazyData:<span class="st"> </span><span class="ot">TRUE</span></code></pre></div
 }</code></pre></div>
 </div>
 <div id="print" class="section level2">
-<h2><span class="header-section-number">4.39</span> <code>print</code></h2>
+<h2><span class="header-section-number">3.39</span> <code>print</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">print.linmod &lt;-<span class="st"> </span>function(x, ...) {
   <span class="kw">cat</span>(<span class="st">&quot;Call:</span><span class="ch">\n</span><span class="st">&quot;</span>)
   <span class="kw">print</span>(x$call)
@@ -630,7 +657,7 @@ LazyData:<span class="st"> </span><span class="ot">TRUE</span></code></pre></div
 }</code></pre></div>
 </div>
 <div id="print-1" class="section level2">
-<h2><span class="header-section-number">4.40</span> <code>print</code></h2>
+<h2><span class="header-section-number">3.40</span> <code>print</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">Const =</span> <span class="dv">1</span>, <span class="dt">Bwt =</span> cats$Bwt)
 y &lt;-<span class="st"> </span>cats$Hw
 mod1 &lt;-<span class="st"> </span><span class="kw">linmod</span>(x, y)
@@ -643,7 +670,7 @@ mod1</code></pre></div>
 ## -0.3566624  4.0340627</code></pre>
 </div>
 <div id="other-methods" class="section level2">
-<h2><span class="header-section-number">4.41</span> Other methods</h2>
+<h2><span class="header-section-number">3.41</span> Other methods</h2>
 <ul>
 <li><p><code>summary.linmod</code></p></li>
 <li><p><code>print.summary.linmod</code></p></li>
@@ -653,7 +680,7 @@ mod1</code></pre></div>
 </ul>
 </div>
 <div id="formulas-and-model-frames" class="section level2">
-<h2><span class="header-section-number">4.42</span> Formulas and model frames</h2>
+<h2><span class="header-section-number">3.42</span> Formulas and model frames</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmod.formula &lt;-<span class="st"> </span>function(formula, <span class="dt">data =</span> <span class="kw">list</span>(), ...) {
   mf &lt;-<span class="st"> </span><span class="kw">model.frame</span>(<span class="dt">formula =</span> formula, <span class="dt">data =</span> data)
   x &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="kw">attr</span>(mf, <span class="st">&quot;terms&quot;</span>), <span class="dt">data =</span> mf)
@@ -665,7 +692,7 @@ mod1</code></pre></div>
 }</code></pre></div>
 </div>
 <div id="unit-tests-and-testthat" class="section level2">
-<h2><span class="header-section-number">4.43</span> Unit tests and <code>testthat</code></h2>
+<h2><span class="header-section-number">3.43</span> Unit tests and <code>testthat</code></h2>
 <p><a href="http://r-pkgs.had.co.nz/tests.html" class="uri">http://r-pkgs.had.co.nz/tests.html</a></p>
 <p>In package directory:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">use_testthat</span>()</code></pre></div>
@@ -673,7 +700,7 @@ mod1</code></pre></div>
 <p>Test files should start with <code>test</code> to be processed.</p>
 </div>
 <div id="test_coef.r" class="section level2">
-<h2><span class="header-section-number">4.44</span> <code>test_coef.R</code></h2>
+<h2><span class="header-section-number">3.44</span> <code>test_coef.R</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(cats, <span class="dt">package =</span> <span class="st">&quot;MASS&quot;</span>)
 l1 &lt;-<span class="st"> </span><span class="kw">linmod</span>(Hwt ~<span class="st"> </span>Bwt *<span class="st"> </span>Sex, <span class="dt">data =</span> cats)
 l2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Hwt ~<span class="st"> </span>Bwt *<span class="st"> </span>Sex, <span class="dt">data =</span> cats)
@@ -690,7 +717,7 @@ Testing pkgtemplate
 Woot!<span class="st"> </span></code></pre></div>
 </div>
 <div id="vignettes" class="section level2">
-<h2><span class="header-section-number">4.45</span> Vignettes</h2>
+<h2><span class="header-section-number">3.45</span> Vignettes</h2>
 <p><a href="http://r-pkgs.had.co.nz/vignettes.html" class="uri">http://r-pkgs.had.co.nz/vignettes.html</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">use_vignette</span>(<span class="st">&quot;linmod&quot;</span>)</code></pre></div>
 <p><a href="https://github.com/harvard-P01/pkgtemplate/blob/master/vignettes/linmod.Rmd" class="uri">https://github.com/harvard-P01/pkgtemplate/blob/master/vignettes/linmod.Rmd</a></p>
@@ -743,17 +770,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(script.src))
-      script.src  = script.src.replace(/^https?:/, '');
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

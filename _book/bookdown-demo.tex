@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-08-18}
+  \date{2017-09-15}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -144,8 +144,11 @@
 \newtheorem{proposition}{Proposition}[chapter]
 \theoremstyle{definition}
 \newtheorem{example}{Example}[chapter]
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}[chapter]
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
+\newtheorem*{solution}{Solution}
 \begin{document}
 \maketitle
 
@@ -153,104 +156,226 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\chapter{Prerequisites}\label{prerequisites}
-
-This is a \emph{sample} book written in \textbf{Markdown}. You can use
-anything that Pandoc's Markdown supports, e.g., a math equation
-\(a^2 + b^2 = c^2\).
-
-For now, you have to install the development versions of
-\textbf{bookdown} from Github:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{devtools::}\KeywordTok{install_github}\NormalTok{(}\StringTok{"rstudio/bookdown"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-Remember each Rmd file contains one and only one chapter, and a chapter
-is defined by the first-level heading \texttt{\#}.
-
-To compile this example to PDF, you need to install XeLaTeX.
-
 \chapter{Introduction}\label{intro}
 
-You can label chapter and section titles using \texttt{\{\#label\}}
-after them, e.g., we can reference Chapter \ref{intro}. If you do not
-manually label them, there will be automatic labels anyway, e.g.,
-Chapter \ref{methods}.
+\section{Prerequisites}\label{prerequisites}
 
-Figures and tables with captions will be placed in \texttt{figure} and
-\texttt{table} environments, respectively.
+For BST262 (Computing for Big Data), we assume familiarity with the
+material covered in BST260 (Introductio to Data Science).
+
+We will use R to present concepts that are mostly language-agnostic. We
+could have used Python, as in BST261 (Data Science II).
+
+\section{Syllabus}\label{syllabus}
+
+Week 1 - Basic tools
+
+\begin{itemize}
+\tightlist
+\item
+  Lecture 1. Unix scripting, make
+\item
+  Lecture 2. Version control: Git and GitHub (guest lecture: Ista Zhan)
+\end{itemize}
+
+Week 2 - Creating and maintaining R packages
+
+\begin{itemize}
+\tightlist
+\item
+  Lecture 3. Rationale, package structure, available tools
+\item
+  Lecture 4. Basics of software engineering: unit testing, continuous
+  integration, code coverage
+\end{itemize}
+
+Week 3 - Software optimization
+
+\begin{itemize}
+\tightlist
+\item
+  Lecture 5. Measuring performance: profiling and benchmarking tools
+\item
+  Lecture 6. Improving performance: an introduction to C/C++, Rcpp
+\end{itemize}
+
+Week 4 -- Databases
+
+\begin{itemize}
+\tightlist
+\item
+  Lecture 7. Overview of SQL (SQLite, PostgreSQL) and noSQL databases
+  (HBase, MongoDB, Cassandra, BigTable, \ldots{})
+\item
+  Lecture 8. R database interfaces (in particular through dplyr)
+\end{itemize}
+
+Week 5 - Analyzing data that does not fit in memory
+
+\begin{itemize}
+\tightlist
+\item
+  Lecture 9. Pure R solutions (sampling, ff and ffbase, other
+  interpreters). JVM solutions (h20, Spark)
+\item
+  Lecture 10. An introduction to parallel computing; clusters and cloud
+  computing. ``Divide and Conquer'' (MapReduce approaches)
+\end{itemize}
+
+Week 6 -- Visualization
+
+\begin{itemize}
+\tightlist
+\item
+  Lecture 11. Principles of visualization (guest lecture: James Honaker)
+\item
+  Lecture 12. Maps and GIS: principles of GIS, using R as a GIS, PostGIS
+\end{itemize}
+
+Weeks 7 \& 8 - Guest lectures (order and precise schedule TBD)
+
+\begin{itemize}
+\tightlist
+\item
+  Software project management (Danny Brooke)
+\item
+  R and Spark (Ellen Kraffmiller and Robert Treacy) Advanced GIS and
+  remote sensing (TBD)
+\item
+  Cluster architecture (William J. Horka)
+\end{itemize}
+
+\section{Evaluation}\label{evaluation}
+
+Grades will be based on two mandatory problem sets. Each problem set
+will correspond to 50\% (= 50 points) of the final grade. The first
+problem set will be available by the end of week 3 and the second
+problem set by the end of week 6.
+
+You will be required to submit problem set solutions within two weeks.
+Grades, and feedback when appropriate, will be returned two weeks after
+submission.
+
+You will submit a markdown document that combines commented code for
+data analysis and detailed and structured explanations of the algorithms
+and software tools that you used.
+
+\section{Software packages}\label{software-packages}
+
+We will mostly use R in this course. Some examples will be run in
+Python. In genral, we will use free and open-source software programs
+such as PostgreSQL or Spark.
+
+\section{Datasets}\label{datasets}
+
+\subsection{MovieLens}\label{movielens}
+
+MovieLens by
+\citet[\url{https://grouplens.org/datasets/movielens/}]{Harper2015}
+collects datasets from the website \url{https://movielens.org/}.
+
+There are datasets of different sizes, notably:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Small (1MB)
+\item
+  Benchmark (\textasciitilde{}190MB zipped)
+\end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{par}\NormalTok{(}\DataTypeTok{mar =} \KeywordTok{c}\NormalTok{(}\DecValTok{4}\NormalTok{, }\DecValTok{4}\NormalTok{, .}\DecValTok{1}\NormalTok{, .}\DecValTok{1}\NormalTok{))}
-\KeywordTok{plot}\NormalTok{(pressure, }\DataTypeTok{type =} \StringTok{'b'}\NormalTok{, }\DataTypeTok{pch =} \DecValTok{19}\NormalTok{)}
+\NormalTok{ratings <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/ml-latest-small/ratings.csv"}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(ratings)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{figure}
-
-{\centering \includegraphics[width=0.8\linewidth]{bookdown-demo_files/figure-latex/nice-fig-1} 
-
-}
-
-\caption{Here is a nice figure!}\label{fig:nice-fig}
-\end{figure}
-
-Reference a figure by its code chunk label with the \texttt{fig:}
-prefix, e.g., see Figure \ref{fig:nice-fig}. Similarly, you can
-reference tables generated from \texttt{knitr::kable()}, e.g., see Table
-\ref{tab:nice-tab}.
+\begin{verbatim}
+##   userId movieId rating  timestamp
+## 1      1      31    2.5 1260759144
+## 2      1    1029    3.0 1260759179
+## 3      1    1061    3.0 1260759182
+## 4      1    1129    2.0 1260759185
+## 5      1    1172    4.0 1260759205
+## 6      1    1263    2.0 1260759151
+\end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{knitr::}\KeywordTok{kable}\NormalTok{(}
-  \KeywordTok{head}\NormalTok{(iris, }\DecValTok{20}\NormalTok{), }\DataTypeTok{caption =} \StringTok{'Here is a nice table!'}\NormalTok{,}
-  \DataTypeTok{booktabs =} \OtherTok{TRUE}
-\NormalTok{)}
+\NormalTok{links <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/ml-latest-small/links.csv"}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(links)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{table}
+\begin{verbatim}
+##   movieId imdbId tmdbId
+## 1       1 114709    862
+## 2       2 113497   8844
+## 3       3 113228  15602
+## 4       4 114885  31357
+## 5       5 113041  11862
+## 6       6 113277    949
+\end{verbatim}
 
-\caption{\label{tab:nice-tab}Here is a nice table!}
-\centering
-\begin{tabular}[t]{rrrrl}
-\toprule
-Sepal.Length & Sepal.Width & Petal.Length & Petal.Width & Species\\
-\midrule
-5.1 & 3.5 & 1.4 & 0.2 & setosa\\
-4.9 & 3.0 & 1.4 & 0.2 & setosa\\
-4.7 & 3.2 & 1.3 & 0.2 & setosa\\
-4.6 & 3.1 & 1.5 & 0.2 & setosa\\
-5.0 & 3.6 & 1.4 & 0.2 & setosa\\
-\addlinespace
-5.4 & 3.9 & 1.7 & 0.4 & setosa\\
-4.6 & 3.4 & 1.4 & 0.3 & setosa\\
-5.0 & 3.4 & 1.5 & 0.2 & setosa\\
-4.4 & 2.9 & 1.4 & 0.2 & setosa\\
-4.9 & 3.1 & 1.5 & 0.1 & setosa\\
-\addlinespace
-5.4 & 3.7 & 1.5 & 0.2 & setosa\\
-4.8 & 3.4 & 1.6 & 0.2 & setosa\\
-4.8 & 3.0 & 1.4 & 0.1 & setosa\\
-4.3 & 3.0 & 1.1 & 0.1 & setosa\\
-5.8 & 4.0 & 1.2 & 0.2 & setosa\\
-\addlinespace
-5.7 & 4.4 & 1.5 & 0.4 & setosa\\
-5.4 & 3.9 & 1.3 & 0.4 & setosa\\
-5.1 & 3.5 & 1.4 & 0.3 & setosa\\
-5.7 & 3.8 & 1.7 & 0.3 & setosa\\
-5.1 & 3.8 & 1.5 & 0.3 & setosa\\
-\bottomrule
-\end{tabular}
-\end{table}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{movies <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/ml-latest-small/movies.csv"}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(movies)}
+\end{Highlighting}
+\end{Shaded}
 
-You can write citations, too. For example, we are using the
-\textbf{bookdown} package \citep{R-bookdown} in this sample book, which
-was built on top of R Markdown and \textbf{knitr} \citep{xie2015}.
+\begin{verbatim}
+##   movieId                              title
+## 1       1                   Toy Story (1995)
+## 2       2                     Jumanji (1995)
+## 3       3            Grumpier Old Men (1995)
+## 4       4           Waiting to Exhale (1995)
+## 5       5 Father of the Bride Part II (1995)
+## 6       6                        Heat (1995)
+##                                        genres
+## 1 Adventure|Animation|Children|Comedy|Fantasy
+## 2                  Adventure|Children|Fantasy
+## 3                              Comedy|Romance
+## 4                        Comedy|Drama|Romance
+## 5                                      Comedy
+## 6                       Action|Crime|Thriller
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tags <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/ml-latest-small/tags.csv"}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(tags)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   userId movieId                     tag  timestamp
+## 1     15     339 sandra 'boring' bullock 1138537770
+## 2     15    1955                 dentist 1193435061
+## 3     15    7478                Cambodia 1170560997
+## 4     15   32892                 Russian 1170626366
+## 5     15   34162             forgettable 1141391765
+## 6     15   35957                   short 1141391873
+\end{verbatim}
+
+\subsection{Airlines data}\label{airlines-data}
+
+\subsection{Census}\label{census}
+
+\subsection{Health claims}\label{health-claims}
+
+\subsection{\texorpdfstring{GIS: PM\textsubscript{2.5}
+exposure}{GIS: PM2.5 exposure}}\label{gis-pm2.5-exposure}
+
+PM\textsubscript{2.5} exposure
+
+\subsection{Methylation?}\label{methylation}
+
+\subsection{Genomics??}\label{genomics}
+
+\subsection{GWAS}\label{gwas}
 
 \chapter{Basic tools}\label{basics}
 
@@ -992,7 +1117,26 @@ performance
 
 \chapter{Big data}\label{bigdata}
 
-We have finished a nice book.
+In this Chapter, we are going to review different approaches to handle
+and perform analyses on \emph{data that does not fit in memory}.
+
+\section{Reading big data (that fits in
+memory)}\label{reading-big-data-that-fits-in-memory}
+
+\subsection{R package comparison}\label{r-package-comparison}
+
+\subsection{Python}\label{python}
+
+\section{Sampling (can be read, not analyzed
+easily)}\label{sampling-can-be-read-not-analyzed-easily}
+
+\section{Pure R solutions}\label{pure-r-solutions}
+
+\section{JVM solutions}\label{jvm-solutions}
+
+\subsection{h20}\label{h20}
+
+\subsection{Spark}\label{spark}
 
 \chapter{Visualization}\label{visualization}
 

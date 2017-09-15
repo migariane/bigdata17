@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Computing for Big Data (BST262)</title>
+  <meta name="description" content="These are the class notes for BST262.">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Computing for Big Data (BST262)" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="These are the class notes for BST262." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Computing for Big Data (BST262)" />
+  
+  <meta name="twitter:description" content="These are the class notes for BST262." />
+  
+
+<meta name="author" content="Christine Choirat">
+
+
+<meta name="date" content="2017-09-13">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="evaluation.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Computing for Big Data</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
+<li class="chapter" data-level="2" data-path="syllabus.html"><a href="syllabus.html"><i class="fa fa-check"></i><b>2</b> Syllabus</a></li>
+<li class="chapter" data-level="3" data-path="evaluation.html"><a href="evaluation.html"><i class="fa fa-check"></i><b>3</b> Evaluation</a></li>
+<li class="chapter" data-level="4" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>4</b> Introduction</a><ul>
+<li class="chapter" data-level="4.1" data-path="intro.html"><a href="intro.html#software-packages"><i class="fa fa-check"></i><b>4.1</b> Software packages</a></li>
+<li class="chapter" data-level="4.2" data-path="intro.html"><a href="intro.html#datasets"><i class="fa fa-check"></i><b>4.2</b> Datasets</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="intro.html"><a href="intro.html#movielens"><i class="fa fa-check"></i><b>4.2.1</b> MovieLens</a></li>
+<li class="chapter" data-level="4.2.2" data-path="intro.html"><a href="intro.html#airlines-data"><i class="fa fa-check"></i><b>4.2.2</b> Airlines data</a></li>
+<li class="chapter" data-level="4.2.3" data-path="intro.html"><a href="intro.html#census"><i class="fa fa-check"></i><b>4.2.3</b> Census</a></li>
+<li class="chapter" data-level="4.2.4" data-path="intro.html"><a href="intro.html#health-claims"><i class="fa fa-check"></i><b>4.2.4</b> Health claims</a></li>
+<li class="chapter" data-level="4.2.5" data-path="intro.html"><a href="intro.html#gis-pm2.5-exposure"><i class="fa fa-check"></i><b>4.2.5</b> GIS: PM<sub>2.5</sub> exposure</a></li>
+<li class="chapter" data-level="4.2.6" data-path="intro.html"><a href="intro.html#methylation"><i class="fa fa-check"></i><b>4.2.6</b> Methylation?</a></li>
+<li class="chapter" data-level="4.2.7" data-path="intro.html"><a href="intro.html#genomics"><i class="fa fa-check"></i><b>4.2.7</b> Genomics??</a></li>
+<li class="chapter" data-level="4.2.8" data-path="intro.html"><a href="intro.html#gwas"><i class="fa fa-check"></i><b>4.2.8</b> GWAS</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>5</b> Basic tools</a><ul>
+<li class="chapter" data-level="5.1" data-path="basics.html"><a href="basics.html#command-line-tools"><i class="fa fa-check"></i><b>5.1</b> Command line tools</a></li>
+<li class="chapter" data-level="5.2" data-path="basics.html"><a href="basics.html#git-and-github"><i class="fa fa-check"></i><b>5.2</b> Git and GitHub</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>6</b> Packages</a><ul>
+<li class="chapter" data-level="6.1" data-path="packages.html"><a href="packages.html#why"><i class="fa fa-check"></i><b>6.1</b> Why?</a></li>
+<li class="chapter" data-level="6.2" data-path="packages.html"><a href="packages.html#structure"><i class="fa fa-check"></i><b>6.2</b> Structure</a></li>
+<li class="chapter" data-level="6.3" data-path="packages.html"><a href="packages.html#building-steps"><i class="fa fa-check"></i><b>6.3</b> Building steps</a></li>
+<li class="chapter" data-level="6.4" data-path="packages.html"><a href="packages.html#r-cmd-build"><i class="fa fa-check"></i><b>6.4</b> <code>R CMD build</code></a></li>
+<li class="chapter" data-level="6.5" data-path="packages.html"><a href="packages.html#r-cmd-install"><i class="fa fa-check"></i><b>6.5</b> <code>R CMD INSTALL</code></a></li>
+<li class="chapter" data-level="6.6" data-path="packages.html"><a href="packages.html#r-cmd-check"><i class="fa fa-check"></i><b>6.6</b> <code>R CMD check</code></a></li>
+<li class="chapter" data-level="6.7" data-path="packages.html"><a href="packages.html#building-steps-with-devtools"><i class="fa fa-check"></i><b>6.7</b> Building steps with <code>devtools</code></a></li>
+<li class="chapter" data-level="6.8" data-path="packages.html"><a href="packages.html#creating-an-r-package"><i class="fa fa-check"></i><b>6.8</b> Creating an R package</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="packages.html"><a href="packages.html#utilspackage.skeleton"><i class="fa fa-check"></i><b>6.8.1</b> <code>utils::package.skeleton</code></a></li>
+<li class="chapter" data-level="6.8.2" data-path="packages.html"><a href="packages.html#devtoolscreate"><i class="fa fa-check"></i><b>6.8.2</b> <code>devtools::create</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.9" data-path="packages.html"><a href="packages.html#submitting-to-cran"><i class="fa fa-check"></i><b>6.9</b> Submitting to CRAN</a></li>
+<li class="chapter" data-level="6.10" data-path="packages.html"><a href="packages.html#using-github"><i class="fa fa-check"></i><b>6.10</b> Using GitHub</a></li>
+<li class="chapter" data-level="6.11" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-1-7"><i class="fa fa-check"></i><b>6.11</b> RStudio and GitHub integration (1 / 7)</a></li>
+<li class="chapter" data-level="6.12" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-2-7"><i class="fa fa-check"></i><b>6.12</b> RStudio and GitHub integration (2 / 7)</a></li>
+<li class="chapter" data-level="6.13" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-3-7"><i class="fa fa-check"></i><b>6.13</b> RStudio and GitHub integration (3 / 7)</a></li>
+<li class="chapter" data-level="6.14" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-4-7"><i class="fa fa-check"></i><b>6.14</b> RStudio and GitHub integration (4 / 7)</a></li>
+<li class="chapter" data-level="6.15" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-5-7"><i class="fa fa-check"></i><b>6.15</b> RStudio and GitHub integration (5 / 7)</a></li>
+<li class="chapter" data-level="6.16" data-path="packages.html"><a href="packages.html#command-line"><i class="fa fa-check"></i><b>6.16</b> Command line</a></li>
+<li class="chapter" data-level="6.17" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-6-7"><i class="fa fa-check"></i><b>6.17</b> RStudio and GitHub integration (6 / 7)</a></li>
+<li class="chapter" data-level="6.18" data-path="packages.html"><a href="packages.html#rstudio-and-github-integration-7-7"><i class="fa fa-check"></i><b>6.18</b> RStudio and GitHub integration (7 / 7)</a></li>
+<li class="chapter" data-level="6.19" data-path="packages.html"><a href="packages.html#installing-from-github"><i class="fa fa-check"></i><b>6.19</b> Installing from GitHub</a></li>
+<li class="chapter" data-level="6.20" data-path="packages.html"><a href="packages.html#gitignore-rstudio-default"><i class="fa fa-check"></i><b>6.20</b> <code>.gitignore</code> (RStudio default)</a></li>
+<li class="chapter" data-level="6.21" data-path="packages.html"><a href="packages.html#gitignore-github-default"><i class="fa fa-check"></i><b>6.21</b> <code>.gitignore</code> (GitHub default)</a></li>
+<li class="chapter" data-level="6.22" data-path="packages.html"><a href="packages.html#rstudio-projects"><i class="fa fa-check"></i><b>6.22</b> RStudio projects</a></li>
+<li class="chapter" data-level="6.23" data-path="packages.html"><a href="packages.html#project-options"><i class="fa fa-check"></i><b>6.23</b> Project options</a></li>
+<li class="chapter" data-level="6.24" data-path="packages.html"><a href="packages.html#package-documentation"><i class="fa fa-check"></i><b>6.24</b> Package documentation</a></li>
+<li class="chapter" data-level="6.25" data-path="packages.html"><a href="packages.html#process-example"><i class="fa fa-check"></i><b>6.25</b> Process example</a></li>
+<li class="chapter" data-level="6.26" data-path="packages.html"><a href="packages.html#adding-linreg.r-in-r-directory"><i class="fa fa-check"></i><b>6.26</b> Adding <code>linreg.R</code> in <code>R/</code> directory</a></li>
+<li class="chapter" data-level="6.27" data-path="packages.html"><a href="packages.html#running-our-function"><i class="fa fa-check"></i><b>6.27</b> Running our function</a></li>
+<li class="chapter" data-level="6.28" data-path="packages.html"><a href="packages.html#and-compare-with-lm-1-2"><i class="fa fa-check"></i><b>6.28</b> And compare with <code>lm</code> (1 / 2)</a></li>
+<li class="chapter" data-level="6.29" data-path="packages.html"><a href="packages.html#and-compare-with-lm-2-2"><i class="fa fa-check"></i><b>6.29</b> And compare with <code>lm</code> (2 / 2)</a></li>
+<li class="chapter" data-level="6.30" data-path="packages.html"><a href="packages.html#adding-roxygen2-documentation"><i class="fa fa-check"></i><b>6.30</b> Adding ROxygen2 documentation</a></li>
+<li class="chapter" data-level="6.31" data-path="packages.html"><a href="packages.html#configure-build-tools"><i class="fa fa-check"></i><b>6.31</b> Configure Build Tools</a></li>
+<li class="chapter" data-level="6.32" data-path="packages.html"><a href="packages.html#manlinmodest.rd"><i class="fa fa-check"></i><b>6.32</b> <code>man/linmodEst.Rd</code></a></li>
+<li class="chapter" data-level="6.33" data-path="packages.html"><a href="packages.html#formatted-output"><i class="fa fa-check"></i><b>6.33</b> Formatted output</a></li>
+<li class="chapter" data-level="6.34" data-path="packages.html"><a href="packages.html#description"><i class="fa fa-check"></i><b>6.34</b> <code>DESCRIPTION</code></a></li>
+<li class="chapter" data-level="6.35" data-path="packages.html"><a href="packages.html#namespace"><i class="fa fa-check"></i><b>6.35</b> <code>NAMESPACE</code></a></li>
+<li class="chapter" data-level="6.36" data-path="packages.html"><a href="packages.html#s3-basics"><i class="fa fa-check"></i><b>6.36</b> S3 basics</a></li>
+<li class="chapter" data-level="6.37" data-path="packages.html"><a href="packages.html#s3-basics-1"><i class="fa fa-check"></i><b>6.37</b> S3 basics</a></li>
+<li class="chapter" data-level="6.38" data-path="packages.html"><a href="packages.html#s3-and-s4-generics"><i class="fa fa-check"></i><b>6.38</b> S3 and S4 generics</a></li>
+<li class="chapter" data-level="6.39" data-path="packages.html"><a href="packages.html#print"><i class="fa fa-check"></i><b>6.39</b> <code>print</code></a></li>
+<li class="chapter" data-level="6.40" data-path="packages.html"><a href="packages.html#print-1"><i class="fa fa-check"></i><b>6.40</b> <code>print</code></a></li>
+<li class="chapter" data-level="6.41" data-path="packages.html"><a href="packages.html#other-methods"><i class="fa fa-check"></i><b>6.41</b> Other methods</a></li>
+<li class="chapter" data-level="6.42" data-path="packages.html"><a href="packages.html#formulas-and-model-frames"><i class="fa fa-check"></i><b>6.42</b> Formulas and model frames</a></li>
+<li class="chapter" data-level="6.43" data-path="packages.html"><a href="packages.html#unit-tests-and-testthat"><i class="fa fa-check"></i><b>6.43</b> Unit tests and <code>testthat</code></a></li>
+<li class="chapter" data-level="6.44" data-path="packages.html"><a href="packages.html#test_coef.r"><i class="fa fa-check"></i><b>6.44</b> <code>test_coef.R</code></a></li>
+<li class="chapter" data-level="6.45" data-path="packages.html"><a href="packages.html#vignettes"><i class="fa fa-check"></i><b>6.45</b> Vignettes</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="optimization.html"><a href="optimization.html"><i class="fa fa-check"></i><b>7</b> Optimization</a><ul>
+<li class="chapter" data-level="7.1" data-path="optimization.html"><a href="optimization.html#measuring-performance"><i class="fa fa-check"></i><b>7.1</b> Measuring performance</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="optimization.html"><a href="optimization.html#profiling"><i class="fa fa-check"></i><b>7.1.1</b> Profiling</a></li>
+<li class="chapter" data-level="7.1.2" data-path="optimization.html"><a href="optimization.html#benchmarking"><i class="fa fa-check"></i><b>7.1.2</b> Benchmarking</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="optimization.html"><a href="optimization.html#improving-performance"><i class="fa fa-check"></i><b>7.2</b> Improving performance</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="optimization.html"><a href="optimization.html#introduction-to-cc"><i class="fa fa-check"></i><b>7.2.1</b> Introduction to C/C++</a></li>
+<li class="chapter" data-level="7.2.2" data-path="optimization.html"><a href="optimization.html#rcpp"><i class="fa fa-check"></i><b>7.2.2</b> Rcpp</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>8</b> Databases</a><ul>
+<li class="chapter" data-level="8.1" data-path="databases.html"><a href="databases.html#overview"><i class="fa fa-check"></i><b>8.1</b> Overview</a></li>
+<li class="chapter" data-level="8.2" data-path="databases.html"><a href="databases.html#sql"><i class="fa fa-check"></i><b>8.2</b> SQL</a></li>
+<li class="chapter" data-level="8.3" data-path="databases.html"><a href="databases.html#nosql"><i class="fa fa-check"></i><b>8.3</b> noSQL</a></li>
+<li class="chapter" data-level="8.4" data-path="databases.html"><a href="databases.html#r-interfaces"><i class="fa fa-check"></i><b>8.4</b> R interfaces</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>9</b> Big data</a><ul>
+<li class="chapter" data-level="9.1" data-path="bigdata.html"><a href="bigdata.html#reading-big-data-that-fits-in-memory"><i class="fa fa-check"></i><b>9.1</b> Reading big data (that fits in memory)</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="bigdata.html"><a href="bigdata.html#r-package-comparison"><i class="fa fa-check"></i><b>9.1.1</b> R package comparison</a></li>
+<li class="chapter" data-level="9.1.2" data-path="bigdata.html"><a href="bigdata.html#python"><i class="fa fa-check"></i><b>9.1.2</b> Python</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="bigdata.html"><a href="bigdata.html#sampling-can-be-read-not-analyzed-easily"><i class="fa fa-check"></i><b>9.2</b> Sampling (can be read, not analyzed easily)</a></li>
+<li class="chapter" data-level="9.3" data-path="bigdata.html"><a href="bigdata.html#pure-r-solutions"><i class="fa fa-check"></i><b>9.3</b> Pure R solutions</a></li>
+<li class="chapter" data-level="9.4" data-path="bigdata.html"><a href="bigdata.html#jvm-solutions"><i class="fa fa-check"></i><b>9.4</b> JVM solutions</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="bigdata.html"><a href="bigdata.html#h20"><i class="fa fa-check"></i><b>9.4.1</b> h20</a></li>
+<li class="chapter" data-level="9.4.2" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>9.4.2</b> Spark</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>10</b> Visualization</a></li>
+<li class="chapter" data-level="11" data-path="placeholder.html"><a href="placeholder.html"><i class="fa fa-check"></i><b>11</b> Placeholder</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Computing for Big Data (BST262)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="syllabus" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Syllabus</h1>
+<p>Week 1 - Basic tools Lecture 1. Unix scripting, make Readings: <a href="https://swcarpentry.github.io/shell-novice/" class="uri">https://swcarpentry.github.io/shell-novice/</a> Lecture 2. Version control: Git and GitHub (guest lecture: Ista Zhan) Readings: Chacon S. and Straub B. (2014), Chapters 1, 2, 6. Week 2 - Creating and maintaining R packages Lecture 3. Rationale, package structure, available tools Readings: Wickham H. (2015) Lecture 4. Basics of software engineering: unit testing, continuous integration, code coverage Readings: Class notes Week 3 - Software optimization Lecture 5. Lecture 6. Measuring performance: profiling and benchmarking tools Readings: Wickham H. (2014), Chapters “Performance”, “Profiling”, “Memory” Improving performance: an introduction to C/C++, Rcpp Readings: Wickham H. (2014), Chapters “Rcpp”, “R’s C interface”. Eddelbuettel D. (2013), Chapters 1, 2, 3, 4, 8. Week 4 – Databases Lecture 7. Overview of SQL (SQLite, PostgreSQL) and noSQL databases (HBase, MongoDB, Cassandra, BigTable, …) Readings: Class notes Lecture 8. R database interfaces (in particular through dplyr) Readings: Class notes Week 5 - Analyzing data that does not fit in memory Lecture 9. Pure R solutions (sampling, ff and ffbase, other interpreters) JVM solutions (h20, Spark) Readings: Class notes Lecture 10. An introduction to parallel computing; clusters and cloud computing. “Divide and Conquer” (MapReduce approaches) Readings: Class notes Week 6 – Visualization Lecture 11. Principles of visualization (guest lecture: James Honaker) Readings: Class notes Lecture 12. Maps and GIS: principles of GIS, using R as a GIS, PostGIS Readings: Class notes Weeks 7 &amp; 8 - Guest lectures (order and precise schedule TBD) Lecture 13. Lecture 14. Lecture 15. Lecture 16. Software project management (Danny Brooke) R and Spark (Ellen Kraffmiller and Robert Treacy) Advanced GIS and remote sensing (TBD) Cluster architecture (William J. Horka)</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="evaluation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"text": "Edit"
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
