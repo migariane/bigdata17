@@ -89,16 +89,28 @@ head(tags)
 
 ### Airlines data
 
+```{r}
+# https://github.com/h2oai/h2o-2/wiki/Hacking-Airline-DataSet-with-H2O
+```
+
+
 ### Census
 
 ### Health claims
+
+Synthetica Medicare data
+
+```{r}
+# https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DE_Syn_PUF.html
+# Sample 1
+# https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DESample01.html
+```
+
 
 ### GIS: PM~2.5~ exposure
 PM~2.5~ exposure
 
 ### Methylation?
-
-### Genomics??
 
 ### GWAS
 
