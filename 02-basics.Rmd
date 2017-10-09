@@ -1,5 +1,27 @@
 # Basic tools {#basics}
 
+GUI: graphical user interface
+
+CLI: command-line interface
+
+REPL: read-evaluate-print loop
+
 ## Command line tools
+
+### Why use the command line?
+
+- Batch processing
+
+- Cluster and cloud computing
+
+### Basic Unix commands
+
+### Useful tools
+
+#### `less`
+
+#### `vi`
+
+#### `awk`
 
 ## Git and GitHub

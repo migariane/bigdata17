@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-09-15">
+<meta name="date" content="2017-10-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -115,9 +115,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.5.3" data-path="intro.html"><a href="intro.html#census"><i class="fa fa-check"></i><b>2.5.3</b> Census</a></li>
 <li class="chapter" data-level="2.5.4" data-path="intro.html"><a href="intro.html#health-claims"><i class="fa fa-check"></i><b>2.5.4</b> Health claims</a></li>
 <li class="chapter" data-level="2.5.5" data-path="intro.html"><a href="intro.html#gis-pm2.5-exposure"><i class="fa fa-check"></i><b>2.5.5</b> GIS: PM<sub>2.5</sub> exposure</a></li>
-<li class="chapter" data-level="2.5.6" data-path="intro.html"><a href="intro.html#methylation"><i class="fa fa-check"></i><b>2.5.6</b> Methylation?</a></li>
-<li class="chapter" data-level="2.5.7" data-path="intro.html"><a href="intro.html#genomics"><i class="fa fa-check"></i><b>2.5.7</b> Genomics??</a></li>
-<li class="chapter" data-level="2.5.8" data-path="intro.html"><a href="intro.html#gwas"><i class="fa fa-check"></i><b>2.5.8</b> GWAS</a></li>
+<li class="chapter" data-level="2.5.6" data-path="intro.html"><a href="intro.html#methylation-if-there-is-enough-interest"><i class="fa fa-check"></i><b>2.5.6</b> Methylation (if there is enough interest)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>3</b> Basic tools</a><ul>
@@ -228,7 +226,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">Chapter 2</span> Introduction</h1>
 <div id="prerequisites" class="section level2">
 <h2><span class="header-section-number">2.1</span> Prerequisites</h2>
-<p>For BST262 (Computing for Big Data), we assume familiarity with the material covered in BST260 (Introductio to Data Science).</p>
+<p>For BST262 (Computing for Big Data), we assume familiarity with the material covered in BST260 (Introduction to Data Science).</p>
 <p>We will use R to present concepts that are mostly language-agnostic. We could have used Python, as in BST261 (Data Science II).</p>
 </div>
 <div id="syllabus" class="section level2">
@@ -290,7 +288,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li>Small (1MB)</li>
 <li>Benchmark (~190MB zipped)</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ratings &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data17/ml-latest-small/ratings.csv&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ratings &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/data17/ml-latest-small/ratings.csv&quot;</span>)
 <span class="kw">head</span>(ratings)</code></pre></div>
 <pre><code>##   userId movieId rating  timestamp
 ## 1      1      31    2.5 1260759144
@@ -299,7 +297,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 4      1    1129    2.0 1260759185
 ## 5      1    1172    4.0 1260759205
 ## 6      1    1263    2.0 1260759151</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">links &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data17/ml-latest-small/links.csv&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">links &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/data17/ml-latest-small/links.csv&quot;</span>)
 <span class="kw">head</span>(links)</code></pre></div>
 <pre><code>##   movieId imdbId tmdbId
 ## 1       1 114709    862
@@ -308,7 +306,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 4       4 114885  31357
 ## 5       5 113041  11862
 ## 6       6 113277    949</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data17/ml-latest-small/movies.csv&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/data17/ml-latest-small/movies.csv&quot;</span>)
 <span class="kw">head</span>(movies)</code></pre></div>
 <pre><code>##   movieId                              title
 ## 1       1                   Toy Story (1995)
@@ -324,7 +322,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 4                        Comedy|Drama|Romance
 ## 5                                      Comedy
 ## 6                       Action|Crime|Thriller</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tags &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data17/ml-latest-small/tags.csv&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tags &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/data17/ml-latest-small/tags.csv&quot;</span>)
 <span class="kw">head</span>(tags)</code></pre></div>
 <pre><code>##   userId movieId                     tag  timestamp
 ## 1     15     339 sandra &#39;boring&#39; bullock 1138537770
@@ -336,25 +334,24 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="airlines-data" class="section level3">
 <h3><span class="header-section-number">2.5.2</span> Airlines data</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># https://github.com/h2oai/h2o-2/wiki/Hacking-Airline-DataSet-with-H2O</span></code></pre></div>
 </div>
 <div id="census" class="section level3">
 <h3><span class="header-section-number">2.5.3</span> Census</h3>
 </div>
 <div id="health-claims" class="section level3">
 <h3><span class="header-section-number">2.5.4</span> Health claims</h3>
+<p>Synthetica Medicare data</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DE_Syn_PUF.html</span>
+<span class="co"># Sample 1</span>
+<span class="co"># https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DESample01.html</span></code></pre></div>
 </div>
 <div id="gis-pm2.5-exposure" class="section level3">
 <h3><span class="header-section-number">2.5.5</span> GIS: PM<sub>2.5</sub> exposure</h3>
 <p>PM<sub>2.5</sub> exposure</p>
 </div>
-<div id="methylation" class="section level3">
-<h3><span class="header-section-number">2.5.6</span> Methylation?</h3>
-</div>
-<div id="genomics" class="section level3">
-<h3><span class="header-section-number">2.5.7</span> Genomics??</h3>
-</div>
-<div id="gwas" class="section level3">
-<h3><span class="header-section-number">2.5.8</span> GWAS</h3>
+<div id="methylation-if-there-is-enough-interest" class="section level3">
+<h3><span class="header-section-number">2.5.6</span> Methylation (if there is enough interest)</h3>
 
 </div>
 </div>

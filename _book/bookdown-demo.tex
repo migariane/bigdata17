@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-09-15}
+  \date{2017-10-07}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -263,7 +263,7 @@ and software tools that you used.
 \section{Software packages}\label{software-packages}
 
 We will mostly use R in this course. Some examples will be run in
-Python. In genral, we will use free and open-source software programs
+Python. In general, we will use free and open-source software programs
 such as PostgreSQL or Spark.
 
 \section{Datasets}\label{datasets}
@@ -287,7 +287,7 @@ There are datasets of different sizes, notably:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ratings <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/ml-latest-small/ratings.csv"}\NormalTok{)}
+\NormalTok{ratings <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data17/ml-latest-small/ratings.csv"}\NormalTok{)}
 \KeywordTok{head}\NormalTok{(ratings)}
 \end{Highlighting}
 \end{Shaded}
@@ -304,7 +304,7 @@ There are datasets of different sizes, notably:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{links <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/ml-latest-small/links.csv"}\NormalTok{)}
+\NormalTok{links <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data17/ml-latest-small/links.csv"}\NormalTok{)}
 \KeywordTok{head}\NormalTok{(links)}
 \end{Highlighting}
 \end{Shaded}
@@ -321,7 +321,7 @@ There are datasets of different sizes, notably:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{movies <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/ml-latest-small/movies.csv"}\NormalTok{)}
+\NormalTok{movies <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data17/ml-latest-small/movies.csv"}\NormalTok{)}
 \KeywordTok{head}\NormalTok{(movies)}
 \end{Highlighting}
 \end{Shaded}
@@ -345,7 +345,7 @@ There are datasets of different sizes, notably:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{tags <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data/ml-latest-small/tags.csv"}\NormalTok{)}
+\NormalTok{tags <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data17/ml-latest-small/tags.csv"}\NormalTok{)}
 \KeywordTok{head}\NormalTok{(tags)}
 \end{Highlighting}
 \end{Shaded}
@@ -362,9 +362,25 @@ There are datasets of different sizes, notably:
 
 \subsection{Airlines data}\label{airlines-data}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# https://github.com/h2oai/h2o-2/wiki/Hacking-Airline-DataSet-with-H2O}
+\end{Highlighting}
+\end{Shaded}
+
 \subsection{Census}\label{census}
 
 \subsection{Health claims}\label{health-claims}
+
+Synthetica Medicare data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DE_Syn_PUF.html}
+\CommentTok{# Sample 1}
+\CommentTok{# https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DESample01.html}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{\texorpdfstring{GIS: PM\textsubscript{2.5}
 exposure}{GIS: PM2.5 exposure}}\label{gis-pm2.5-exposure}
@@ -372,8 +388,6 @@ exposure}{GIS: PM2.5 exposure}}\label{gis-pm2.5-exposure}
 PM\textsubscript{2.5} exposure
 
 \subsection{Methylation?}\label{methylation}
-
-\subsection{Genomics??}\label{genomics}
 
 \subsection{GWAS}\label{gwas}
 

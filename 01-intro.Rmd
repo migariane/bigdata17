@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-For BST262 (Computing for Big Data), we assume familiarity with the material covered in BST260 (Introductio to Data Science).
+For BST262 (Computing for Big Data), we assume familiarity with the material covered in BST260 (Introduction to Data Science).
 
 We will use R to present concepts that are mostly language-agnostic.  We could have used Python, as in BST261 (Data Science II).
 
@@ -70,20 +70,20 @@ There are datasets of different sizes, notably:
 2. Benchmark (~190MB zipped)
 
 ```{r}
-ratings <- read.csv("data17/ml-latest-small/ratings.csv")
+ratings <- read.csv("~/Dropbox/data17/ml-latest-small/ratings.csv")
 head(ratings)
 ```
 ```{r}
-links <- read.csv("data17/ml-latest-small/links.csv")
+links <- read.csv("~/Dropbox/data17/ml-latest-small/links.csv")
 head(links)
 ```
 
 ```{r}
-movies <- read.csv("data17/ml-latest-small/movies.csv")
+movies <- read.csv("~/Dropbox/data17/ml-latest-small/movies.csv")
 head(movies)
 ```
 ```{r}
-tags <- read.csv("data17/ml-latest-small/tags.csv")
+tags <- read.csv("~/Dropbox/data17/ml-latest-small/tags.csv")
 head(tags)
 ```
 
@@ -92,7 +92,6 @@ head(tags)
 ```{r}
 # https://github.com/h2oai/h2o-2/wiki/Hacking-Airline-DataSet-with-H2O
 ```
-
 
 ### Census
 
@@ -106,11 +105,8 @@ Synthetica Medicare data
 # https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DESample01.html
 ```
 
-
 ### GIS: PM~2.5~ exposure
 PM~2.5~ exposure
 
-### Methylation?
-
-### GWAS
+### Methylation (if there is enough interest)
 
