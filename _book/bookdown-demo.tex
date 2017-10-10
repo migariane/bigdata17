@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-09}
+  \date{2017-10-10}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -165,6 +165,18 @@ material covered in BST260 (Introduction to Data Science).
 
 We will use R to present concepts that are mostly language-agnostic. We
 could have used Python, as in BST261 (Data Science II).
+
+\section{Rationale}\label{rationale}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Available data grows at a much faster rate than available computing
+  capacity.
+\item
+  Statistical software programs such as R were not designed to handle
+  datasets of massive size.
+\end{enumerate}
 
 \section{Syllabus}\label{syllabus}
 
@@ -273,6 +285,10 @@ In general, we will use free and open-source software programs such as
 
 \section{Datasets}\label{datasets}
 
+We have collected datasets to illustrate concepts. They are hosted on a
+\href{https://www.dropbox.com/sh/mt4a7goxsl44swm/AADJK54wOXlDZjABMxN0DJIHa?dl=0}{Dropbox
+folder}.
+
 \subsection{MovieLens}\label{movielens}
 
 MovieLens by
@@ -331,7 +347,7 @@ If there is enough interest, we might present methylation examples.
 
 \section{Contributing with GitHub}\label{contributing-with-github}
 
-If you have suggestions, you can open an issue on GitHub at
+If you have suggestions, you can open a GitHub issue at
 \url{https://github.com/cchoirat/bigdata17/issues}.
 
 If you want to contribute, we welcome
@@ -343,7 +359,7 @@ requests}.
 In this Chapter, we present basic tools that will be important when
 interacting with big data systems, most importantly the command-line
 interface (CLI) in a Unix shell and several utilities (\texttt{less},
-\texttt{vi}, \texttt{awk} and \texttt{make}).
+\texttt{awk}, \texttt{vi} and \texttt{make}).
 
 \section{Command line tools}\label{command-line-tools}
 
@@ -370,13 +386,163 @@ Windows 10).
 
 \subsubsection{\texorpdfstring{\texttt{less}}{less}}\label{less}
 
-\subsubsection{\texorpdfstring{\texttt{vi}}{vi}}\label{vi}
-
 \subsubsection{\texorpdfstring{\texttt{awk}}{awk}}\label{awk}
+
+\subsubsection{\texorpdfstring{\texttt{vi}}{vi}}\label{vi}
 
 \subsection{Example}\label{example}
 
-Let's apply some of the techniques described in \citet{Blackwell2012}.
+Let's apply some of the techniques described in \citet{Blackwell2012} on
+Fisher's Iris data set saved in tab-delimited format. Of course, it is a
+small dataset easily processed with R:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(}\StringTok{"~/Dropbox/Data17/iris/iris.tab"}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(iris, }\DataTypeTok{n =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+\end{verbatim}
+
+In a shell, we can use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head} \NormalTok{-n 6 ~/Dropbox/Data17/iris/iris.tab}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## "Sepal.Length"   "Sepal.Width"   "Petal.Length"  "Petal.Width"   "Species"
+## "1"  5.1 3.5 1.4 0.2 "setosa"
+## "2"  4.9 3   1.4 0.2 "setosa"
+## "3"  4.7 3.2 1.3 0.2 "setosa"
+## "4"  4.6 3.1 1.5 0.2 "setosa"
+## "5"  5   3.6 1.4 0.2 "setosa"
+\end{verbatim}
+
+Suppose that we only need to select two variables in our model,
+\texttt{Sepal.Length} and \texttt{Species}. In R, we can use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris_subset <-}\StringTok{ }\NormalTok{iris[, }\KeywordTok{c}\NormalTok{(}\StringTok{"Sepal.Length"}\NormalTok{, }\StringTok{"Species"}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+or
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris_subset <-}\StringTok{ }\NormalTok{iris[, }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{)]}
+\KeywordTok{head}\NormalTok{(iris_subset)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Sepal.Length Species
+## 1          5.1  setosa
+## 2          4.9  setosa
+## 3          4.7  setosa
+## 4          4.6  setosa
+## 5          5.0  setosa
+## 6          5.4  setosa
+\end{verbatim}
+
+With the tidyverse, we can use \emph{pipes}. The
+\texttt{\%\textgreater{}\%} operator allows for performing chained
+operations.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{suppressMessages}\NormalTok{(}\KeywordTok{library}\NormalTok{(dplyr))}
+
+\NormalTok{iris %>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{5}\NormalTok{) %>%}\StringTok{ }
+\StringTok{  }\KeywordTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Sepal.Length Species
+## 1          5.1  setosa
+## 2          4.9  setosa
+## 3          4.7  setosa
+## 4          4.6  setosa
+## 5          5.0  setosa
+## 6          5.4  setosa
+\end{verbatim}
+
+In a shell, the pipe operator to combine shell commands is
+\texttt{\textbar{}} and we can use:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cut} \NormalTok{-f 1,5 ~/Dropbox/Data17/iris/iris.tab }\KeywordTok{|} \KeywordTok{head} \NormalTok{-n 7}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## "Sepal.Length"   "Species"
+## "1"  0.2
+## "2"  0.2
+## "3"  0.2
+## "4"  0.2
+## "5"  0.2
+## "6"  0.4
+\end{verbatim}
+
+To keep observations with ``Sepal.Length'' greater than 5:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{iris %>%}
+\StringTok{  }\KeywordTok{filter}\NormalTok{(Sepal.Length >}\StringTok{ }\DecValTok{5}\NormalTok{) %>%}\StringTok{ }
+\StringTok{  }\KeywordTok{head}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          5.4         3.9          1.7         0.4  setosa
+## 3          5.4         3.7          1.5         0.2  setosa
+## 4          5.8         4.0          1.2         0.2  setosa
+## 5          5.7         4.4          1.5         0.4  setosa
+## 6          5.4         3.9          1.3         0.4  setosa
+\end{verbatim}
+
+In a shell, we can use the \texttt{AWK} programming language. We start
+from row \texttt{NR} 2 (we could start from row 1, it contains variable
+names) and select rows such that the second variable
+(\texttt{Sepal.Length}) is greater than 5.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{awk} \StringTok{'NR == 2 || $2 > 5'} \NormalTok{~/Dropbox/Data17/iris/iris.tab }\KeywordTok{|} \KeywordTok{head}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## "1"  5.1 3.5 1.4 0.2 "setosa"
+## "6"  5.4 3.9 1.7 0.4 "setosa"
+## "11" 5.4 3.7 1.5 0.2 "setosa"
+## "15" 5.8 4   1.2 0.2 "setosa"
+## "16" 5.7 4.4 1.5 0.4 "setosa"
+## "17" 5.4 3.9 1.3 0.4 "setosa"
+## "18" 5.1 3.5 1.4 0.3 "setosa"
+## "19" 5.7 3.8 1.7 0.3 "setosa"
+## "20" 5.1 3.8 1.5 0.3 "setosa"
+## "21" 5.4 3.4 1.7 0.2 "setosa"
+\end{verbatim}
 
 \section{Makefiles}\label{makefiles}
 

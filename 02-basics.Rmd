@@ -1,6 +1,6 @@
 # Basic tools {#basics}
 
-In this Chapter, we present basic tools that will be important when interacting with big data systems, most importantly the command-line interface (CLI) in a Unix shell and several utilities (`less`, `vi`, `awk` and `make`).
+In this Chapter, we present basic tools that will be important when interacting with big data systems, most importantly the command-line interface (CLI) in a Unix shell and several utilities (`less`, `awk`, `vi` and `make`).
 
 ## Command line tools
 
@@ -20,13 +20,67 @@ We also assume that you have access to a shell, either because you use Linux or 
 
 #### `less`
 
-#### `vi`
-
 #### `awk`
+
+#### `vi`
 
 ### Example
 
-Let's apply some of the techniques described in @Blackwell2012.
+Let's apply some of the techniques described in @Blackwell2012 on Fisher's Iris data set saved in tab-delimited format.  Of course, it is a small dataset easily processed with R:
+
+```{r}
+iris <- read.table("~/Dropbox/Data17/iris/iris.tab")
+head(iris, n = 5)
+```
+
+In a shell, we can use:
+
+```{r, engine='bash'}
+head -n 6 ~/Dropbox/Data17/iris/iris.tab
+```
+
+Suppose that we only need to select two variables in our model, `Sepal.Length` and `Species`.  In R, we can use:
+
+```{r, eval=FALSE}
+iris_subset <- iris[, c("Sepal.Length", "Species")]
+```
+
+or
+
+```{r}
+iris_subset <- iris[, c(1, 5)]
+head(iris_subset)
+```
+
+With the tidyverse, we can use *pipes*.  The `%>%` operator allows for performing chained operations.
+
+```{r}
+suppressMessages(library(dplyr))
+
+iris %>%
+  select(1, 5) %>% 
+  head()
+```
+
+In a shell, the pipe operator to combine shell commands is `|` and we can use:
+
+```{r, engine='bash'}
+cut -f 1,5 ~/Dropbox/Data17/iris/iris.tab | head -n 7
+```
+
+To keep observations with "Sepal.Length" greater than 5:
+
+```{r}
+iris %>%
+  filter(Sepal.Length > 5) %>% 
+  head()
+```
+
+In a shell, we can use the `AWK` programming language.  We start from row `NR` 2 (we could start from row 1, it contains variable names) and select rows such that the second variable (`Sepal.Length`) is greater than 5.
+
+```{r, engine='bash'}
+awk 'NR == 2 || $2 > 5' ~/Dropbox/Data17/iris/iris.tab | head
+```
 
 ## Makefiles
 
