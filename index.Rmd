@@ -8,7 +8,7 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: rstudio/bookdown-demo
-description: "These are the class notes for BST-262."
+github-repo: cchoirat/bigdata17
+description: "Class notes for BST 262"
 ---
 

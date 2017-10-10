@@ -1,12 +1,12 @@
 # Basic tools {#basics}
 
-GUI: graphical user interface
-
-CLI: command-line interface
-
-REPL: read-evaluate-print loop
+In this Chapter, we present basic tools that will be important when interacting with big data systems, most importantly the command-line interface (CLI) in a Unix shell and several utilities (`less`, `vi`, `awk` and `make`).
 
 ## Command line tools
+
+We assume some familiarity with the Unix shell, for example as in http://swcarpentry.github.io/shell-novice/.
+
+We also assume that you have access to a shell, either because you use Linux or OS X or because you have the right tools on Windows (for example [Cygwin](https://www.cygwin.com/) or the Bash shell in Windows 10).
 
 ### Why use the command line?
 
@@ -24,4 +24,33 @@ REPL: read-evaluate-print loop
 
 #### `awk`
 
+### Example
+
+Let's apply some of the techniques described in @Blackwell2012.
+
+## Makefiles
+
 ## Git and GitHub
+
+Guest lecture by [Ista Zahn](https://www.iq.harvard.edu/people/ista-zahn).
+
+## Buffer
+
+```{r}
+ratings <- read.csv("~/Dropbox/data17/ml-latest-small/ratings.csv")
+head(ratings)
+```
+```{r}
+links <- read.csv("~/Dropbox/data17/ml-latest-small/links.csv")
+head(links)
+```
+
+```{r}
+movies <- read.csv("~/Dropbox/data17/ml-latest-small/movies.csv")
+head(movies)
+```
+```{r}
+tags <- read.csv("~/Dropbox/data17/ml-latest-small/tags.csv")
+head(tags)
+```
+

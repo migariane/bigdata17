@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-07}
+  \date{2017-10-09}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -161,7 +161,7 @@
 \section{Prerequisites}\label{prerequisites}
 
 For BST262 (Computing for Big Data), we assume familiarity with the
-material covered in BST260 (Introductio to Data Science).
+material covered in BST260 (Introduction to Data Science).
 
 We will use R to present concepts that are mostly language-agnostic. We
 could have used Python, as in BST261 (Data Science II).
@@ -215,8 +215,8 @@ Week 5 - Analyzing data that does not fit in memory
 \begin{itemize}
 \tightlist
 \item
-  Lecture 9. Pure R solutions (sampling, ff and ffbase, other
-  interpreters). JVM solutions (h20, Spark)
+  Lecture 9. Pure R solutions (sampling, \texttt{ff} and
+  \texttt{ffbase}, other interpreters). JVM solutions (h20, Spark)
 \item
   Lecture 10. An introduction to parallel computing; clusters and cloud
   computing. ``Divide and Conquer'' (MapReduce approaches)
@@ -239,18 +239,19 @@ Weeks 7 \& 8 - Guest lectures (order and precise schedule TBD)
 \item
   Software project management (Danny Brooke)
 \item
-  R and Spark (Ellen Kraffmiller and Robert Treacy) Advanced GIS and
-  remote sensing (TBD)
+  R and Spark (Ellen Kraffmiller and Robert Treacy)
+\item
+  Advanced GIS and remote sensing (TBD)
 \item
   Cluster architecture (William J. Horka)
 \end{itemize}
 
 \section{Evaluation}\label{evaluation}
 
-Grades will be based on two mandatory problem sets. Each problem set
-will correspond to 50\% (= 50 points) of the final grade. The first
-problem set will be available by the end of week 3 and the second
-problem set by the end of week 6.
+Grades will be based on \textbf{two mandatory problem sets}. Each
+problem set will correspond to 50\% (= 50 points) of the final grade.
+The first problem set will be available by the end of week 3 and the
+second problem set by the end of week 6.
 
 You will be required to submit problem set solutions within two weeks.
 Grades, and feedback when appropriate, will be returned two weeks after
@@ -260,11 +261,15 @@ You will submit a markdown document that combines commented code for
 data analysis and detailed and structured explanations of the algorithms
 and software tools that you used.
 
-\section{Software packages}\label{software-packages}
+\section{Software tools and packages}\label{software-tools-and-packages}
 
-We will mostly use R in this course. Some examples will be run in
-Python. In general, we will use free and open-source software programs
-such as PostgreSQL or Spark.
+We will mostly use \href{https://www.r-project.org/}{R} in this course.
+Some examples will be run in \href{https://www.python.org/}{Python}.
+
+In general, we will use free and open-source software programs such as
+\href{https://www.postgresql.org/}{PostgreSQL} /
+\href{http://postgis.net/}{PostGIS} or
+\href{https://spark.apache.org/}{Spark}.
 
 \section{Datasets}\label{datasets}
 
@@ -274,20 +279,117 @@ MovieLens by
 \citet[\url{https://grouplens.org/datasets/movielens/}]{Harper2015}
 collects datasets from the website \url{https://movielens.org/}.
 
-There are datasets of different sizes, notably:
+There are datasets of different sizes. We will use:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Small (1MB)
+  Small (1MB): \url{https://grouplens.org/datasets/movielens/latest/}
 \item
-  Benchmark (\textasciitilde{}190MB zipped)
+  Benchmark (\textasciitilde{}190MB zipped):
+  \url{https://grouplens.org/datasets/movielens/20m/}
 \end{enumerate}
+
+\subsection{Airlines data}\label{airlines-data}
+
+The airlines dataset comes from the U.S. Department of Transportation
+and were used in the
+\href{http://stat-computing.org/dataexpo/2009/}{2009 Data Expo} of the
+American Statistical Association (ASA).
+
+We will use a version curated by \href{https://www.h2o.ai/}{h20o}:
+\url{https://github.com/h2oai/h2o-2/wiki/Hacking-Airline-DataSet-with-H2O}.
+
+\subsection{Insurance claims}\label{insurance-claims}
+
+Claims data contain Protected Health Information (PHI). There are strong
+privacy restrictions to store, use and share this type of data.
+
+We will use
+\href{https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DE_Syn_PUF.html}{synthetic
+data}
+(\href{https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DESample01.html}{Sample
+1}) from the Centers for Medicare and Medicaid Services (CMS).
+
+\subsection{Census}\label{census}
+
+Census data is commonly merged with administrative claims data such as
+Medicare. We will use data from the
+\href{https://www.census.gov/data.html}{Census Bureau}.
+
+\subsection{\texorpdfstring{PM\textsubscript{2.5}
+exposure}{PM2.5 exposure}}\label{pm2.5-exposure}
+
+We will use PM\textsubscript{2.5} exposure data from the
+\href{https://www.epa.gov/aqs}{EPA Air Quality System (AQS)} to
+illustrate GIS linkage concepts.
+
+\subsection{Methylation}\label{methylation}
+
+If there is enough interest, we might present methylation examples.
+
+\section{Contributing with GitHub}\label{contributing-with-github}
+
+If you have suggestions, you can open an issue on GitHub at
+\url{https://github.com/cchoirat/bigdata17/issues}.
+
+If you want to contribute, we welcome
+\href{https://help.github.com/articles/about-pull-requests/}{pull
+requests}.
+
+\chapter{Basic tools}\label{basics}
+
+In this Chapter, we present basic tools that will be important when
+interacting with big data systems, most importantly the command-line
+interface (CLI) in a Unix shell and several utilities (\texttt{less},
+\texttt{vi}, \texttt{awk} and \texttt{make}).
+
+\section{Command line tools}\label{command-line-tools}
+
+We assume some familiarity with the Unix shell, for example as in
+\url{http://swcarpentry.github.io/shell-novice/}.
+
+We also assume that you have access to a shell, either because you use
+Linux or OS X or because you have the right tools on Windows (for
+example \href{https://www.cygwin.com/}{Cygwin} or the Bash shell in
+Windows 10).
+
+\subsection{Why use the command line?}\label{why-use-the-command-line}
+
+\begin{itemize}
+\item
+  Batch processing
+\item
+  Cluster and cloud computing
+\end{itemize}
+
+\subsection{Basic Unix commands}\label{basic-unix-commands}
+
+\subsection{Useful tools}\label{useful-tools}
+
+\subsubsection{\texorpdfstring{\texttt{less}}{less}}\label{less}
+
+\subsubsection{\texorpdfstring{\texttt{vi}}{vi}}\label{vi}
+
+\subsubsection{\texorpdfstring{\texttt{awk}}{awk}}\label{awk}
+
+\subsection{Example}\label{example}
+
+Let's apply some of the techniques described in \citet{Blackwell2012}.
+
+\section{Makefiles}\label{makefiles}
+
+\section{Git and GitHub}\label{git-and-github}
+
+Guest lecture by \href{https://www.iq.harvard.edu/people/ista-zahn}{Ista
+Zahn}.
+
+\section{Buffer}\label{buffer}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{ratings <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data17/ml-latest-small/ratings.csv"}\NormalTok{)}
+\NormalTok{ratings <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"~/Dropbox/data17/ml-latest-small/ratings.csv"}\NormalTok{)}
 \KeywordTok{head}\NormalTok{(ratings)}
 \end{Highlighting}
 \end{Shaded}
@@ -304,7 +406,7 @@ There are datasets of different sizes, notably:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{links <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data17/ml-latest-small/links.csv"}\NormalTok{)}
+\NormalTok{links <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"~/Dropbox/data17/ml-latest-small/links.csv"}\NormalTok{)}
 \KeywordTok{head}\NormalTok{(links)}
 \end{Highlighting}
 \end{Shaded}
@@ -321,7 +423,7 @@ There are datasets of different sizes, notably:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{movies <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data17/ml-latest-small/movies.csv"}\NormalTok{)}
+\NormalTok{movies <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"~/Dropbox/data17/ml-latest-small/movies.csv"}\NormalTok{)}
 \KeywordTok{head}\NormalTok{(movies)}
 \end{Highlighting}
 \end{Shaded}
@@ -345,7 +447,7 @@ There are datasets of different sizes, notably:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{tags <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"data17/ml-latest-small/tags.csv"}\NormalTok{)}
+\NormalTok{tags <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"~/Dropbox/data17/ml-latest-small/tags.csv"}\NormalTok{)}
 \KeywordTok{head}\NormalTok{(tags)}
 \end{Highlighting}
 \end{Shaded}
@@ -359,43 +461,6 @@ There are datasets of different sizes, notably:
 ## 5     15   34162             forgettable 1141391765
 ## 6     15   35957                   short 1141391873
 \end{verbatim}
-
-\subsection{Airlines data}\label{airlines-data}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# https://github.com/h2oai/h2o-2/wiki/Hacking-Airline-DataSet-with-H2O}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{Census}\label{census}
-
-\subsection{Health claims}\label{health-claims}
-
-Synthetica Medicare data
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DE_Syn_PUF.html}
-\CommentTok{# Sample 1}
-\CommentTok{# https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DESample01.html}
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{\texorpdfstring{GIS: PM\textsubscript{2.5}
-exposure}{GIS: PM2.5 exposure}}\label{gis-pm2.5-exposure}
-
-PM\textsubscript{2.5} exposure
-
-\subsection{Methylation?}\label{methylation}
-
-\subsection{GWAS}\label{gwas}
-
-\chapter{Basic tools}\label{basics}
-
-\section{Command line tools}\label{command-line-tools}
-
-\section{Git and GitHub}\label{git-and-github}
 
 \chapter{Packages}\label{packages}
 

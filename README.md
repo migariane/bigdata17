@@ -1,5 +1,6 @@
 # bigdata17
-Computing for Big Data - 2017/2018
+
+BST 262: Computing for Big Data - 2017/2018
 
 Week 1 - Basic tools
   

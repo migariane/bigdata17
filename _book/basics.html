@@ -6,20 +6,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Computing for Big Data (BST-262)</title>
-  <meta name="description" content="These are the class notes for BST-262.">
+  <meta name="description" content="Class notes for BST 262">
   <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Computing for Big Data (BST-262)" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="These are the class notes for BST-262." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  <meta property="og:description" content="Class notes for BST 262" />
+  <meta name="github-repo" content="cchoirat/bigdata17" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Computing for Big Data (BST-262)" />
   
-  <meta name="twitter:description" content="These are the class notes for BST-262." />
+  <meta name="twitter:description" content="Class notes for BST 262" />
   
 
 <meta name="author" content="Christine Choirat">
@@ -49,6 +49,43 @@
 
 
 
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -71,23 +108,27 @@
 <li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#prerequisites"><i class="fa fa-check"></i><b>2.1</b> Prerequisites</a></li>
 <li class="chapter" data-level="2.2" data-path="intro.html"><a href="intro.html#syllabus"><i class="fa fa-check"></i><b>2.2</b> Syllabus</a></li>
 <li class="chapter" data-level="2.3" data-path="intro.html"><a href="intro.html#evaluation"><i class="fa fa-check"></i><b>2.3</b> Evaluation</a></li>
-<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#software-packages"><i class="fa fa-check"></i><b>2.4</b> Software packages</a></li>
+<li class="chapter" data-level="2.4" data-path="intro.html"><a href="intro.html#software-tools-and-packages"><i class="fa fa-check"></i><b>2.4</b> Software tools and packages</a></li>
 <li class="chapter" data-level="2.5" data-path="intro.html"><a href="intro.html#datasets"><i class="fa fa-check"></i><b>2.5</b> Datasets</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="intro.html"><a href="intro.html#movielens"><i class="fa fa-check"></i><b>2.5.1</b> MovieLens</a></li>
 <li class="chapter" data-level="2.5.2" data-path="intro.html"><a href="intro.html#airlines-data"><i class="fa fa-check"></i><b>2.5.2</b> Airlines data</a></li>
-<li class="chapter" data-level="2.5.3" data-path="intro.html"><a href="intro.html#census"><i class="fa fa-check"></i><b>2.5.3</b> Census</a></li>
-<li class="chapter" data-level="2.5.4" data-path="intro.html"><a href="intro.html#health-claims"><i class="fa fa-check"></i><b>2.5.4</b> Health claims</a></li>
-<li class="chapter" data-level="2.5.5" data-path="intro.html"><a href="intro.html#gis-pm2.5-exposure"><i class="fa fa-check"></i><b>2.5.5</b> GIS: PM<sub>2.5</sub> exposure</a></li>
-<li class="chapter" data-level="2.5.6" data-path="intro.html"><a href="intro.html#methylation-if-there-is-enough-interest"><i class="fa fa-check"></i><b>2.5.6</b> Methylation (if there is enough interest)</a></li>
+<li class="chapter" data-level="2.5.3" data-path="intro.html"><a href="intro.html#insurance-claims"><i class="fa fa-check"></i><b>2.5.3</b> Insurance claims</a></li>
+<li class="chapter" data-level="2.5.4" data-path="intro.html"><a href="intro.html#census"><i class="fa fa-check"></i><b>2.5.4</b> Census</a></li>
+<li class="chapter" data-level="2.5.5" data-path="intro.html"><a href="intro.html#pm2.5-exposure"><i class="fa fa-check"></i><b>2.5.5</b> PM<sub>2.5</sub> exposure</a></li>
+<li class="chapter" data-level="2.5.6" data-path="intro.html"><a href="intro.html#methylation"><i class="fa fa-check"></i><b>2.5.6</b> Methylation</a></li>
 </ul></li>
+<li class="chapter" data-level="2.6" data-path="intro.html"><a href="intro.html#contributing-with-github"><i class="fa fa-check"></i><b>2.6</b> Contributing with GitHub</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>3</b> Basic tools</a><ul>
 <li class="chapter" data-level="3.1" data-path="basics.html"><a href="basics.html#command-line-tools"><i class="fa fa-check"></i><b>3.1</b> Command line tools</a><ul>
 <li class="chapter" data-level="3.1.1" data-path="basics.html"><a href="basics.html#why-use-the-command-line"><i class="fa fa-check"></i><b>3.1.1</b> Why use the command line?</a></li>
 <li class="chapter" data-level="3.1.2" data-path="basics.html"><a href="basics.html#basic-unix-commands"><i class="fa fa-check"></i><b>3.1.2</b> Basic Unix commands</a></li>
 <li class="chapter" data-level="3.1.3" data-path="basics.html"><a href="basics.html#useful-tools"><i class="fa fa-check"></i><b>3.1.3</b> Useful tools</a></li>
+<li class="chapter" data-level="3.1.4" data-path="basics.html"><a href="basics.html#example"><i class="fa fa-check"></i><b>3.1.4</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="basics.html"><a href="basics.html#git-and-github"><i class="fa fa-check"></i><b>3.2</b> Git and GitHub</a></li>
+<li class="chapter" data-level="3.2" data-path="basics.html"><a href="basics.html#makefiles"><i class="fa fa-check"></i><b>3.2</b> Makefiles</a></li>
+<li class="chapter" data-level="3.3" data-path="basics.html"><a href="basics.html#git-and-github"><i class="fa fa-check"></i><b>3.3</b> Git and GitHub</a></li>
+<li class="chapter" data-level="3.4" data-path="basics.html"><a href="basics.html#buffer"><i class="fa fa-check"></i><b>3.4</b> Buffer</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>4</b> Packages</a><ul>
 <li class="chapter" data-level="4.1" data-path="packages.html"><a href="packages.html#why"><i class="fa fa-check"></i><b>4.1</b> Why?</a></li>
@@ -191,11 +232,11 @@
             <section class="normal" id="section-">
 <div id="basics" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Basic tools</h1>
-<p>GUI: graphical user interface</p>
-<p>CLI: command-line interface</p>
-<p>REPL: read-evaluate-print loop</p>
+<p>In this Chapter, we present basic tools that will be important when interacting with big data systems, most importantly the command-line interface (CLI) in a Unix shell and several utilities (<code>less</code>, <code>vi</code>, <code>awk</code> and <code>make</code>).</p>
 <div id="command-line-tools" class="section level2">
 <h2><span class="header-section-number">3.1</span> Command line tools</h2>
+<p>We assume some familiarity with the Unix shell, for example as in <a href="http://swcarpentry.github.io/shell-novice/" class="uri">http://swcarpentry.github.io/shell-novice/</a>.</p>
+<p>We also assume that you have access to a shell, either because you use Linux or OS X or because you have the right tools on Windows (for example <a href="https://www.cygwin.com/">Cygwin</a> or the Bash shell in Windows 10).</p>
 <div id="why-use-the-command-line" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Why use the command line?</h3>
 <ul>
@@ -218,10 +259,70 @@
 <h4><span class="header-section-number">3.1.3.3</span> <code>awk</code></h4>
 </div>
 </div>
+<div id="example" class="section level3">
+<h3><span class="header-section-number">3.1.4</span> Example</h3>
+<p>Let’s apply some of the techniques described in <span class="citation">Blackwell and Sen (<a href="#ref-Blackwell2012">2012</a>)</span>.</p>
+</div>
+</div>
+<div id="makefiles" class="section level2">
+<h2><span class="header-section-number">3.2</span> Makefiles</h2>
 </div>
 <div id="git-and-github" class="section level2">
-<h2><span class="header-section-number">3.2</span> Git and GitHub</h2>
+<h2><span class="header-section-number">3.3</span> Git and GitHub</h2>
+<p>Guest lecture by <a href="https://www.iq.harvard.edu/people/ista-zahn">Ista Zahn</a>.</p>
+</div>
+<div id="buffer" class="section level2">
+<h2><span class="header-section-number">3.4</span> Buffer</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ratings &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/data17/ml-latest-small/ratings.csv&quot;</span>)
+<span class="kw">head</span>(ratings)</code></pre></div>
+<pre><code>##   userId movieId rating  timestamp
+## 1      1      31    2.5 1260759144
+## 2      1    1029    3.0 1260759179
+## 3      1    1061    3.0 1260759182
+## 4      1    1129    2.0 1260759185
+## 5      1    1172    4.0 1260759205
+## 6      1    1263    2.0 1260759151</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">links &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/data17/ml-latest-small/links.csv&quot;</span>)
+<span class="kw">head</span>(links)</code></pre></div>
+<pre><code>##   movieId imdbId tmdbId
+## 1       1 114709    862
+## 2       2 113497   8844
+## 3       3 113228  15602
+## 4       4 114885  31357
+## 5       5 113041  11862
+## 6       6 113277    949</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">movies &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/data17/ml-latest-small/movies.csv&quot;</span>)
+<span class="kw">head</span>(movies)</code></pre></div>
+<pre><code>##   movieId                              title
+## 1       1                   Toy Story (1995)
+## 2       2                     Jumanji (1995)
+## 3       3            Grumpier Old Men (1995)
+## 4       4           Waiting to Exhale (1995)
+## 5       5 Father of the Bride Part II (1995)
+## 6       6                        Heat (1995)
+##                                        genres
+## 1 Adventure|Animation|Children|Comedy|Fantasy
+## 2                  Adventure|Children|Fantasy
+## 3                              Comedy|Romance
+## 4                        Comedy|Drama|Romance
+## 5                                      Comedy
+## 6                       Action|Crime|Thriller</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tags &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/data17/ml-latest-small/tags.csv&quot;</span>)
+<span class="kw">head</span>(tags)</code></pre></div>
+<pre><code>##   userId movieId                     tag  timestamp
+## 1     15     339 sandra &#39;boring&#39; bullock 1138537770
+## 2     15    1955                 dentist 1193435061
+## 3     15    7478                Cambodia 1170560997
+## 4     15   32892                 Russian 1170626366
+## 5     15   34162             forgettable 1141391765
+## 6     15   35957                   short 1141391873</code></pre>
 
+</div>
+</div>
+<h3> Placeholder</h3>
+<div id="refs" class="references">
+<div id="ref-Blackwell2012">
+<p>Blackwell, Matthew, and Maya Sen. 2012. “Large Datasets and You: A Field Guide.” <em>The Political Methodologist</em> 20 (1): 2–5. <a href="https://scholar.harvard.edu/files/msen/files/blackwell_sen_tpm.pdf" class="uri">https://scholar.harvard.edu/files/msen/files/blackwell_sen_tpm.pdf</a>.</p>
 </div>
 </div>
             </section>
