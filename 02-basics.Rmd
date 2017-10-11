@@ -82,6 +82,10 @@ In a shell, we can use the `AWK` programming language.  We start from row `NR` 2
 awk 'NR == 2 || $2 > 5' ~/Dropbox/Data17/iris/iris.tab | head
 ```
 
+```{exercise}
+The iris dataset is also saved in .csv format at `~/Dropbox/Data17/iris/iris.csv`.  Use `AWK` and `tail` to select the last 5 observations where `Sepal.Width` is larger than 3.5 and `Petal.Length` is smaller than 1.5.
+```
+
 ## Makefiles
 
 ## Git and GitHub

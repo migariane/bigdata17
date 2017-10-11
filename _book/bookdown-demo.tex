@@ -149,6 +149,7 @@
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 \newtheorem*{solution}{Solution}
+\let\BeginKnitrBlock\begin \let\EndKnitrBlock\end
 \begin{document}
 \maketitle
 
@@ -543,6 +544,15 @@ names) and select rows such that the second variable
 ## "20" 5.1 3.8 1.5 0.3 "setosa"
 ## "21" 5.4 3.4 1.7 0.2 "setosa"
 \end{verbatim}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:unnamed-chunk-9}{}{\label{exr:unnamed-chunk-9} }The
+iris dataset is also saved in .csv format at
+\texttt{\textasciitilde{}/Dropbox/Data17/iris/iris.csv}. Use
+\texttt{AWK} and \texttt{tail} to select the last 5 observations where
+\texttt{Sepal.Width} is larger than 3.5 and \texttt{Petal.Length} is
+smaller than 1.5.
+\EndKnitrBlock{exercise}
 
 \section{Makefiles}\label{makefiles}
 
