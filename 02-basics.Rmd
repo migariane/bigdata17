@@ -76,7 +76,7 @@ iris %>%
   head()
 ```
 
-In a shell, we can use the `AWK` programming language.  We start from row `NR` 2 (we could start from row 1, it contains variable names) and select rows such that the second variable (`Sepal.Length`) is greater than 5.
+In the shell, we can use the `AWK` programming language.  We start from row `NR` 2 (we could start from row 1, it contains variable names) and select rows such that the second variable (`Sepal.Length`) is greater than 5.
 
 ```{r, engine='bash'}
 awk 'NR == 2 || $2 > 5' ~/Dropbox/Data17/iris/iris.tab | head
