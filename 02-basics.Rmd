@@ -88,27 +88,155 @@ The iris dataset is also saved in .csv format at `~/Dropbox/Data17/iris/iris.csv
 
 ## Makefiles
 
+`make` is a tool that helps put all the pieces of an analytic workflow together:
+
+- data retrieving
+- data cleaning
+- analysis
+- graphs
+- reports
+- ...
+
+Dependency management
+
+### Simulate data in R
+
+```{r}
+set.seed(123)
+```
+
+File `simulate_data.R`
+
+```{r echo = TRUE, eval = TRUE}
+# set.seed(123)
+N <- 1000 # sample size
+
+X1 <- rpois(n = N, lambda = 50)
+X2 <- 10 + rbinom(n = N, prob = 0.8, size = 1)
+Y <- 10 + 3 * X1 + -5 * X2 + 3 * rnorm(n = N)
+
+write.csv(data.frame(Y = Y, X1 = X1, X2 = X2),
+          "sample_data.csv", row.names = FALSE)
+```
+
+```{r}
+head(data.frame(Y = Y, X1 = X1, X2 = X2))
+```
+
+### Create a plot in Python
+
+File `create_graph.py`
+
+```{python echo = TRUE, eval = FALSE}
+import pandas as pd
+import matplotlib.pyplot as plt
+
+sim_data = pd.read_csv("sample_data.csv")
+
+plt.figure()
+sim_data.plot()
+plt.savefig("plot.pdf", format = "pdf")
+```
+
+```{r echo=FALSE}
+knitr::include_graphics("images/ch1_plot.jpg")
+```
+
+### Run statistical model in R
+
+We can print the model output with:
+
+```{r echo = TRUE, eval = TRUE}
+sim_data <- read.csv("sample_data.csv")
+summary(lm(Y ~ X1 + X2, data = sim_data))
+```
+
+### Run statistical model in R
+
+To save the output, we use the `sink` function.
+
+File `estimate_model.R`
+
+```{r echo = TRUE, eval = FALSE}
+sim_data <- read.csv("sample_data.csv")
+summary(lm(Y ~ X1 + X2, data = sim_data))
+
+sink("estimation_summary.txt")
+summary(lm(Y ~ X1 + X2, data = sim_data))
+sink()
+```
+
+### Makefile syntax
+
+- `make` is a *command* that runs on a text file often named `Makefile`.
+
+-  A `Makefile` contains one or several blocks with the following structure:
+
+```{txt echo = TRUE}
+targetfile: sourcefile(s)
+[tab] command
+```
+
+### Naive version
+
+File: `Makefile`
+
+```{txt echo = TRUE}
+sample_data.csv: simulate_data.R
+	R CMD BATCH simulate_data.R
+
+plot.pdf: create_graph.py
+	python create_graph.py
+
+estimation_summary.txt: estimate_model.R
+	R CMD BATCH estimate_model.R
+```
+
+A simple call to `make` only builds the first target (`sample_data.csv`).  To build the other targets, we have to use: `make plot.pdf` and `make estimation_summary.txt`.
+
+### Making all targets
+
+File: `Makefile`
+
+```{txt echo = TRUE}
+all: analysis
+
+analysis: sample_data.csv plot.pdf estimation_summary.txt
+
+sample_data.csv: simulate_data.R
+	R CMD BATCH simulate_data.R
+
+plot.pdf: create_graph.py
+	python create_graph.py
+
+estimation_summary.txt: estimate_model.R
+	R CMD BATCH estimate_model.R
+```
+
+New data is simulated and saved in `sample_data.csv`.  But `plot.pdf` and `estimation_summary.txt` are not updated.
+
+### Dealing with dependencies
+
+- Problem `plot.pdf` and `estimation_summary.txt` depend on `sample_data.csv`.
+- Solution: explicit dependencies.
+
+File: `Makefile`
+
+```{txt echo = TRUE}
+all: analysis
+
+analysis: sample_data.csv plot.pdf estimation_summary.txt
+
+sample_data.csv: simulate_data.R
+	R CMD BATCH simulate_data.R
+
+plot.pdf: sample_data.csv create_graph.py
+	python create_graph.py
+
+estimation_summary.txt: sample_data.csv estimate_model.R
+	R CMD BATCH estimate_model.R
+```
+
 ## Git and GitHub
 
 Guest lecture by [Ista Zahn](https://www.iq.harvard.edu/people/ista-zahn).
-
-## Buffer
-
-```{r}
-ratings <- read.csv("~/Dropbox/data17/ml-latest-small/ratings.csv")
-head(ratings)
-```
-```{r}
-links <- read.csv("~/Dropbox/data17/ml-latest-small/links.csv")
-head(links)
-```
-
-```{r}
-movies <- read.csv("~/Dropbox/data17/ml-latest-small/movies.csv")
-head(movies)
-```
-```{r}
-tags <- read.csv("~/Dropbox/data17/ml-latest-small/tags.csv")
-head(tags)
-```
-

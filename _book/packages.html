@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Computing for Big Data (BST-262)</title>
   <meta name="description" content="Class notes for BST 262">
-  <meta name="generator" content="bookdown 0.5.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Computing for Big Data (BST-262)" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-10-10">
+<meta name="date" content="2017-10-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -126,7 +126,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.1.3" data-path="basics.html"><a href="basics.html#useful-tools"><i class="fa fa-check"></i><b>2.1.3</b> Useful tools</a></li>
 <li class="chapter" data-level="2.1.4" data-path="basics.html"><a href="basics.html#example"><i class="fa fa-check"></i><b>2.1.4</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#makefiles"><i class="fa fa-check"></i><b>2.2</b> Makefiles</a></li>
+<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#makefiles"><i class="fa fa-check"></i><b>2.2</b> Makefiles</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="basics.html"><a href="basics.html#simulate-data-in-r"><i class="fa fa-check"></i><b>2.2.1</b> Simulate data in R</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basics.html"><a href="basics.html#create-a-plot-in-python"><i class="fa fa-check"></i><b>2.2.2</b> Create a plot in Python</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basics.html"><a href="basics.html#run-statistical-model-in-r"><i class="fa fa-check"></i><b>2.2.3</b> Run statistical model in R</a></li>
+<li class="chapter" data-level="2.2.4" data-path="basics.html"><a href="basics.html#run-statistical-model-in-r-1"><i class="fa fa-check"></i><b>2.2.4</b> Run statistical model in R</a></li>
+<li class="chapter" data-level="2.2.5" data-path="basics.html"><a href="basics.html#makefile-syntax"><i class="fa fa-check"></i><b>2.2.5</b> Makefile syntax</a></li>
+<li class="chapter" data-level="2.2.6" data-path="basics.html"><a href="basics.html#naive-version"><i class="fa fa-check"></i><b>2.2.6</b> Naive version</a></li>
+<li class="chapter" data-level="2.2.7" data-path="basics.html"><a href="basics.html#making-all-targets"><i class="fa fa-check"></i><b>2.2.7</b> Making all targets</a></li>
+<li class="chapter" data-level="2.2.8" data-path="basics.html"><a href="basics.html#dealing-with-dependencies"><i class="fa fa-check"></i><b>2.2.8</b> Dealing with dependencies</a></li>
+</ul></li>
 <li class="chapter" data-level="2.3" data-path="basics.html"><a href="basics.html#git-and-github"><i class="fa fa-check"></i><b>2.3</b> Git and GitHub</a></li>
 <li class="chapter" data-level="2.4" data-path="basics.html"><a href="basics.html#buffer"><i class="fa fa-check"></i><b>2.4</b> Buffer</a></li>
 </ul></li>
@@ -269,17 +278,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="r-cmd-build" class="section level2">
 <h2><span class="header-section-number">3.4</span> <code>R CMD build</code></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">R CMD build --help</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">R CMD build <span class="op">--</span>help</code></pre></div>
 <p><em>Build R packages from package sources in the directories specified by ‘pkgdirs’</em></p>
 </div>
 <div id="r-cmd-install" class="section level2">
 <h2><span class="header-section-number">3.5</span> <code>R CMD INSTALL</code></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">R CMD INSTALL --help</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">R CMD INSTALL <span class="op">--</span>help</code></pre></div>
 <p><em>Install the add-on packages specified by pkgs. The elements of pkgs can be relative or absolute paths to directories with the package sources, or to gzipped package ‘tar’ archives. The library tree to install to can be specified via ‘–library’. By default, packages are installed in the library tree rooted at the first directory in .libPaths() for an R session run in the current environment.</em></p>
 </div>
 <div id="r-cmd-check" class="section level2">
 <h2><span class="header-section-number">3.6</span> <code>R CMD check</code></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">R CMD check --help</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">R CMD check <span class="op">--</span>help</code></pre></div>
 <p><a href="http://r-pkgs.had.co.nz/check.html" class="uri">http://r-pkgs.had.co.nz/check.html</a></p>
 <p><em>Check R packages from package sources, which can be directories or package ‘tar’ archives with extension ‘.tar.gz’, ‘.tar.bz2’, ‘.tar.xz’ or ‘.tgz’.</em></p>
 <p><em>A variety of diagnostic checks on directory structure, index and control files are performed. The package is installed into the log directory and production of the package PDF manual is tested. All examples and tests provided by the package are tested to see if they run successfully. By default code in the vignettes is tested, as is re-building the vignette PDFs.</em></p>
@@ -301,15 +310,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="kw">package.skeleton</span>(<span class="st">&quot;pkgname&quot;</span>) <span class="co"># in &quot;fresh&quot; session</span>
 
 <span class="kw">set.seed</span>(<span class="dv">02138</span>)
-f &lt;-<span class="st"> </span>function(x, y) x+y
-g &lt;-<span class="st"> </span>function(x, y) x-y
+f &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) x<span class="op">+</span>y
+g &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) x<span class="op">-</span>y
 d &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>)
 e &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>)
 <span class="kw">package.skeleton</span>(<span class="dt">list =</span> <span class="kw">c</span>(<span class="st">&quot;f&quot;</span>,<span class="st">&quot;g&quot;</span>,<span class="st">&quot;d&quot;</span>,<span class="st">&quot;e&quot;</span>), <span class="dt">name =</span> <span class="st">&quot;pkgname&quot;</span>)</code></pre></div>
 </div>
 <div id="devtoolscreate" class="section level3">
 <h3><span class="header-section-number">3.8.2</span> <code>devtools::create</code></h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">create</span>(<span class="st">&quot;path/to/package/pkgname&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">create</span>(<span class="st">&quot;path/to/package/pkgname&quot;</span>)</code></pre></div>
 </div>
 </div>
 <div id="submitting-to-cran" class="section level2">
@@ -358,10 +367,10 @@ e &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <div id="command-line" class="section level2">
 <h2><span class="header-section-number">3.16</span> Command line</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">git init
-git add *
-git commit -m <span class="st">&quot;First commit&quot;</span>
-git remote add origin git@github.com:harvard-P01/pkgtemplate.git
-git push -u origin master</code></pre></div>
+git add <span class="op">*</span>
+git commit <span class="op">-</span>m <span class="st">&quot;First commit&quot;</span>
+git remote add origin git<span class="op">@</span>github.com<span class="op">:</span>harvard<span class="op">-</span>P01<span class="op">/</span>pkgtemplate.git
+git push <span class="op">-</span>u origin master</code></pre></div>
 </div>
 <div id="rstudio-and-github-integration-6-7" class="section level2">
 <h2><span class="header-section-number">3.17</span> RStudio and GitHub integration (6 / 7)</h2>
@@ -377,8 +386,8 @@ git push -u origin master</code></pre></div>
 </div>
 <div id="installing-from-github" class="section level2">
 <h2><span class="header-section-number">3.19</span> Installing from GitHub</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;harvard-P01/pkgtemplate&quot;</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">&quot;harvard-P01/pkgtemplate&quot;</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;harvard-P01/pkgtemplate&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;harvard-P01/pkgtemplate&quot;</span>,
                          <span class="dt">build_vignettes =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
 <div id="gitignore-rstudio-default" class="section level2">
@@ -394,14 +403,14 @@ git push -u origin master</code></pre></div>
 .Rapp.history
 
 <span class="co"># Example code in package build process</span>
-*-Ex.R
+<span class="op">*-</span>Ex.R
 
 <span class="co"># RStudio files</span>
-.Rproj.user/
+.Rproj.user<span class="op">/</span>
 
 <span class="co"># produced vignettes</span>
-vignettes/<span class="er">*</span>.html
-vignettes/<span class="er">*</span>.pdf</code></pre></div>
+vignettes<span class="op">/</span><span class="er">*</span>.html
+vignettes<span class="op">/</span><span class="er">*</span>.pdf</code></pre></div>
 </div>
 <div id="rstudio-projects" class="section level2">
 <h2><span class="header-section-number">3.22</span> RStudio projects</h2>
@@ -419,26 +428,26 @@ vignettes/<span class="er">*</span>.pdf</code></pre></div>
 </div>
 <div id="project-options" class="section level2">
 <h2><span class="header-section-number">3.23</span> Project options</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Version:<span class="st"> </span><span class="fl">1.0</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Version<span class="op">:</span><span class="st"> </span><span class="fl">1.0</span>
 
-RestoreWorkspace:<span class="st"> </span>Default
-SaveWorkspace:<span class="st"> </span>Default
-AlwaysSaveHistory:<span class="st"> </span>Default
+RestoreWorkspace<span class="op">:</span><span class="st"> </span>Default
+SaveWorkspace<span class="op">:</span><span class="st"> </span>Default
+AlwaysSaveHistory<span class="op">:</span><span class="st"> </span>Default
 
-EnableCodeIndexing:<span class="st"> </span>Yes
-UseSpacesForTab:<span class="st"> </span>Yes
-NumSpacesForTab:<span class="st"> </span><span class="dv">2</span>
-Encoding:<span class="st"> </span>UTF<span class="dv">-8</span>
+EnableCodeIndexing<span class="op">:</span><span class="st"> </span>Yes
+UseSpacesForTab<span class="op">:</span><span class="st"> </span>Yes
+NumSpacesForTab<span class="op">:</span><span class="st"> </span><span class="dv">2</span>
+Encoding<span class="op">:</span><span class="st"> </span>UTF<span class="op">-</span><span class="dv">8</span>
 
-RnwWeave:<span class="st"> </span>knitr
-LaTeX:<span class="st"> </span>pdfLaTeX
+RnwWeave<span class="op">:</span><span class="st"> </span>knitr
+LaTeX<span class="op">:</span><span class="st"> </span>pdfLaTeX
 
-AutoAppendNewline:<span class="st"> </span>Yes
-StripTrailingWhitespace:<span class="st"> </span>Yes
+AutoAppendNewline<span class="op">:</span><span class="st"> </span>Yes
+StripTrailingWhitespace<span class="op">:</span><span class="st"> </span>Yes
 
-BuildType:<span class="st"> </span>Package
-PackageUseDevtools:<span class="st"> </span>Yes
-PackageInstallArgs:<span class="st"> </span>--no-multiarch --with-keep.source</code></pre></div>
+BuildType<span class="op">:</span><span class="st"> </span>Package
+PackageUseDevtools<span class="op">:</span><span class="st"> </span>Yes
+PackageInstallArgs<span class="op">:</span><span class="st"> </span><span class="op">--</span>no<span class="op">-</span>multiarch <span class="op">--</span>with<span class="op">-</span>keep.source</code></pre></div>
 </div>
 <div id="package-documentation" class="section level2">
 <h2><span class="header-section-number">3.24</span> Package documentation</h2>
@@ -460,16 +469,16 @@ PackageInstallArgs:<span class="st"> </span>--no-multiarch --with-keep.source</c
 </div>
 <div id="adding-linreg.r-in-r-directory" class="section level2">
 <h2><span class="header-section-number">3.26</span> Adding <code>linreg.R</code> in <code>R/</code> directory</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmodEst &lt;-<span class="st"> </span>function(x, y) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmodEst &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
   ## compute QR-decomposition of x
   qx &lt;-<span class="st"> </span><span class="kw">qr</span>(x)
   ## compute (x’x)^(-1) x’y
   coef &lt;-<span class="st"> </span><span class="kw">solve.qr</span>(qx, y)
   ## degrees of freedom and standard deviation of residuals
-  df &lt;-<span class="st"> </span><span class="kw">nrow</span>(x) -<span class="st"> </span><span class="kw">ncol</span>(x)
-  sigma2 &lt;-<span class="st"> </span><span class="kw">sum</span>((y -<span class="st"> </span>x %*%<span class="st"> </span>coef) ^<span class="st"> </span><span class="dv">2</span>) /<span class="st"> </span>df
+  df &lt;-<span class="st"> </span><span class="kw">nrow</span>(x) <span class="op">-</span><span class="st"> </span><span class="kw">ncol</span>(x)
+  sigma2 &lt;-<span class="st"> </span><span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span>x <span class="op">%*%</span><span class="st"> </span>coef) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>df
   ## compute sigma^2 * (x’x)^-1
-  vcov &lt;-<span class="st"> </span>sigma2 *<span class="st"> </span><span class="kw">chol2inv</span>(qx$qr)
+  vcov &lt;-<span class="st"> </span>sigma2 <span class="op">*</span><span class="st"> </span><span class="kw">chol2inv</span>(qx<span class="op">$</span>qr)
   <span class="kw">colnames</span>(vcov) &lt;-<span class="st"> </span><span class="kw">rownames</span>(vcov) &lt;-<span class="st"> </span><span class="kw">colnames</span>(x)
   <span class="kw">list</span>(
     <span class="dt">coefficients =</span> coef,
@@ -482,7 +491,7 @@ PackageInstallArgs:<span class="st"> </span>--no-multiarch --with-keep.source</c
 <div id="running-our-function" class="section level2">
 <h2><span class="header-section-number">3.27</span> Running our function</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(cats, <span class="dt">package =</span> <span class="st">&quot;MASS&quot;</span>)
-<span class="kw">linmodEst</span>(<span class="kw">cbind</span>(<span class="dv">1</span>, cats$Bwt), cats$Hwt)</code></pre></div>
+<span class="kw">linmodEst</span>(<span class="kw">cbind</span>(<span class="dv">1</span>, cats<span class="op">$</span>Bwt), cats<span class="op">$</span>Hwt)</code></pre></div>
 <pre><code>## $coefficients
 ## [1] -0.3566624  4.0340627
 ## 
@@ -499,7 +508,7 @@ PackageInstallArgs:<span class="st"> </span>--no-multiarch --with-keep.source</c
 </div>
 <div id="and-compare-with-lm-1-2" class="section level2">
 <h2><span class="header-section-number">3.28</span> And compare with <code>lm</code> (1 / 2)</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Hwt ~<span class="st"> </span>Bwt, <span class="dt">data=</span>cats)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lm1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt, <span class="dt">data=</span>cats)
 lm1</code></pre></div>
 <pre><code>## 
 ## Call:
@@ -518,7 +527,7 @@ lm1</code></pre></div>
 <pre><code>##             (Intercept)         Bwt
 ## (Intercept)   0.4792475 -0.17058197
 ## Bwt          -0.1705820  0.06263081</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(lm1)$sigma</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(lm1)<span class="op">$</span>sigma</code></pre></div>
 <pre><code>## [1] 1.452373</code></pre>
 </div>
 <div id="adding-roxygen2-documentation" class="section level2">
@@ -540,16 +549,16 @@ lm1</code></pre></div>
 <span class="co">#&#39;</span>
 <span class="co">#&#39; @export</span>
 <span class="co">#&#39;</span>
-linmodEst &lt;-<span class="st"> </span>function(x, y) {
+linmodEst &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
   ## compute QR-decomposition of x
   qx &lt;-<span class="st"> </span><span class="kw">qr</span>(x)
   ## compute (x’x)^(-1) x’y
   coef &lt;-<span class="st"> </span><span class="kw">solve.qr</span>(qx, y)
   ## degrees of freedom and standard deviation of residuals
-  df &lt;-<span class="st"> </span><span class="kw">nrow</span>(x) -<span class="st"> </span><span class="kw">ncol</span>(x)
-  sigma2 &lt;-<span class="st"> </span><span class="kw">sum</span>((y -<span class="st"> </span>x %*%<span class="st"> </span>coef) ^<span class="st"> </span><span class="dv">2</span>) /<span class="st"> </span>df
+  df &lt;-<span class="st"> </span><span class="kw">nrow</span>(x) <span class="op">-</span><span class="st"> </span><span class="kw">ncol</span>(x)
+  sigma2 &lt;-<span class="st"> </span><span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span>x <span class="op">%*%</span><span class="st"> </span>coef) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>df
   ## compute sigma^2 * (x’x)^-1
-  vcov &lt;-<span class="st"> </span>sigma2 *<span class="st"> </span><span class="kw">chol2inv</span>(qx$qr)
+  vcov &lt;-<span class="st"> </span>sigma2 <span class="op">*</span><span class="st"> </span><span class="kw">chol2inv</span>(qx<span class="op">$</span>qr)
   <span class="kw">colnames</span>(vcov) &lt;-<span class="st"> </span><span class="kw">rownames</span>(vcov) &lt;-<span class="st"> </span><span class="kw">colnames</span>(x)
   <span class="kw">list</span>(
     <span class="dt">coefficients =</span> coef,
@@ -567,8 +576,8 @@ linmodEst &lt;-<span class="st"> </span>function(x, y) {
 </div>
 <div id="manlinmodest.rd" class="section level2">
 <h2><span class="header-section-number">3.32</span> <code>man/linmodEst.Rd</code></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">% Generated by <span class="kw">roxygen2</span> (<span class="fl">4.1.1</span>):<span class="st"> </span>do not edit by hand
-% Please edit documentation in R/linmodEst.R
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">% Generated by <span class="kw">roxygen2</span> (<span class="fl">4.1</span>.<span class="dv">1</span>)<span class="op">:</span><span class="st"> </span>do not edit by hand
+% Please edit documentation <span class="cf">in</span> R<span class="op">/</span>linmodEst.R
 \name{linmodEst}
 \alias{linmodEst}
 \title{Linear regression}
@@ -581,7 +590,7 @@ linmodEst &lt;-<span class="st"> </span>function(x, y) {
 \item{X}{covariate <span class="kw">matrix</span> (p x n) with no intercept}
 }
 \value{
-A list with <span class="dv">4</span> elements:<span class="st"> </span>coefficients, vcov, sigma, df
+A list with <span class="dv">4</span> elements<span class="op">:</span><span class="st"> </span>coefficients, vcov, sigma, df
 }
 \description{
 Runs an OLS regression not unlike \code{\link{lm}}
@@ -601,16 +610,16 @@ y &lt;-<span class="st"> </span>mtcars[, <span class="st">&quot;mpg&quot;</span>
 </div>
 <div id="description" class="section level2">
 <h2><span class="header-section-number">3.34</span> <code>DESCRIPTION</code></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Package:<span class="st"> </span>pkgtemplate
-Type:<span class="st"> </span>Package
-Title:<span class="st"> </span>What the Package <span class="kw">Does</span> (Title Case)
-Version:<span class="st"> </span><span class="fl">0.1</span>
-Date:<span class="st"> </span><span class="dv">2015-10-24</span>
-Author:<span class="st"> </span>Who wrote it
-Maintainer:<span class="st"> </span>Who to complain to &lt;yourfault@somewhere.net&gt;
-Description:<span class="st"> </span>More about what it <span class="kw">does</span> (maybe more than one line)
-License:<span class="st"> </span>What license is it under?
-LazyData:<span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Package<span class="op">:</span><span class="st"> </span>pkgtemplate
+Type<span class="op">:</span><span class="st"> </span>Package
+Title<span class="op">:</span><span class="st"> </span>What the Package <span class="kw">Does</span> (Title Case)
+Version<span class="op">:</span><span class="st"> </span><span class="fl">0.1</span>
+Date<span class="op">:</span><span class="st"> </span><span class="dv">2015</span><span class="op">-</span><span class="dv">10</span><span class="op">-</span><span class="dv">24</span>
+Author<span class="op">:</span><span class="st"> </span>Who wrote it
+Maintainer<span class="op">:</span><span class="st"> </span>Who to complain to <span class="op">&lt;</span>yourfault<span class="op">@</span>somewhere.net<span class="op">&gt;</span>
+Description<span class="op">:</span><span class="st"> </span>More about what it <span class="kw">does</span> (maybe more than one line)
+License<span class="op">:</span><span class="st"> </span>What license is it under?
+LazyData<span class="op">:</span><span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
 </div>
 <div id="namespace" class="section level2">
 <h2><span class="header-section-number">3.35</span> <code>NAMESPACE</code></h2>
@@ -619,7 +628,7 @@ LazyData:<span class="st"> </span><span class="ot">TRUE</span></code></pre></div
 </div>
 <div id="s3-basics" class="section level2">
 <h2><span class="header-section-number">3.36</span> S3 basics</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hello &lt;-<span class="st"> </span>function() {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hello &lt;-<span class="st"> </span><span class="cf">function</span>() {
  s &lt;-<span class="st"> &quot;Hello World!&quot;</span>
  <span class="kw">class</span>(s) &lt;-<span class="st"> &quot;hi&quot;</span>
  <span class="kw">return</span>(s)
@@ -632,7 +641,7 @@ LazyData:<span class="st"> </span><span class="ot">TRUE</span></code></pre></div
 </div>
 <div id="s3-basics-1" class="section level2">
 <h2><span class="header-section-number">3.37</span> S3 basics</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">print.hi &lt;-<span class="st"> </span>function(...) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">print.hi &lt;-<span class="st"> </span><span class="cf">function</span>(...) {
   <span class="kw">print</span>(<span class="st">&quot;Surprise!&quot;</span>)
 }
 
@@ -641,32 +650,32 @@ LazyData:<span class="st"> </span><span class="ot">TRUE</span></code></pre></div
 </div>
 <div id="s3-and-s4-generics" class="section level2">
 <h2><span class="header-section-number">3.38</span> S3 and S4 generics</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmod &lt;-<span class="st"> </span>function(x, ...)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmod &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...)
   <span class="kw">UseMethod</span>(<span class="st">&quot;linmod&quot;</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmod.default &lt;-<span class="st"> </span>function(x, y, ...) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmod.default &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, ...) {
   x &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(x)
   y &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(y)
   est &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(x, y)
-  est$fitted.values &lt;-<span class="st"> </span><span class="kw">as.vector</span>(x %*%<span class="st"> </span>est$coefficients)
-  est$residuals &lt;-<span class="st"> </span>y -<span class="st"> </span>est$fitted.values
-  est$call &lt;-<span class="st"> </span><span class="kw">match.call</span>()
+  est<span class="op">$</span>fitted.values &lt;-<span class="st"> </span><span class="kw">as.vector</span>(x <span class="op">%*%</span><span class="st"> </span>est<span class="op">$</span>coefficients)
+  est<span class="op">$</span>residuals &lt;-<span class="st"> </span>y <span class="op">-</span><span class="st"> </span>est<span class="op">$</span>fitted.values
+  est<span class="op">$</span>call &lt;-<span class="st"> </span><span class="kw">match.call</span>()
   <span class="kw">class</span>(est) &lt;-<span class="st"> &quot;linmod&quot;</span>
   <span class="kw">return</span>(est)
 }</code></pre></div>
 </div>
 <div id="print" class="section level2">
 <h2><span class="header-section-number">3.39</span> <code>print</code></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">print.linmod &lt;-<span class="st"> </span>function(x, ...) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">print.linmod &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {
   <span class="kw">cat</span>(<span class="st">&quot;Call:</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  <span class="kw">print</span>(x$call)
+  <span class="kw">print</span>(x<span class="op">$</span>call)
   <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Coefficients:</span><span class="ch">\n</span><span class="st">&quot;</span>)
-  <span class="kw">print</span>(x$coefficients)
+  <span class="kw">print</span>(x<span class="op">$</span>coefficients)
 }</code></pre></div>
 </div>
 <div id="print-1" class="section level2">
 <h2><span class="header-section-number">3.40</span> <code>print</code></h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">Const =</span> <span class="dv">1</span>, <span class="dt">Bwt =</span> cats$Bwt)
-y &lt;-<span class="st"> </span>cats$Hw
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">Const =</span> <span class="dv">1</span>, <span class="dt">Bwt =</span> cats<span class="op">$</span>Bwt)
+y &lt;-<span class="st"> </span>cats<span class="op">$</span>Hw
 mod1 &lt;-<span class="st"> </span><span class="kw">linmod</span>(x, y)
 mod1</code></pre></div>
 <pre><code>## Call:
@@ -688,13 +697,13 @@ mod1</code></pre></div>
 </div>
 <div id="formulas-and-model-frames" class="section level2">
 <h2><span class="header-section-number">3.42</span> Formulas and model frames</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmod.formula &lt;-<span class="st"> </span>function(formula, <span class="dt">data =</span> <span class="kw">list</span>(), ...) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmod.formula &lt;-<span class="st"> </span><span class="cf">function</span>(formula, <span class="dt">data =</span> <span class="kw">list</span>(), ...) {
   mf &lt;-<span class="st"> </span><span class="kw">model.frame</span>(<span class="dt">formula =</span> formula, <span class="dt">data =</span> data)
   x &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="kw">attr</span>(mf, <span class="st">&quot;terms&quot;</span>), <span class="dt">data =</span> mf)
   y &lt;-<span class="st"> </span><span class="kw">model.response</span>(mf)
   est &lt;-<span class="st"> </span><span class="kw">linmod.default</span>(x, y, ...)
-  est$call &lt;-<span class="st"> </span><span class="kw">match.call</span>()
-  est$formula &lt;-<span class="st"> </span>formula
+  est<span class="op">$</span>call &lt;-<span class="st"> </span><span class="kw">match.call</span>()
+  est<span class="op">$</span>formula &lt;-<span class="st"> </span>formula
   <span class="kw">return</span>(est)
 }</code></pre></div>
 </div>
@@ -702,31 +711,31 @@ mod1</code></pre></div>
 <h2><span class="header-section-number">3.43</span> Unit tests and <code>testthat</code></h2>
 <p><a href="http://r-pkgs.had.co.nz/tests.html" class="uri">http://r-pkgs.had.co.nz/tests.html</a></p>
 <p>In package directory:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">use_testthat</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">use_testthat</span>()</code></pre></div>
 <p>pre-populates <code>test/testthat/</code></p>
 <p>Test files should start with <code>test</code> to be processed.</p>
 </div>
 <div id="test_coef.r" class="section level2">
 <h2><span class="header-section-number">3.44</span> <code>test_coef.R</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(cats, <span class="dt">package =</span> <span class="st">&quot;MASS&quot;</span>)
-l1 &lt;-<span class="st"> </span><span class="kw">linmod</span>(Hwt ~<span class="st"> </span>Bwt *<span class="st"> </span>Sex, <span class="dt">data =</span> cats)
-l2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Hwt ~<span class="st"> </span>Bwt *<span class="st"> </span>Sex, <span class="dt">data =</span> cats)
+l1 &lt;-<span class="st"> </span><span class="kw">linmod</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt <span class="op">*</span><span class="st"> </span>Sex, <span class="dt">data =</span> cats)
+l2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt <span class="op">*</span><span class="st"> </span>Sex, <span class="dt">data =</span> cats)
 
 <span class="kw">test_that</span>(<span class="st">&quot;same estimated coefficients as lm function&quot;</span>, {
-  <span class="kw">expect_equal</span>(l1$coefficients, l2$coefficients)
+  <span class="kw">expect_equal</span>(l1<span class="op">$</span>coefficients, l2<span class="op">$</span>coefficients)
 })</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">==<span class="er">&gt;</span><span class="st"> </span>devtools::<span class="kw">test</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">==</span><span class="er">&gt;</span><span class="st"> </span>devtools<span class="op">::</span><span class="kw">test</span>()
 
 Loading pkgtemplate
-Loading required package:<span class="st"> </span>testthat
+Loading required package<span class="op">:</span><span class="st"> </span>testthat
 Testing pkgtemplate
 .
-Woot!<span class="st"> </span></code></pre></div>
+Woot<span class="op">!</span><span class="st"> </span></code></pre></div>
 </div>
 <div id="vignettes" class="section level2">
 <h2><span class="header-section-number">3.45</span> Vignettes</h2>
 <p><a href="http://r-pkgs.had.co.nz/vignettes.html" class="uri">http://r-pkgs.had.co.nz/vignettes.html</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">use_vignette</span>(<span class="st">&quot;linmod&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">use_vignette</span>(<span class="st">&quot;linmod&quot;</span>)</code></pre></div>
 <p><a href="https://github.com/harvard-P01/pkgtemplate/blob/master/vignettes/linmod.Rmd" class="uri">https://github.com/harvard-P01/pkgtemplate/blob/master/vignettes/linmod.Rmd</a></p>
 
 </div>

@@ -37,7 +37,7 @@ MongoDB, Cassandra, BigTable, ...)
 
 Week 5 - Analyzing data that does not fit in memory
 
-- Lecture 9. Pure R solutions (sampling, `ff` and `ffbase`, other interpreters). JVM solutions (h20, Spark)
+- Lecture 9. Pure R solutions (sampling, `ff` and `bigmemory`, other interpreters). JVM solutions (h20, Spark)
 - Lecture 10. An introduction to parallel computing; clusters and cloud computing.
 “Divide and Conquer” (MapReduce approaches)
 

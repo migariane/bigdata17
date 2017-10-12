@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Computing for Big Data (BST-262)</title>
   <meta name="description" content="Class notes for BST 262">
-  <meta name="generator" content="bookdown 0.5.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Computing for Big Data (BST-262)" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-10-10">
+<meta name="date" content="2017-10-12">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -126,7 +126,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.1.3" data-path="basics.html"><a href="basics.html#useful-tools"><i class="fa fa-check"></i><b>2.1.3</b> Useful tools</a></li>
 <li class="chapter" data-level="2.1.4" data-path="basics.html"><a href="basics.html#example"><i class="fa fa-check"></i><b>2.1.4</b> Example</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#makefiles"><i class="fa fa-check"></i><b>2.2</b> Makefiles</a></li>
+<li class="chapter" data-level="2.2" data-path="basics.html"><a href="basics.html#makefiles"><i class="fa fa-check"></i><b>2.2</b> Makefiles</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="basics.html"><a href="basics.html#simulate-data-in-r"><i class="fa fa-check"></i><b>2.2.1</b> Simulate data in R</a></li>
+<li class="chapter" data-level="2.2.2" data-path="basics.html"><a href="basics.html#create-a-plot-in-python"><i class="fa fa-check"></i><b>2.2.2</b> Create a plot in Python</a></li>
+<li class="chapter" data-level="2.2.3" data-path="basics.html"><a href="basics.html#run-statistical-model-in-r"><i class="fa fa-check"></i><b>2.2.3</b> Run statistical model in R</a></li>
+<li class="chapter" data-level="2.2.4" data-path="basics.html"><a href="basics.html#run-statistical-model-in-r-1"><i class="fa fa-check"></i><b>2.2.4</b> Run statistical model in R</a></li>
+<li class="chapter" data-level="2.2.5" data-path="basics.html"><a href="basics.html#makefile-syntax"><i class="fa fa-check"></i><b>2.2.5</b> Makefile syntax</a></li>
+<li class="chapter" data-level="2.2.6" data-path="basics.html"><a href="basics.html#naive-version"><i class="fa fa-check"></i><b>2.2.6</b> Naive version</a></li>
+<li class="chapter" data-level="2.2.7" data-path="basics.html"><a href="basics.html#making-all-targets"><i class="fa fa-check"></i><b>2.2.7</b> Making all targets</a></li>
+<li class="chapter" data-level="2.2.8" data-path="basics.html"><a href="basics.html#dealing-with-dependencies"><i class="fa fa-check"></i><b>2.2.8</b> Dealing with dependencies</a></li>
+</ul></li>
 <li class="chapter" data-level="2.3" data-path="basics.html"><a href="basics.html#git-and-github"><i class="fa fa-check"></i><b>2.3</b> Git and GitHub</a></li>
 <li class="chapter" data-level="2.4" data-path="basics.html"><a href="basics.html#buffer"><i class="fa fa-check"></i><b>2.4</b> Buffer</a></li>
 </ul></li>
@@ -271,7 +280,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ## 4          4.6         3.1          1.5         0.2  setosa
 ## 5          5.0         3.6          1.4         0.2  setosa</code></pre>
 <p>In a shell, we can use:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">head</span> -n 6 ~/Dropbox/Data17/iris/iris.tab</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">head</span> -n 6 ~/Dropbox/Data17/iris/iris.tab</code></pre></div>
 <pre><code>## &quot;Sepal.Length&quot;   &quot;Sepal.Width&quot;   &quot;Petal.Length&quot;  &quot;Petal.Width&quot;   &quot;Species&quot;
 ## &quot;1&quot;  5.1 3.5 1.4 0.2 &quot;setosa&quot;
 ## &quot;2&quot;  4.9 3   1.4 0.2 &quot;setosa&quot;
@@ -293,8 +302,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>With the tidyverse, we can use <em>pipes</em>. The <code>%&gt;%</code> operator allows for performing chained operations.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">suppressMessages</span>(<span class="kw">library</span>(dplyr))
 
-iris %&gt;%
-<span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span>, <span class="dv">5</span>) %&gt;%<span class="st"> </span>
+iris <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span>, <span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>()</code></pre></div>
 <pre><code>##   Sepal.Length Species
 ## 1          5.1  setosa
@@ -304,7 +313,7 @@ iris %&gt;%
 ## 5          5.0  setosa
 ## 6          5.4  setosa</code></pre>
 <p>In a shell, the pipe operator to combine shell commands is <code>|</code> and we can use:</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cut</span> -f 1,5 ~/Dropbox/Data17/iris/iris.tab <span class="kw">|</span> <span class="kw">head</span> -n 7</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">cut</span> -f 1,5 ~/Dropbox/Data17/iris/iris.tab <span class="kw">|</span> <span class="fu">head</span> -n 7</code></pre></div>
 <pre><code>## &quot;Sepal.Length&quot;   &quot;Species&quot;
 ## &quot;1&quot;  0.2
 ## &quot;2&quot;  0.2
@@ -313,8 +322,8 @@ iris %&gt;%
 ## &quot;5&quot;  0.2
 ## &quot;6&quot;  0.4</code></pre>
 <p>To keep observations with “Sepal.Length” greater than 5:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris %&gt;%
-<span class="st">  </span><span class="kw">filter</span>(Sepal.Length &gt;<span class="st"> </span><span class="dv">5</span>) %&gt;%<span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">head</span>()</code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
@@ -323,8 +332,8 @@ iris %&gt;%
 ## 4          5.8         4.0          1.2         0.2  setosa
 ## 5          5.7         4.4          1.5         0.4  setosa
 ## 6          5.4         3.9          1.3         0.4  setosa</code></pre>
-<p>In a shell, we can use the <code>AWK</code> programming language. We start from row <code>NR</code> 2 (we could start from row 1, it contains variable names) and select rows such that the second variable (<code>Sepal.Length</code>) is greater than 5.</p>
-<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">awk</span> <span class="st">&#39;NR == 2 || $2 &gt; 5&#39;</span> ~/Dropbox/Data17/iris/iris.tab <span class="kw">|</span> <span class="kw">head</span></code></pre></div>
+<p>In the shell, we can use the <code>AWK</code> programming language. We start from row <code>NR</code> 2 (we could start from row 1, it contains variable names) and select rows such that the second variable (<code>Sepal.Length</code>) is greater than 5.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">awk</span> <span class="st">&#39;NR == 2 || $2 &gt; 5&#39;</span> ~/Dropbox/Data17/iris/iris.tab <span class="kw">|</span> <span class="fu">head</span></code></pre></div>
 <pre><code>## &quot;1&quot;  5.1 3.5 1.4 0.2 &quot;setosa&quot;
 ## &quot;6&quot;  5.4 3.9 1.7 0.4 &quot;setosa&quot;
 ## &quot;11&quot; 5.4 3.7 1.5 0.2 &quot;setosa&quot;
@@ -339,11 +348,151 @@ iris %&gt;%
 <div class="exercise">
 <span id="exr:unnamed-chunk-9" class="exercise"><strong>Exercise 2.1  </strong></span>The iris dataset is also saved in .csv format at <code>~/Dropbox/Data17/iris/iris.csv</code>. Use <code>AWK</code> and <code>tail</code> to select the last 5 observations where <code>Sepal.Width</code> is larger than 3.5 and <code>Petal.Length</code> is smaller than 1.5.
 </div>
-<p></p>
+
 </div>
 </div>
 <div id="makefiles" class="section level2">
 <h2><span class="header-section-number">2.2</span> Makefiles</h2>
+<p><code>make</code> is a tool that helps put all the pieces of an analytic workflow together:</p>
+<ul>
+<li>data retrieving</li>
+<li>data cleaning</li>
+<li>analysis</li>
+<li>graphs</li>
+<li>reports</li>
+<li>…</li>
+</ul>
+<p>Dependency management</p>
+<div id="simulate-data-in-r" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Simulate data in R</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">123</span>)</code></pre></div>
+<p>File <code>simulate_data.R</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># set.seed(123)</span>
+N &lt;-<span class="st"> </span><span class="dv">1000</span> <span class="co"># sample size</span>
+
+X1 &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dt">n =</span> N, <span class="dt">lambda =</span> <span class="dv">50</span>)
+X2 &lt;-<span class="st"> </span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="kw">rbinom</span>(<span class="dt">n =</span> N, <span class="dt">prob =</span> <span class="fl">0.8</span>, <span class="dt">size =</span> <span class="dv">1</span>)
+Y &lt;-<span class="st"> </span><span class="dv">10</span> <span class="op">+</span><span class="st"> </span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span><span class="op">-</span><span class="dv">5</span> <span class="op">*</span><span class="st"> </span>X2 <span class="op">+</span><span class="st"> </span><span class="dv">3</span> <span class="op">*</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> N)
+
+<span class="kw">write.csv</span>(<span class="kw">data.frame</span>(<span class="dt">Y =</span> Y, <span class="dt">X1 =</span> X1, <span class="dt">X2 =</span> X2),
+          <span class="st">&quot;sample_data.csv&quot;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">data.frame</span>(<span class="dt">Y =</span> Y, <span class="dt">X1 =</span> X1, <span class="dt">X2 =</span> X2))</code></pre></div>
+<pre><code>##           Y X1 X2
+## 1  88.74430 46 11
+## 2 125.77081 58 11
+## 3  70.76396 38 10
+## 4 110.32157 50 10
+## 5 145.79546 62 11
+## 6 109.45403 53 11</code></pre>
+</div>
+<div id="create-a-plot-in-python" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Create a plot in Python</h3>
+<p>File <code>create_graph.py</code></p>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">import</span> pandas <span class="im">as</span> pd
+<span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt
+
+sim_data <span class="op">=</span> pd.read_csv(<span class="st">&quot;sample_data.csv&quot;</span>)
+
+plt.figure()
+sim_data.plot()
+plt.savefig(<span class="st">&quot;plot.pdf&quot;</span>, <span class="bu">format</span> <span class="op">=</span> <span class="st">&quot;pdf&quot;</span>)</code></pre></div>
+<p><img src="images/ch1_plot.jpg" /><!-- --></p>
+</div>
+<div id="run-statistical-model-in-r" class="section level3">
+<h3><span class="header-section-number">2.2.3</span> Run statistical model in R</h3>
+<p>We can print the model output with:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;sample_data.csv&quot;</span>)
+<span class="kw">summary</span>(<span class="kw">lm</span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">data =</span> sim_data))</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Y ~ X1 + X2, data = sim_data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -8.3988 -1.9452 -0.0261  2.0216  9.1066 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  9.09087    2.54667    3.57 0.000374 ***
+## X1           3.00531    0.01326  226.68  &lt; 2e-16 ***
+## X2          -4.94658    0.22876  -21.62  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.936 on 997 degrees of freedom
+## Multiple R-squared:  0.9811, Adjusted R-squared:  0.981 
+## F-statistic: 2.585e+04 on 2 and 997 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div id="run-statistical-model-in-r-1" class="section level3">
+<h3><span class="header-section-number">2.2.4</span> Run statistical model in R</h3>
+<p>To save the output, we use the <code>sink</code> function.</p>
+<p>File <code>estimate_model.R</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sim_data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;sample_data.csv&quot;</span>)
+<span class="kw">summary</span>(<span class="kw">lm</span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">data =</span> sim_data))
+
+<span class="kw">sink</span>(<span class="st">&quot;estimation_summary.txt&quot;</span>)
+<span class="kw">summary</span>(<span class="kw">lm</span>(Y <span class="op">~</span><span class="st"> </span>X1 <span class="op">+</span><span class="st"> </span>X2, <span class="dt">data =</span> sim_data))
+<span class="kw">sink</span>()</code></pre></div>
+</div>
+<div id="makefile-syntax" class="section level3">
+<h3><span class="header-section-number">2.2.5</span> Makefile syntax</h3>
+<ul>
+<li><p><code>make</code> is a <em>command</em> that runs on a text file often named <code>Makefile</code>.</p></li>
+<li><p>A <code>Makefile</code> contains one or several blocks with the following structure:</p></li>
+</ul>
+<pre class="txt"><code>targetfile: sourcefile(s)
+[tab] command</code></pre>
+</div>
+<div id="naive-version" class="section level3">
+<h3><span class="header-section-number">2.2.6</span> Naive version</h3>
+<p>File: <code>Makefile</code></p>
+<pre class="txt"><code>sample_data.csv: simulate_data.R
+    R CMD BATCH simulate_data.R
+
+plot.pdf: create_graph.py
+    python create_graph.py
+
+estimation_summary.txt: estimate_model.R
+    R CMD BATCH estimate_model.R</code></pre>
+<p>A simple call to <code>make</code> only builds the first target (<code>sample_data.csv</code>). To build the other targets, we have to use: <code>make plot.pdf</code> and <code>make estimation_summary.txt</code>.</p>
+</div>
+<div id="making-all-targets" class="section level3">
+<h3><span class="header-section-number">2.2.7</span> Making all targets</h3>
+<p>File: <code>Makefile</code></p>
+<pre class="txt"><code>all: analysis
+
+analysis: sample_data.csv plot.pdf estimation_summary.txt
+
+sample_data.csv: simulate_data.R
+    R CMD BATCH simulate_data.R
+
+plot.pdf: create_graph.py
+    python create_graph.py
+
+estimation_summary.txt: estimate_model.R
+    R CMD BATCH estimate_model.R</code></pre>
+<p>New data is simulated and saved in <code>sample_data.csv</code>. But <code>plot.pdf</code> and <code>estimation_summary.txt</code> are not updated.</p>
+</div>
+<div id="dealing-with-dependencies" class="section level3">
+<h3><span class="header-section-number">2.2.8</span> Dealing with dependencies</h3>
+<ul>
+<li>Problem <code>plot.pdf</code> and <code>estimation_summary.txt</code> depend on <code>sample_data.csv</code>.</li>
+<li>Solution: explicit dependencies.</li>
+</ul>
+<p>File: <code>Makefile</code></p>
+<pre class="txt"><code>all: analysis
+
+analysis: sample_data.csv plot.pdf estimation_summary.txt
+
+sample_data.csv: simulate_data.R
+    R CMD BATCH simulate_data.R
+
+plot.pdf: sample_data.csv create_graph.py
+    python create_graph.py
+
+estimation_summary.txt: sample_data.csv estimate_model.R
+    R CMD BATCH estimate_model.R</code></pre>
+</div>
 </div>
 <div id="git-and-github" class="section level2">
 <h2><span class="header-section-number">2.3</span> Git and GitHub</h2>
