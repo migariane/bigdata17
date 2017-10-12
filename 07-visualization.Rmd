@@ -1,3 +1,5 @@
 # Visualization {#visualization}
 
-We have finished a nice book.
+## Principles of visualization
+
+## Maps and GIS
