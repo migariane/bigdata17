@@ -1,6 +1,6 @@
 # Optimization {#optimization}
 
-In this Chapter, we are going to see how to measure and improve code performance
+In this Chapter, we will see how to measure and improve code performance.
 
 ## Measuring performance
 

@@ -8,7 +8,7 @@
 
 - Keep versions of your code
 
-## Structure
+## Package structure
 
 - Folder hierarchy
     - `NAMESPACE`: package import / export
@@ -31,7 +31,7 @@
 
 - `R CMD check`
 
-## `R CMD build`
+### `R CMD build`
 
 ```{r eval=FALSE}
 R CMD build --help
@@ -39,7 +39,7 @@ R CMD build --help
 
 _Build R packages from package sources in the directories specified by ‘pkgdirs’_
 
-## `R CMD INSTALL`
+### `R CMD INSTALL`
 
 ```{r eval=FALSE}
 R CMD INSTALL --help
@@ -47,7 +47,7 @@ R CMD INSTALL --help
 
 _Install the add-on packages specified by pkgs.  The elements of pkgs can be relative or absolute paths to directories with the package sources, or to gzipped package 'tar' archives.  The library tree to install to can be specified via '--library'.  By default, packages are installed in the library tree rooted at the first directory in .libPaths() for an R session run in the current environment._
 
-## `R CMD check`
+### `R CMD check`
 
 ```{r eval=FALSE}
 R CMD check --help
@@ -59,7 +59,7 @@ _Check R packages from package sources, which can be directories or package 'tar
 
 _A variety of diagnostic checks on directory structure, index and control files are performed.  The package is installed into the log directory and production of the package PDF manual is tested. All examples and tests provided by the package are tested to see if they run successfully.  By default code in the vignettes is tested, as is re-building the vignette PDFs._
 
-## Building steps with `devtools`
+### Building steps with `devtools`
 
 - `devtools::build`
 
@@ -69,7 +69,7 @@ _A variety of diagnostic checks on directory structure, index and control files 
 
 - and many others: `load_all`, `document`, `test`, `run_examples`, ...
 
-## Creating an R package
+## Create an R package
 
 ### `utils::package.skeleton`
 
@@ -91,7 +91,7 @@ package.skeleton(list = c("f","g","d","e"), name = "pkgname")
 devtools::create("path/to/package/pkgname")
 ```
 
-## Submitting to CRAN
+### Submit to CRAN
 
 <div class="centered">
 <img src="http://etc.ancient.eu/wp-content/uploads/2014/12/Hydra-1024x521.jpg" width="600px"/>
@@ -99,43 +99,35 @@ devtools::create("path/to/package/pkgname")
 
 http://r-pkgs.had.co.nz/release.html
 
-## Using GitHub
+## R packages on GitHub
 
 http://r-pkgs.had.co.nz/git.html
 
 <iframe src="http://r-pkgs.had.co.nz/git.html"></iframe>
 
-## RStudio and GitHub integration (1 / 7)
+#### RStudio and GitHub integration
 
 <div class="centered">
 <img src="doc_packages/create_git_package_1.png" width="600px"/>
 </div>
 
-## RStudio and GitHub integration (2 / 7)
-
 <div class="centered">
 <img src="doc_packages/create_git_package_2.png" width="600px"/>
 </div>
-
-## RStudio and GitHub integration (3 / 7)
 
 <div class="centered">
 <img src="doc_packages/create_git_package_3.png" width="600px"/>
 </div>
 
-## RStudio and GitHub integration (4 / 7)
-
 <div class="centered">
 <img src="doc_packages/create_git_package_4.png" width="600px"/>
 </div>
-
-## RStudio and GitHub integration (5 / 7)
 
 <div class="centered">
 <img src="doc_packages/create_git_package_5.png" width="600px"/>
 </div>
 
-## Command line
+__Command line__
 
 ```{r eval=FALSE}
 git init
@@ -145,19 +137,15 @@ git remote add origin git@github.com:harvard-P01/pkgtemplate.git
 git push -u origin master
 ```
 
-## RStudio and GitHub integration (6 / 7)
-
 <div class="centered">
 <img src="doc_packages/create_git_package_6.png" width="600px"/>
 </div>
-
-## RStudio and GitHub integration (7 / 7)
 
 <div class="centered">
 <img src="doc_packages/create_git_package_7.png" width="600px"/>
 </div>
 
-## Installing from GitHub
+### Installing from GitHub
 
 ```{r eval=FALSE}
 devtools::install_github("harvard-P01/pkgtemplate")
@@ -168,7 +156,9 @@ devtools::install_github("harvard-P01/pkgtemplate",
                          build_vignettes = TRUE)
 ```
 
-## `.gitignore` (RStudio default)
+### `.gitignore`
+
+RStudio default
 
 ```{r eval=FALSE}
 .Rproj.user
@@ -176,7 +166,7 @@ devtools::install_github("harvard-P01/pkgtemplate",
 .RData
 ```
 
-## `.gitignore` (GitHub default)
+GitHub default
 
 ```{r eval=FALSE}
 # History files
@@ -207,7 +197,7 @@ vignettes/*.pdf
 
 - Keeps track of project-specific recent files
 
-## Project options
+### Project options
 
 ```{r eval=FALSE}
 Version: 1.0
@@ -232,7 +222,7 @@ PackageUseDevtools: Yes
 PackageInstallArgs: --no-multiarch --with-keep.source
 ```
 
-## Package documentation
+### Package documentation
 
 - Functions and methods
 
@@ -240,13 +230,13 @@ PackageInstallArgs: --no-multiarch --with-keep.source
     - PDF
     - `knitr` (or `Sweave`)
 
-## Process example
+## Package workflow example
 
-Creating R Packages: A Tutorial (Friedrich Leisch, 2009 )
+Creating R Packages: A Tutorial (Friedrich Leisch, 2009)
 
 - https://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf
 
-## Adding `linreg.R` in `R/` directory
+### Add `linreg.R` to `R/` directory
 
 ```{r eval=TRUE}
 linmodEst <- function(x, y) {
@@ -269,14 +259,14 @@ linmodEst <- function(x, y) {
 }
 ```
 
-## Running our function
+### Run our function
 
 ```{r}
 data(cats, package = "MASS")
 linmodEst(cbind(1, cats$Bwt), cats$Hwt)
 ```
 
-## And compare with `lm` (1 / 2)
+We can compare the output with `lm`.
 
 ```{r}
 lm1 <- lm(Hwt ~ Bwt, data=cats)
@@ -284,14 +274,12 @@ lm1
 coef(lm1)
 ```
 
-## And compare with `lm` (2 / 2)
-
 ```{r}
 vcov(lm1)
 summary(lm1)$sigma
 ```
 
-## Adding ROxygen2 documentation
+### Add ROxygen2 documentation
 
 ```{r eval=FALSE}
 #' Linear regression
@@ -331,13 +319,13 @@ linmodEst <- function(x, y) {
 }
 ```
 
-## Configure Build Tools
+### Configure Build Tools
 
 <div class="centered">
 <img src="doc_packages/configure_build_tools.png" width="400px"/>
 </div>
 
-## `man/linmodEst.Rd`
+### `man/linmodEst.Rd`
 
 ```{r eval=FALSE}
 % Generated by roxygen2 (4.1.1): do not edit by hand
@@ -367,13 +355,13 @@ linmodEst(y, X)
 }
 ```
 
-## Formatted output
+### Formatted output
 
 <div class="centered">
 <img src="doc_packages/formatted_help.png" width="400px"/>
 </div>
 
-## `DESCRIPTION`
+### `DESCRIPTION`
 
 ```{r eval=FALSE}
 Package: pkgtemplate
@@ -388,15 +376,15 @@ License: What license is it under?
 LazyData: TRUE
 ```
 
-## `NAMESPACE`
+### `NAMESPACE`
 
-`export`'s automatically generated when parsing ROxygens2 snippets
+`export`'s automatically generated when parsing ROxygen2 snippets
 
 ```{r eval=FALSE}
 export(linmodEst)
 ```
 
-## S3 basics
+### S3 basics
 
 ```{r}
 hello <- function() {
@@ -408,7 +396,7 @@ hello <- function() {
 hello()
 ```
 
-## S3 basics
+### S3 basics
 
 ```{r}
 print.hi <- function(...) {
@@ -418,13 +406,12 @@ print.hi <- function(...) {
 hello()
 ```
 
-## S3 and S4 generics
+### S3 and S4 generics
 
 ```{r}
 linmod <- function(x, ...)
   UseMethod("linmod")
 ```
-
 
 ```{r}
 linmod.default <- function(x, y, ...) {
@@ -439,7 +426,7 @@ linmod.default <- function(x, y, ...) {
 }
 ```
 
-## `print`
+### `print`
 
 ```{r}
 print.linmod <- function(x, ...) {
@@ -450,8 +437,6 @@ print.linmod <- function(x, ...) {
 }
 ```
 
-## `print`
-
 ```{r}
 x <- cbind(Const = 1, Bwt = cats$Bwt)
 y <- cats$Hw
@@ -459,7 +444,7 @@ mod1 <- linmod(x, y)
 mod1
 ```
 
-## Other methods
+### Other methods
 
 - `summary.linmod`
 
@@ -471,7 +456,7 @@ mod1
 
 - `coef.linmod`, `vcov.linmod`, ...
 
-## Formulas and model frames
+### Formulas and model frames
 
 ```{r eval=FALSE}
 linmod.formula <- function(formula, data = list(), ...) {
@@ -485,7 +470,9 @@ linmod.formula <- function(formula, data = list(), ...) {
 }
 ```
 
-## Unit tests and `testthat`
+## Unit testing
+
+### Unit tests and `testthat`
 
 http://r-pkgs.had.co.nz/tests.html
 
@@ -499,7 +486,7 @@ pre-populates `test/testthat/`
 
 Test files should start with `test` to be processed.
 
-## `test_coef.R`
+### `test_coef.R`
 
 ```{r eval=FALSE}
 data(cats, package = "MASS")
@@ -520,6 +507,10 @@ Testing pkgtemplate
 .
 Woot! 
 ```
+
+## Code coverage
+
+## Continuous integration
 
 ## Vignettes
 

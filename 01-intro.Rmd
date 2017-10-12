@@ -22,7 +22,7 @@ Week 1 - Basic tools
 Week 2 - Creating and maintaining R packages
 
 - Lecture 3. Rationale, package structure, available tools
-- Lecture 4. Basics of software engineering: unit testing, continuous integration, code coverage
+- Lecture 4. Basics of software engineering: unit testing, code coverage, continuous integration
 
 Week 3 - Software optimization
 
