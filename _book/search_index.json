@@ -5,6 +5,6 @@
 ["optimization.html", "Chapter 4 Optimization 4.1 Measuring performance 4.2 Improving performance", " Chapter 4 Optimization In this Chapter, we will see how to measure and improve code performance. 4.1 Measuring performance 4.1.1 Profiling 4.1.2 Benchmarking 4.2 Improving performance 4.2.1 Introduction to C/C++ 4.2.2 Rcpp "],
 ["databases.html", "Chapter 5 Databases 5.1 Overview 5.2 SQL 5.3 noSQL 5.4 R interfaces", " Chapter 5 Databases 5.1 Overview 5.2 SQL 5.3 noSQL 5.4 R interfaces "],
 ["bigdata.html", "Chapter 6 Big data 6.1 Reading big data (that fits in memory) 6.2 Sampling (can be read, not analyzed easily) 6.3 Pure R solutions 6.4 JVM solutions", " Chapter 6 Big data In this Chapter, we are going to review different approaches to handle and perform analyses on data that does not fit in memory. 6.1 Reading big data (that fits in memory) 6.1.1 R package comparison 6.1.2 Python 6.2 Sampling (can be read, not analyzed easily) 6.3 Pure R solutions 6.4 JVM solutions 6.4.1 h20 6.4.2 Spark "],
-["visualization.html", "Chapter 7 Visualization", " Chapter 7 Visualization We have finished a nice book. "],
+["visualization.html", "Chapter 7 Visualization 7.1 Principles of visualization 7.2 Maps and GIS", " Chapter 7 Visualization 7.1 Principles of visualization 7.2 Maps and GIS "],
 ["references.html", "References", " References "]
 ]
