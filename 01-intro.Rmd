@@ -1,5 +1,13 @@
 # Introduction {#intro}
 
+## Logistics
+
+- Fall 2 course
+- Tuesday and Wednesday, 11:30am-1pm
+- Contact info: cchoirat@iq.harvard.edu.  Please use BST232 in the email title.
+- TA's: Qian Di (qiandi@mail.harvard.edu) and Ben Sabath (mbsabath@hsph.harvard.edu)
+- Office hours: TBD
+
 ## Prerequisites
 
 For BST262 (Computing for Big Data), we assume familiarity with the material covered in BST260 (Introduction to Data Science).
