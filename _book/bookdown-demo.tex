@@ -178,6 +178,10 @@
   (\href{mailto:mbsabath@hsph.harvard.edu}{\nolinkurl{mbsabath@hsph.harvard.edu}})
 \item
   Office hours: TBD
+\item
+  Course GitHub repository \url{https://github.com/cchoirat/bigdata17}
+\item
+  Open HTML file in folder \texttt{\_book/index.html}.
 \end{itemize}
 
 \section{Prerequisites}\label{prerequisites}
@@ -199,6 +203,42 @@ could have used Python, as in BST261 (Data Science II).
   Statistical software programs such as R were not designed to handle
   datasets of massive size.
 \end{enumerate}
+
+\section{Big data bottlenecks}\label{big-data-bottlenecks}
+
+As described by \citet{Lim2015}, there are three bottlenecks:
+
+\begin{itemize}
+\tightlist
+\item
+  CPU
+\item
+  RAM
+\item
+  I/O
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=7.08in]{images/ch1_bottlenecks} 
+
+}
+
+\caption{Steps to execute an R program, from @Lim2015, Chapter 1.}\label{fig:bottlenecks}
+\end{figure}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:unnamed-chunk-1}{}{\label{exr:unnamed-chunk-1} }Can
+you identify points 1--7 in the following code snippet?
+\EndKnitrBlock{exercise}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"mydata.csv"}\NormalTok{)}
+\NormalTok{totals <-}\StringTok{ }\KeywordTok{colSums}\NormalTok{(data)}
+\KeywordTok{write.csv}\NormalTok{(totals, }\StringTok{"totals.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \section{Syllabus}\label{syllabus}
 
@@ -567,8 +607,8 @@ names) and select rows such that the second variable
 \end{verbatim}
 
 \BeginKnitrBlock{exercise}
-\protect\hypertarget{exr:unnamed-chunk-9}{}{\label{exr:unnamed-chunk-9} }The
-iris dataset is also saved in .csv format at
+\protect\hypertarget{exr:unnamed-chunk-11}{}{\label{exr:unnamed-chunk-11}
+}The iris dataset is also saved in .csv format at
 \texttt{\textasciitilde{}/Dropbox/Data17/iris/iris.csv}. Use
 \texttt{AWK} and \texttt{tail} to select the last 5 observations where
 \texttt{Sepal.Width} is larger than 3.5 and \texttt{Petal.Length} is

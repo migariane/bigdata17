@@ -7,6 +7,8 @@
 - Contact info: cchoirat@iq.harvard.edu.  Please use BST232 in the email title.
 - TA's: Qian Di (qiandi@mail.harvard.edu) and Ben Sabath (mbsabath@hsph.harvard.edu)
 - Office hours: TBD
+- Course GitHub repository https://github.com/cchoirat/bigdata17
+- Open HTML file in folder `_book/index.html`.
 
 ## Prerequisites
 
@@ -19,6 +21,27 @@ We will use R to present concepts that are mostly language-agnostic.  We could h
 1. Available data grows at a much faster rate than available computing capacity.
 
 2. Statistical software programs such as R were not designed to handle datasets of massive size.
+
+## Big data bottlenecks
+
+As described by @Lim2015, there are three bottlenecks:
+
+- CPU
+- RAM
+- I/O
+
+```{r echo=FALSE, fig.align="center", bottlenecks, fig.cap="Steps to execute an R program, from @Lim2015, Chapter 1."}
+knitr::include_graphics("images/ch1_bottlenecks.png")
+```
+```{exercise}
+Can you identify points 1--7 in the following code snippet?
+```
+
+```{r eval=FALSE}
+data <- read.csv("mydata.csv")
+totals <- colSums(data)
+write.csv(totals, "totals.csv")
+```
 
 ## Syllabus
 
