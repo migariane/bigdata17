@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-15}
+  \date{2017-10-16}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -220,7 +220,7 @@ As described by \citet{Lim2015}, there are three bottlenecks:
 
 \begin{figure}
 
-{\centering \includegraphics[width=7.08in]{images/ch1_bottlenecks} 
+{\centering \includegraphics{images/ch1_bottlenecks} 
 
 }
 
@@ -695,7 +695,7 @@ File \texttt{create\_graph.py}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=53.33in]{images/ch1_plot}
+\includegraphics{images/ch1_plot.jpg}
 
 \subsection{Run statistical model in
 R}\label{run-statistical-model-in-r}
@@ -841,6 +841,16 @@ Zahn}.
 
 \chapter{Packages}\label{packages}
 
+We strongly recommand \citet{Wickham2015}.
+
+We assume the following packages are installed:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"roxygen2"}\NormalTok{, }\StringTok{"testthat"}\NormalTok{, }\StringTok{"knitr"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
 \section{Why?}\label{why}
 
 \begin{itemize}
@@ -965,8 +975,8 @@ re-building the vignette PDFs.}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{package.skeleton}\NormalTok{() }\CommentTok{# "in "fresh" session ("anRpackage")}
-\KeywordTok{package.skeleton}\NormalTok{(}\StringTok{"pkgname"}\NormalTok{) }\CommentTok{# in "fresh" session}
+\KeywordTok{package.skeleton}\NormalTok{() }\CommentTok{# "in "clean" session ("anRpackage")}
+\KeywordTok{package.skeleton}\NormalTok{(}\StringTok{"pkgname"}\NormalTok{) }\CommentTok{# in "clean" session}
 
 \KeywordTok{set.seed}\NormalTok{(}\DecValTok{02138}\NormalTok{)}
 \NormalTok{f <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, y) x}\OperatorTok{+}\NormalTok{y}
@@ -987,18 +997,38 @@ re-building the vignette PDFs.}
 
 \subsection{Submit to CRAN}\label{submit-to-cran}
 
-\url{http://r-pkgs.had.co.nz/release.html}
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_hydra} 
+
+}
+
+\caption{Submittin to CRAN.  It's not that bad...}\label{fig:hydra}
+\end{figure}
+
+Reading: \url{http://r-pkgs.had.co.nz/release.html}
 
 \section{R packages on GitHub}\label{r-packages-on-github}
 
-\url{http://r-pkgs.had.co.nz/git.html}
+Reading: \url{http://r-pkgs.had.co.nz/git.html}
+
+\begin{itemize}
+\item
+  Version control
+\item
+  Website
+\item
+  Easy install: \texttt{install\_github} from \texttt{devtools}
+\item
+  Collaboration
+\end{itemize}
 
 \subsubsection{RStudio and GitHub
 integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=18.25in]{images/ch3_create_git_package_1} 
+{\centering \includegraphics{images/ch3_create_git_package_1} 
 
 }
 
@@ -1006,7 +1036,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=14.61in]{images/ch3_create_git_package_2} 
+{\centering \includegraphics{images/ch3_create_git_package_2} 
 
 }
 
@@ -1014,7 +1044,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=14.58in]{images/ch3_create_git_package_3} 
+{\centering \includegraphics{images/ch3_create_git_package_3} 
 
 }
 
@@ -1022,7 +1052,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=14.64in]{images/ch3_create_git_package_4} 
+{\centering \includegraphics{images/ch3_create_git_package_4} 
 
 }
 
@@ -1030,7 +1060,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=31.94in]{images/ch3_create_git_package_5} 
+{\centering \includegraphics{images/ch3_create_git_package_5} 
 
 }
 
@@ -1050,7 +1080,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=20.31in]{images/ch3_create_git_package_6} 
+{\centering \includegraphics{images/ch3_create_git_package_6} 
 
 }
 
@@ -1058,7 +1088,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=31.94in]{images/ch3_create_git_package_7} 
+{\centering \includegraphics{images/ch3_create_git_package_7} 
 
 }
 
@@ -1373,7 +1403,7 @@ documentation}\label{add-roxygen2-documentation}
 
 \begin{figure}
 
-{\centering \includegraphics[width=14.69in]{images/ch3_formatted_help} 
+{\centering \includegraphics{images/ch3_formatted_help} 
 
 }
 

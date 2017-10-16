@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-10-15">
+<meta name="date" content="2017-10-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -241,6 +241,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="packages" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Packages</h1>
+<p>We strongly recommand <span class="citation">Wickham (<a href="#ref-Wickham2015">2015</a>)</span>.</p>
+<p>We assume the following packages are installed:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="kw">c</span>(<span class="st">&quot;devtools&quot;</span>, <span class="st">&quot;roxygen2&quot;</span>, <span class="st">&quot;testthat&quot;</span>, <span class="st">&quot;knitr&quot;</span>))</code></pre></div>
 <div id="why" class="section level2">
 <h2><span class="header-section-number">3.1</span> Why?</h2>
 <ul>
@@ -306,8 +309,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2><span class="header-section-number">3.4</span> Create an R package</h2>
 <div id="utilspackage.skeleton" class="section level3">
 <h3><span class="header-section-number">3.4.1</span> <code>utils::package.skeleton</code></h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">package.skeleton</span>() <span class="co"># &quot;in &quot;fresh&quot; session (&quot;anRpackage&quot;)</span>
-<span class="kw">package.skeleton</span>(<span class="st">&quot;pkgname&quot;</span>) <span class="co"># in &quot;fresh&quot; session</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">package.skeleton</span>() <span class="co"># &quot;in &quot;clean&quot; session (&quot;anRpackage&quot;)</span>
+<span class="kw">package.skeleton</span>(<span class="st">&quot;pkgname&quot;</span>) <span class="co"># in &quot;clean&quot; session</span>
 
 <span class="kw">set.seed</span>(<span class="dv">02138</span>)
 f &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) x<span class="op">+</span>y
@@ -322,32 +325,39 @@ e &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 </div>
 <div id="submit-to-cran" class="section level3">
 <h3><span class="header-section-number">3.4.3</span> Submit to CRAN</h3>
-<div class="centered">
-<p><img src="http://etc.ancient.eu/wp-content/uploads/2014/12/Hydra-1024x521.jpg" width="600px"/></p>
+<div class="figure" style="text-align: center"><span id="fig:hydra"></span>
+<img src="images/ch3_hydra.jpg" alt="Submittin to CRAN.  It's not that bad..."  />
+<p class="caption">
+Figure 3.1: Submittin to CRAN. It’s not that bad…
+</p>
 </div>
-<p><a href="http://r-pkgs.had.co.nz/release.html" class="uri">http://r-pkgs.had.co.nz/release.html</a></p>
+<p>Reading: <a href="http://r-pkgs.had.co.nz/release.html" class="uri">http://r-pkgs.had.co.nz/release.html</a></p>
 </div>
 </div>
 <div id="r-packages-on-github" class="section level2">
 <h2><span class="header-section-number">3.5</span> R packages on GitHub</h2>
-<p><a href="http://r-pkgs.had.co.nz/git.html" class="uri">http://r-pkgs.had.co.nz/git.html</a></p>
-<iframe src="http://r-pkgs.had.co.nz/git.html">
-</iframe>
+<p>Reading: <a href="http://r-pkgs.had.co.nz/git.html" class="uri">http://r-pkgs.had.co.nz/git.html</a></p>
+<ul>
+<li><p>Version control</p></li>
+<li><p>Website</p></li>
+<li><p>Easy install: <code>install_github</code> from <code>devtools</code></p></li>
+<li><p>Collaboration</p></li>
+</ul>
 <div id="rstudio-and-github-integration" class="section level4">
 <h4><span class="header-section-number">3.5.0.1</span> RStudio and GitHub integration</h4>
-<p><img src="images/ch3_create_git_package_1.png" width="657" style="display: block; margin: auto;" /></p>
-<p><img src="images/ch3_create_git_package_2.png" width="526" style="display: block; margin: auto;" /></p>
-<p><img src="images/ch3_create_git_package_3.png" width="525" style="display: block; margin: auto;" /></p>
-<p><img src="images/ch3_create_git_package_4.png" width="527" style="display: block; margin: auto;" /></p>
-<p><img src="images/ch3_create_git_package_5.png" width="1150" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_create_git_package_1.png" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_create_git_package_2.png" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_create_git_package_3.png" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_create_git_package_4.png" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_create_git_package_5.png" style="display: block; margin: auto;" /></p>
 <p><strong>Command line</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">git init
 git add <span class="op">*</span>
 git commit <span class="op">-</span>m <span class="st">&quot;First commit&quot;</span>
 git remote add origin git<span class="op">@</span>github.com<span class="op">:</span>harvard<span class="op">-</span>P01<span class="op">/</span>pkgtemplate.git
 git push <span class="op">-</span>u origin master</code></pre></div>
-<p><img src="images/ch3_create_git_package_6.png" width="731" style="display: block; margin: auto;" /></p>
-<p><img src="images/ch3_create_git_package_7.png" width="1150" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_create_git_package_6.png" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_create_git_package_7.png" style="display: block; margin: auto;" /></p>
 </div>
 <div id="installing-from-github" class="section level3">
 <h3><span class="header-section-number">3.5.1</span> Installing from GitHub</h3>
@@ -563,7 +573,7 @@ y &lt;-<span class="st"> </span>mtcars[, <span class="st">&quot;mpg&quot;</span>
 </div>
 <div id="formatted-output" class="section level3">
 <h3><span class="header-section-number">3.7.6</span> Formatted output</h3>
-<p><img src="images/ch3_formatted_help.png" width="529" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_formatted_help.png" style="display: block; margin: auto;" /></p>
 </div>
 <div id="description" class="section level3">
 <h3><span class="header-section-number">3.7.7</span> <code>DESCRIPTION</code></h3>
@@ -702,6 +712,12 @@ Woot<span class="op">!</span><span class="st"> </span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">use_vignette</span>(<span class="st">&quot;linmod&quot;</span>)</code></pre></div>
 <p><a href="https://github.com/harvard-P01/pkgtemplate/blob/master/vignettes/linmod.Rmd" class="uri">https://github.com/harvard-P01/pkgtemplate/blob/master/vignettes/linmod.Rmd</a></p>
 
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Wickham2015">
+<p>Wickham, H. 2015. <em>R Packages</em>. 1st ed. O’Reilly Media, Inc.</p>
 </div>
 </div>
             </section>

@@ -1,5 +1,13 @@
 # Packages {#packages}
 
+We strongly recommand @Wickham2015.
+
+We assume the following packages are installed:
+
+```{r, eval=FALSE}
+install.packages(c("devtools", "roxygen2", "testthat", "knitr"))
+```
+
 ## Why?
 
 - Organize your code
@@ -74,8 +82,8 @@ _A variety of diagnostic checks on directory structure, index and control files 
 ### `utils::package.skeleton`
 
 ```{r eval=FALSE}
-package.skeleton() # "in "fresh" session ("anRpackage")
-package.skeleton("pkgname") # in "fresh" session
+package.skeleton() # "in "clean" session ("anRpackage")
+package.skeleton("pkgname") # in "clean" session
 
 set.seed(02138)
 f <- function(x, y) x+y
@@ -93,37 +101,53 @@ devtools::create("path/to/package/pkgname")
 
 ### Submit to CRAN
 
-<div class="centered">
-<img src="http://etc.ancient.eu/wp-content/uploads/2014/12/Hydra-1024x521.jpg" width="600px"/>
-</div>
+```{r echo=FALSE, fig.align="center", hydra, fig.cap="Submittin to CRAN.  It's not that bad..."}
+knitr::include_graphics("images/ch3_hydra.jpg")
+```
 
-http://r-pkgs.had.co.nz/release.html
+Reading: http://r-pkgs.had.co.nz/release.html
 
 ## R packages on GitHub
 
-http://r-pkgs.had.co.nz/git.html
+Reading: http://r-pkgs.had.co.nz/git.html
 
-<iframe src="http://r-pkgs.had.co.nz/git.html"></iframe>
+- Version control
+
+- Website, wiki
+
+- Easy install: `install_github` from `devtools`
+
+- Collaboration
+
+- Issue tracking
 
 #### RStudio and GitHub integration
 
-```{r echo=FALSE, fig.align="center", pkg1, fig.cap=""}
+```{r echo=FALSE, fig.align="center", pkg1, fig.cap="Create a new repository on GitHub"}
 knitr::include_graphics("images/ch3_create_git_package_1.png")
 ```
 
-```{r echo=FALSE, fig.align="center", pkg2, fig.cap=""}
+```{r echo=FALSE, fig.align="center", pkg11, fig.cap="GitHub view"}
+knitr::include_graphics("images/ch3_create_git_package_1_1.png")
+```
+
+```{r echo=FALSE, fig.align="center", pkg2, fig.cap="Create a new project in RStudio"}
 knitr::include_graphics("images/ch3_create_git_package_2.png")
 ```
 
-```{r echo=FALSE, fig.align="center", pkg3, fig.cap=""}
+```{r echo=FALSE, fig.align="center", pkg3, fig.cap="Create an empty project"}
 knitr::include_graphics("images/ch3_create_git_package_3.png")
 ```
 
-```{r echo=FALSE, fig.align="center", pkg4, fig.cap=""}
+```{r echo=FALSE, fig.align="center", pkg4, fig.cap="Create a new R package"}
 knitr::include_graphics("images/ch3_create_git_package_4.png")
 ```
 
-```{r echo=FALSE, fig.align="center", pkg5, fig.cap=""}
+```{r echo=FALSE, fig.align="center", pkg4, fig.cap="Package template is created"}
+knitr::include_graphics("images/ch3_create_git_package_4_1.png")
+```
+
+```{r echo=FALSE, fig.align="center", pkg5, fig.cap="Ready to run!  Notice the "Build" tab"}
 knitr::include_graphics("images/ch3_create_git_package_5.png")
 ```
 
@@ -386,6 +410,8 @@ export(linmodEst)
 
 ### S3 basics
 
+Reading: http://adv-r.had.co.nz/S3.html
+
 ```{r}
 hello <- function() {
  s <- "Hello World!"
@@ -396,8 +422,6 @@ hello <- function() {
 hello()
 ```
 
-### S3 basics
-
 ```{r}
 print.hi <- function(...) {
   print("Surprise!")
@@ -407,6 +431,8 @@ hello()
 ```
 
 ### S3 and S4 generics
+
+Reading: http://adv-r.had.co.nz/S4.html
 
 ```{r}
 linmod <- function(x, ...)
