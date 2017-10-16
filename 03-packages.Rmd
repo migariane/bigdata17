@@ -107,25 +107,25 @@ http://r-pkgs.had.co.nz/git.html
 
 #### RStudio and GitHub integration
 
-<div class="centered">
-<img src="doc_packages/create_git_package_1.png" width="600px"/>
-</div>
+```{r echo=FALSE, fig.align="center", pkg1, fig.cap=""}
+knitr::include_graphics("images/ch3_create_git_package_1.png")
+```
 
-<div class="centered">
-<img src="doc_packages/create_git_package_2.png" width="600px"/>
-</div>
+```{r echo=FALSE, fig.align="center", pkg2, fig.cap=""}
+knitr::include_graphics("images/ch3_create_git_package_2.png")
+```
 
-<div class="centered">
-<img src="doc_packages/create_git_package_3.png" width="600px"/>
-</div>
+```{r echo=FALSE, fig.align="center", pkg3, fig.cap=""}
+knitr::include_graphics("images/ch3_create_git_package_3.png")
+```
 
-<div class="centered">
-<img src="doc_packages/create_git_package_4.png" width="600px"/>
-</div>
+```{r echo=FALSE, fig.align="center", pkg4, fig.cap=""}
+knitr::include_graphics("images/ch3_create_git_package_4.png")
+```
 
-<div class="centered">
-<img src="doc_packages/create_git_package_5.png" width="600px"/>
-</div>
+```{r echo=FALSE, fig.align="center", pkg5, fig.cap=""}
+knitr::include_graphics("images/ch3_create_git_package_5.png")
+```
 
 __Command line__
 
@@ -137,13 +137,13 @@ git remote add origin git@github.com:harvard-P01/pkgtemplate.git
 git push -u origin master
 ```
 
-<div class="centered">
-<img src="doc_packages/create_git_package_6.png" width="600px"/>
-</div>
+```{r echo=FALSE, fig.align="center", pkg6, fig.cap=""}
+knitr::include_graphics("images/ch3_create_git_package_6.png")
+```
 
-<div class="centered">
-<img src="doc_packages/create_git_package_7.png" width="600px"/>
-</div>
+```{r echo=FALSE, fig.align="center", pkg7, fig.cap=""}
+knitr::include_graphics("images/ch3_create_git_package_7.png")
+```
 
 ### Installing from GitHub
 
@@ -322,7 +322,7 @@ linmodEst <- function(x, y) {
 ### Configure Build Tools
 
 <div class="centered">
-<img src="doc_packages/configure_build_tools.png" width="400px"/>
+<img src="images/ch3_configure_build_tools.png" width="400px"/>
 </div>
 
 ### `man/linmodEst.Rd`
@@ -357,9 +357,9 @@ linmodEst(y, X)
 
 ### Formatted output
 
-<div class="centered">
-<img src="doc_packages/formatted_help.png" width="400px"/>
-</div>
+```{r echo=FALSE, fig.align="center", help, fig.cap=""}
+knitr::include_graphics("images/ch3_formatted_help.png")
+```
 
 ### `DESCRIPTION`
 

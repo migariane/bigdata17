@@ -8,7 +8,7 @@
 - TA's: Qian Di (qiandi@mail.harvard.edu) and Ben Sabath (mbsabath@hsph.harvard.edu)
 - Office hours: TBD
 - Course GitHub repository https://github.com/cchoirat/bigdata17
-- Open HTML file in folder `_book/index.html`.
+- Open file in folder `_book/index.html`
 
 ## Prerequisites
 
