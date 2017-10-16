@@ -1,9 +1,50 @@
 # Databases {#databases}
 
 ## Overview
+  A database is simply an organized structure for storing and accessing data. There are a number of structures used to store
+  
 
-## SQL
 
-## noSQL
+## Relational Databases (SQL)
+
+A Relational Database stores information in a the form of entities and the relationships between them. Entities are typically nouns and relationships are typically verbs. For example, if we wanted to store information about class enrollment at a university, the entities would consist of objects like a student, class, and professor. The relationships would consist of takes and teaches. Relationships can be one to one, many to many, or one to many.
+
+### SQL
+
+SQL (Structured Query Language) is the standard way that information stored in relational databases is queried. There are a number of variations on the language, and a number of online resources available for learning their various complexities. However, the general structure of all SQL queries is consistent across implementations. 
+
+In SQL systems, entities and relationships are represented by tables, where each row or record in a table represents a particular instance of of that general object. Continuing the class example, students would be stored in `Student`, classes in `Class`, and professors in `Professor`. The table containing the relationships between students and classes would be likely named `StudentClass` and the 
+
+The three key parts of a SQL query are the `SELECT` clause, the `FROM` clause, and the `WHERE` clause. The `SELECT` clause specifies the pieces of information you want about an individual record, the `FROM` clause specifies the tables that will be used
+
+
+To get all information about all students we would type the following:
+```{SQL} 
+SELECT * FROM STUDENT
+``` 
+
+To Select the name and birthday of all students in classes taught by Dr. Choirat would be a more complex query, which would likely look something like this:
+
+```{SQL}
+   SELECT Name,
+          DOB
+   FROM Student s 
+        inner join StudentClass sc on 
+            s.ID = sc.studentid
+        inner join ProfessorClass pc on
+            sc.classid = pc.classid
+        inner join Professor p on
+            pc.profid = p.id
+    WHERE p.lastname = "Choirat"
+    ```
+        
+        
+
+
+
+
+
+
+## Non-Relational Databases (noSQL)
 
 ## R interfaces
