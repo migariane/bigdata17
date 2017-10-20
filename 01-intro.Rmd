@@ -45,6 +45,8 @@ write.csv(totals, "totals.csv")
 
 ## Syllabus
 
+Part I – Good code still matters _(even with lots of computing resources)_
+
 Week 1 - Basic tools
 
 - Lecture 1. Unix scripting, make
@@ -59,6 +61,8 @@ Week 3 - Software optimization
 
 - Lecture 5. Measuring performance: profiling and benchmarking tools
 - Lecture 6. Improving performance: an introduction to C/C++, Rcpp
+
+Part II – Scaling up _(don’t use big data tools for small data)_
 
 Week 4 – Databases
 
@@ -140,3 +144,4 @@ If there is enough interest, we might present methylation examples.
 If you have suggestions, you can open a GitHub issue at https://github.com/cchoirat/bigdata17/issues.
 
 If you want to contribute, we welcome [pull requests](https://help.github.com/articles/about-pull-requests/).
+
