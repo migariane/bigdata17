@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-10-18">
+<meta name="date" content="2017-10-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -180,9 +180,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.8.1" data-path="packages.html"><a href="packages.html#unit-tests-and-testthat"><i class="fa fa-check"></i><b>3.8.1</b> Unit tests and <code>testthat</code></a></li>
 <li class="chapter" data-level="3.8.2" data-path="packages.html"><a href="packages.html#test_coef.r"><i class="fa fa-check"></i><b>3.8.2</b> <code>test_coef.R</code></a></li>
 </ul></li>
-<li class="chapter" data-level="3.9" data-path="packages.html"><a href="packages.html#code-coverage"><i class="fa fa-check"></i><b>3.9</b> Code coverage</a></li>
-<li class="chapter" data-level="3.10" data-path="packages.html"><a href="packages.html#continuous-integration"><i class="fa fa-check"></i><b>3.10</b> Continuous integration</a></li>
-<li class="chapter" data-level="3.11" data-path="packages.html"><a href="packages.html#vignettes"><i class="fa fa-check"></i><b>3.11</b> Vignettes</a></li>
+<li class="chapter" data-level="3.9" data-path="packages.html"><a href="packages.html#continuous-integration"><i class="fa fa-check"></i><b>3.9</b> Continuous integration</a></li>
+<li class="chapter" data-level="3.10" data-path="packages.html"><a href="packages.html#code-coverage"><i class="fa fa-check"></i><b>3.10</b> Code coverage</a></li>
+<li class="chapter" data-level="3.11" data-path="packages.html"><a href="packages.html#back-to-github"><i class="fa fa-check"></i><b>3.11</b> Back to GitHub</a></li>
+<li class="chapter" data-level="3.12" data-path="packages.html"><a href="packages.html#vignettes"><i class="fa fa-check"></i><b>3.12</b> Vignettes</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="optimization.html"><a href="optimization.html"><i class="fa fa-check"></i><b>4</b> Optimization</a><ul>
 <li class="chapter" data-level="4.1" data-path="optimization.html"><a href="optimization.html#measuring-performance"><i class="fa fa-check"></i><b>4.1</b> Measuring performance</a><ul>
@@ -752,17 +753,57 @@ Testing Linreg
 DONE <span class="op">==</span><span class="er">=======================================================================================</span></code></pre></div>
 </div>
 </div>
-<div id="code-coverage" class="section level2">
-<h2><span class="header-section-number">3.9</span> Code coverage</h2>
-<p>Reading: <a href="https://walczak.org/2017/06/how-to-add-code-coverage-codecov-to-your-r-package/" class="uri">https://walczak.org/2017/06/how-to-add-code-coverage-codecov-to-your-r-package/</a></p>
-<p><a href="https://travis-ci.org/" class="uri">https://travis-ci.org/</a> <a href="https://codecov.io/" class="uri">https://codecov.io/</a></p>
-</div>
 <div id="continuous-integration" class="section level2">
-<h2><span class="header-section-number">3.10</span> Continuous integration</h2>
+<h2><span class="header-section-number">3.9</span> Continuous integration</h2>
 <p>Reading: <a href="http://r-pkgs.had.co.nz/check.html#travis" class="uri">http://r-pkgs.had.co.nz/check.html#travis</a></p>
+<p>Website: <a href="https://travis-ci.org/" class="uri">https://travis-ci.org/</a></p>
+<p>First step is to create a Travis account and link it to you GitHub account.</p>
+<p><img src="images/ch3_travis_github.png" style="display: block; margin: auto;" /></p>
+<p>Travis will list all your public GitHub repositories for you to select the ones you want to test.</p>
+<p><img src="images/ch3_travis_Linreg.png" style="display: block; margin: auto;" /></p>
+<p>Calling</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">use_coverage</span>(<span class="dt">pkg =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;codecov&quot;</span>))</code></pre></div>
+<p>creates the <code>.travis.yml</code> file:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># R for travis: see documentation at https://docs.travis-ci.com/user/languages/r</span>
+
+language<span class="op">:</span><span class="st"> </span>R
+sudo<span class="op">:</span><span class="st"> </span>false
+cache<span class="op">:</span><span class="st"> </span>packages</code></pre></div>
+<p>and pushing <code>Linreg</code> code to GitHub will automatically triggers a Travis build… which fails!</p>
+<p><img src="images/ch3_travis_failed_build.png" style="display: block; margin: auto;" /></p>
+<p>To be continued…</p>
+</div>
+<div id="code-coverage" class="section level2">
+<h2><span class="header-section-number">3.10</span> Code coverage</h2>
+<p>Reading: <a href="https://walczak.org/2017/06/how-to-add-code-coverage-codecov-to-your-r-package/" class="uri">https://walczak.org/2017/06/how-to-add-code-coverage-codecov-to-your-r-package/</a></p>
+<p>Website: <a href="https://codecov.io/" class="uri">https://codecov.io/</a></p>
+<p>Like Travis, codecov has to be linked to a GitHub account:</p>
+<p><img src="images/ch3_codecov_github.png" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">use_coverage</span>(<span class="dt">pkg =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;codecov&quot;</span>))</code></pre></div>
+<p>creates the <code>codecov.yml</code> file:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">comment<span class="op">:</span><span class="st"> </span>false</code></pre></div>
+<p>A call to</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">covr<span class="op">::</span><span class="kw">codecov</span>(<span class="dt">token =</span> <span class="st">&quot;YOUR_TOKEN&quot;</span>)</code></pre></div>
+<p>will give you code coverage information:</p>
+<p><img src="images/ch3_codecov_out.png" style="display: block; margin: auto;" /></p>
+</div>
+<div id="back-to-github" class="section level2">
+<h2><span class="header-section-number">3.11</span> Back to GitHub</h2>
+<p>Badges can be added to <code>README.md</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&lt;!---</span><span class="st"> </span>Badges <span class="op">----</span>-&gt;
+[<span class="op">!</span>[<span class="kw">Travis</span> (LINUX) Build Status](https<span class="op">:</span><span class="er">//</span>travis<span class="op">-</span>ci.org<span class="op">/</span>cchoirat<span class="op">/</span>Linreg.svg?<span class="dt">branch=</span>master)](https<span class="op">:</span><span class="er">//</span>travis<span class="op">-</span>ci.org<span class="op">/</span>cchoirat<span class="op">/</span>Linreg)
+[<span class="op">!</span>[codecov](https<span class="op">:</span><span class="er">//</span>codecov.io<span class="op">/</span>gh<span class="op">/</span>cchoirat<span class="op">/</span>Linreg<span class="op">/</span>branch<span class="op">/</span>master<span class="op">/</span>graph<span class="op">/</span>badge.svg)](https<span class="op">:</span><span class="er">//</span>codecov.io<span class="op">/</span>gh<span class="op">/</span>cchoirat<span class="op">/</span>Linreg)
+
+## `Linreg` package template
+
+Based on <span class="st">&quot;Creating R Packages: A Tutorial&quot;</span> (Friedrich Leisch, <span class="dv">2009</span>)
+
+<span class="op">-</span><span class="st"> </span>https<span class="op">:</span><span class="er">//</span>cran.r<span class="op">-</span>project.org<span class="op">/</span>doc<span class="op">/</span>contrib<span class="op">/</span>Leisch<span class="op">-</span>CreatingPackages.pdf</code></pre></div>
+<p>are are automatically displayed on GitHub:</p>
+<p><img src="images/ch3_badges.png" style="display: block; margin: auto;" /></p>
 </div>
 <div id="vignettes" class="section level2">
-<h2><span class="header-section-number">3.11</span> Vignettes</h2>
+<h2><span class="header-section-number">3.12</span> Vignettes</h2>
 <p><a href="http://r-pkgs.had.co.nz/vignettes.html" class="uri">http://r-pkgs.had.co.nz/vignettes.html</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">use_vignette</span>(<span class="st">&quot;linmod&quot;</span>)</code></pre></div>
 <p><a href="https://github.com/harvard-P01/pkgtemplate/blob/master/vignettes/linmod.Rmd" class="uri">https://github.com/harvard-P01/pkgtemplate/blob/master/vignettes/linmod.Rmd</a></p>

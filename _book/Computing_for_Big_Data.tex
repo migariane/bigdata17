@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-18}
+  \date{2017-10-20}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -1648,16 +1648,143 @@ Test files should start with \texttt{test} to be processed.
 \end{Highlighting}
 \end{Shaded}
 
+\section{Continuous integration}\label{continuous-integration}
+
+Reading: \url{http://r-pkgs.had.co.nz/check.html\#travis}
+
+Website: \url{https://travis-ci.org/}
+
+First step is to create a Travis account and link it to you GitHub
+account.
+
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_travis_github} 
+
+}
+
+\end{figure}
+
+Travis will list all your public GitHub repositories for you to select
+the ones you want to test.
+
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_travis_Linreg} 
+
+}
+
+\end{figure}
+
+Calling
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{use_coverage}\NormalTok{(}\DataTypeTok{pkg =} \StringTok{"."}\NormalTok{, }\DataTypeTok{type =} \KeywordTok{c}\NormalTok{(}\StringTok{"codecov"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+creates the \texttt{.travis.yml} file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r}
+
+\NormalTok{language}\OperatorTok{:}\StringTok{ }\NormalTok{R}
+\NormalTok{sudo}\OperatorTok{:}\StringTok{ }\NormalTok{false}
+\NormalTok{cache}\OperatorTok{:}\StringTok{ }\NormalTok{packages}
+\end{Highlighting}
+\end{Shaded}
+
+and pushing \texttt{Linreg} code to GitHub will automatically triggers a
+Travis build\ldots{} which fails!
+
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_travis_failed_build} 
+
+}
+
+\end{figure}
+
+To be continued\ldots{}
+
 \section{Code coverage}\label{code-coverage}
 
 Reading:
 \url{https://walczak.org/2017/06/how-to-add-code-coverage-codecov-to-your-r-package/}
 
-\url{https://travis-ci.org/} \url{https://codecov.io/}
+Website: \url{https://codecov.io/}
 
-\section{Continuous integration}\label{continuous-integration}
+Like Travis, codecov has to be linked to a GitHub account:
 
-Reading: \url{http://r-pkgs.had.co.nz/check.html\#travis}
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_codecov_github} 
+
+}
+
+\end{figure}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{use_coverage}\NormalTok{(}\DataTypeTok{pkg =} \StringTok{"."}\NormalTok{, }\DataTypeTok{type =} \KeywordTok{c}\NormalTok{(}\StringTok{"codecov"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+creates the \texttt{codecov.yml} file:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{comment}\OperatorTok{:}\StringTok{ }\NormalTok{false}
+\end{Highlighting}
+\end{Shaded}
+
+A call to
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{covr}\OperatorTok{::}\KeywordTok{codecov}\NormalTok{(}\DataTypeTok{token =} \StringTok{"YOUR_TOKEN"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+will give you code coverage information:
+
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_codecov_out} 
+
+}
+
+\end{figure}
+
+\section{Back to GitHub}\label{back-to-github}
+
+Badges can be added to \texttt{README.md}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\OperatorTok{<!---}\StringTok{ }\NormalTok{Badges }\OperatorTok{----}\NormalTok{->}
+\NormalTok{[}\OperatorTok{!}\NormalTok{[}\KeywordTok{Travis}\NormalTok{ (LINUX) Build Status](https}\OperatorTok{:}\ErrorTok{//}\NormalTok{travis}\OperatorTok{-}\NormalTok{ci.org}\OperatorTok{/}\NormalTok{cchoirat}\OperatorTok{/}\NormalTok{Linreg.svg?}\DataTypeTok{branch=}\NormalTok{master)](https}\OperatorTok{:}\ErrorTok{//}\NormalTok{travis}\OperatorTok{-}\NormalTok{ci.org}\OperatorTok{/}\NormalTok{cchoirat}\OperatorTok{/}\NormalTok{Linreg)}
+\NormalTok{[}\OperatorTok{!}\NormalTok{[codecov](https}\OperatorTok{:}\ErrorTok{//}\NormalTok{codecov.io}\OperatorTok{/}\NormalTok{gh}\OperatorTok{/}\NormalTok{cchoirat}\OperatorTok{/}\NormalTok{Linreg}\OperatorTok{/}\NormalTok{branch}\OperatorTok{/}\NormalTok{master}\OperatorTok{/}\NormalTok{graph}\OperatorTok{/}\NormalTok{badge.svg)](https}\OperatorTok{:}\ErrorTok{//}\NormalTok{codecov.io}\OperatorTok{/}\NormalTok{gh}\OperatorTok{/}\NormalTok{cchoirat}\OperatorTok{/}\NormalTok{Linreg)}
+
+\NormalTok{## `Linreg` package template}
+
+\NormalTok{Based on }\StringTok{"Creating R Packages: A Tutorial"}\NormalTok{ (Friedrich Leisch, }\DecValTok{2009}\NormalTok{)}
+
+\OperatorTok{-}\StringTok{ }\NormalTok{https}\OperatorTok{:}\ErrorTok{//}\NormalTok{cran.r}\OperatorTok{-}\NormalTok{project.org}\OperatorTok{/}\NormalTok{doc}\OperatorTok{/}\NormalTok{contrib}\OperatorTok{/}\NormalTok{Leisch}\OperatorTok{-}\NormalTok{CreatingPackages.pdf}
+\end{Highlighting}
+\end{Shaded}
+
+are are automatically displayed on GitHub:
+
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_badges} 
+
+}
+
+\end{figure}
 
 \section{Vignettes}\label{vignettes}
 

@@ -541,16 +541,105 @@ Testing Linreg
 DONE =========================================================================================
 ```
 
+## Continuous integration
+
+Reading: http://r-pkgs.had.co.nz/check.html#travis
+
+Website: https://travis-ci.org/
+
+First step is to create a Travis account and link it to you GitHub account.
+
+```{r echo=FALSE, fig.align="center", travis, fig.cap=""}
+knitr::include_graphics("images/ch3_travis_github.png")
+```
+
+Travis will list all your public GitHub repositories for you to select the ones you want to test.
+
+```{r echo=FALSE, fig.align="center", travis_linreg, fig.cap=""}
+knitr::include_graphics("images/ch3_travis_Linreg.png")
+```
+
+Calling
+
+```{r eval=FALSE}
+devtools::use_coverage(pkg = ".", type = c("codecov"))
+```
+
+creates the `.travis.yml` file:
+
+```{r eval=FALSE}
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: R
+sudo: false
+cache: packages
+
+```
+
+and pushing `Linreg` code to GitHub will automatically triggers a Travis build... which fails!
+
+```{r echo=FALSE, fig.align="center", travis_failed, fig.cap=""}
+knitr::include_graphics("images/ch3_travis_failed_build.png")
+```
+
+To be continued...
+
 ## Code coverage
 
 Reading: https://walczak.org/2017/06/how-to-add-code-coverage-codecov-to-your-r-package/
 
-https://travis-ci.org/
-https://codecov.io/
+Website: https://codecov.io/
 
-## Continuous integration
+Like Travis, codecov has to be linked to a GitHub account:
 
-Reading: http://r-pkgs.had.co.nz/check.html#travis
+```{r echo=FALSE, fig.align="center", codecov, fig.cap=""}
+knitr::include_graphics("images/ch3_codecov_github.png")
+```
+
+```{r eval=FALSE}
+devtools::use_coverage(pkg = ".", type = c("codecov"))
+```
+
+creates the `codecov.yml` file:
+
+```{r eval=FALSE}
+comment: false
+```
+
+A call to
+
+```{r eval=FALSE}
+covr::codecov(token = "YOUR_TOKEN")
+```
+
+will give you code coverage information:
+
+```{r echo=FALSE, fig.align="center", codecov_out, fig.cap=""}
+knitr::include_graphics("images/ch3_codecov_out.png")
+```
+
+## Back to GitHub
+
+Badges can be added to `README.md`:
+
+```{r eval=FALSE}
+<!--- Badges ----->
+[![Travis (LINUX) Build Status](https://travis-ci.org/cchoirat/Linreg.svg?branch=master)](https://travis-ci.org/cchoirat/Linreg)
+[![codecov](https://codecov.io/gh/cchoirat/Linreg/branch/master/graph/badge.svg)](https://codecov.io/gh/cchoirat/Linreg)
+
+## `Linreg` package template
+
+Based on "Creating R Packages: A Tutorial" (Friedrich Leisch, 2009)
+
+- https://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf
+
+```
+
+are are automatically displayed on GitHub:
+
+```{r echo=FALSE, fig.align="center", badges, fig.cap=""}
+knitr::include_graphics("images/ch3_badges.png")
+```
 
 ## Vignettes
 
