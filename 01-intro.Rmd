@@ -145,3 +145,15 @@ If you have suggestions, you can open a GitHub issue at https://github.com/cchoi
 
 If you want to contribute, we welcome [pull requests](https://help.github.com/articles/about-pull-requests/).
 
+## Before we start...
+
+How much R do you know?
+
+Introduction to R: http://tutorials.iq.harvard.edu/R/Rintro/Rintro.html
+
+Regression models in R: http://tutorials.iq.harvard.edu/R/Rstatistics/Rstatistics.html
+
+R graphics: http://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html
+
+R programming: http://tutorials.iq.harvard.edu/R/RProgramming/Rprogramming.html
+

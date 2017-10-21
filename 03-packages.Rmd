@@ -679,7 +679,7 @@ Copying my-linear-regression.Rmd to inst/doc/
 
 The vignette is accessible with
 
-```{r}
+```{r eval=FALSE}
 vignette("my-linear-regression")
 vignette("my-linear-regression", package = "Linreg")
 ```
