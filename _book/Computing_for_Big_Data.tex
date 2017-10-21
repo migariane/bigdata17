@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-20}
+  \date{2017-10-21}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -1793,15 +1793,69 @@ are are automatically displayed on GitHub:
 
 \section{Vignettes}\label{vignettes}
 
-\url{http://r-pkgs.had.co.nz/vignettes.html}
+Reading: \url{http://r-pkgs.had.co.nz/vignettes.html}
+
+Reading: \url{http://kbroman.org/pkg_primer/pages/vignettes.html}
+
+Even if all the functions and datasets of your package are documented,
+it is still useful to have a more detailed illustation on how to use
+your package. A \emph{vignette} is the right place to explain a worflow
+and a statistical method.
+
+Running:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{devtools}\OperatorTok{::}\KeywordTok{use_vignette}\NormalTok{(}\StringTok{"linmod"}\NormalTok{)}
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{use_vignette}\NormalTok{(}\StringTok{"my-linear-regression"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\url{https://github.com/harvard-P01/pkgtemplate/blob/master/vignettes/linmod.Rmd}
+creates a \texttt{vignettes} folder and provide a template in RMarkdown
+format \texttt{my-linear-regression.Rmd}:
+
+\url{https://github.com/cchoirat/Linreg/blob/master/vignettes/my-linear-regression.Rmd}
+
+It also indicates in \texttt{DESCRIPTION} that vignettes should be built
+with \texttt{knitr}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{VignetteBuilder}\OperatorTok{:}\StringTok{ }\NormalTok{knitr}
+\end{Highlighting}
+\end{Shaded}
+
+The vignette is built into a HTML document with
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{devtools}\OperatorTok{::}\KeywordTok{build_vignettes}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Building Linreg vignettes}
+\NormalTok{Moving my}\OperatorTok{-}\NormalTok{linear}\OperatorTok{-}\NormalTok{regression.html, my}\OperatorTok{-}\NormalTok{linear}\OperatorTok{-}\NormalTok{regression.R to inst}\OperatorTok{/}\NormalTok{doc}\OperatorTok{/}
+\NormalTok{Copying my}\OperatorTok{-}\NormalTok{linear}\OperatorTok{-}\NormalTok{regression.Rmd to inst}\OperatorTok{/}\NormalTok{doc}\OperatorTok{/}
+\end{Highlighting}
+\end{Shaded}
+
+The vignette is accessible with
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{vignette}\NormalTok{(}\StringTok{"my-linear-regression"}\NormalTok{)}
+\KeywordTok{vignette}\NormalTok{(}\StringTok{"my-linear-regression"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"Linreg"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_vignette_html} 
+
+}
+
+\end{figure}
 
 \chapter{Optimization}\label{optimization}
 

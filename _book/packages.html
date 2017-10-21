@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-10-20">
+<meta name="date" content="2017-10-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -804,9 +804,25 @@ Based on <span class="st">&quot;Creating R Packages: A Tutorial&quot;</span> (Fr
 </div>
 <div id="vignettes" class="section level2">
 <h2><span class="header-section-number">3.12</span> Vignettes</h2>
-<p><a href="http://r-pkgs.had.co.nz/vignettes.html" class="uri">http://r-pkgs.had.co.nz/vignettes.html</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">use_vignette</span>(<span class="st">&quot;linmod&quot;</span>)</code></pre></div>
-<p><a href="https://github.com/harvard-P01/pkgtemplate/blob/master/vignettes/linmod.Rmd" class="uri">https://github.com/harvard-P01/pkgtemplate/blob/master/vignettes/linmod.Rmd</a></p>
+<p>Reading: <a href="http://r-pkgs.had.co.nz/vignettes.html" class="uri">http://r-pkgs.had.co.nz/vignettes.html</a></p>
+<p>Reading: <a href="http://kbroman.org/pkg_primer/pages/vignettes.html" class="uri">http://kbroman.org/pkg_primer/pages/vignettes.html</a></p>
+<p>Even if all the functions and datasets of your package are documented, it is still useful to have a more detailed illustation on how to use your package. A <em>vignette</em> is the right place to explain a worflow and a statistical method.</p>
+<p>Running:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">use_vignette</span>(<span class="st">&quot;my-linear-regression&quot;</span>)</code></pre></div>
+<p>creates a <code>vignettes</code> folder and provide a template in RMarkdown format <code>my-linear-regression.Rmd</code>:</p>
+<p><a href="https://github.com/cchoirat/Linreg/blob/master/vignettes/my-linear-regression.Rmd" class="uri">https://github.com/cchoirat/Linreg/blob/master/vignettes/my-linear-regression.Rmd</a></p>
+<p>It also indicates in <code>DESCRIPTION</code> that vignettes should be built with <code>knitr</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">VignetteBuilder<span class="op">:</span><span class="st"> </span>knitr</code></pre></div>
+<p>The vignette is built into a HTML document with</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">build_vignettes</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Building Linreg vignettes
+Moving my<span class="op">-</span>linear<span class="op">-</span>regression.html, my<span class="op">-</span>linear<span class="op">-</span>regression.R to inst<span class="op">/</span>doc<span class="op">/</span>
+Copying my<span class="op">-</span>linear<span class="op">-</span>regression.Rmd to inst<span class="op">/</span>doc<span class="op">/</span></code></pre></div>
+<p>The vignette is accessible with</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vignette</span>(<span class="st">&quot;my-linear-regression&quot;</span>)</code></pre></div>
+<pre><code>## starting httpd help server ... done</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vignette</span>(<span class="st">&quot;my-linear-regression&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;Linreg&quot;</span>)</code></pre></div>
+<p><img src="images/ch3_vignette_html.png" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>
