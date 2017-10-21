@@ -6,10 +6,26 @@ In this Chapter, we will see how to measure and improve code performance.
 
 ### Profiling
 
+Reading: http://adv-r.had.co.nz/Profiling.html#measure-perf
+
 ### Benchmarking
+
+Reading: http://adv-r.had.co.nz/Performance.html#microbenchmarking
+
+Reading: http://www.alexejgossmann.com/benchmarking_r/
 
 ## Improving performance
 
+- Use different tools (as in Chapter \@ref(bigdata)))
+
+- Vectorize
+
+- Parallelize
+
 ### Introduction to C/C++
 
+Reading: 
+
 ### Rcpp
+
+Reading: http://adv-r.had.co.nz/Rcpp.html
