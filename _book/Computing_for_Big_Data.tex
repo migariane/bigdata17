@@ -444,9 +444,9 @@ Reading: \url{http://adv-r.had.co.nz/Style.html}
 \chapter{Basic tools}\label{basics}
 
 In this Chapter, we present basic tools that will be important when
-interacting with big data systems, most importantly the command-line
-interface (CLI) in a Unix shell and several utilities (\texttt{less},
-\texttt{awk}, \texttt{vi} and \texttt{make}).
+interacting with big data systems: the command-line interface (CLI) in a
+Unix shell and several utilities (\texttt{less}, \texttt{awk},
+\texttt{vi} and \texttt{make}).
 
 \section{Command line tools}\label{command-line-tools}
 
@@ -467,15 +467,35 @@ Windows 10).
   Cluster and cloud computing
 \end{itemize}
 
-\subsection{Basic Unix commands}\label{basic-unix-commands}
+\subsection{Basic Unix tools}\label{basic-unix-tools}
 
 \subsection{Useful tools}\label{useful-tools}
 
 \subsubsection{\texorpdfstring{\texttt{less}}{less}}\label{less}
 
+\texttt{less} is a pager that lets you view one page at a time files
+that can be very large.
+
+File \texttt{DE1\_0\_2008\_to\_2010\_Carrier\_Claims\_Sample\_1A.csv} in
+\texttt{Data17/SyntheticMedicare} is 1.2GB. Even if we have enough RAM
+to process the data, \texttt{less} helps get a very quick sense of the
+data (variable names, separators, etc.)
+
 \subsubsection{\texorpdfstring{\texttt{awk}}{awk}}\label{awk}
 
+\texttt{awk} is a text-processing programming language available on most
+Unix systems. It can be used for data extraction.
+
 \subsubsection{\texorpdfstring{\texttt{vi}}{vi}}\label{vi}
+
+\texttt{vi} is a screen-based text editor available on almost all Unix
+systems. Most versions are actually
+\href{http://www.vim.org/}{\texttt{Vim}} (that stands for ``Vi
+IMproved'').
+
+There are many cheat sheets and tutorials available on-line (for
+example, the interactive \url{http://www.openvim.com/}). I invite you to
+learn basics \texttt{vi} commands.
 
 \subsection{Example}\label{example}
 
@@ -516,7 +536,7 @@ In a shell, we can use:
 ## "5"  5   3.6 1.4 0.2 "setosa"
 \end{verbatim}
 
-Suppose that we only need to select two variables in our model,
+Suppose we only need to select two variables in our model,
 \texttt{Sepal.Length} and \texttt{Species}. In R, we can use:
 
 \begin{Shaded}
@@ -642,8 +662,8 @@ smaller than 1.5.
 
 \section{Makefiles}\label{makefiles}
 
-\texttt{make} is a tool that helps put all the pieces of an analytic
-workflow together:
+\texttt{make} is a tool that helps put all the (interdependent) pieces
+of an analytic workflow together:
 
 \begin{itemize}
 \tightlist
@@ -660,8 +680,6 @@ workflow together:
 \item
   \ldots{}
 \end{itemize}
-
-Dependency management
 
 \subsection{Simulate data in R}\label{simulate-data-in-r}
 
@@ -725,7 +743,7 @@ File \texttt{create\_graph.py}
 \subsection{Run statistical model in
 R}\label{run-statistical-model-in-r}
 
-We can print the model output with:
+We can estimate the model with R:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -765,9 +783,6 @@ File \texttt{estimate\_model.R}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sim_data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"sample_data.csv"}\NormalTok{)}
-\KeywordTok{summary}\NormalTok{(}\KeywordTok{lm}\NormalTok{(Y }\OperatorTok{~}\StringTok{ }\NormalTok{X1 }\OperatorTok{+}\StringTok{ }\NormalTok{X2, }\DataTypeTok{data =}\NormalTok{ sim_data))}
-
 \KeywordTok{sink}\NormalTok{(}\StringTok{"estimation_summary.txt"}\NormalTok{)}
 \KeywordTok{summary}\NormalTok{(}\KeywordTok{lm}\NormalTok{(Y }\OperatorTok{~}\StringTok{ }\NormalTok{X1 }\OperatorTok{+}\StringTok{ }\NormalTok{X2, }\DataTypeTok{data =}\NormalTok{ sim_data))}
 \KeywordTok{sink}\NormalTok{()}
@@ -1914,12 +1929,12 @@ Let's start with an example from \citet{Wickham2014}.
 
 \begin{verbatim}
 ## Unit: nanoseconds
-##           expr  min     lq      mean  median      uq   max neval
-##       [32, 11] 8597 9702.5 10803.099 10103.5 10595.5 46000  1000
-##      $carb[32] 4347 5572.0  6445.412  6011.5  6463.5 66320  1000
-##  [[c(11, 32)]] 3728 4604.0  5273.489  4978.5  5379.0 19740  1000
-##     [[11]][32] 3509 4302.5  5008.678  4668.0  5050.5 49313  1000
-##       .subset2  208  264.0   331.545   308.0   368.0  1432  1000
+##           expr  min     lq      mean  median      uq    max neval
+##       [32, 11] 8238 9784.0 11252.749 10239.5 10938.0  96676  1000
+##      $carb[32] 4503 5912.5  7032.588  6359.5  6918.0 141933  1000
+##  [[c(11, 32)]] 3811 4738.0  5627.458  5051.0  5531.0  53596  1000
+##     [[11]][32] 3485 4432.5  5115.681  4780.5  5181.0  49515  1000
+##       .subset2  208  276.0   399.835   319.0   383.5  10175  1000
 \end{verbatim}
 
 \begin{Shaded}
@@ -1977,14 +1992,14 @@ built-in \texttt{lm} and with two functions we defined in package
 
 \begin{verbatim}
 ## Unit: microseconds
-##                                             expr     min      lq     mean
-##               fit1 <- lm(Hwt ~ Bwt, data = cats) 648.132 678.608 738.2265
-##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 555.820 575.518 626.1814
-##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  97.401 108.888 123.5269
-##    median       uq      max neval
-##  692.3555 750.1525 2338.054   100
-##  585.7020 644.2970 1178.910   100
-##  119.2180 128.9705  285.427   100
+##                                             expr     min       lq     mean
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 653.759 697.4730 797.0769
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 553.394 581.7415 634.2640
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  95.733 114.3665 133.1447
+##    median      uq      max neval
+##  731.7785 804.206 2322.667   100
+##  605.9475 665.020 1051.374   100
+##  124.8455 145.184  320.370   100
 \end{verbatim}
 
 \begin{Shaded}
