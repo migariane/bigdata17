@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-10-21">
+<meta name="date" content="2017-10-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -121,6 +121,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="1.9" data-path="intro.html"><a href="intro.html#contributing-with-github"><i class="fa fa-check"></i><b>1.9</b> Contributing with GitHub</a></li>
 <li class="chapter" data-level="1.10" data-path="intro.html"><a href="intro.html#before-we-start"><i class="fa fa-check"></i><b>1.10</b> Before we start…</a></li>
+<li class="chapter" data-level="1.11" data-path="intro.html"><a href="intro.html#style"><i class="fa fa-check"></i><b>1.11</b> Style</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="basics.html"><a href="basics.html"><i class="fa fa-check"></i><b>2</b> Basic tools</a><ul>
 <li class="chapter" data-level="2.1" data-path="basics.html"><a href="basics.html#command-line-tools"><i class="fa fa-check"></i><b>2.1</b> Command line tools</a><ul>
@@ -188,8 +189,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4" data-path="optimization.html"><a href="optimization.html"><i class="fa fa-check"></i><b>4</b> Optimization</a><ul>
 <li class="chapter" data-level="4.1" data-path="optimization.html"><a href="optimization.html#measuring-performance"><i class="fa fa-check"></i><b>4.1</b> Measuring performance</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="optimization.html"><a href="optimization.html#profiling"><i class="fa fa-check"></i><b>4.1.1</b> Profiling</a></li>
-<li class="chapter" data-level="4.1.2" data-path="optimization.html"><a href="optimization.html#benchmarking"><i class="fa fa-check"></i><b>4.1.2</b> Benchmarking</a></li>
+<li class="chapter" data-level="4.1.1" data-path="optimization.html"><a href="optimization.html#benchmarking"><i class="fa fa-check"></i><b>4.1.1</b> Benchmarking</a></li>
+<li class="chapter" data-level="4.1.2" data-path="optimization.html"><a href="optimization.html#profiling-and-optimization"><i class="fa fa-check"></i><b>4.1.2</b> Profiling and optimization</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="optimization.html"><a href="optimization.html#improving-performance"><i class="fa fa-check"></i><b>4.2</b> Improving performance</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="optimization.html"><a href="optimization.html#introduction-to-cc"><i class="fa fa-check"></i><b>4.2.1</b> Introduction to C/C++</a></li>
@@ -244,22 +245,70 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>In this Chapter, we will see how to measure and improve code performance.</p>
 <div id="measuring-performance" class="section level2">
 <h2><span class="header-section-number">4.1</span> Measuring performance</h2>
-<div id="profiling" class="section level3">
-<h3><span class="header-section-number">4.1.1</span> Profiling</h3>
-<p>Reading: <a href="http://adv-r.had.co.nz/Profiling.html#measure-perf" class="uri">http://adv-r.had.co.nz/Profiling.html#measure-perf</a></p>
-</div>
 <div id="benchmarking" class="section level3">
-<h3><span class="header-section-number">4.1.2</span> Benchmarking</h3>
+<h3><span class="header-section-number">4.1.1</span> Benchmarking</h3>
 <p>Reading: <a href="http://adv-r.had.co.nz/Performance.html#microbenchmarking" class="uri">http://adv-r.had.co.nz/Performance.html#microbenchmarking</a></p>
-<p>Reading: <a href="http://www.alexejgossmann.com/benchmarking_r/" class="uri">http://www.alexejgossmann.com/benchmarking_r/</a></p>
+<p>There are several ways to benchmark code (see <a href="http://www.alexejgossmann.com/benchmarking_r/" class="uri">http://www.alexejgossmann.com/benchmarking_r/</a>) from <code>system.time</code> to dedicated packages such as <code>rbenchmark</code> (<span class="citation">Kusnierczyk (<a href="#ref-rbenchmark">2012</a>)</span>) or <code>microbenchmark</code> (<span class="citation">Mersmann (<a href="#ref-microbenchmark">2015</a>)</span>).</p>
+<p>Let’s start with an example from <span class="citation">Wickham (<a href="#ref-Wickham2014">2014</a>)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(microbenchmark)
+m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
+  <span class="dt">times =</span> <span class="dv">1000</span>, <span class="co"># default is 100</span>
+  <span class="st">&quot;[32, 11]&quot;</span>      =<span class="st"> </span>mtcars[<span class="dv">32</span>, <span class="dv">11</span>],
+  <span class="st">&quot;$carb[32]&quot;</span>     =<span class="st"> </span>mtcars<span class="op">$</span>carb[<span class="dv">32</span>],
+  <span class="st">&quot;[[c(11, 32)]]&quot;</span> =<span class="st"> </span>mtcars[[<span class="kw">c</span>(<span class="dv">11</span>, <span class="dv">32</span>)]],
+  <span class="st">&quot;[[11]][32]&quot;</span>    =<span class="st"> </span>mtcars[[<span class="dv">11</span>]][<span class="dv">32</span>],
+  <span class="st">&quot;.subset2&quot;</span>      =<span class="st"> </span><span class="kw">.subset2</span>(mtcars, <span class="dv">11</span>)[<span class="dv">32</span>]
+)
+m</code></pre></div>
+<pre><code>## Unit: nanoseconds
+##           expr  min     lq      mean  median      uq      max neval
+##       [32, 11] 8478 9644.5 11203.023 10341.5 11630.0    68403  1000
+##      $carb[32] 4543 5564.0  6841.344  6160.5  6813.0    83909  1000
+##  [[c(11, 32)]] 3677 4600.5  5683.810  5212.0  5865.5   118412  1000
+##     [[11]][32] 3449 4297.5 98917.474  4830.5  5538.0 93673447  1000
+##       .subset2  207  273.0   479.941   306.0   373.0    32918  1000</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
+<p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+</div>
+<div id="profiling-and-optimization" class="section level3">
+<h3><span class="header-section-number">4.1.2</span> Profiling and optimization</h3>
+<p>Reading: <a href="http://adv-r.had.co.nz/Profiling.html#measure-perf" class="uri">http://adv-r.had.co.nz/Profiling.html#measure-perf</a></p>
+<p>Let’s compare three ways of estimating a linear regression: with built-in <code>lm</code> and with two functions we defined in package <code>Linreg</code> in Chapter <a href="packages.html#packages">3</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(cats, <span class="dt">package =</span> <span class="st">&quot;MASS&quot;</span>)
+fit1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt, <span class="dt">data =</span> cats)
+fit2 &lt;-<span class="st"> </span><span class="kw">linmod</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt, <span class="dt">data =</span> cats)
+fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class="kw">cbind</span>(<span class="dv">1</span>, cats<span class="op">$</span>Bwt), cats<span class="op">$</span>Hwt)
+<span class="kw">all.equal</span>(<span class="kw">round</span>(<span class="kw">coef</span>(fit1), <span class="dv">5</span>), <span class="kw">round</span>(<span class="kw">coef</span>(fit2), <span class="dv">5</span>))</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all.equal</span>(<span class="kw">round</span>(<span class="kw">coef</span>(fit1), <span class="dv">5</span>), <span class="kw">round</span>(fit3<span class="op">$</span>coefficients, <span class="dv">5</span>), <span class="dt">check.names =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
+  fit1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt, <span class="dt">data =</span> cats),
+  fit2 &lt;-<span class="st"> </span><span class="kw">linmod</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt, <span class="dt">data =</span> cats),
+  fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class="kw">cbind</span>(<span class="dv">1</span>, cats<span class="op">$</span>Bwt), cats<span class="op">$</span>Hwt)
+  <span class="co"># custom checks can be performed with the &#39;check&#39; argument</span>
+)
+m</code></pre></div>
+<pre><code>## Unit: microseconds
+##                                             expr     min       lq     mean
+##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 660.012 675.4510 702.5467
+##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 544.950 567.1640 603.8967
+##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  98.114 109.4105 134.1899
+##    median       uq      max neval
+##  685.0950 697.3550 1400.490   100
+##  577.5620 591.1905 1933.560   100
+##  117.5185 125.3265 1448.549   100</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
+<p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
 </div>
 <div id="improving-performance" class="section level2">
 <h2><span class="header-section-number">4.2</span> Improving performance</h2>
 <ul>
-<li><p>Use different tools (as in Chapter <a href="bigdata.html#bigdata">6</a>))</p></li>
+<li><p>Use different tools (as in Chapter <a href="bigdata.html#bigdata">6</a>)</p></li>
 <li><p>Vectorize</p></li>
 <li><p>Parallelize</p></li>
+<li><p>Use a faster language (C/C++, Fortran, )</p></li>
 </ul>
 <div id="introduction-to-cc" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Introduction to C/C++</h3>
@@ -270,6 +319,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Reading: <a href="http://adv-r.had.co.nz/Rcpp.html" class="uri">http://adv-r.had.co.nz/Rcpp.html</a></p>
 
 </div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-rbenchmark">
+<p>Kusnierczyk, W. 2012. <em>Rbenchmark: Benchmarking Routine for R</em>. <a href="https://CRAN.R-project.org/package=rbenchmark" class="uri">https://CRAN.R-project.org/package=rbenchmark</a>.</p>
+</div>
+<div id="ref-microbenchmark">
+<p>Mersmann, Olaf. 2015. <em>Microbenchmark: Accurate Timing Functions</em>. <a href="https://CRAN.R-project.org/package=microbenchmark" class="uri">https://CRAN.R-project.org/package=microbenchmark</a>.</p>
+</div>
+<div id="ref-Wickham2014">
+<p>Wickham, H. 2014. <em>Advanced R</em>. Chapman &amp; Hall/Crc the R Series. Taylor &amp; Francis. <a href="https://books.google.com/books?id=PFHFNAEACAAJ" class="uri">https://books.google.com/books?id=PFHFNAEACAAJ</a>.</p>
 </div>
 </div>
             </section>

@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-21}
+  \date{2017-10-22}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -436,6 +436,10 @@ R graphics:
 
 R programming:
 \url{http://tutorials.iq.harvard.edu/R/RProgramming/Rprogramming.html}
+
+\section{Style}\label{style}
+
+Reading: \url{http://adv-r.had.co.nz/Style.html}
 
 \chapter{Basic tools}\label{basics}
 
@@ -1880,26 +1884,128 @@ performance.
 
 \section{Measuring performance}\label{measuring-performance}
 
-\subsection{Profiling}\label{profiling}
-
-Reading: \url{http://adv-r.had.co.nz/Profiling.html\#measure-perf}
-
 \subsection{Benchmarking}\label{benchmarking}
 
 Reading:
 \url{http://adv-r.had.co.nz/Performance.html\#microbenchmarking}
 
-Reading: \url{http://www.alexejgossmann.com/benchmarking_r/}
+There are several ways to benchmark code (see
+\url{http://www.alexejgossmann.com/benchmarking_r/}) from
+\texttt{system.time} to dedicated packages such as \texttt{rbenchmark}
+(\citet{rbenchmark}) or \texttt{microbenchmark}
+(\citet{microbenchmark}).
+
+Let's start with an example from \citet{Wickham2014}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(microbenchmark)}
+\NormalTok{m <-}\StringTok{ }\KeywordTok{microbenchmark}\NormalTok{(}
+  \DataTypeTok{times =} \DecValTok{1000}\NormalTok{, }\CommentTok{# default is 100}
+  \StringTok{"[32, 11]"}\NormalTok{      =}\StringTok{ }\NormalTok{mtcars[}\DecValTok{32}\NormalTok{, }\DecValTok{11}\NormalTok{],}
+  \StringTok{"$carb[32]"}\NormalTok{     =}\StringTok{ }\NormalTok{mtcars}\OperatorTok{$}\NormalTok{carb[}\DecValTok{32}\NormalTok{],}
+  \StringTok{"[[c(11, 32)]]"}\NormalTok{ =}\StringTok{ }\NormalTok{mtcars[[}\KeywordTok{c}\NormalTok{(}\DecValTok{11}\NormalTok{, }\DecValTok{32}\NormalTok{)]],}
+  \StringTok{"[[11]][32]"}\NormalTok{    =}\StringTok{ }\NormalTok{mtcars[[}\DecValTok{11}\NormalTok{]][}\DecValTok{32}\NormalTok{],}
+  \StringTok{".subset2"}\NormalTok{      =}\StringTok{ }\KeywordTok{.subset2}\NormalTok{(mtcars, }\DecValTok{11}\NormalTok{)[}\DecValTok{32}\NormalTok{]}
+\NormalTok{)}
+\NormalTok{m}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Unit: nanoseconds
+##           expr  min     lq      mean  median      uq   max neval
+##       [32, 11] 8597 9702.5 10803.099 10103.5 10595.5 46000  1000
+##      $carb[32] 4347 5572.0  6445.412  6011.5  6463.5 66320  1000
+##  [[c(11, 32)]] 3728 4604.0  5273.489  4978.5  5379.0 19740  1000
+##     [[11]][32] 3509 4302.5  5008.678  4668.0  5050.5 49313  1000
+##       .subset2  208  264.0   331.545   308.0   368.0  1432  1000
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{autoplot}\NormalTok{(m)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Computing_for_Big_Data_files/figure-latex/unnamed-chunk-65-1.pdf}
+
+\subsection{Profiling and
+optimization}\label{profiling-and-optimization}
+
+Reading: \url{http://adv-r.had.co.nz/Profiling.html\#measure-perf}
+
+Let's compare three ways of estimating a linear regression: with
+built-in \texttt{lm} and with two functions we defined in package
+\texttt{Linreg} in Chapter \ref{packages}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{data}\NormalTok{(cats, }\DataTypeTok{package =} \StringTok{"MASS"}\NormalTok{)}
+\NormalTok{fit1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Hwt }\OperatorTok{~}\StringTok{ }\NormalTok{Bwt, }\DataTypeTok{data =}\NormalTok{ cats)}
+\NormalTok{fit2 <-}\StringTok{ }\KeywordTok{linmod}\NormalTok{(Hwt }\OperatorTok{~}\StringTok{ }\NormalTok{Bwt, }\DataTypeTok{data =}\NormalTok{ cats)}
+\NormalTok{fit3 <-}\StringTok{ }\KeywordTok{linmodEst}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(}\DecValTok{1}\NormalTok{, cats}\OperatorTok{$}\NormalTok{Bwt), cats}\OperatorTok{$}\NormalTok{Hwt)}
+\KeywordTok{all.equal}\NormalTok{(}\KeywordTok{round}\NormalTok{(}\KeywordTok{coef}\NormalTok{(fit1), }\DecValTok{5}\NormalTok{), }\KeywordTok{round}\NormalTok{(}\KeywordTok{coef}\NormalTok{(fit2), }\DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{all.equal}\NormalTok{(}\KeywordTok{round}\NormalTok{(}\KeywordTok{coef}\NormalTok{(fit1), }\DecValTok{5}\NormalTok{), }\KeywordTok{round}\NormalTok{(fit3}\OperatorTok{$}\NormalTok{coefficients, }\DecValTok{5}\NormalTok{), }\DataTypeTok{check.names =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{m <-}\StringTok{ }\KeywordTok{microbenchmark}\NormalTok{(}
+\NormalTok{  fit1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Hwt }\OperatorTok{~}\StringTok{ }\NormalTok{Bwt, }\DataTypeTok{data =}\NormalTok{ cats),}
+\NormalTok{  fit2 <-}\StringTok{ }\KeywordTok{linmod}\NormalTok{(Hwt }\OperatorTok{~}\StringTok{ }\NormalTok{Bwt, }\DataTypeTok{data =}\NormalTok{ cats),}
+\NormalTok{  fit3 <-}\StringTok{ }\KeywordTok{linmodEst}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(}\DecValTok{1}\NormalTok{, cats}\OperatorTok{$}\NormalTok{Bwt), cats}\OperatorTok{$}\NormalTok{Hwt)}
+  \CommentTok{# custom checks can be performed with the 'check' argument}
+\NormalTok{)}
+\NormalTok{m}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Unit: microseconds
+##                                             expr     min      lq     mean
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 648.132 678.608 738.2265
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 555.820 575.518 626.1814
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  97.401 108.888 123.5269
+##    median       uq      max neval
+##  692.3555 750.1525 2338.054   100
+##  585.7020 644.2970 1178.910   100
+##  119.2180 128.9705  285.427   100
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{autoplot}\NormalTok{(m)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Computing_for_Big_Data_files/figure-latex/unnamed-chunk-67-1.pdf}
 
 \section{Improving performance}\label{improving-performance}
 
 \begin{itemize}
 \item
-  Use different tools (as in Chapter \ref{bigdata}))
+  Use different tools (as in Chapter \ref{bigdata})
 \item
   Vectorize
 \item
   Parallelize
+\item
+  Use a faster language (C/C++, Fortran, )
 \end{itemize}
 
 \subsection{Introduction to C/C++}\label{introduction-to-cc}

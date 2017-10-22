@@ -4,23 +4,72 @@ In this Chapter, we will see how to measure and improve code performance.
 
 ## Measuring performance
 
-### Profiling
-
-Reading: http://adv-r.had.co.nz/Profiling.html#measure-perf
-
 ### Benchmarking
 
 Reading: http://adv-r.had.co.nz/Performance.html#microbenchmarking
 
-Reading: http://www.alexejgossmann.com/benchmarking_r/
+There are several ways to benchmark code (see http://www.alexejgossmann.com/benchmarking_r/) from `system.time` to dedicated packages such as `rbenchmark` (@rbenchmark) or `microbenchmark` (@microbenchmark).
+
+Let's start with an example from @Wickham2014.
+
+```{r}
+library(microbenchmark)
+m <- microbenchmark(
+  times = 1000, # default is 100
+  "[32, 11]"      = mtcars[32, 11],
+  "$carb[32]"     = mtcars$carb[32],
+  "[[c(11, 32)]]" = mtcars[[c(11, 32)]],
+  "[[11]][32]"    = mtcars[[11]][32],
+  ".subset2"      = .subset2(mtcars, 11)[32]
+)
+m
+```
+
+
+```{r}
+ggplot2::autoplot(m)
+```
+
+
+### Profiling and optimization
+
+Reading: http://adv-r.had.co.nz/Profiling.html#measure-perf
+
+Let's compare three ways of estimating a linear regression: with built-in `lm` and with two functions we defined in package `Linreg` in Chapter \@ref(packages).
+
+```{r echo=FALSE}
+suppressPackageStartupMessages(library(Linreg))
+```
+
+
+```{r}
+data(cats, package = "MASS")
+fit1 <- lm(Hwt ~ Bwt, data = cats)
+fit2 <- linmod(Hwt ~ Bwt, data = cats)
+fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)
+all.equal(round(coef(fit1), 5), round(coef(fit2), 5))
+all.equal(round(coef(fit1), 5), round(fit3$coefficients, 5), check.names = FALSE)
+
+m <- microbenchmark(
+  fit1 <- lm(Hwt ~ Bwt, data = cats),
+  fit2 <- linmod(Hwt ~ Bwt, data = cats),
+  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)
+  # custom checks can be performed with the 'check' argument
+)
+m
+ggplot2::autoplot(m)
+```
+
 
 ## Improving performance
 
-- Use different tools (as in Chapter \@ref(bigdata)))
+- Use different tools (as in Chapter \@ref(bigdata))
 
 - Vectorize
 
 - Parallelize
+
+- Use a faster language (C/C++, Fortran, )
 
 ### Introduction to C/C++
 

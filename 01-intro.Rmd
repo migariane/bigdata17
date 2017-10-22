@@ -157,3 +157,7 @@ R graphics: http://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html
 
 R programming: http://tutorials.iq.harvard.edu/R/RProgramming/Rprogramming.html
 
+## Style
+
+Reading: http://adv-r.had.co.nz/Style.html
+
