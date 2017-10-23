@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-10-22">
+<meta name="date" content="2017-10-23">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -261,12 +261,12 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: nanoseconds
-##           expr  min     lq      mean  median    uq      max neval
-##       [32, 11] 8457 9614.5 11301.963 10148.0 11044   401072  1000
-##      $carb[32] 4495 5799.5  6690.989  6313.5  6876    55243  1000
-##  [[c(11, 32)]] 3696 4686.5  5413.488  5126.0  5769    16490  1000
-##     [[11]][32] 3532 4405.5 82852.786  4844.0  5416 77688774  1000
-##       .subset2  209  269.0   378.849   302.0   359     9535  1000</code></pre>
+##           expr  min     lq      mean  median      uq      max neval
+##       [32, 11] 8405 9531.5 10669.669 10069.5 11210.0    66007  1000
+##      $carb[32] 4519 5583.0  6420.826  6118.5  6697.0    41524  1000
+##  [[c(11, 32)]] 3609 4558.0  5217.720  5082.0  5679.5    37131  1000
+##     [[11]][32] 3435 4262.0 31598.453  4732.0  5419.5 26656862  1000
+##       .subset2  206  258.0   350.518   286.0   351.0     2371  1000</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 </div>
@@ -291,13 +291,13 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 m</code></pre></div>
 <pre><code>## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 649.693 665.4260 711.9948
-##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 545.137 560.0565 622.6431
-##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  97.932 107.3785 146.8090
+##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 645.615 661.3840 765.9811
+##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 538.402 554.6035 593.0444
+##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  97.385 107.6065 131.5962
 ##    median       uq      max neval
-##  681.9790 721.8800 1196.787   100
-##  572.6195 624.2510 2328.223   100
-##  119.6210 125.8755 1447.201   100</code></pre>
+##  672.5185 690.5385 9224.218   100
+##  561.8630 576.5045 1964.201   100
+##  116.8665 123.5560 1427.398   100</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>

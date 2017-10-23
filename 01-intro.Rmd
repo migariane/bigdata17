@@ -4,11 +4,15 @@
 
 - Fall 2 course
 - Tuesday and Wednesday, 11:30am-1pm
-- Contact info: cchoirat@iq.harvard.edu.  Please use BST232 in the email title.
+- Contact info: Christine Choirat (cchoirat@iq.harvard.edu).  Please use BST232 in the email title.
 - TA's: Qian Di (qiandi@mail.harvard.edu) and Ben Sabath (mbsabath@hsph.harvard.edu)
-- Office hours: TBD
+- Office hours:
+    - Ben: Tuesday 1:30-2:30pm
+    - Qian:  Thursday 10:30-11:30am
+    - Christine: Thursday 3-4pm
 - Course GitHub repository https://github.com/cchoirat/bigdata17
 - Open file in folder `_book/index.html`
+- These course notes are **work in progress*.
 
 ## Prerequisites
 
@@ -68,7 +72,7 @@ Week 4 – Databases
 
 - Lecture 7. Overview of SQL (SQLite, PostgreSQL) and noSQL databases (HBase,
 MongoDB, Cassandra, BigTable, ...)
-- Lecture 8. R database interfaces (in particular through dplyr)
+- Lecture 8. R database interfaces (in particular through dplyr and mongolite)
 
 Week 5 - Analyzing data that does not fit in memory
 

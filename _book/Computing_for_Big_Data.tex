@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-22}
+  \date{2017-10-23}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -168,8 +168,8 @@
 \item
   Tuesday and Wednesday, 11:30am-1pm
 \item
-  Contact info:
-  \href{mailto:cchoirat@iq.harvard.edu}{\nolinkurl{cchoirat@iq.harvard.edu}}.
+  Contact info: Christine Choirat
+  (\href{mailto:cchoirat@iq.harvard.edu}{\nolinkurl{cchoirat@iq.harvard.edu}}).
   Please use BST232 in the email title.
 \item
   TA's: Qian Di
@@ -177,11 +177,23 @@
   and Ben Sabath
   (\href{mailto:mbsabath@hsph.harvard.edu}{\nolinkurl{mbsabath@hsph.harvard.edu}})
 \item
-  Office hours: TBD
+  Office hours:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Ben: Tuesday 1:30-2:30pm
+  \item
+    Qian: Thursday 10:30-11:30am
+  \item
+    Christine: Thursday 3-4pm
+  \end{itemize}
 \item
   Course GitHub repository \url{https://github.com/cchoirat/bigdata17}
 \item
   Open file in folder \texttt{\_book/index.html}
+\item
+  These course notes are **work in progress*.
 \end{itemize}
 
 \section{Prerequisites}\label{prerequisites}
@@ -286,7 +298,8 @@ Week 4 -- Databases
   Lecture 7. Overview of SQL (SQLite, PostgreSQL) and noSQL databases
   (HBase, MongoDB, Cassandra, BigTable, \ldots{})
 \item
-  Lecture 8. R database interfaces (in particular through dplyr)
+  Lecture 8. R database interfaces (in particular through dplyr and
+  mongolite)
 \end{itemize}
 
 Week 5 - Analyzing data that does not fit in memory
@@ -1929,12 +1942,12 @@ Let's start with an example from \citet{Wickham2014}.
 
 \begin{verbatim}
 ## Unit: nanoseconds
-##           expr  min     lq      mean  median      uq    max neval
-##       [32, 11] 8238 9784.0 11252.749 10239.5 10938.0  96676  1000
-##      $carb[32] 4503 5912.5  7032.588  6359.5  6918.0 141933  1000
-##  [[c(11, 32)]] 3811 4738.0  5627.458  5051.0  5531.0  53596  1000
-##     [[11]][32] 3485 4432.5  5115.681  4780.5  5181.0  49515  1000
-##       .subset2  208  276.0   399.835   319.0   383.5  10175  1000
+##           expr  min     lq      mean median      uq   max neval
+##       [32, 11] 8504 9543.5 10277.684 9913.0 10384.5 36702  1000
+##      $carb[32] 4551 5597.0  6153.071 6005.0  6479.5 18889  1000
+##  [[c(11, 32)]] 3567 4530.0  5031.042 4811.5  5201.0 73911  1000
+##     [[11]][32] 3455 4274.5  4732.494 4571.0  4916.0 43629  1000
+##       .subset2  207  265.0   335.443  299.0   364.5  1093  1000
 \end{verbatim}
 
 \begin{Shaded}
@@ -1993,13 +2006,13 @@ built-in \texttt{lm} and with two functions we defined in package
 \begin{verbatim}
 ## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 <- lm(Hwt ~ Bwt, data = cats) 653.759 697.4730 797.0769
-##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 553.394 581.7415 634.2640
-##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  95.733 114.3665 133.1447
-##    median      uq      max neval
-##  731.7785 804.206 2322.667   100
-##  605.9475 665.020 1051.374   100
-##  124.8455 145.184  320.370   100
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 640.097 660.4590 707.0278
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 541.312 556.9600 580.1771
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  93.340 110.6055 119.8242
+##    median       uq      max neval
+##  680.4855 692.9740 2475.487   100
+##  577.8805 593.5775  714.026   100
+##  118.9015 126.6825  231.412   100
 \end{verbatim}
 
 \begin{Shaded}
