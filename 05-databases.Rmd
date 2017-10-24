@@ -47,4 +47,12 @@ To Select the name and birthday of all students in classes taught by Dr. Choirat
 
 ## Non-Relational Databases (noSQL)
 
+NoSQL Databases were developed to solve some of the limitations that can come with SQL databases.
+
+### Common Types of NoSQL Databases
+
+#### Graph Databases
+
+#### Object Databases
+
 ## R interfaces
