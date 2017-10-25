@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-10-24">
+<meta name="date" content="2017-10-25">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -192,9 +192,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.1.1" data-path="optimization.html"><a href="optimization.html#benchmarking"><i class="fa fa-check"></i><b>4.1.1</b> Benchmarking</a></li>
 <li class="chapter" data-level="4.1.2" data-path="optimization.html"><a href="optimization.html#profiling-and-optimization"><i class="fa fa-check"></i><b>4.1.2</b> Profiling and optimization</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="optimization.html"><a href="optimization.html#improving-performance"><i class="fa fa-check"></i><b>4.2</b> Improving performance</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="optimization.html"><a href="optimization.html#introduction-to-cc"><i class="fa fa-check"></i><b>4.2.1</b> Introduction to C/C++</a></li>
-<li class="chapter" data-level="4.2.2" data-path="optimization.html"><a href="optimization.html#rcpp"><i class="fa fa-check"></i><b>4.2.2</b> Rcpp</a></li>
+<li class="chapter" data-level="4.2" data-path="optimization.html"><a href="optimization.html#improving-performance"><i class="fa fa-check"></i><b>4.2</b> Improving performance</a></li>
+<li class="chapter" data-level="4.3" data-path="optimization.html"><a href="optimization.html#vectorization"><i class="fa fa-check"></i><b>4.3</b> Vectorization</a></li>
+<li class="chapter" data-level="4.4" data-path="optimization.html"><a href="optimization.html#parallelization"><i class="fa fa-check"></i><b>4.4</b> Parallelization</a></li>
+<li class="chapter" data-level="4.5" data-path="optimization.html"><a href="optimization.html#introduction-to-c"><i class="fa fa-check"></i><b>4.5</b> Introduction to C++</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="optimization.html"><a href="optimization.html#rcpp"><i class="fa fa-check"></i><b>4.5.1</b> Rcpp</a></li>
+<li class="chapter" data-level="4.5.2" data-path="optimization.html"><a href="optimization.html#hello-world"><i class="fa fa-check"></i><b>4.5.2</b> Hello World!</a></li>
+<li class="chapter" data-level="4.5.3" data-path="optimization.html"><a href="optimization.html#sourcecpp"><i class="fa fa-check"></i><b>4.5.3</b> <code>sourceCpp</code></a></li>
+<li class="chapter" data-level="4.5.4" data-path="optimization.html"><a href="optimization.html#data-types"><i class="fa fa-check"></i><b>4.5.4</b> Data types</a></li>
+<li class="chapter" data-level="4.5.5" data-path="optimization.html"><a href="optimization.html#sugar"><i class="fa fa-check"></i><b>4.5.5</b> Sugar</a></li>
+<li class="chapter" data-level="4.5.6" data-path="optimization.html"><a href="optimization.html#example-1"><i class="fa fa-check"></i><b>4.5.6</b> Example</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>5</b> Databases</a><ul>
@@ -261,12 +268,12 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: nanoseconds
-##           expr  min     lq      mean  median      uq     max neval cld
-##       [32, 11] 8251 9878.0 11296.768 10644.5 12142.5   58860  1000   c
-##      $carb[32] 4347 5737.0  6849.534  6377.5  7246.0   64170  1000  bc
-##  [[c(11, 32)]] 3681 4757.0  5649.884  5349.5  6076.0   33412  1000  b 
-##     [[11]][32] 3415 4535.5  8415.851  5055.0  5731.0 3017206  1000  bc
-##       .subset2  198  275.5   383.170   321.0   398.0    9709  1000 a</code></pre>
+##           expr  min     lq       mean  median      uq       max neval
+##       [32, 11] 8211 9771.0  11678.599 10525.5 11608.0    108388  1000
+##      $carb[32] 4371 5620.0   6793.075  6287.5  7025.5     76405  1000
+##  [[c(11, 32)]] 3650 4675.5   5558.161  5159.0  5934.5     77672  1000
+##     [[11]][32] 3413 4352.5 118444.157  4890.5  5695.5 112625024  1000
+##       .subset2  212  277.0    388.084   313.5   381.5     10148  1000</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 </div>
@@ -291,13 +298,13 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 m</code></pre></div>
 <pre><code>## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 638.923 658.6490 731.6074
-##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 543.895 559.9730 578.8419
-##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  96.717 106.7175 123.6187
-##    median       uq      max neval cld
-##  668.6670 683.7070 3453.972   100   c
-##  569.8615 578.6935 1087.361   100  b 
-##  115.0710 121.9510  756.010   100 a</code></pre>
+##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 645.027 699.8745 842.3636
+##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 554.704 594.4945 719.0150
+##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  98.991 115.3390 196.1832
+##    median      uq      max neval
+##  749.0580 856.355 2115.206   100
+##  635.6995 721.811 2105.377   100
+##  125.5670 141.662 4040.441   100</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
@@ -305,18 +312,218 @@ m</code></pre></div>
 <div id="improving-performance" class="section level2">
 <h2><span class="header-section-number">4.2</span> Improving performance</h2>
 <ul>
-<li><p>Use different tools (as in Chapter <a href="bigdata.html#bigdata">6</a>)</p></li>
 <li><p>Vectorize</p></li>
 <li><p>Parallelize</p></li>
-<li><p>Use a faster language (C/C++, Fortran, )</p></li>
+<li><p>Use a faster language (C/C++, Fortran, …)</p></li>
+<li><p>Use different tools (as in Chapter <a href="bigdata.html#bigdata">6</a>)</p></li>
 </ul>
-<div id="introduction-to-cc" class="section level3">
-<h3><span class="header-section-number">4.2.1</span> Introduction to C/C++</h3>
-<p>Reading:</p>
 </div>
+<div id="vectorization" class="section level2">
+<h2><span class="header-section-number">4.3</span> Vectorization</h2>
+<p>Let’s take an example from a blog post (that seems to be <a href="http://www.babelgraph.org/wp/?p=358">gone</a>). It’s used in <span class="citation">Wickham (<a href="#ref-Wickham2014">2014</a>, Section <a href="http://adv-r.had.co.nz/Rcpp.html#rcpp-case-studies">Case studies</a>)</span>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vacc1a &lt;-<span class="st"> </span><span class="cf">function</span>(age, female, ily) {
+  p &lt;-<span class="st"> </span><span class="fl">0.25</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.3</span> <span class="op">*</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="fl">0.04</span> <span class="op">*</span><span class="st"> </span>age)) <span class="op">+</span><span class="st"> </span><span class="fl">0.1</span> <span class="op">*</span><span class="st"> </span>ily
+  p &lt;-<span class="st"> </span>p <span class="op">*</span><span class="st"> </span><span class="cf">if</span> (female) <span class="fl">1.25</span> <span class="cf">else</span> <span class="fl">0.75</span>
+  p &lt;-<span class="st"> </span><span class="kw">max</span>(<span class="dv">0</span>, p)
+  p &lt;-<span class="st"> </span><span class="kw">min</span>(<span class="dv">1</span>, p)
+  p
+}
+
+<span class="kw">set.seed</span>(<span class="dv">1959</span>)
+n &lt;-<span class="st"> </span><span class="dv">1000</span>
+age &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dt">mean =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="dv">10</span>)
+female &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(T, F), n, <span class="dt">rep =</span> <span class="ot">TRUE</span>)
+ily &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">c</span>(T, F), n, <span class="dt">prob =</span> <span class="kw">c</span>(<span class="fl">0.8</span>, <span class="fl">0.2</span>), <span class="dt">rep =</span> <span class="ot">TRUE</span>)
+
+<span class="kw">vacc1a</span>(age[<span class="dv">1</span>], female[<span class="dv">1</span>], ily[<span class="dv">1</span>])</code></pre></div>
+<pre><code>## [1] 0.1667005</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vacc1a</span>(age[<span class="dv">2</span>], female[<span class="dv">2</span>], ily[<span class="dv">2</span>])</code></pre></div>
+<pre><code>## [1] 0.4045439</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vacc1a</span>(age[<span class="dv">3</span>], female[<span class="dv">3</span>], ily[<span class="dv">3</span>])</code></pre></div>
+<pre><code>## [1] 0.2699324</code></pre>
+<p><code>vacc1a</code> is not designed for vector inputs</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vacc1a</span>(age, female, ily)</code></pre></div>
+<pre><code>## Warning in if (female) 1.25 else 0.75: the condition has length &gt; 1 and
+## only the first element will be used</code></pre>
+<pre><code>## [1] 0.2526293</code></pre>
+<p>It should be called</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vacc1a</span>(age[<span class="dv">1</span>], female[<span class="dv">1</span>], ily[<span class="dv">1</span>])</code></pre></div>
+<pre><code>## [1] 0.1667005</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vacc1a</span>(age[<span class="dv">2</span>], female[<span class="dv">2</span>], ily[<span class="dv">2</span>])</code></pre></div>
+<pre><code>## [1] 0.4045439</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vacc1a</span>(age[<span class="dv">3</span>], female[<span class="dv">3</span>], ily[<span class="dv">3</span>])</code></pre></div>
+<pre><code>## [1] 0.2699324</code></pre>
+<p>We can use a loop:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">out &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n)
+  out[i] &lt;-<span class="st"> </span><span class="kw">vacc1a</span>(age[i], female[i], ily[i])</code></pre></div>
+<p>or one of the <code>apply</code> functions:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vacc0&lt;-<span class="st"> </span><span class="cf">function</span>(age, female, ily) {
+  <span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="cf">function</span>(i) <span class="kw">vacc1a</span>(age[i], female[i], ily[i]))
+}
+
+out0 &lt;-<span class="st"> </span><span class="kw">vacc0</span>(age, female, ily)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all.equal</span>(out, out0)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>But, it’s convenient for the function to support vector inputs, instead of relying on users writing their own wrappers. We can loop inside the function body.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vacc1 &lt;-<span class="st"> </span><span class="cf">function</span>(age, female, ily) {
+  n &lt;-<span class="st"> </span><span class="kw">length</span>(age)
+  out &lt;-<span class="st"> </span><span class="kw">numeric</span>(n)
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_len</span>(n)) {
+    out[i] &lt;-<span class="st"> </span><span class="kw">vacc1a</span>(age[i], female[i], ily[i])
+  }
+  out
+}</code></pre></div>
+<p>or we can rely on base R functions that accept vector inputs</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vacc2 &lt;-<span class="st"> </span><span class="cf">function</span>(age, female, ily) {
+  p &lt;-<span class="st"> </span><span class="fl">0.25</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.3</span> <span class="op">*</span><span class="st"> </span><span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">exp</span>(<span class="fl">0.04</span> <span class="op">*</span><span class="st"> </span>age)) <span class="op">+</span><span class="st"> </span><span class="fl">0.1</span> <span class="op">*</span><span class="st"> </span>ily
+  p &lt;-<span class="st"> </span>p <span class="op">*</span><span class="st"> </span><span class="kw">ifelse</span>(female, <span class="fl">1.25</span>, <span class="fl">0.75</span>)
+  p &lt;-<span class="st"> </span><span class="kw">pmax</span>(<span class="dv">0</span>, p)
+  p &lt;-<span class="st"> </span><span class="kw">pmin</span>(<span class="dv">1</span>, p)
+  p
+}</code></pre></div>
+</div>
+<div id="parallelization" class="section level2">
+<h2><span class="header-section-number">4.4</span> Parallelization</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(parallel)
+cores &lt;-<span class="st"> </span><span class="kw">detectCores</span>()
+cores</code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vacc3 &lt;-<span class="st"> </span><span class="cf">function</span>(age, female, ily) {
+  <span class="kw">mcmapply</span>(<span class="cf">function</span>(i) <span class="kw">vacc1a</span>(age[i], female[i], ily[i]), <span class="dv">1</span><span class="op">:</span>n, <span class="dt">mc.cores =</span> cores <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
+}
+
+out3 &lt;-<span class="st"> </span><span class="kw">vacc3</span>(age, female, ily)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(microbenchmark)
+m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
+  <span class="dt">vacc0 =</span> <span class="kw">vacc0</span>(age, female, ily),
+  <span class="dt">vacc1 =</span> <span class="kw">vacc1</span>(age, female, ily),
+  <span class="dt">vacc2 =</span> <span class="kw">vacc2</span>(age, female, ily),
+  <span class="dt">vacc3 =</span> <span class="kw">vacc3</span>(age, female, ily)
+)
+m</code></pre></div>
+<pre><code>## Unit: microseconds
+##   expr       min         lq       mean     median        uq       max
+##  vacc0  2075.345  3188.4700  4353.9667  3796.6475  4760.484 13318.071
+##  vacc1  2064.880  2295.3500  3153.2543  2568.6430  3416.135 11477.762
+##  vacc2    91.649   145.0765   523.1521   191.2765   455.166  7673.492
+##  vacc3 13017.024 16843.9390 20239.9164 18827.2995 22395.559 35139.569
+##  neval
+##    100
+##    100
+##    100
+##    100</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
+<p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
+<p>So, what’s going on?</p>
+<p>We will talk more about parallelization tools and techniques in Chapter `<span class="citation">(<span class="citeproc-not-found" data-reference-id="ref"><strong>???</strong></span>)</span>(bigdata).</p>
+</div>
+<div id="introduction-to-c" class="section level2">
+<h2><span class="header-section-number">4.5</span> Introduction to C++</h2>
+<ul>
+<li><p>C++ is a very powerful object-oriented language.</p></li>
+<li><p>Many tutorials are available on-line, for example <a href="http://www.cplusplus.com/doc/tutorial/" class="uri">http://www.cplusplus.com/doc/tutorial/</a>.</p></li>
+<li><p>R is <em>intepreted</em>, C++ is <em>compiled</em> and typically much faster (in loops for examples).</p></li>
+<li><p>Our introduction to C++ is from an R perspective. Python (and most interpreted languages) can be extended with C++ too.</p></li>
+</ul>
 <div id="rcpp" class="section level3">
-<h3><span class="header-section-number">4.2.2</span> Rcpp</h3>
+<h3><span class="header-section-number">4.5.1</span> Rcpp</h3>
 <p>Reading: <a href="http://adv-r.had.co.nz/Rcpp.html" class="uri">http://adv-r.had.co.nz/Rcpp.html</a></p>
+<ul>
+<li><p><code>Rcpp</code> <span class="citation">Eddelbuettel (<a href="#ref-Eddelbuettel2013">2013</a>)</span> makes it very easy to use C++ code in R (for example to speed up a function or to wrap methods already implemented in C++).</p></li>
+<li><p><code>Rcpp</code> provides “syntactic sugar” that makes is easy to leverage C++ even without a deep knowledge of it.</p></li>
+<li>To use <code>Rcpp</code>, you need a C++ compiler:
+<ul>
+<li>Windows: <a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a></li>
+<li>OS X: <a href="https://developer.apple.com/xcode/">Xcode</a></li>
+<li>Linux: <code>r-base-dev</code> from package manager</li>
+</ul></li>
+</ul>
+</div>
+<div id="hello-world" class="section level3">
+<h3><span class="header-section-number">4.5.2</span> Hello World!</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rcpp)
+<span class="kw">cppFunction</span>(<span class="st">&#39;void hello(){</span>
+<span class="st">  Rprintf(&quot;Hello, world!&quot;);</span>
+<span class="st">}&#39;</span>)
+hello</code></pre></div>
+<pre><code>## function () 
+## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x114462cc0&gt;))</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hello</span>()</code></pre></div>
+<pre><code>## Hello, world!</code></pre>
+<p><code>Rprintf</code> is the counterpart of C++ <a href="http://www.cplusplus.com/reference/cstdio/printf/"><code>printf</code></a> function.</p>
+<p>Let’s take the first example of <span class="citation">Wickham (<a href="#ref-Wickham2014">2014</a>)</span>, Section <a href="http://adv-r.had.co.nz/Rcpp.html#rcpp-intro">Getting started with C++</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cppFunction</span>(<span class="st">&#39;int add(int x, int y, int z) {</span>
+<span class="st">  int sum = x + y + z;</span>
+<span class="st">  return sum;</span>
+<span class="st">}&#39;</span>)</code></pre></div>
+<p>We have to specify the input type and the output type. As expected</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">add</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</code></pre></div>
+<p>returns 6. How about?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">add</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cppFunction</span>(<span class="st">&#39;double addd(double x, double y, double z) {</span>
+<span class="st">  double sum = x + y + z;</span>
+<span class="st">  return sum;</span>
+<span class="st">}&#39;</span>)</code></pre></div>
+<p>With <code>addd</code> we do get 6.6:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">addd</span>(<span class="fl">1.1</span>, <span class="fl">2.2</span>, <span class="fl">3.3</span>)</code></pre></div>
+</div>
+<div id="sourcecpp" class="section level3">
+<h3><span class="header-section-number">4.5.3</span> <code>sourceCpp</code></h3>
+<p>When C++ code takes more than a couple of lines, it’s more convenient to create a stand-alone C++ source file.</p>
+<p>From the RStudio default template:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span>
+<span class="kw">using</span> <span class="kw">namespace</span> Rcpp;
+
+NumericVector timesTwo(NumericVector x) {
+  <span class="cf">return</span> x * <span class="dv">2</span>;
+}
+
+<span class="co">/*** R</span>
+<span class="co">timesTwo(42)</span>
+<span class="co">*/</span></code></pre></div>
+<p>From R, we can use <code>sourceCpp</code> to access <code>timesTwo</code> in R:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sourceCpp</span>(<span class="st">&quot;src/times-two.cpp&quot;</span>)
+<span class="kw">timesTwo</span>(<span class="dv">100</span>)</code></pre></div>
+</div>
+<div id="data-types" class="section level3">
+<h3><span class="header-section-number">4.5.4</span> Data types</h3>
+<p><code>int</code> <code>double</code> <code>bool</code> <code>string</code></p>
+<p><code>NumericVector</code> <code>LogicalVector</code> <code>IntegerVector</code> <code>CharacterVector</code></p>
+<p><code>NumericMatrix</code> <code>IntegerMatrix</code> <code>LogicalMatrix</code> <code>CharacterMatrix</code></p>
+<p><code>NA_REAL</code> <code>NA_INTEGER</code> <code>NA_STRING</code> <code>NA_LOGICAL</code></p>
+<p><code>List</code> <code>DataFrame</code> <code>Function</code></p>
+<p>…</p>
+</div>
+<div id="sugar" class="section level3">
+<h3><span class="header-section-number">4.5.5</span> Sugar</h3>
+<p>Reading: <a href="http://adv-r.had.co.nz/Rcpp.html#rcpp-sugar" class="uri">http://adv-r.had.co.nz/Rcpp.html#rcpp-sugar</a>.</p>
+</div>
+<div id="example-1" class="section level3">
+<h3><span class="header-section-number">4.5.6</span> Example</h3>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span>
+<span class="kw">using</span> <span class="kw">namespace</span> Rcpp;
+
+<span class="dt">double</span> vacc3a(<span class="dt">double</span> age, <span class="dt">bool</span> female, <span class="dt">bool</span> ily){
+  <span class="dt">double</span> p = <span class="fl">0.25</span> + <span class="fl">0.3</span> * <span class="dv">1</span> / (<span class="dv">1</span> - exp(<span class="fl">0.04</span> * age)) + <span class="fl">0.1</span> * ily;
+  p = p * (female ? <span class="fl">1.25</span> : <span class="fl">0.75</span>);
+  p = <span class="bu">std::</span>max(p, <span class="fl">0.0</span>);
+  p = <span class="bu">std::</span>min(p, <span class="fl">1.0</span>);
+  <span class="cf">return</span> p;
+}
+
+<span class="co">// [[Rcpp::export]]</span>
+NumericVector vacc3(NumericVector age, LogicalVector female, 
+                    LogicalVector ily) {
+  <span class="dt">int</span> n = age.size();
+  NumericVector out(n);
+
+  <span class="cf">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; n; ++i) {
+    out[i] = vacc3a(age[i], female[i], ily[i]);
+  }
+
+  <span class="cf">return</span> out;
+}</code></pre></div>
 
 </div>
 </div>
@@ -331,6 +538,9 @@ m</code></pre></div>
 </div>
 <div id="ref-Wickham2014">
 <p>Wickham, H. 2014. <em>Advanced R</em>. Chapman &amp; Hall/Crc the R Series. Taylor &amp; Francis. <a href="https://books.google.com/books?id=PFHFNAEACAAJ" class="uri">https://books.google.com/books?id=PFHFNAEACAAJ</a>.</p>
+</div>
+<div id="ref-Eddelbuettel2013">
+<p>Eddelbuettel, Dirk. 2013. <em>Seamless R and C++ Integration with Rcpp</em>. New York: Springer.</p>
 </div>
 </div>
             </section>
