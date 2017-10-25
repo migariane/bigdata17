@@ -3,7 +3,7 @@
 ## Logistics
 
 - Fall 2 course
-- Tuesday and Wednesday, 11:30am-1pm
+- Tuesday and Thursday, 11:30am-1pm
 - Contact info: Christine Choirat (cchoirat@iq.harvard.edu).  Please use BST232 in the email title.
 - TA's: Qian Di (qiandi@mail.harvard.edu) and Ben Sabath (mbsabath@hsph.harvard.edu)
 - Office hours:
@@ -12,7 +12,7 @@
     - Christine: Thursday 3-4pm
 - Course GitHub repository https://github.com/cchoirat/bigdata17
 - Open file in folder `_book/index.html`
-- These course notes are **work in progress*.
+- These course notes are **work in progress**.
 
 ## Prerequisites
 
