@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-10-25">
+<meta name="date" content="2017-10-26">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -201,7 +201,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.5.3" data-path="optimization.html"><a href="optimization.html#sourcecpp"><i class="fa fa-check"></i><b>4.5.3</b> <code>sourceCpp</code></a></li>
 <li class="chapter" data-level="4.5.4" data-path="optimization.html"><a href="optimization.html#data-types"><i class="fa fa-check"></i><b>4.5.4</b> Data types</a></li>
 <li class="chapter" data-level="4.5.5" data-path="optimization.html"><a href="optimization.html#sugar"><i class="fa fa-check"></i><b>4.5.5</b> Sugar</a></li>
-<li class="chapter" data-level="4.5.6" data-path="optimization.html"><a href="optimization.html#example-1"><i class="fa fa-check"></i><b>4.5.6</b> Example</a></li>
+<li class="chapter" data-level="4.5.6" data-path="optimization.html"><a href="optimization.html#example-continued"><i class="fa fa-check"></i><b>4.5.6</b> Example (continued)</a></li>
+<li class="chapter" data-level="4.5.7" data-path="optimization.html"><a href="optimization.html#back-to-linreg"><i class="fa fa-check"></i><b>4.5.7</b> Back to Linreg</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>5</b> Databases</a><ul>
@@ -268,12 +269,12 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: nanoseconds
-##           expr  min     lq       mean  median      uq       max neval
-##       [32, 11] 8211 9771.0  11678.599 10525.5 11608.0    108388  1000
-##      $carb[32] 4371 5620.0   6793.075  6287.5  7025.5     76405  1000
-##  [[c(11, 32)]] 3650 4675.5   5558.161  5159.0  5934.5     77672  1000
-##     [[11]][32] 3413 4352.5 118444.157  4890.5  5695.5 112625024  1000
-##       .subset2  212  277.0    388.084   313.5   381.5     10148  1000</code></pre>
+##           expr  min     lq      mean  median      uq     max neval cld
+##       [32, 11] 8255 9783.5 11412.177 10733.5 11806.0   71095  1000   b
+##      $carb[32] 4692 5885.5  6894.340  6495.5  7251.5   36931  1000  ab
+##  [[c(11, 32)]] 3857 4760.0  5572.355  5286.0  6042.0   32394  1000  ab
+##     [[11]][32] 3486 4542.5  9752.787  5024.5  5770.0 4335403  1000   b
+##       .subset2  205  278.5   352.216   319.0   373.0    2182  1000  a</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 </div>
@@ -298,13 +299,13 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 m</code></pre></div>
 <pre><code>## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 645.027 699.8745 842.3636
-##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 554.704 594.4945 719.0150
-##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  98.991 115.3390 196.1832
-##    median      uq      max neval
-##  749.0580 856.355 2115.206   100
-##  635.6995 721.811 2105.377   100
-##  125.5670 141.662 4040.441   100</code></pre>
+##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 643.492 757.3195 983.8396
+##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 573.297 653.2045 891.9445
+##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  99.761 129.1220 178.5660
+##    median        uq      max neval cld
+##  896.6895 1163.1405 1671.887   100   c
+##  835.4805 1066.5830 3090.587   100  b 
+##  161.7350  218.8665  413.542   100 a</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
@@ -388,7 +389,7 @@ out0 &lt;-<span class="st"> </span><span class="kw">vacc0</span>(age, female, il
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(parallel)
 cores &lt;-<span class="st"> </span><span class="kw">detectCores</span>()
 cores</code></pre></div>
-<pre><code>## [1] 4</code></pre>
+<pre><code>## [1] 8</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vacc3 &lt;-<span class="st"> </span><span class="cf">function</span>(age, female, ily) {
   <span class="kw">mcmapply</span>(<span class="cf">function</span>(i) <span class="kw">vacc1a</span>(age[i], female[i], ily[i]), <span class="dv">1</span><span class="op">:</span>n, <span class="dt">mc.cores =</span> cores <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
 }
@@ -403,16 +404,16 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: microseconds
-##   expr       min         lq       mean     median        uq       max
-##  vacc0  2075.345  3188.4700  4353.9667  3796.6475  4760.484 13318.071
-##  vacc1  2064.880  2295.3500  3153.2543  2568.6430  3416.135 11477.762
-##  vacc2    91.649   145.0765   523.1521   191.2765   455.166  7673.492
-##  vacc3 13017.024 16843.9390 20239.9164 18827.2995 22395.559 35139.569
-##  neval
-##    100
-##    100
-##    100
-##    100</code></pre>
+##   expr       min        lq       mean    median         uq       max neval
+##  vacc0  1956.213  3248.302  4278.1227  3841.280  4809.9620 17511.717   100
+##  vacc1  2026.314  2437.291  3515.5761  2925.926  4091.4090 11999.725   100
+##  vacc2   129.360   181.228   455.4776   216.163   469.7395  6675.446   100
+##  vacc3 21395.788 24406.537 26810.6447 26353.761 28624.9730 39585.124   100
+##  cld
+##   b 
+##   b 
+##  a  
+##    c</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
 <p>So, what’s going on?</p>
@@ -448,7 +449,7 @@ m</code></pre></div>
 <span class="st">}&#39;</span>)
 hello</code></pre></div>
 <pre><code>## function () 
-## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x114462cc0&gt;))</code></pre>
+## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x110cec100&gt;))</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hello</span>()</code></pre></div>
 <pre><code>## Hello, world!</code></pre>
 <p><code>Rprintf</code> is the counterpart of C++ <a href="http://www.cplusplus.com/reference/cstdio/printf/"><code>printf</code></a> function.</p>
@@ -498,9 +499,22 @@ NumericVector timesTwo(NumericVector x) {
 <div id="sugar" class="section level3">
 <h3><span class="header-section-number">4.5.5</span> Sugar</h3>
 <p>Reading: <a href="http://adv-r.had.co.nz/Rcpp.html#rcpp-sugar" class="uri">http://adv-r.had.co.nz/Rcpp.html#rcpp-sugar</a>.</p>
+<ul>
+<li>Vectorization of <code>+</code>, <code>*</code>, <code>-</code>, <code>/</code>, <code>pow</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>==</code>, <code>!=</code>, <code>!</code></li>
+</ul>
+<p>-x`</p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-87" class="exercise"><strong>Exercise 4.1  </strong></span>Can you write an <code>Rcpp</code> function similar to <code>addd</code> but accepting vector arguments?
 </div>
-<div id="example-1" class="section level3">
-<h3><span class="header-section-number">4.5.6</span> Example</h3>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cppFunction</span>(<span class="st">&#39;NumericVector addv(NumericVector x, NumericVector y, NumericVector z) {</span>
+<span class="st">  NumericVector sum = x + y + z;</span>
+<span class="st">  return sum;</span>
+<span class="st">}&#39;</span>)</code></pre></div>
+</div>
+<div id="example-continued" class="section level3">
+<h3><span class="header-section-number">4.5.6</span> Example (continued)</h3>
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;Rcpp.h&gt;</span>
 <span class="kw">using</span> <span class="kw">namespace</span> Rcpp;
 
@@ -523,6 +537,36 @@ NumericVector vacc3(NumericVector age, LogicalVector female,
   }
 
   <span class="cf">return</span> out;
+}</code></pre></div>
+</div>
+<div id="back-to-linreg" class="section level3">
+<h3><span class="header-section-number">4.5.7</span> Back to Linreg</h3>
+<ul>
+<li><p><code>armadillo</code> is a very powerful C++ linear algebra library: <a href="http://arma.sourceforge.net/" class="uri">http://arma.sourceforge.net/</a></p></li>
+<li><p>It can be used in <code>Rcpp</code> via the <code>RcppArmadillo</code> package.</p></li>
+</ul>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-90" class="exercise"><strong>Exercise 4.2  </strong></span>Can you write an <code>Rcpp</code> function similar to <code>linmodEst</code>?
+</div>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmodEst &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
+  ## compute QR-decomposition of x
+  qx &lt;-<span class="st"> </span><span class="kw">qr</span>(x)
+  ## compute (x’x)^(-1) x’y
+  coef &lt;-<span class="st"> </span><span class="kw">solve.qr</span>(qx, y)
+  ## degrees of freedom and standard deviation of residuals
+  df &lt;-<span class="st"> </span><span class="kw">nrow</span>(x) <span class="op">-</span><span class="st"> </span><span class="kw">ncol</span>(x)
+  sigma2 &lt;-<span class="st"> </span><span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span>x <span class="op">%*%</span><span class="st"> </span>coef) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>df
+  ## compute sigma^2 * (x’x)^-1
+  vcov &lt;-<span class="st"> </span>sigma2 <span class="op">*</span><span class="st"> </span><span class="kw">chol2inv</span>(qx<span class="op">$</span>qr)
+  <span class="kw">colnames</span>(vcov) &lt;-<span class="st"> </span><span class="kw">rownames</span>(vcov) &lt;-<span class="st"> </span><span class="kw">colnames</span>(x)
+  <span class="kw">list</span>(
+    <span class="dt">coefficients =</span> coef,
+    <span class="dt">vcov =</span> vcov,
+    <span class="dt">sigma =</span> <span class="kw">sqrt</span>(sigma2),
+    <span class="dt">df =</span> df
+  )
 }</code></pre></div>
 
 </div>
