@@ -214,7 +214,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>6</b> Big data</a><ul>
 <li class="chapter" data-level="6.1" data-path="bigdata.html"><a href="bigdata.html#list-of-tools"><i class="fa fa-check"></i><b>6.1</b> List of tools</a></li>
 <li class="chapter" data-level="6.2" data-path="bigdata.html"><a href="bigdata.html#data-that-fits-in-memory"><i class="fa fa-check"></i><b>6.2</b> Data that fits in memory</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="bigdata.html"><a href="bigdata.html#r-and-data.table"><i class="fa fa-check"></i><b>6.2.1</b> R and <code>data.table</code></a></li>
+<li class="chapter" data-level="6.2.1" data-path="bigdata.html"><a href="bigdata.html#faster-io"><i class="fa fa-check"></i><b>6.2.1</b> Faster I/O</a></li>
+<li class="chapter" data-level="6.2.2" data-path="bigdata.html"><a href="bigdata.html#reference-vs-copy"><i class="fa fa-check"></i><b>6.2.2</b> Reference vs copy</a></li>
 </ul></li>
 <li class="chapter" data-level="6.3" data-path="bigdata.html"><a href="bigdata.html#data-that-doesnt-fit-in-memory-but-fits-on-drive"><i class="fa fa-check"></i><b>6.3</b> Data that doesn’t fit in memory (but fits on drive)</a></li>
 <li class="chapter" data-level="6.4" data-path="bigdata.html"><a href="bigdata.html#pure-r-solutions"><i class="fa fa-check"></i><b>6.4</b> Pure R solutions</a><ul>
@@ -225,7 +226,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.5" data-path="bigdata.html"><a href="bigdata.html#scaling-up"><i class="fa fa-check"></i><b>6.5</b> Scaling up</a><ul>
 <li class="chapter" data-level="6.5.1" data-path="bigdata.html"><a href="bigdata.html#parallel-computing-and-clusters"><i class="fa fa-check"></i><b>6.5.1</b> Parallel computing and clusters</a></li>
 <li class="chapter" data-level="6.5.2" data-path="bigdata.html"><a href="bigdata.html#cloud-computing"><i class="fa fa-check"></i><b>6.5.2</b> Cloud computing</a></li>
-<li class="chapter" data-level="6.5.3" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.5.3</b> <code>Spark</code></a></li>
+<li class="chapter" data-level="6.5.3" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.5.3</b> Spark</a></li>
 <li class="chapter" data-level="6.5.4" data-path="bigdata.html"><a href="bigdata.html#h2o-and-sparkling-water"><i class="fa fa-check"></i><b>6.5.4</b> <code>h2o</code> and <code>Sparkling Water</code></a></li>
 <li class="chapter" data-level="6.5.5" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.5.5</b> More?</a></li>
 </ul></li>
@@ -270,10 +271,62 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="data-that-fits-in-memory" class="section level2">
 <h2><span class="header-section-number">6.2</span> Data that fits in memory</h2>
-<div id="r-and-data.table" class="section level3">
-<h3><span class="header-section-number">6.2.1</span> R and <code>data.table</code></h3>
+<div id="faster-io" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Faster I/O</h3>
 <p>Reading: <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html" class="uri">https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html</a></p>
 <p><code>data.table</code> provides an enhanced of a <code>data.frame</code> and faster I/O with <code>fread</code> and <code>fwrite</code>.</p>
+<p>To read the 0.5GB ratings file from MovieLens</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table)
+<span class="kw">system.time</span>(ratings &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;~/Dropbox/Data17/ml-20m/ratings.csv&quot;</span>))</code></pre></div>
+<p>takes</p>
+<pre class="txt"><code>Read 20000263 rows and 4 (of 4) columns from 0.497 GB file in 00:00:05
+   user  system elapsed 
+  4.007   0.229   4.244</code></pre>
+<p>while</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(ratings &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/Data17/ml-20m/ratings.csv&quot;</span>))</code></pre></div>
+<p>takes</p>
+<pre class="txt"><code>   user  system elapsed 
+ 85.199   2.711  90.997 </code></pre>
+<p>There are ways to improve the speed of <code>read.csv</code> (for example, but specifying column types). But in general <code>fread</code> is much faster.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr) <span class="co"># in tidyverse</span>
+<span class="kw">system.time</span>(ratings &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;~/Dropbox/Data17/ml-20m/ratings.csv&quot;</span>))</code></pre></div>
+<pre class="txt"><code>   user  system elapsed 
+ 10.290   3.037  18.450 </code></pre>
+<p>also tends to perform better than <code>read.csv</code>.</p>
+</div>
+<div id="reference-vs-copy" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> Reference vs copy</h3>
+<table>
+<caption><span id="tab:unnamed-chunk-98">Table 6.1: </span>I/O comparison</caption>
+<thead>
+<tr class="header">
+<th align="left">package</th>
+<th align="left">function.</th>
+<th align="left">speed</th>
+<th align="left">output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">read.csv</td>
+<td align="left">slow</td>
+<td align="left">data.frame</td>
+</tr>
+<tr class="even">
+<td align="left">data.table</td>
+<td align="left">fread</td>
+<td align="left">very fast</td>
+<td align="left">data.table</td>
+</tr>
+<tr class="odd">
+<td align="left">readr</td>
+<td align="left">read_csv</td>
+<td align="left">fast</td>
+<td align="left">tibble</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="data-that-doesnt-fit-in-memory-but-fits-on-drive" class="section level2">
@@ -300,7 +353,43 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h3><span class="header-section-number">6.5.2</span> Cloud computing</h3>
 </div>
 <div id="spark" class="section level3">
-<h3><span class="header-section-number">6.5.3</span> <code>Spark</code></h3>
+<h3><span class="header-section-number">6.5.3</span> Spark</h3>
+<p>Reading: <a href="https://spark.rstudio.com/" class="uri">https://spark.rstudio.com/</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sparklyr)
+<span class="kw">spark_install</span>(<span class="dt">version =</span> <span class="st">&quot;2.1.0&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sc &lt;-<span class="st"> </span><span class="kw">spark_connect</span>(<span class="dt">master =</span> <span class="st">&quot;local&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+iris_tbl &lt;-<span class="st"> </span><span class="kw">copy_to</span>(sc, iris)
+flights_tbl &lt;-<span class="st"> </span><span class="kw">copy_to</span>(sc, nycflights13<span class="op">::</span>flights, <span class="st">&quot;flights&quot;</span>)
+batting_tbl &lt;-<span class="st"> </span><span class="kw">copy_to</span>(sc, Lahman<span class="op">::</span>Batting, <span class="st">&quot;batting&quot;</span>)
+<span class="kw">src_tbls</span>(sc)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">top_rows &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/Data17/AirFlights/allyears.csv&quot;</span>, <span class="dt">nrows =</span> <span class="dv">5</span>)
+file_columns &lt;-<span class="st"> </span>top_rows <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(<span class="cf">function</span>(x)<span class="st">&quot;character&quot;</span>)
+<span class="kw">rm</span>(top_rows)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sp_flights &lt;-<span class="st"> </span><span class="kw">spark_read_csv</span>(sc, 
+                             <span class="dt">name =</span> <span class="st">&quot;flights2&quot;</span>, 
+                             <span class="dt">path =</span> <span class="st">&quot;~/Dropbox/Data17/AirFlights/allyears.csv&quot;</span>, 
+                             <span class="dt">memory =</span> <span class="ot">FALSE</span>, 
+                             <span class="dt">columns =</span> file_columns, 
+                             <span class="dt">infer_schema =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">flights_table &lt;-<span class="st"> </span>sp_flights <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">DepDelay =</span> <span class="kw">as.numeric</span>(DepDelay),
+         <span class="dt">ArrDelay =</span> <span class="kw">as.numeric</span>(ArrDelay),
+         <span class="dt">SchedDeparture =</span> <span class="kw">as.numeric</span>(CRSDepTime)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(Origin, Dest, SchedDeparture, ArrDelay, DepDelay, Month, DayofMonth)
+
+flights_table <span class="op">%&gt;%</span><span class="st"> </span>head</code></pre></div>
+<p>Cache data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sp_flights <span class="op">%&gt;%</span>
+<span class="st">  </span>tally <span class="co"># takes a looooong time</span></code></pre></div>
+<p>123534969…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">subset_table &lt;-<span class="st"> </span>flights_table <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">compute</span>(<span class="st">&quot;flights_subset&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">subset_table <span class="op">%&gt;%</span>
+<span class="st">  </span>tally <span class="co"># a bit faster.</span></code></pre></div>
+<p>123534969 as well!</p>
+<p>TODOL change the <code>config</code> arguments of the connection</p>
 </div>
 <div id="h2o-and-sparkling-water" class="section level3">
 <h3><span class="header-section-number">6.5.4</span> <code>h2o</code> and <code>Sparkling Water</code></h3>
