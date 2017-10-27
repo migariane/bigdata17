@@ -372,15 +372,14 @@ Can you write an `Rcpp` function similar to `linmodEst`?
 
 ```{r eval=TRUE}
 linmodEst <- function(x, y) {
-  ## compute QR-decomposition of x
-  qx <- qr(x)
-  ## compute (x’x)^(-1) x’y
-  coef <- solve.qr(qx, y)
+  ## CC: crossprod or a QR decomposition (as in the original version) are more efficient
+  coef <- solve(t(x) %*% x) %*% t(x) %*% y
+  print(coef)
   ## degrees of freedom and standard deviation of residuals
   df <- nrow(x) - ncol(x)
   sigma2 <- sum((y - x %*% coef) ^ 2) / df
   ## compute sigma^2 * (x’x)^-1
-  vcov <- sigma2 * chol2inv(qx$qr)
+  vcov <- sigma2 * solve(t(x) %*% x)
   colnames(vcov) <- rownames(vcov) <- colnames(x)
   list(
     coefficients = coef,
