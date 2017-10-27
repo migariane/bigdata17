@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-10-26">
+<meta name="date" content="2017-10-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -212,15 +212,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.4" data-path="databases.html"><a href="databases.html#r-interfaces"><i class="fa fa-check"></i><b>5.4</b> R interfaces</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>6</b> Big data</a><ul>
-<li class="chapter" data-level="6.1" data-path="bigdata.html"><a href="bigdata.html#reading-big-data-that-fits-in-memory"><i class="fa fa-check"></i><b>6.1</b> Reading big data (that fits in memory)</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="bigdata.html"><a href="bigdata.html#r-package-comparison"><i class="fa fa-check"></i><b>6.1.1</b> R package comparison</a></li>
-<li class="chapter" data-level="6.1.2" data-path="bigdata.html"><a href="bigdata.html#python"><i class="fa fa-check"></i><b>6.1.2</b> Python</a></li>
+<li class="chapter" data-level="6.1" data-path="bigdata.html"><a href="bigdata.html#list-of-tools"><i class="fa fa-check"></i><b>6.1</b> List of tools</a></li>
+<li class="chapter" data-level="6.2" data-path="bigdata.html"><a href="bigdata.html#data-that-fits-in-memory"><i class="fa fa-check"></i><b>6.2</b> Data that fits in memory</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="bigdata.html"><a href="bigdata.html#r-and-data.table"><i class="fa fa-check"></i><b>6.2.1</b> R and <code>data.table</code></a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="bigdata.html"><a href="bigdata.html#sampling-can-be-read-not-analyzed-easily"><i class="fa fa-check"></i><b>6.2</b> Sampling (can be read, not analyzed easily)</a></li>
-<li class="chapter" data-level="6.3" data-path="bigdata.html"><a href="bigdata.html#pure-r-solutions"><i class="fa fa-check"></i><b>6.3</b> Pure R solutions</a></li>
-<li class="chapter" data-level="6.4" data-path="bigdata.html"><a href="bigdata.html#jvm-solutions"><i class="fa fa-check"></i><b>6.4</b> JVM solutions</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="bigdata.html"><a href="bigdata.html#h20"><i class="fa fa-check"></i><b>6.4.1</b> h20</a></li>
-<li class="chapter" data-level="6.4.2" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.4.2</b> Spark</a></li>
+<li class="chapter" data-level="6.3" data-path="bigdata.html"><a href="bigdata.html#data-that-doesnt-fit-in-memory-but-fits-on-drive"><i class="fa fa-check"></i><b>6.3</b> Data that doesn’t fit in memory (but fits on drive)</a></li>
+<li class="chapter" data-level="6.4" data-path="bigdata.html"><a href="bigdata.html#pure-r-solutions"><i class="fa fa-check"></i><b>6.4</b> Pure R solutions</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="bigdata.html"><a href="bigdata.html#sampling"><i class="fa fa-check"></i><b>6.4.1</b> Sampling</a></li>
+<li class="chapter" data-level="6.4.2" data-path="bigdata.html"><a href="bigdata.html#bigmemory"><i class="fa fa-check"></i><b>6.4.2</b> <code>bigmemory</code></a></li>
+<li class="chapter" data-level="6.4.3" data-path="bigdata.html"><a href="bigdata.html#database-connections-and-lazy-evaluation"><i class="fa fa-check"></i><b>6.4.3</b> Database connections and lazy evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="bigdata.html"><a href="bigdata.html#scaling-up"><i class="fa fa-check"></i><b>6.5</b> Scaling up</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="bigdata.html"><a href="bigdata.html#parallel-computing-and-clusters"><i class="fa fa-check"></i><b>6.5.1</b> Parallel computing and clusters</a></li>
+<li class="chapter" data-level="6.5.2" data-path="bigdata.html"><a href="bigdata.html#cloud-computing"><i class="fa fa-check"></i><b>6.5.2</b> Cloud computing</a></li>
+<li class="chapter" data-level="6.5.3" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.5.3</b> <code>Spark</code></a></li>
+<li class="chapter" data-level="6.5.4" data-path="bigdata.html"><a href="bigdata.html#h2o-and-sparkling-water"><i class="fa fa-check"></i><b>6.5.4</b> <code>h2o</code> and <code>Sparkling Water</code></a></li>
+<li class="chapter" data-level="6.5.5" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.5.5</b> More?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>7</b> Visualization</a><ul>
@@ -269,12 +276,12 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: nanoseconds
-##           expr  min     lq      mean  median      uq     max neval cld
-##       [32, 11] 8255 9783.5 11412.177 10733.5 11806.0   71095  1000   b
-##      $carb[32] 4692 5885.5  6894.340  6495.5  7251.5   36931  1000  ab
-##  [[c(11, 32)]] 3857 4760.0  5572.355  5286.0  6042.0   32394  1000  ab
-##     [[11]][32] 3486 4542.5  9752.787  5024.5  5770.0 4335403  1000   b
-##       .subset2  205  278.5   352.216   319.0   373.0    2182  1000  a</code></pre>
+##           expr  min     lq      mean  median    uq      max neval
+##       [32, 11] 8564 9886.0 11168.604 10532.0 11502    72486  1000
+##      $carb[32] 4364 5673.5  6609.963  6242.0  6873    45665  1000
+##  [[c(11, 32)]] 3599 4695.5  5683.708  5240.5  5780   112717  1000
+##     [[11]][32] 3377 4420.0 40969.545  4911.0  5485 35785867  1000
+##       .subset2  208  269.0   382.712   314.0   372    13134  1000</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 </div>
@@ -284,28 +291,639 @@ m</code></pre></div>
 <p>Let’s compare three ways of estimating a linear regression: with built-in <code>lm</code> and with two functions we defined in package <code>Linreg</code> in Chapter <a href="packages.html#packages">3</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(cats, <span class="dt">package =</span> <span class="st">&quot;MASS&quot;</span>)
 fit1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt, <span class="dt">data =</span> cats)
-fit2 &lt;-<span class="st"> </span><span class="kw">linmod</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt, <span class="dt">data =</span> cats)
-fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class="kw">cbind</span>(<span class="dv">1</span>, cats<span class="op">$</span>Bwt), cats<span class="op">$</span>Hwt)
-<span class="kw">all.equal</span>(<span class="kw">round</span>(<span class="kw">coef</span>(fit1), <span class="dv">5</span>), <span class="kw">round</span>(<span class="kw">coef</span>(fit2), <span class="dv">5</span>))</code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+fit2 &lt;-<span class="st"> </span><span class="kw">linmod</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt, <span class="dt">data =</span> cats)</code></pre></div>
+<pre><code>##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class="kw">cbind</span>(<span class="dv">1</span>, cats<span class="op">$</span>Bwt), cats<span class="op">$</span>Hwt)</code></pre></div>
+<pre><code>##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all.equal</span>(<span class="kw">round</span>(<span class="kw">coef</span>(fit1), <span class="dv">5</span>), <span class="kw">round</span>(<span class="kw">coef</span>(fit2), <span class="dv">5</span>))</code></pre></div>
+<pre><code>## [1] &quot;names for target but not for current&quot;                             
+## [2] &quot;Attributes: &lt; names for current but not for target &gt;&quot;             
+## [3] &quot;Attributes: &lt; Length mismatch: comparison on first 0 components &gt;&quot;
+## [4] &quot;target is numeric, current is matrix&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all.equal</span>(<span class="kw">round</span>(<span class="kw">coef</span>(fit1), <span class="dv">5</span>), <span class="kw">round</span>(fit3<span class="op">$</span>coefficients, <span class="dv">5</span>), <span class="dt">check.names =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>## [1] &quot;Attributes: &lt; names for current but not for target &gt;&quot;             
+## [2] &quot;Attributes: &lt; Length mismatch: comparison on first 0 components &gt;&quot;
+## [3] &quot;target is numeric, current is matrix&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
   fit1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt, <span class="dt">data =</span> cats),
   fit2 &lt;-<span class="st"> </span><span class="kw">linmod</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt, <span class="dt">data =</span> cats),
   fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class="kw">cbind</span>(<span class="dv">1</span>, cats<span class="op">$</span>Bwt), cats<span class="op">$</span>Hwt)
   <span class="co"># custom checks can be performed with the &#39;check&#39; argument</span>
-)
-m</code></pre></div>
+)</code></pre></div>
+<pre><code>##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m</code></pre></div>
 <pre><code>## Unit: microseconds
-##                                             expr     min       lq     mean
-##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 643.492 757.3195 983.8396
-##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 573.297 653.2045 891.9445
-##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  99.761 129.1220 178.5660
-##    median        uq      max neval cld
-##  896.6895 1163.1405 1671.887   100   c
-##  835.4805 1066.5830 3090.587   100  b 
-##  161.7350  218.8665  413.542   100 a</code></pre>
+##                                             expr     min      lq     mean
+##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 670.580 718.971 903.7342
+##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 572.021 618.766 818.7001
+##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  98.330 113.785 152.8500
+##    median       uq      max neval
+##  802.7560 932.6870 3594.493   100
+##  676.6795 808.6370 3465.592   100
+##  129.5280 156.1395  710.966   100</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
@@ -389,7 +1007,7 @@ out0 &lt;-<span class="st"> </span><span class="kw">vacc0</span>(age, female, il
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(parallel)
 cores &lt;-<span class="st"> </span><span class="kw">detectCores</span>()
 cores</code></pre></div>
-<pre><code>## [1] 8</code></pre>
+<pre><code>## [1] 4</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vacc3 &lt;-<span class="st"> </span><span class="cf">function</span>(age, female, ily) {
   <span class="kw">mcmapply</span>(<span class="cf">function</span>(i) <span class="kw">vacc1a</span>(age[i], female[i], ily[i]), <span class="dv">1</span><span class="op">:</span>n, <span class="dt">mc.cores =</span> cores <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
 }
@@ -404,16 +1022,11 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: microseconds
-##   expr       min        lq       mean    median         uq       max neval
-##  vacc0  1956.213  3248.302  4278.1227  3841.280  4809.9620 17511.717   100
-##  vacc1  2026.314  2437.291  3515.5761  2925.926  4091.4090 11999.725   100
-##  vacc2   129.360   181.228   455.4776   216.163   469.7395  6675.446   100
-##  vacc3 21395.788 24406.537 26810.6447 26353.761 28624.9730 39585.124   100
-##  cld
-##   b 
-##   b 
-##  a  
-##    c</code></pre>
+##   expr       min        lq       mean     median        uq       max neval
+##  vacc0  2125.938  3125.428  4185.7166  3660.2080  4516.715 11115.160   100
+##  vacc1  2018.220  2272.246  3182.4689  2548.9745  2975.503 25983.105   100
+##  vacc2    89.684   150.174   526.7011   206.9225   680.519  6080.296   100
+##  vacc3 14230.641 17154.815 21429.4830 19916.3205 23812.328 37051.331   100</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
 <p>So, what’s going on?</p>
@@ -449,7 +1062,7 @@ m</code></pre></div>
 <span class="st">}&#39;</span>)
 hello</code></pre></div>
 <pre><code>## function () 
-## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x110cec100&gt;))</code></pre>
+## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x10c941cc0&gt;))</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hello</span>()</code></pre></div>
 <pre><code>## Hello, world!</code></pre>
 <p><code>Rprintf</code> is the counterpart of C++ <a href="http://www.cplusplus.com/reference/cstdio/printf/"><code>printf</code></a> function.</p>
@@ -551,15 +1164,14 @@ NumericVector vacc3(NumericVector age, LogicalVector female,
 </div>
 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmodEst &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
-  ## compute QR-decomposition of x
-  qx &lt;-<span class="st"> </span><span class="kw">qr</span>(x)
-  ## compute (x’x)^(-1) x’y
-  coef &lt;-<span class="st"> </span><span class="kw">solve.qr</span>(qx, y)
+  ## CC: crossprod or a QR decomposition (as in the original version) are more efficient
+  coef &lt;-<span class="st"> </span><span class="kw">solve</span>(<span class="kw">t</span>(x) <span class="op">%*%</span><span class="st"> </span>x) <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(x) <span class="op">%*%</span><span class="st"> </span>y
+  <span class="kw">print</span>(coef)
   ## degrees of freedom and standard deviation of residuals
   df &lt;-<span class="st"> </span><span class="kw">nrow</span>(x) <span class="op">-</span><span class="st"> </span><span class="kw">ncol</span>(x)
   sigma2 &lt;-<span class="st"> </span><span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span>x <span class="op">%*%</span><span class="st"> </span>coef) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>df
   ## compute sigma^2 * (x’x)^-1
-  vcov &lt;-<span class="st"> </span>sigma2 <span class="op">*</span><span class="st"> </span><span class="kw">chol2inv</span>(qx<span class="op">$</span>qr)
+  vcov &lt;-<span class="st"> </span>sigma2 <span class="op">*</span><span class="st"> </span><span class="kw">solve</span>(<span class="kw">t</span>(x) <span class="op">%*%</span><span class="st"> </span>x)
   <span class="kw">colnames</span>(vcov) &lt;-<span class="st"> </span><span class="kw">rownames</span>(vcov) &lt;-<span class="st"> </span><span class="kw">colnames</span>(x)
   <span class="kw">list</span>(
     <span class="dt">coefficients =</span> coef,

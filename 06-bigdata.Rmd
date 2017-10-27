@@ -1,19 +1,47 @@
 # Big data {#bigdata}
 
-In this Chapter, we are going to review different approaches to handle and perform analyses on *data that does not fit in memory*.
+## List of tools
 
-## Reading big data (that fits in memory)
+Reading: @Varian2014 ([PDF available](http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.28.2.3))
 
-### R package comparison
+```{r echo=FALSE, fig.align="center", tool_list, fig.cap=""}
+knitr::include_graphics("images/ch6_tool_list.png")
+```
 
-### Python
+Spark?  h2o?  More?  Let's go back to the bottlenecks
 
-## Sampling (can be read, not analyzed easily)
+- CPU
+- RAM
+- I/O
+
+## Data that fits in memory
+
+### R and `data.table`
+
+Reading: https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html
+
+`data.table` provides an enhanced of a `data.frame` and faster I/O with `fread` and `fwrite`.
+
+## Data that doesn't fit in memory (but fits on drive)
 
 ## Pure R solutions
 
-## JVM solutions
+### Sampling
 
-### h20
+### `bigmemory`
 
-### Spark
+### Database connections and lazy evaluation
+
+## Scaling up
+
+### Parallel computing and clusters
+
+### Cloud computing
+
+### `Spark`
+
+### `h2o` and `Sparkling Water`
+
+### More?
+
+GPU

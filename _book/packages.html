@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-10-26">
+<meta name="date" content="2017-10-27">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -212,15 +212,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.4" data-path="databases.html"><a href="databases.html#r-interfaces"><i class="fa fa-check"></i><b>5.4</b> R interfaces</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>6</b> Big data</a><ul>
-<li class="chapter" data-level="6.1" data-path="bigdata.html"><a href="bigdata.html#reading-big-data-that-fits-in-memory"><i class="fa fa-check"></i><b>6.1</b> Reading big data (that fits in memory)</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="bigdata.html"><a href="bigdata.html#r-package-comparison"><i class="fa fa-check"></i><b>6.1.1</b> R package comparison</a></li>
-<li class="chapter" data-level="6.1.2" data-path="bigdata.html"><a href="bigdata.html#python"><i class="fa fa-check"></i><b>6.1.2</b> Python</a></li>
+<li class="chapter" data-level="6.1" data-path="bigdata.html"><a href="bigdata.html#list-of-tools"><i class="fa fa-check"></i><b>6.1</b> List of tools</a></li>
+<li class="chapter" data-level="6.2" data-path="bigdata.html"><a href="bigdata.html#data-that-fits-in-memory"><i class="fa fa-check"></i><b>6.2</b> Data that fits in memory</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="bigdata.html"><a href="bigdata.html#r-and-data.table"><i class="fa fa-check"></i><b>6.2.1</b> R and <code>data.table</code></a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="bigdata.html"><a href="bigdata.html#sampling-can-be-read-not-analyzed-easily"><i class="fa fa-check"></i><b>6.2</b> Sampling (can be read, not analyzed easily)</a></li>
-<li class="chapter" data-level="6.3" data-path="bigdata.html"><a href="bigdata.html#pure-r-solutions"><i class="fa fa-check"></i><b>6.3</b> Pure R solutions</a></li>
-<li class="chapter" data-level="6.4" data-path="bigdata.html"><a href="bigdata.html#jvm-solutions"><i class="fa fa-check"></i><b>6.4</b> JVM solutions</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="bigdata.html"><a href="bigdata.html#h20"><i class="fa fa-check"></i><b>6.4.1</b> h20</a></li>
-<li class="chapter" data-level="6.4.2" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.4.2</b> Spark</a></li>
+<li class="chapter" data-level="6.3" data-path="bigdata.html"><a href="bigdata.html#data-that-doesnt-fit-in-memory-but-fits-on-drive"><i class="fa fa-check"></i><b>6.3</b> Data that doesn’t fit in memory (but fits on drive)</a></li>
+<li class="chapter" data-level="6.4" data-path="bigdata.html"><a href="bigdata.html#pure-r-solutions"><i class="fa fa-check"></i><b>6.4</b> Pure R solutions</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="bigdata.html"><a href="bigdata.html#sampling"><i class="fa fa-check"></i><b>6.4.1</b> Sampling</a></li>
+<li class="chapter" data-level="6.4.2" data-path="bigdata.html"><a href="bigdata.html#bigmemory"><i class="fa fa-check"></i><b>6.4.2</b> <code>bigmemory</code></a></li>
+<li class="chapter" data-level="6.4.3" data-path="bigdata.html"><a href="bigdata.html#database-connections-and-lazy-evaluation"><i class="fa fa-check"></i><b>6.4.3</b> Database connections and lazy evaluation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="bigdata.html"><a href="bigdata.html#scaling-up"><i class="fa fa-check"></i><b>6.5</b> Scaling up</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="bigdata.html"><a href="bigdata.html#parallel-computing-and-clusters"><i class="fa fa-check"></i><b>6.5.1</b> Parallel computing and clusters</a></li>
+<li class="chapter" data-level="6.5.2" data-path="bigdata.html"><a href="bigdata.html#cloud-computing"><i class="fa fa-check"></i><b>6.5.2</b> Cloud computing</a></li>
+<li class="chapter" data-level="6.5.3" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.5.3</b> <code>Spark</code></a></li>
+<li class="chapter" data-level="6.5.4" data-path="bigdata.html"><a href="bigdata.html#h2o-and-sparkling-water"><i class="fa fa-check"></i><b>6.5.4</b> <code>h2o</code> and <code>Sparkling Water</code></a></li>
+<li class="chapter" data-level="6.5.5" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.5.5</b> More?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>7</b> Visualization</a><ul>
@@ -335,7 +342,7 @@ e &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1
 <div id="submit-to-cran" class="section level3">
 <h3><span class="header-section-number">3.4.3</span> Submit to CRAN</h3>
 <div class="figure" style="text-align: center"><span id="fig:hydra"></span>
-<img src="images/ch3_hydra.jpg" alt="Submitting to CRAN.  It's not that bad..." width="160" />
+<img src="images/ch3_hydra.jpg" alt="Submitting to CRAN.  It's not that bad..."  />
 <p class="caption">
 Figure 3.1: Submitting to CRAN. It’s not that bad…
 </p>
@@ -356,49 +363,49 @@ Figure 3.1: Submitting to CRAN. It’s not that bad…
 <div id="rstudio-and-github-integration" class="section level4">
 <h4><span class="header-section-number">3.5.0.1</span> RStudio and GitHub integration</h4>
 <div class="figure" style="text-align: center"><span id="fig:pkg1"></span>
-<img src="images/ch3_pkg_1_github.png" alt="Create a new Linreg repository on GitHub" width="540" />
+<img src="images/ch3_pkg_1_github.png" alt="Create a new Linreg repository on GitHub"  />
 <p class="caption">
 Figure 3.2: Create a new Linreg repository on GitHub
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:pkg2"></span>
-<img src="images/ch3_pkg_2_project.png" alt="Create a new project in RStudio" width="264" />
+<img src="images/ch3_pkg_2_project.png" alt="Create a new project in RStudio"  />
 <p class="caption">
 Figure 3.3: Create a new project in RStudio
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:pkg3"></span>
-<img src="images/ch3_pkg_3_package.png" alt="Select R package" width="264" />
+<img src="images/ch3_pkg_3_package.png" alt="Select R package"  />
 <p class="caption">
 Figure 3.4: Select R package
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:pkg4"></span>
-<img src="images/ch3_pkg_4_create.png" alt="Create the Linreg R package as a Git repository" width="264" />
+<img src="images/ch3_pkg_4_create.png" alt="Create the Linreg R package as a Git repository"  />
 <p class="caption">
 Figure 3.5: Create the Linreg R package as a Git repository
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:pkg5"></span>
-<img src="images/ch3_pkg_5_filelist.png" alt="Automatically created files" width="504" />
+<img src="images/ch3_pkg_5_filelist.png" alt="Automatically created files"  />
 <p class="caption">
 Figure 3.6: Automatically created files
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:pkg6"></span>
-<img src="images/ch3_pkg_6_install.png" alt="Build tab in RStudio" width="454" />
+<img src="images/ch3_pkg_6_install.png" alt="Build tab in RStudio"  />
 <p class="caption">
 Figure 3.7: Build tab in RStudio
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:pkg7"></span>
-<img src="images/ch3_pkg_7_github.png" alt="Github webpage" width="754" />
+<img src="images/ch3_pkg_7_github.png" alt="Github webpage"  />
 <p class="caption">
 Figure 3.8: Github webpage
 </p>
 </div>
 <div class="figure" style="text-align: center"><span id="fig:term"></span>
-<img src="images/ch3_pkg_8_terminal.png" alt="Open a terminal" width="282" />
+<img src="images/ch3_pkg_8_terminal.png" alt="Open a terminal"  />
 <p class="caption">
 Figure 3.9: Open a terminal
 </p>
@@ -410,7 +417,7 @@ git commit <span class="op">-</span>m <span class="st">&quot;First commit&quot;<
 git remote add origin https<span class="op">:</span><span class="er">//</span>github.com<span class="op">/</span>cchoirat<span class="op">/</span>Linreg
 git push <span class="op">-</span>u origin master</code></pre></div>
 <div class="figure" style="text-align: center"><span id="fig:pkg9"></span>
-<img src="images/ch3_pkg_9_github.png" alt="Github webpage is updated" width="760" />
+<img src="images/ch3_pkg_9_github.png" alt="Github webpage is updated"  />
 <p class="caption">
 Figure 3.10: Github webpage is updated
 </p>
@@ -489,21 +496,18 @@ PackageInstallArgs<span class="op">:</span><span class="st"> </span><span class=
 <div id="package-workflow-example" class="section level2">
 <h2><span class="header-section-number">3.7</span> Package workflow example</h2>
 <p>Creating R Packages: A Tutorial (Friedrich Leisch, 2009)</p>
-<ul>
-<li><a href="https://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf" class="uri">https://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf</a></li>
-</ul>
+<p>Our example is adapted from <a href="https://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf" class="uri">https://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf</a>.</p>
 <div id="add-linreg.r-to-r-directory" class="section level3">
 <h3><span class="header-section-number">3.7.1</span> Add <code>linreg.R</code> to <code>R/</code> directory</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmodEst &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
-  ## compute QR-decomposition of x
-  qx &lt;-<span class="st"> </span><span class="kw">qr</span>(x)
-  ## compute (x’x)^(-1) x’y
-  coef &lt;-<span class="st"> </span><span class="kw">solve.qr</span>(qx, y)
+  ## CC: crossprod or a QR decomposition (as in the original version) are more efficient
+  coef &lt;-<span class="st"> </span><span class="kw">solve</span>(<span class="kw">t</span>(x) <span class="op">%*%</span><span class="st"> </span>x) <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(x) <span class="op">%*%</span><span class="st"> </span>y
+  <span class="kw">print</span>(coef)
   ## degrees of freedom and standard deviation of residuals
   df &lt;-<span class="st"> </span><span class="kw">nrow</span>(x) <span class="op">-</span><span class="st"> </span><span class="kw">ncol</span>(x)
   sigma2 &lt;-<span class="st"> </span><span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span>x <span class="op">%*%</span><span class="st"> </span>coef) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>df
   ## compute sigma^2 * (x’x)^-1
-  vcov &lt;-<span class="st"> </span>sigma2 <span class="op">*</span><span class="st"> </span><span class="kw">chol2inv</span>(qx<span class="op">$</span>qr)
+  vcov &lt;-<span class="st"> </span>sigma2 <span class="op">*</span><span class="st"> </span><span class="kw">solve</span>(<span class="kw">t</span>(x) <span class="op">%*%</span><span class="st"> </span>x)
   <span class="kw">colnames</span>(vcov) &lt;-<span class="st"> </span><span class="kw">rownames</span>(vcov) &lt;-<span class="st"> </span><span class="kw">colnames</span>(x)
   <span class="kw">list</span>(
     <span class="dt">coefficients =</span> coef,
@@ -517,8 +521,13 @@ PackageInstallArgs<span class="op">:</span><span class="st"> </span><span class=
 <h3><span class="header-section-number">3.7.2</span> Run our function</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(cats, <span class="dt">package =</span> <span class="st">&quot;MASS&quot;</span>)
 <span class="kw">linmodEst</span>(<span class="kw">cbind</span>(<span class="dv">1</span>, cats<span class="op">$</span>Bwt), cats<span class="op">$</span>Hwt)</code></pre></div>
+<pre><code>##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627</code></pre>
 <pre><code>## $coefficients
-## [1] -0.3566624  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
 ## 
 ## $vcov
 ##            [,1]        [,2]
@@ -591,7 +600,7 @@ linmodEst &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
 <div id="configure-build-tools" class="section level3">
 <h3><span class="header-section-number">3.7.4</span> Configure Build Tools</h3>
 <div class="figure" style="text-align: center"><span id="fig:pkg8"></span>
-<img src="images/ch3_configure_build_tools.png" alt="Roxygen options" width="156" />
+<img src="images/ch3_configure_build_tools.png" alt="Roxygen options"  />
 <p class="caption">
 Figure 3.11: Roxygen options
 </p>
@@ -629,7 +638,7 @@ y &lt;-<span class="st"> </span>mtcars[, <span class="st">&quot;mpg&quot;</span>
 </div>
 <div id="formatted-output" class="section level3">
 <h3><span class="header-section-number">3.7.6</span> Formatted output</h3>
-<p><img src="images/ch3_formatted_help.png" width="194" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_formatted_help.png" style="display: block; margin: auto;" /></p>
 </div>
 <div id="description" class="section level3">
 <h3><span class="header-section-number">3.7.7</span> <code>DESCRIPTION</code></h3>
@@ -697,14 +706,18 @@ RoxygenNote<span class="op">:</span><span class="st"> </span><span class="fl">6.
 }</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">Const =</span> <span class="dv">1</span>, <span class="dt">Bwt =</span> cats<span class="op">$</span>Bwt)
 y &lt;-<span class="st"> </span>cats<span class="op">$</span>Hw
-mod1 &lt;-<span class="st"> </span><span class="kw">linmod</span>(x, y)
-mod1</code></pre></div>
+mod1 &lt;-<span class="st"> </span><span class="kw">linmod</span>(x, y)</code></pre></div>
+<pre><code>##             [,1]
+## Const -0.3566624
+## Bwt    4.0340627</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mod1</code></pre></div>
 <pre><code>## Call:
 ## linmod.default(x = x, y = y)
 ## 
 ## Coefficients:
-##      Const        Bwt 
-## -0.3566624  4.0340627</code></pre>
+##             [,1]
+## Const -0.3566624
+## Bwt    4.0340627</code></pre>
 </div>
 <div id="other-methods" class="section level3">
 <h3><span class="header-section-number">3.7.12</span> Other methods</h3>
@@ -768,9 +781,9 @@ DONE <span class="op">==</span><span class="er">================================
 <p>Reading: <a href="http://r-pkgs.had.co.nz/check.html#travis" class="uri">http://r-pkgs.had.co.nz/check.html#travis</a></p>
 <p>Website: <a href="https://travis-ci.org/" class="uri">https://travis-ci.org/</a></p>
 <p>First step is to create a Travis account and link it to you GitHub account.</p>
-<p><img src="images/ch3_travis_github.png" width="518" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_travis_github.png" style="display: block; margin: auto;" /></p>
 <p>Travis will list all your public GitHub repositories for you to select the ones you want to test.</p>
-<p><img src="images/ch3_travis_Linreg.png" width="194" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_travis_Linreg.png" style="display: block; margin: auto;" /></p>
 <p>Calling</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">use_coverage</span>(<span class="dt">pkg =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;codecov&quot;</span>))</code></pre></div>
 <p>creates the <code>.travis.yml</code> file:</p>
@@ -780,7 +793,7 @@ language<span class="op">:</span><span class="st"> </span>R
 sudo<span class="op">:</span><span class="st"> </span>false
 cache<span class="op">:</span><span class="st"> </span>packages</code></pre></div>
 <p>and pushing <code>Linreg</code> code to GitHub will automatically triggers a Travis build… which fails!</p>
-<p><img src="images/ch3_travis_failed_build.png" width="460" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_travis_failed_build.png" style="display: block; margin: auto;" /></p>
 <p>To be continued…</p>
 </div>
 <div id="code-coverage" class="section level2">
@@ -788,14 +801,14 @@ cache<span class="op">:</span><span class="st"> </span>packages</code></pre></di
 <p>Reading: <a href="https://walczak.org/2017/06/how-to-add-code-coverage-codecov-to-your-r-package/" class="uri">https://walczak.org/2017/06/how-to-add-code-coverage-codecov-to-your-r-package/</a></p>
 <p>Website: <a href="https://codecov.io/" class="uri">https://codecov.io/</a></p>
 <p>Like Travis, codecov has to be linked to a GitHub account:</p>
-<p><img src="images/ch3_codecov_github.png" width="230" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_codecov_github.png" style="display: block; margin: auto;" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools<span class="op">::</span><span class="kw">use_coverage</span>(<span class="dt">pkg =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">type =</span> <span class="kw">c</span>(<span class="st">&quot;codecov&quot;</span>))</code></pre></div>
 <p>creates the <code>codecov.yml</code> file:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">comment<span class="op">:</span><span class="st"> </span>false</code></pre></div>
 <p>A call to</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">covr<span class="op">::</span><span class="kw">codecov</span>(<span class="dt">token =</span> <span class="st">&quot;YOUR_TOKEN&quot;</span>)</code></pre></div>
 <p>will give you code coverage information:</p>
-<p><img src="images/ch3_codecov_out.png" width="861" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_codecov_out.png" style="display: block; margin: auto;" /></p>
 </div>
 <div id="back-to-github" class="section level2">
 <h2><span class="header-section-number">3.11</span> Back to GitHub</h2>
@@ -810,7 +823,7 @@ Based on <span class="st">&quot;Creating R Packages: A Tutorial&quot;</span> (Fr
 
 <span class="op">-</span><span class="st"> </span>https<span class="op">:</span><span class="er">//</span>cran.r<span class="op">-</span>project.org<span class="op">/</span>doc<span class="op">/</span>contrib<span class="op">/</span>Leisch<span class="op">-</span>CreatingPackages.pdf</code></pre></div>
 <p>are are automatically displayed on GitHub:</p>
-<p><img src="images/ch3_badges.png" width="146" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_badges.png" style="display: block; margin: auto;" /></p>
 </div>
 <div id="vignettes" class="section level2">
 <h2><span class="header-section-number">3.12</span> Vignettes</h2>
@@ -831,7 +844,7 @@ Copying my<span class="op">-</span>linear<span class="op">-</span>regression.Rmd
 <p>The vignette is accessible with</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vignette</span>(<span class="st">&quot;my-linear-regression&quot;</span>)
 <span class="kw">vignette</span>(<span class="st">&quot;my-linear-regression&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;Linreg&quot;</span>)</code></pre></div>
-<p><img src="images/ch3_vignette_html.png" width="372" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch3_vignette_html.png" style="display: block; margin: auto;" /></p>
 
 </div>
 </div>

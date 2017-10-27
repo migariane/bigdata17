@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-26}
+  \date{2017-10-27}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -232,7 +232,7 @@ As described by \citet{Lim2015}, there are three bottlenecks:
 
 \begin{figure}
 
-{\centering \includegraphics[width=7.08in]{images/ch1_bottlenecks} 
+{\centering \includegraphics{images/ch1_bottlenecks} 
 
 }
 
@@ -751,7 +751,7 @@ File \texttt{create\_graph.py}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics[width=53.33in]{images/ch1_plot}
+\includegraphics{images/ch1_plot.jpg}
 
 \subsection{Run statistical model in
 R}\label{run-statistical-model-in-r}
@@ -1052,7 +1052,7 @@ re-building the vignette PDFs.}
 
 \begin{figure}
 
-{\centering \includegraphics[width=4.44in]{images/ch3_hydra} 
+{\centering \includegraphics{images/ch3_hydra} 
 
 }
 
@@ -1083,7 +1083,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=15in]{images/ch3_pkg_1_github} 
+{\centering \includegraphics{images/ch3_pkg_1_github} 
 
 }
 
@@ -1092,7 +1092,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=7.32in]{images/ch3_pkg_2_project} 
+{\centering \includegraphics{images/ch3_pkg_2_project} 
 
 }
 
@@ -1101,7 +1101,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=7.32in]{images/ch3_pkg_3_package} 
+{\centering \includegraphics{images/ch3_pkg_3_package} 
 
 }
 
@@ -1110,7 +1110,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=7.33in]{images/ch3_pkg_4_create} 
+{\centering \includegraphics{images/ch3_pkg_4_create} 
 
 }
 
@@ -1119,7 +1119,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=14.01in]{images/ch3_pkg_5_filelist} 
+{\centering \includegraphics{images/ch3_pkg_5_filelist} 
 
 }
 
@@ -1128,7 +1128,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=12.6in]{images/ch3_pkg_6_install} 
+{\centering \includegraphics{images/ch3_pkg_6_install} 
 
 }
 
@@ -1137,7 +1137,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=20.94in]{images/ch3_pkg_7_github} 
+{\centering \includegraphics{images/ch3_pkg_7_github} 
 
 }
 
@@ -1146,7 +1146,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=7.85in]{images/ch3_pkg_8_terminal} 
+{\centering \includegraphics{images/ch3_pkg_8_terminal} 
 
 }
 
@@ -1167,7 +1167,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics[width=21.1in]{images/ch3_pkg_9_github} 
+{\centering \includegraphics{images/ch3_pkg_9_github} 
 
 }
 
@@ -1278,11 +1278,8 @@ GitHub default
 
 Creating R Packages: A Tutorial (Friedrich Leisch, 2009)
 
-\begin{itemize}
-\tightlist
-\item
-  \url{https://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf}
-\end{itemize}
+Our example is adapted from
+\url{https://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf}.
 
 \subsection{\texorpdfstring{Add \texttt{linreg.R} to \texttt{R/}
 directory}{Add linreg.R to R/ directory}}\label{add-linreg.r-to-r-directory}
@@ -1290,15 +1287,14 @@ directory}{Add linreg.R to R/ directory}}\label{add-linreg.r-to-r-directory}
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{linmodEst <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, y) \{}
-\NormalTok{  ## compute QR-decomposition of x}
-\NormalTok{  qx <-}\StringTok{ }\KeywordTok{qr}\NormalTok{(x)}
-\NormalTok{  ## compute (x’x)^(-1) x’y}
-\NormalTok{  coef <-}\StringTok{ }\KeywordTok{solve.qr}\NormalTok{(qx, y)}
+\NormalTok{  ## CC: crossprod or a QR decomposition (as in the original version) are more efficient}
+\NormalTok{  coef <-}\StringTok{ }\KeywordTok{solve}\NormalTok{(}\KeywordTok{t}\NormalTok{(x) }\OperatorTok{%*%}\StringTok{ }\NormalTok{x) }\OperatorTok{%*%}\StringTok{ }\KeywordTok{t}\NormalTok{(x) }\OperatorTok{%*%}\StringTok{ }\NormalTok{y}
+  \KeywordTok{print}\NormalTok{(coef)}
 \NormalTok{  ## degrees of freedom and standard deviation of residuals}
 \NormalTok{  df <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{(x) }\OperatorTok{-}\StringTok{ }\KeywordTok{ncol}\NormalTok{(x)}
 \NormalTok{  sigma2 <-}\StringTok{ }\KeywordTok{sum}\NormalTok{((y }\OperatorTok{-}\StringTok{ }\NormalTok{x }\OperatorTok{%*%}\StringTok{ }\NormalTok{coef) }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{df}
 \NormalTok{  ## compute sigma^2 * (x’x)^-1}
-\NormalTok{  vcov <-}\StringTok{ }\NormalTok{sigma2 }\OperatorTok{*}\StringTok{ }\KeywordTok{chol2inv}\NormalTok{(qx}\OperatorTok{$}\NormalTok{qr)}
+\NormalTok{  vcov <-}\StringTok{ }\NormalTok{sigma2 }\OperatorTok{*}\StringTok{ }\KeywordTok{solve}\NormalTok{(}\KeywordTok{t}\NormalTok{(x) }\OperatorTok{%*%}\StringTok{ }\NormalTok{x)}
   \KeywordTok{colnames}\NormalTok{(vcov) <-}\StringTok{ }\KeywordTok{rownames}\NormalTok{(vcov) <-}\StringTok{ }\KeywordTok{colnames}\NormalTok{(x)}
   \KeywordTok{list}\NormalTok{(}
     \DataTypeTok{coefficients =}\NormalTok{ coef,}
@@ -1320,8 +1316,16 @@ directory}{Add linreg.R to R/ directory}}\label{add-linreg.r-to-r-directory}
 \end{Shaded}
 
 \begin{verbatim}
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+\end{verbatim}
+
+\begin{verbatim}
 ## $coefficients
-## [1] -0.3566624  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
 ## 
 ## $vcov
 ##            [,1]        [,2]
@@ -1434,7 +1438,7 @@ documentation}\label{add-roxygen2-documentation}
 
 \begin{figure}
 
-{\centering \includegraphics[width=4.35in]{images/ch3_configure_build_tools} 
+{\centering \includegraphics{images/ch3_configure_build_tools} 
 
 }
 
@@ -1481,7 +1485,7 @@ File `\texttt{man/linmodEst.Rd} contains:
 
 \begin{figure}
 
-{\centering \includegraphics[width=5.38in]{images/ch3_formatted_help} 
+{\centering \includegraphics{images/ch3_formatted_help} 
 
 }
 
@@ -1596,6 +1600,17 @@ Reading: \url{http://adv-r.had.co.nz/S4.html}
 \NormalTok{x <-}\StringTok{ }\KeywordTok{cbind}\NormalTok{(}\DataTypeTok{Const =} \DecValTok{1}\NormalTok{, }\DataTypeTok{Bwt =}\NormalTok{ cats}\OperatorTok{$}\NormalTok{Bwt)}
 \NormalTok{y <-}\StringTok{ }\NormalTok{cats}\OperatorTok{$}\NormalTok{Hw}
 \NormalTok{mod1 <-}\StringTok{ }\KeywordTok{linmod}\NormalTok{(x, y)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             [,1]
+## Const -0.3566624
+## Bwt    4.0340627
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{mod1}
 \end{Highlighting}
 \end{Shaded}
@@ -1605,8 +1620,9 @@ Reading: \url{http://adv-r.had.co.nz/S4.html}
 ## linmod.default(x = x, y = y)
 ## 
 ## Coefficients:
-##      Const        Bwt 
-## -0.3566624  4.0340627
+##             [,1]
+## Const -0.3566624
+## Bwt    4.0340627
 \end{verbatim}
 
 \subsection{Other methods}\label{other-methods}
@@ -1712,7 +1728,7 @@ account.
 
 \begin{figure}
 
-{\centering \includegraphics[width=14.38in]{images/ch3_travis_github} 
+{\centering \includegraphics{images/ch3_travis_github} 
 
 }
 
@@ -1723,7 +1739,7 @@ the ones you want to test.
 
 \begin{figure}
 
-{\centering \includegraphics[width=5.39in]{images/ch3_travis_Linreg} 
+{\centering \includegraphics{images/ch3_travis_Linreg} 
 
 }
 
@@ -1754,7 +1770,7 @@ Travis build\ldots{} which fails!
 
 \begin{figure}
 
-{\centering \includegraphics[width=12.79in]{images/ch3_travis_failed_build} 
+{\centering \includegraphics{images/ch3_travis_failed_build} 
 
 }
 
@@ -1773,7 +1789,7 @@ Like Travis, codecov has to be linked to a GitHub account:
 
 \begin{figure}
 
-{\centering \includegraphics[width=6.38in]{images/ch3_codecov_github} 
+{\centering \includegraphics{images/ch3_codecov_github} 
 
 }
 
@@ -1805,7 +1821,7 @@ will give you code coverage information:
 
 \begin{figure}
 
-{\centering \includegraphics[width=23.92in]{images/ch3_codecov_out} 
+{\centering \includegraphics{images/ch3_codecov_out} 
 
 }
 
@@ -1833,7 +1849,7 @@ are are automatically displayed on GitHub:
 
 \begin{figure}
 
-{\centering \includegraphics[width=4.06in]{images/ch3_badges} 
+{\centering \includegraphics{images/ch3_badges} 
 
 }
 
@@ -1899,7 +1915,7 @@ The vignette is accessible with
 
 \begin{figure}
 
-{\centering \includegraphics[width=10.33in]{images/ch3_vignette_html} 
+{\centering \includegraphics{images/ch3_vignette_html} 
 
 }
 
@@ -1942,12 +1958,12 @@ Let's start with an example from \citet{Wickham2014}.
 
 \begin{verbatim}
 ## Unit: nanoseconds
-##           expr  min      lq      mean  median      uq   max neval  cld
-##       [32, 11] 8720 10062.5 12342.830 10609.0 11545.5 69813  1000    d
-##      $carb[32] 4669  5775.5  7069.517  6289.5  6951.0 35582  1000   c 
-##  [[c(11, 32)]] 3782  4667.5  5727.066  5112.5  5663.5 37608  1000  b  
-##     [[11]][32] 3618  4470.0  5545.236  4830.0  5316.0 39945  1000  b  
-##       .subset2  195   262.0   363.594   301.5   394.0  8900  1000 a
+##           expr  min      lq      mean  median      uq    max neval
+##       [32, 11] 8528 10091.5 11836.020 10555.5 11142.0 304845  1000
+##      $carb[32] 4631  5830.5  7032.024  6288.0  6757.5 130665  1000
+##  [[c(11, 32)]] 3717  4690.0  5574.615  5097.0  5486.5  99237  1000
+##     [[11]][32] 3526  4459.0  5927.647  4798.0  5178.5 541368  1000
+##       .subset2  205   266.0   364.643   311.5   375.0  10259  1000
 \end{verbatim}
 
 \begin{Shaded}
@@ -1972,13 +1988,38 @@ built-in \texttt{lm} and with two functions we defined in package
 \KeywordTok{data}\NormalTok{(cats, }\DataTypeTok{package =} \StringTok{"MASS"}\NormalTok{)}
 \NormalTok{fit1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Hwt }\OperatorTok{~}\StringTok{ }\NormalTok{Bwt, }\DataTypeTok{data =}\NormalTok{ cats)}
 \NormalTok{fit2 <-}\StringTok{ }\KeywordTok{linmod}\NormalTok{(Hwt }\OperatorTok{~}\StringTok{ }\NormalTok{Bwt, }\DataTypeTok{data =}\NormalTok{ cats)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{fit3 <-}\StringTok{ }\KeywordTok{linmodEst}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(}\DecValTok{1}\NormalTok{, cats}\OperatorTok{$}\NormalTok{Bwt), cats}\OperatorTok{$}\NormalTok{Hwt)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{all.equal}\NormalTok{(}\KeywordTok{round}\NormalTok{(}\KeywordTok{coef}\NormalTok{(fit1), }\DecValTok{5}\NormalTok{), }\KeywordTok{round}\NormalTok{(}\KeywordTok{coef}\NormalTok{(fit2), }\DecValTok{5}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [1] TRUE
+## [1] "names for target but not for current"                             
+## [2] "Attributes: < names for current but not for target >"             
+## [3] "Attributes: < Length mismatch: comparison on first 0 components >"
+## [4] "target is numeric, current is matrix"
 \end{verbatim}
 
 \begin{Shaded}
@@ -1988,7 +2029,9 @@ built-in \texttt{lm} and with two functions we defined in package
 \end{Shaded}
 
 \begin{verbatim}
-## [1] TRUE
+## [1] "Attributes: < names for current but not for target >"             
+## [2] "Attributes: < Length mismatch: comparison on first 0 components >"
+## [3] "target is numeric, current is matrix"
 \end{verbatim}
 
 \begin{Shaded}
@@ -1999,20 +2042,628 @@ built-in \texttt{lm} and with two functions we defined in package
 \NormalTok{  fit3 <-}\StringTok{ }\KeywordTok{linmodEst}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(}\DecValTok{1}\NormalTok{, cats}\OperatorTok{$}\NormalTok{Bwt), cats}\OperatorTok{$}\NormalTok{Hwt)}
   \CommentTok{# custom checks can be performed with the 'check' argument}
 \NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##            [,1]
+## [1,] -0.3566624
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{m}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ## Unit: microseconds
-##                                             expr     min       lq     mean
-##               fit1 <- lm(Hwt ~ Bwt, data = cats) 640.082 728.8320 874.3418
-##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 551.034 596.0000 734.7999
-##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt) 102.139 119.0205 154.2748
-##    median      uq      max neval cld
-##  817.3565 990.962 1340.091   100   c
-##  659.9475 820.378 1203.859   100  b 
-##  136.2870 162.702  730.589   100 a
+##                                             expr     min      lq     mean
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 681.435 730.793 870.0019
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 586.509 612.982 730.2025
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  98.976 115.449 145.0813
+##    median      uq      max neval
+##  763.1385 883.915 3196.983   100
+##  633.5360 722.993 2055.521   100
+##  133.0135 152.929  526.125   100
 \end{verbatim}
 
 \begin{Shaded}
@@ -2211,7 +2862,7 @@ or we can rely on base R functions that accept vector inputs
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 8
+## [1] 4
 \end{verbatim}
 
 \begin{Shaded}
@@ -2239,16 +2890,11 @@ or we can rely on base R functions that accept vector inputs
 
 \begin{verbatim}
 ## Unit: microseconds
-##   expr       min         lq       mean     median        uq       max
-##  vacc0  2366.087  3620.1395  5240.2424  4913.8645  6276.065 11431.554
-##  vacc1  2150.601  2540.2115  3601.6583  3201.8995  4126.243 12930.888
-##  vacc2   149.408   205.6615   615.3359   243.2605   731.481  7773.571
-##  vacc3 13680.982 23442.7025 26638.4114 25875.6545 28617.194 54562.138
-##  neval  cld
-##    100   c 
-##    100  b  
-##    100 a   
-##    100    d
+##   expr       min        lq       mean     median        uq       max neval
+##  vacc0  2398.783  3040.664  4115.0505  3491.9910  4482.053 13818.834   100
+##  vacc1  2007.864  2319.678  3156.6179  2564.3795  3316.053  9295.554   100
+##  vacc2   116.258   144.574   642.4547   201.9445   593.068  6529.062   100
+##  vacc3 12307.463 17523.095 20489.5760 18782.4615 20904.978 35779.593   100
 \end{verbatim}
 
 \begin{Shaded}
@@ -2321,7 +2967,7 @@ Reading: \url{http://adv-r.had.co.nz/Rcpp.html}
 
 \begin{verbatim}
 ## function () 
-## invisible(.Primitive(".Call")(<pointer: 0x110cec100>))
+## invisible(.Primitive(".Call")(<pointer: 0x10864dcc0>))
 \end{verbatim}
 
 \begin{Shaded}
@@ -2511,15 +3157,14 @@ accepting vector arguments?
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{linmodEst <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, y) \{}
-\NormalTok{  ## compute QR-decomposition of x}
-\NormalTok{  qx <-}\StringTok{ }\KeywordTok{qr}\NormalTok{(x)}
-\NormalTok{  ## compute (x’x)^(-1) x’y}
-\NormalTok{  coef <-}\StringTok{ }\KeywordTok{solve.qr}\NormalTok{(qx, y)}
+\NormalTok{  ## CC: crossprod or a QR decomposition (as in the original version) are more efficient}
+\NormalTok{  coef <-}\StringTok{ }\KeywordTok{solve}\NormalTok{(}\KeywordTok{t}\NormalTok{(x) }\OperatorTok{%*%}\StringTok{ }\NormalTok{x) }\OperatorTok{%*%}\StringTok{ }\KeywordTok{t}\NormalTok{(x) }\OperatorTok{%*%}\StringTok{ }\NormalTok{y}
+  \KeywordTok{print}\NormalTok{(coef)}
 \NormalTok{  ## degrees of freedom and standard deviation of residuals}
 \NormalTok{  df <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{(x) }\OperatorTok{-}\StringTok{ }\KeywordTok{ncol}\NormalTok{(x)}
 \NormalTok{  sigma2 <-}\StringTok{ }\KeywordTok{sum}\NormalTok{((y }\OperatorTok{-}\StringTok{ }\NormalTok{x }\OperatorTok{%*%}\StringTok{ }\NormalTok{coef) }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{df}
 \NormalTok{  ## compute sigma^2 * (x’x)^-1}
-\NormalTok{  vcov <-}\StringTok{ }\NormalTok{sigma2 }\OperatorTok{*}\StringTok{ }\KeywordTok{chol2inv}\NormalTok{(qx}\OperatorTok{$}\NormalTok{qr)}
+\NormalTok{  vcov <-}\StringTok{ }\NormalTok{sigma2 }\OperatorTok{*}\StringTok{ }\KeywordTok{solve}\NormalTok{(}\KeywordTok{t}\NormalTok{(x) }\OperatorTok{%*%}\StringTok{ }\NormalTok{x)}
   \KeywordTok{colnames}\NormalTok{(vcov) <-}\StringTok{ }\KeywordTok{rownames}\NormalTok{(vcov) <-}\StringTok{ }\KeywordTok{colnames}\NormalTok{(x)}
   \KeywordTok{list}\NormalTok{(}
     \DataTypeTok{coefficients =}\NormalTok{ coef,}
@@ -2543,26 +3188,70 @@ accepting vector arguments?
 
 \chapter{Big data}\label{bigdata}
 
-In this Chapter, we are going to review different approaches to handle
-and perform analyses on \emph{data that does not fit in memory}.
+\section{List of tools}\label{list-of-tools}
 
-\section{Reading big data (that fits in
-memory)}\label{reading-big-data-that-fits-in-memory}
+Reading: \citet{Varian2014}
+(\href{http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.28.2.3}{PDF
+available})
 
-\subsection{R package comparison}\label{r-package-comparison}
+\begin{figure}
 
-\subsection{Python}\label{python}
+{\centering \includegraphics{images/ch6_tool_list} 
 
-\section{Sampling (can be read, not analyzed
-easily)}\label{sampling-can-be-read-not-analyzed-easily}
+}
+
+\end{figure}
+
+Spark? h2o? More? Let's go back to the bottlenecks
+
+\begin{itemize}
+\tightlist
+\item
+  CPU
+\item
+  RAM
+\item
+  I/O
+\end{itemize}
+
+\section{Data that fits in memory}\label{data-that-fits-in-memory}
+
+\subsection{\texorpdfstring{R and
+\texttt{data.table}}{R and data.table}}\label{r-and-data.table}
+
+Reading:
+\url{https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html}
+
+\texttt{data.table} provides an enhanced of a \texttt{data.frame} and
+faster I/O with \texttt{fread} and \texttt{fwrite}.
+
+\section{Data that doesn't fit in memory (but fits on
+drive)}\label{data-that-doesnt-fit-in-memory-but-fits-on-drive}
 
 \section{Pure R solutions}\label{pure-r-solutions}
 
-\section{JVM solutions}\label{jvm-solutions}
+\subsection{Sampling}\label{sampling}
 
-\subsection{h20}\label{h20}
+\subsection{\texorpdfstring{\texttt{bigmemory}}{bigmemory}}\label{bigmemory}
 
-\subsection{Spark}\label{spark}
+\subsection{Database connections and lazy
+evaluation}\label{database-connections-and-lazy-evaluation}
+
+\section{Scaling up}\label{scaling-up}
+
+\subsection{Parallel computing and
+clusters}\label{parallel-computing-and-clusters}
+
+\subsection{Cloud computing}\label{cloud-computing}
+
+\subsection{\texorpdfstring{\texttt{Spark}}{Spark}}\label{spark}
+
+\subsection{\texorpdfstring{\texttt{h2o} and
+\texttt{Sparkling\ Water}}{h2o and Sparkling Water}}\label{h2o-and-sparkling-water}
+
+\subsection{More?}\label{more}
+
+GPU
 
 \chapter{Visualization}\label{visualization}
 

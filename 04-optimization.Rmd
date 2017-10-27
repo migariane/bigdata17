@@ -390,5 +390,3 @@ linmodEst <- function(x, y) {
 }
 ```
 
-
-
