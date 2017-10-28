@@ -34,4 +34,4 @@ vignettes/*.pdf
 .Rproj.user
 
 # Spark logs
-logs/*.log
+logs/
