@@ -101,6 +101,9 @@ spark_install(version = "2.1.0")
 ```
 
 ```{r eval=FALSE}
+conf <- spark_config()
+conf$`sparklyr.shell.driver-memory` <- "32G"
+conf$spark.memory.fraction <- 0.5
 sc <- spark_connect(master = "local")
 ```
 
@@ -159,6 +162,12 @@ subset_table %>%
 ```
 
 123534969 as well!
+
+```{r eval=FALSE}
+lm(arr_delay ~ distance, data = flights_tbl)
+ml_linear_regression(subset_table, response = "ArrDelay", features = "SchedDeparture")
+```
+
 
 
 TODOL change the `config` arguments of the connection

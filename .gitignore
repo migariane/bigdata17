@@ -35,3 +35,6 @@ vignettes/*.pdf
 
 # Spark logs
 logs/
+log/
+*.log
+
