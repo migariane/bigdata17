@@ -174,6 +174,8 @@ TODOL change the `config` arguments of the connection
 
 ### `h2o` and `Sparkling Water`
 
+Reading: https://spark.rstudio.com/h2o.html
+
 ### More?
 
 GPU
