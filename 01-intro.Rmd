@@ -9,7 +9,7 @@
 - Office hours:
     - Ben: Tuesday 1:30-2:30pm
     - Qian:  Thursday 10:30-11:30am
-    - Christine: Tuesday 10:30-1130am (office 437A)
+    - Christine: Tuesday 10:30-11:30am (office 437A)
 - Course GitHub repository https://github.com/cchoirat/bigdata17
 - Open file in folder `_book/index.html`
 - These course notes are **work in progress**.

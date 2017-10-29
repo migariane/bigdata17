@@ -390,3 +390,8 @@ linmodEst <- function(x, y) {
 }
 ```
 
+## Rcpp packages
+
+Readings:
+    - https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-package.pdf
+    - http://adv-r.had.co.nz/Rcpp.html#rcpp-package
