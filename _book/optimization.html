@@ -172,10 +172,11 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.7.6" data-path="packages.html"><a href="packages.html#formatted-output"><i class="fa fa-check"></i><b>3.7.6</b> Formatted output</a></li>
 <li class="chapter" data-level="3.7.7" data-path="packages.html"><a href="packages.html#description"><i class="fa fa-check"></i><b>3.7.7</b> <code>DESCRIPTION</code></a></li>
 <li class="chapter" data-level="3.7.8" data-path="packages.html"><a href="packages.html#namespace"><i class="fa fa-check"></i><b>3.7.8</b> <code>NAMESPACE</code></a></li>
-<li class="chapter" data-level="3.7.9" data-path="packages.html"><a href="packages.html#s3-and-s4-generics"><i class="fa fa-check"></i><b>3.7.9</b> S3 and S4 generics</a></li>
-<li class="chapter" data-level="3.7.10" data-path="packages.html"><a href="packages.html#print"><i class="fa fa-check"></i><b>3.7.10</b> <code>print</code></a></li>
-<li class="chapter" data-level="3.7.11" data-path="packages.html"><a href="packages.html#other-methods"><i class="fa fa-check"></i><b>3.7.11</b> Other methods</a></li>
-<li class="chapter" data-level="3.7.12" data-path="packages.html"><a href="packages.html#formulas-and-model-frames"><i class="fa fa-check"></i><b>3.7.12</b> Formulas and model frames</a></li>
+<li class="chapter" data-level="3.7.9" data-path="packages.html"><a href="packages.html#s3-basics"><i class="fa fa-check"></i><b>3.7.9</b> S3 basics</a></li>
+<li class="chapter" data-level="3.7.10" data-path="packages.html"><a href="packages.html#s3-and-s4-generics"><i class="fa fa-check"></i><b>3.7.10</b> S3 and S4 generics</a></li>
+<li class="chapter" data-level="3.7.11" data-path="packages.html"><a href="packages.html#print"><i class="fa fa-check"></i><b>3.7.11</b> <code>print</code></a></li>
+<li class="chapter" data-level="3.7.12" data-path="packages.html"><a href="packages.html#other-methods"><i class="fa fa-check"></i><b>3.7.12</b> Other methods</a></li>
+<li class="chapter" data-level="3.7.13" data-path="packages.html"><a href="packages.html#formulas-and-model-frames"><i class="fa fa-check"></i><b>3.7.13</b> Formulas and model frames</a></li>
 </ul></li>
 <li class="chapter" data-level="3.8" data-path="packages.html"><a href="packages.html#unit-testing"><i class="fa fa-check"></i><b>3.8</b> Unit testing</a><ul>
 <li class="chapter" data-level="3.8.1" data-path="packages.html"><a href="packages.html#unit-tests-and-testthat"><i class="fa fa-check"></i><b>3.8.1</b> Unit tests and <code>testthat</code></a></li>
@@ -277,12 +278,12 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: nanoseconds
-##           expr  min   lq      mean  median      uq     max neval cld
-##       [32, 11] 8571 9909 12586.122 10581.5 12203.5   82119  1000   c
-##      $carb[32] 4440 5710  7757.808  6387.5  7494.0  112228  1000  b 
-##  [[c(11, 32)]] 3722 4714  6248.577  5255.0  6195.0   90017  1000  b 
-##     [[11]][32] 3447 4458  7446.448  4964.0  5842.5 1445414  1000  b 
-##       .subset2  201  282   427.063   323.0   395.5   10755  1000 a</code></pre>
+##           expr  min      lq      mean  median      uq     max neval cld
+##       [32, 11] 8216 10072.5 11867.396 11152.0 12381.0   70184  1000   c
+##      $carb[32] 4144  5901.0  7168.992  6713.0  7548.0   66296  1000  b 
+##  [[c(11, 32)]] 3421  5011.0  5941.043  5703.5  6219.5   29443  1000  b 
+##     [[11]][32] 3187  4535.5  7495.212  5305.5  5797.0 2093126  1000  b 
+##       .subset2  190   281.0   401.620   347.0   453.5    3175  1000 a</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 </div>
@@ -612,13 +613,13 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m</code></pre></div>
 <pre><code>## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 662.222 700.0935 816.4632
-##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 551.424 587.6080 769.8936
-##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  96.549 115.1655 143.6460
-##    median       uq       max neval cld
-##  743.6480 844.5330  3748.613   100   b
-##  618.4865 685.1855 12210.348   100   b
-##  138.1950 157.6825   359.390   100  a</code></pre>
+##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 636.567 663.2870 733.3245
+##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 535.859 559.5085 668.1634
+##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  95.290 109.8260 127.4688
+##    median       uq      max neval cld
+##  683.5960 718.9365 3024.722   100   b
+##  576.0310 606.6585 7217.824   100   b
+##  126.7885 132.2405  249.005   100  a</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
@@ -717,11 +718,11 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: microseconds
-##   expr       min         lq       mean    median         uq        max
-##  vacc0  1844.201  3192.0385  6570.4288  4142.616  5266.0960 227794.631
-##  vacc1  2006.944  2372.6235  3374.4916  3071.015  3803.6280   9634.324
-##  vacc2   115.336   189.0855   606.8207   258.837   695.6965   6391.521
-##  vacc3 13828.784 19279.1345 22678.9924 21392.059 25536.0110  43467.940
+##   expr       min        lq       mean    median         uq        max
+##  vacc0  1883.778  3092.583  5996.6871  3905.287  4667.5375 195828.052
+##  vacc1  1967.502  2437.718  3342.3760  3085.624  3743.1575  11828.225
+##  vacc2   123.560   167.498   716.1689   221.719   867.5135   6211.609
+##  vacc3 13863.207 19385.752 21630.8722 21373.298 23214.6985  37252.099
 ##  neval cld
 ##    100  b 
 ##    100 ab 
@@ -762,7 +763,7 @@ m</code></pre></div>
 <span class="st">}&#39;</span>)
 hello</code></pre></div>
 <pre><code>## function () 
-## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x108bf7100&gt;))</code></pre>
+## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x107860100&gt;))</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hello</span>()</code></pre></div>
 <pre><code>## Hello, world!</code></pre>
 <p><code>Rprintf</code> is the counterpart of C++ <a href="http://www.cplusplus.com/reference/cstdio/printf/"><code>printf</code></a> function.</p>

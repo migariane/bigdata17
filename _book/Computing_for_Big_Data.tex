@@ -1541,6 +1541,21 @@ Reading: \url{http://r-pkgs.had.co.nz/namespace.html}, in particular
 
 \end{figure}
 
+\begin{itemize}
+\item
+  A scary hack
+\item
+  A scary tree
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics[width=14.56in]{images/ch3_halloween_tree} 
+
+}
+
+\end{figure}
+
 \subsection{S3 basics}\label{s3-basics}
 
 Reading: \url{http://adv-r.had.co.nz/S3.html}
@@ -1979,12 +1994,12 @@ Let's start with an example from \citet{Wickham2014}.
 
 \begin{verbatim}
 ## Unit: nanoseconds
-##           expr  min      lq      mean  median      uq   max neval   cld
-##       [32, 11] 8342 10037.5 11164.021 10536.0 11217.0 67482  1000     e
-##      $carb[32] 4502  5661.0  6482.985  6228.0  6829.5 44521  1000    d 
-##  [[c(11, 32)]] 3726  4632.0  5257.811  5042.5  5491.0 48664  1000   c  
-##     [[11]][32] 3406  4373.0  4974.515  4796.0  5254.0 50837  1000  b   
-##       .subset2  195   265.0   345.953   302.0   376.5 11032  1000 a
+##           expr  min     lq      mean  median      uq   max neval   cld
+##       [32, 11] 8304 9559.0 10559.731 10066.0 10689.5 33687  1000     e
+##      $carb[32] 4533 5576.0  6198.955  5994.5  6510.5 27395  1000    d 
+##  [[c(11, 32)]] 3595 4534.5  5132.417  4916.0  5368.5 44446  1000   c  
+##     [[11]][32] 3295 4225.5  4761.957  4599.5  5007.0 25681  1000  b   
+##       .subset2  193  258.0   320.960   297.0   361.0   903  1000 a
 \end{verbatim}
 
 \begin{Shaded}
@@ -2364,13 +2379,13 @@ built-in \texttt{lm} and with two functions we defined in package
 \begin{verbatim}
 ## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 <- lm(Hwt ~ Bwt, data = cats) 653.693 675.0420 727.1695
-##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 550.665 572.1230 597.5103
-##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  98.558 115.0305 132.9835
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 654.540 682.9380 734.9910
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 546.826 571.3625 594.6399
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt) 101.805 114.4275 133.9494
 ##    median       uq      max neval cld
-##  686.9850 718.7155 1384.296   100   c
-##  585.7725 602.0640  885.322   100  b 
-##  131.9395 138.8425  257.519   100 a
+##  696.7805 728.4910 1473.209   100   c
+##  586.0890 603.3210  809.010   100  b 
+##  134.3535 141.2115  228.724   100 a
 \end{verbatim}
 
 \begin{Shaded}
@@ -2597,11 +2612,11 @@ or we can rely on base R functions that accept vector inputs
 
 \begin{verbatim}
 ## Unit: microseconds
-##   expr       min        lq       mean    median        uq       max neval
-##  vacc0  2084.109  3274.560  5055.7932  4406.197  5402.729 59183.133   100
-##  vacc1  2013.875  2300.562  3262.6797  2869.896  3477.700 10897.536   100
-##  vacc2   104.941   170.171   599.8415   223.138   731.011  6518.841   100
-##  vacc3 16924.509 20390.434 23406.7190 23660.876 26186.340 30040.545   100
+##   expr       min        lq       mean    median         uq       max neval
+##  vacc0  1913.810  3272.610  4860.9381  4511.481  5360.9050 28508.167   100
+##  vacc1  2025.942  2617.384  3589.6382  3248.014  3810.6850 12578.677   100
+##  vacc2   112.774   186.666   518.0049   260.377   490.4655  6513.684   100
+##  vacc3 13182.759 18173.791 21784.7975 21765.854 25633.0875 30251.287   100
 ##   cld
 ##    c 
 ##   b  
@@ -2679,7 +2694,7 @@ Reading: \url{http://adv-r.had.co.nz/Rcpp.html}
 
 \begin{verbatim}
 ## function () 
-## invisible(.Primitive(".Call")(<pointer: 0x108bf7100>))
+## invisible(.Primitive(".Call")(<pointer: 0x106cbc100>))
 \end{verbatim}
 
 \begin{Shaded}

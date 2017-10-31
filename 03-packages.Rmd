@@ -411,10 +411,20 @@ export(linmodEst)
 knitr::include_graphics("images/ch3_pumpkin.jpg")
 ```
 
-```{r echo=FALSE, fig.align="center", octocat, fig.cap="", fig.height=2.7}
+```{r echo=FALSE, fig.align="center", octocat, fig.cap="", fig.height=2.5}
 # https://octodex.github.com/images/octocat-de-los-muertos.jpg
 knitr::include_graphics("images/ch3_octocat-de-los-muertos.jpg")
 ```
+
+- A scary hack
+
+- A scary tree
+
+```{r echo=FALSE, fig.align="center", halloween_tree, fig.cap="", fig.height=2.7}
+# https://octodex.github.com/images/octocat-de-los-muertos.jpg
+knitr::include_graphics("images/ch3_halloween_tree.jpg")
+```
+
 ### S3 basics
 
 Reading: http://adv-r.had.co.nz/S3.html
