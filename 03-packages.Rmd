@@ -99,6 +99,8 @@ package.skeleton(list = c("f","g","d","e"), name = "pkgname")
 devtools::create("path/to/package/pkgname")
 ```
 
+Also from RStudio (`File -> New Project').
+
 ### Submit to CRAN
 
 ```{r echo=FALSE, fig.align="center", hydra, fig.cap="Submitting to CRAN.  It's not that bad..."}
@@ -199,7 +201,7 @@ vignettes/*.pdf
 
 ## RStudio projects
 
-- `.Rproj` file extension, in our example `pkgtemplate.Rproj`
+- `.Rproj` file extension, in our example `Linreg.Rproj`
 
 - A project has its own:
     - R session
@@ -241,7 +243,7 @@ PackageInstallArgs: --no-multiarch --with-keep.source
 
 - Vignettes
     - PDF
-    - `knitr` (or `Sweave`)
+    - `knitr`
 
 ## Package workflow example
 
@@ -312,15 +314,14 @@ summary(lm1)$sigma
 #' @export
 #'
 linmodEst <- function(x, y) {
-  ## compute QR-decomposition of x
-  qx <- qr(x)
-  ## compute (x’x)^(-1) x’y
-  coef <- solve.qr(qx, y)
+  ## CC: crossprod or a QR decomposition (as in the original version) are more efficient
+  coef <- solve(t(x) %*% x) %*% t(x) %*% y
+  print(coef)
   ## degrees of freedom and standard deviation of residuals
   df <- nrow(x) - ncol(x)
   sigma2 <- sum((y - x %*% coef) ^ 2) / df
   ## compute sigma^2 * (x’x)^-1
-  vcov <- sigma2 * chol2inv(qx$qr)
+  vcov <- sigma2 * solve(t(x) %*% x)
   colnames(vcov) <- rownames(vcov) <- colnames(x)
   list(
     coefficients = coef,
@@ -379,6 +380,8 @@ knitr::include_graphics("images/ch3_formatted_help.png")
 
 ### `DESCRIPTION`
 
+Reading: http://r-pkgs.had.co.nz/description.html
+
 ```{r eval=FALSE}
 Package: Linreg
 Type: Package
@@ -396,12 +399,22 @@ RoxygenNote: 6.0.1
 
 ### `NAMESPACE`
 
+Reading: http://r-pkgs.had.co.nz/namespace.html, in particular `Imports` vs `Suggests`
+
 `export`'s automatically generated when parsing ROxygen2 snippets
 
 ```{r eval=FALSE}
 export(linmodEst)
 ```
 
+```{r echo=FALSE, fig.align="center", pumpkin, fig.cap=""}
+knitr::include_graphics("images/ch3_pumpkin.jpg")
+```
+
+```{r echo=FALSE, fig.align="center", octocat, fig.cap="", fig.height=2.7}
+# https://octodex.github.com/images/octocat-de-los-muertos.jpg
+knitr::include_graphics("images/ch3_octocat-de-los-muertos.jpg")
+```
 ### S3 basics
 
 Reading: http://adv-r.had.co.nz/S3.html

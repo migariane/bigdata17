@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-10-27">
+<meta name="date" content="2017-10-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -172,11 +172,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3.7.6" data-path="packages.html"><a href="packages.html#formatted-output"><i class="fa fa-check"></i><b>3.7.6</b> Formatted output</a></li>
 <li class="chapter" data-level="3.7.7" data-path="packages.html"><a href="packages.html#description"><i class="fa fa-check"></i><b>3.7.7</b> <code>DESCRIPTION</code></a></li>
 <li class="chapter" data-level="3.7.8" data-path="packages.html"><a href="packages.html#namespace"><i class="fa fa-check"></i><b>3.7.8</b> <code>NAMESPACE</code></a></li>
-<li class="chapter" data-level="3.7.9" data-path="packages.html"><a href="packages.html#s3-basics"><i class="fa fa-check"></i><b>3.7.9</b> S3 basics</a></li>
-<li class="chapter" data-level="3.7.10" data-path="packages.html"><a href="packages.html#s3-and-s4-generics"><i class="fa fa-check"></i><b>3.7.10</b> S3 and S4 generics</a></li>
-<li class="chapter" data-level="3.7.11" data-path="packages.html"><a href="packages.html#print"><i class="fa fa-check"></i><b>3.7.11</b> <code>print</code></a></li>
-<li class="chapter" data-level="3.7.12" data-path="packages.html"><a href="packages.html#other-methods"><i class="fa fa-check"></i><b>3.7.12</b> Other methods</a></li>
-<li class="chapter" data-level="3.7.13" data-path="packages.html"><a href="packages.html#formulas-and-model-frames"><i class="fa fa-check"></i><b>3.7.13</b> Formulas and model frames</a></li>
+<li class="chapter" data-level="3.7.9" data-path="packages.html"><a href="packages.html#s3-and-s4-generics"><i class="fa fa-check"></i><b>3.7.9</b> S3 and S4 generics</a></li>
+<li class="chapter" data-level="3.7.10" data-path="packages.html"><a href="packages.html#print"><i class="fa fa-check"></i><b>3.7.10</b> <code>print</code></a></li>
+<li class="chapter" data-level="3.7.11" data-path="packages.html"><a href="packages.html#other-methods"><i class="fa fa-check"></i><b>3.7.11</b> Other methods</a></li>
+<li class="chapter" data-level="3.7.12" data-path="packages.html"><a href="packages.html#formulas-and-model-frames"><i class="fa fa-check"></i><b>3.7.12</b> Formulas and model frames</a></li>
 </ul></li>
 <li class="chapter" data-level="3.8" data-path="packages.html"><a href="packages.html#unit-testing"><i class="fa fa-check"></i><b>3.8</b> Unit testing</a><ul>
 <li class="chapter" data-level="3.8.1" data-path="packages.html"><a href="packages.html#unit-tests-and-testthat"><i class="fa fa-check"></i><b>3.8.1</b> Unit tests and <code>testthat</code></a></li>
@@ -204,6 +203,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.5.6" data-path="optimization.html"><a href="optimization.html#example-continued"><i class="fa fa-check"></i><b>4.5.6</b> Example (continued)</a></li>
 <li class="chapter" data-level="4.5.7" data-path="optimization.html"><a href="optimization.html#back-to-linreg"><i class="fa fa-check"></i><b>4.5.7</b> Back to Linreg</a></li>
 </ul></li>
+<li class="chapter" data-level="4.6" data-path="optimization.html"><a href="optimization.html#rcpp-packages"><i class="fa fa-check"></i><b>4.6</b> Rcpp packages</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>5</b> Databases</a><ul>
 <li class="chapter" data-level="5.1" data-path="databases.html"><a href="databases.html#overview"><i class="fa fa-check"></i><b>5.1</b> Overview</a></li>
@@ -261,7 +261,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="list-of-tools" class="section level2">
 <h2><span class="header-section-number">6.1</span> List of tools</h2>
 <p>Reading: <span class="citation">Varian (<a href="#ref-Varian2014">2014</a>)</span> (<a href="http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.28.2.3">PDF available</a>)</p>
-<p><img src="images/ch6_tool_list.png" style="display: block; margin: auto;" /></p>
+<p><img src="images/ch6_tool_list.png" width="374" style="display: block; margin: auto;" /></p>
 <p>Spark? h2o? More? Let’s go back to the bottlenecks</p>
 <ul>
 <li>CPU</li>
@@ -357,7 +357,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Reading: <a href="https://spark.rstudio.com/" class="uri">https://spark.rstudio.com/</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sparklyr)
 <span class="kw">spark_install</span>(<span class="dt">version =</span> <span class="st">&quot;2.1.0&quot;</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sc &lt;-<span class="st"> </span><span class="kw">spark_connect</span>(<span class="dt">master =</span> <span class="st">&quot;local&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">conf &lt;-<span class="st"> </span><span class="kw">spark_config</span>()
+conf<span class="op">$</span><span class="st">`</span><span class="dt">sparklyr.shell.driver-memory</span><span class="st">`</span> &lt;-<span class="st"> &quot;32G&quot;</span>
+conf<span class="op">$</span>spark.memory.fraction &lt;-<span class="st"> </span><span class="fl">0.5</span>
+sc &lt;-<span class="st"> </span><span class="kw">spark_connect</span>(<span class="dt">master =</span> <span class="st">&quot;local&quot;</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 iris_tbl &lt;-<span class="st"> </span><span class="kw">copy_to</span>(sc, iris)
 flights_tbl &lt;-<span class="st"> </span><span class="kw">copy_to</span>(sc, nycflights13<span class="op">::</span>flights, <span class="st">&quot;flights&quot;</span>)
@@ -389,10 +392,13 @@ flights_table <span class="op">%&gt;%</span><span class="st"> </span>head</code>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">subset_table <span class="op">%&gt;%</span>
 <span class="st">  </span>tally <span class="co"># a bit faster.</span></code></pre></div>
 <p>123534969 as well!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(arr_delay <span class="op">~</span><span class="st"> </span>distance, <span class="dt">data =</span> flights_tbl)
+<span class="kw">ml_linear_regression</span>(subset_table, <span class="dt">response =</span> <span class="st">&quot;ArrDelay&quot;</span>, <span class="dt">features =</span> <span class="st">&quot;SchedDeparture&quot;</span>)</code></pre></div>
 <p>TODOL change the <code>config</code> arguments of the connection</p>
 </div>
 <div id="h2o-and-sparkling-water" class="section level3">
 <h3><span class="header-section-number">6.5.4</span> <code>h2o</code> and <code>Sparkling Water</code></h3>
+<p>Reading: <a href="https://spark.rstudio.com/h2o.html" class="uri">https://spark.rstudio.com/h2o.html</a></p>
 </div>
 <div id="more" class="section level3">
 <h3><span class="header-section-number">6.5.5</span> More?</h3>

@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-27}
+  \date{2017-10-30}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -186,7 +186,7 @@
   \item
     Qian: Thursday 10:30-11:30am
   \item
-    Christine: Tuesday 10:30-1130am (office 437A)
+    Christine: Tuesday 10:30-11:30am (office 437A)
   \end{itemize}
 \item
   Course GitHub repository \url{https://github.com/cchoirat/bigdata17}
@@ -232,7 +232,7 @@ As described by \citet{Lim2015}, there are three bottlenecks:
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch1_bottlenecks} 
+{\centering \includegraphics[width=7.08in]{images/ch1_bottlenecks} 
 
 }
 
@@ -751,7 +751,7 @@ File \texttt{create\_graph.py}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{images/ch1_plot.jpg}
+\includegraphics[width=53.33in]{images/ch1_plot}
 
 \subsection{Run statistical model in
 R}\label{run-statistical-model-in-r}
@@ -1048,11 +1048,13 @@ re-building the vignette PDFs.}
 \end{Highlighting}
 \end{Shaded}
 
+Also from RStudio (`File -\textgreater{} New Project').
+
 \subsection{Submit to CRAN}\label{submit-to-cran}
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_hydra} 
+{\centering \includegraphics[width=4.44in]{images/ch3_hydra} 
 
 }
 
@@ -1083,7 +1085,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_pkg_1_github} 
+{\centering \includegraphics[width=15in]{images/ch3_pkg_1_github} 
 
 }
 
@@ -1092,7 +1094,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_pkg_2_project} 
+{\centering \includegraphics[width=7.32in]{images/ch3_pkg_2_project} 
 
 }
 
@@ -1101,7 +1103,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_pkg_3_package} 
+{\centering \includegraphics[width=7.32in]{images/ch3_pkg_3_package} 
 
 }
 
@@ -1110,7 +1112,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_pkg_4_create} 
+{\centering \includegraphics[width=7.33in]{images/ch3_pkg_4_create} 
 
 }
 
@@ -1119,7 +1121,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_pkg_5_filelist} 
+{\centering \includegraphics[width=14.01in]{images/ch3_pkg_5_filelist} 
 
 }
 
@@ -1128,7 +1130,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_pkg_6_install} 
+{\centering \includegraphics[width=12.6in]{images/ch3_pkg_6_install} 
 
 }
 
@@ -1137,7 +1139,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_pkg_7_github} 
+{\centering \includegraphics[width=20.94in]{images/ch3_pkg_7_github} 
 
 }
 
@@ -1146,7 +1148,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_pkg_8_terminal} 
+{\centering \includegraphics[width=7.85in]{images/ch3_pkg_8_terminal} 
 
 }
 
@@ -1167,7 +1169,7 @@ integration}\label{rstudio-and-github-integration}
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_pkg_9_github} 
+{\centering \includegraphics[width=21.1in]{images/ch3_pkg_9_github} 
 
 }
 
@@ -1210,8 +1212,7 @@ GitHub default
 
 \begin{itemize}
 \item
-  \texttt{.Rproj} file extension, in our example
-  \texttt{pkgtemplate.Rproj}
+  \texttt{.Rproj} file extension, in our example \texttt{Linreg.Rproj}
 \item
   A project has its own:
 
@@ -1270,7 +1271,7 @@ GitHub default
   \item
     PDF
   \item
-    \texttt{knitr} (or \texttt{Sweave})
+    \texttt{knitr}
   \end{itemize}
 \end{itemize}
 
@@ -1414,15 +1415,14 @@ documentation}\label{add-roxygen2-documentation}
 \CommentTok{#' @export}
 \CommentTok{#'}
 \NormalTok{linmodEst <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, y) \{}
-\NormalTok{  ## compute QR-decomposition of x}
-\NormalTok{  qx <-}\StringTok{ }\KeywordTok{qr}\NormalTok{(x)}
-\NormalTok{  ## compute (x’x)^(-1) x’y}
-\NormalTok{  coef <-}\StringTok{ }\KeywordTok{solve.qr}\NormalTok{(qx, y)}
+\NormalTok{  ## CC: crossprod or a QR decomposition (as in the original version) are more efficient}
+\NormalTok{  coef <-}\StringTok{ }\KeywordTok{solve}\NormalTok{(}\KeywordTok{t}\NormalTok{(x) }\OperatorTok{%*%}\StringTok{ }\NormalTok{x) }\OperatorTok{%*%}\StringTok{ }\KeywordTok{t}\NormalTok{(x) }\OperatorTok{%*%}\StringTok{ }\NormalTok{y}
+  \KeywordTok{print}\NormalTok{(coef)}
 \NormalTok{  ## degrees of freedom and standard deviation of residuals}
 \NormalTok{  df <-}\StringTok{ }\KeywordTok{nrow}\NormalTok{(x) }\OperatorTok{-}\StringTok{ }\KeywordTok{ncol}\NormalTok{(x)}
 \NormalTok{  sigma2 <-}\StringTok{ }\KeywordTok{sum}\NormalTok{((y }\OperatorTok{-}\StringTok{ }\NormalTok{x }\OperatorTok{%*%}\StringTok{ }\NormalTok{coef) }\OperatorTok{^}\StringTok{ }\DecValTok{2}\NormalTok{) }\OperatorTok{/}\StringTok{ }\NormalTok{df}
 \NormalTok{  ## compute sigma^2 * (x’x)^-1}
-\NormalTok{  vcov <-}\StringTok{ }\NormalTok{sigma2 }\OperatorTok{*}\StringTok{ }\KeywordTok{chol2inv}\NormalTok{(qx}\OperatorTok{$}\NormalTok{qr)}
+\NormalTok{  vcov <-}\StringTok{ }\NormalTok{sigma2 }\OperatorTok{*}\StringTok{ }\KeywordTok{solve}\NormalTok{(}\KeywordTok{t}\NormalTok{(x) }\OperatorTok{%*%}\StringTok{ }\NormalTok{x)}
   \KeywordTok{colnames}\NormalTok{(vcov) <-}\StringTok{ }\KeywordTok{rownames}\NormalTok{(vcov) <-}\StringTok{ }\KeywordTok{colnames}\NormalTok{(x)}
   \KeywordTok{list}\NormalTok{(}
     \DataTypeTok{coefficients =}\NormalTok{ coef,}
@@ -1438,7 +1438,7 @@ documentation}\label{add-roxygen2-documentation}
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_configure_build_tools} 
+{\centering \includegraphics[width=4.35in]{images/ch3_configure_build_tools} 
 
 }
 
@@ -1485,13 +1485,15 @@ File `\texttt{man/linmodEst.Rd} contains:
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_formatted_help} 
+{\centering \includegraphics[width=5.38in]{images/ch3_formatted_help} 
 
 }
 
 \end{figure}
 
 \subsection{\texorpdfstring{\texttt{DESCRIPTION}}{DESCRIPTION}}\label{description}
+
+Reading: \url{http://r-pkgs.had.co.nz/description.html}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1512,6 +1514,9 @@ File `\texttt{man/linmodEst.Rd} contains:
 
 \subsection{\texorpdfstring{\texttt{NAMESPACE}}{NAMESPACE}}\label{namespace}
 
+Reading: \url{http://r-pkgs.had.co.nz/namespace.html}, in particular
+\texttt{Imports} vs \texttt{Suggests}
+
 \texttt{export}'s automatically generated when parsing ROxygen2 snippets
 
 \begin{Shaded}
@@ -1519,6 +1524,22 @@ File `\texttt{man/linmodEst.Rd} contains:
 \KeywordTok{export}\NormalTok{(linmodEst)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=6.86in]{images/ch3_pumpkin} 
+
+}
+
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=12.44in]{images/ch3_octocat-de-los-muertos} 
+
+}
+
+\end{figure}
 
 \subsection{S3 basics}\label{s3-basics}
 
@@ -1728,7 +1749,7 @@ account.
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_travis_github} 
+{\centering \includegraphics[width=14.38in]{images/ch3_travis_github} 
 
 }
 
@@ -1739,7 +1760,7 @@ the ones you want to test.
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_travis_Linreg} 
+{\centering \includegraphics[width=5.39in]{images/ch3_travis_Linreg} 
 
 }
 
@@ -1770,7 +1791,7 @@ Travis build\ldots{} which fails!
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_travis_failed_build} 
+{\centering \includegraphics[width=12.79in]{images/ch3_travis_failed_build} 
 
 }
 
@@ -1789,7 +1810,7 @@ Like Travis, codecov has to be linked to a GitHub account:
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_codecov_github} 
+{\centering \includegraphics[width=6.38in]{images/ch3_codecov_github} 
 
 }
 
@@ -1821,7 +1842,7 @@ will give you code coverage information:
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_codecov_out} 
+{\centering \includegraphics[width=23.92in]{images/ch3_codecov_out} 
 
 }
 
@@ -1849,7 +1870,7 @@ are are automatically displayed on GitHub:
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_badges} 
+{\centering \includegraphics[width=4.06in]{images/ch3_badges} 
 
 }
 
@@ -1915,7 +1936,7 @@ The vignette is accessible with
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch3_vignette_html} 
+{\centering \includegraphics[width=10.33in]{images/ch3_vignette_html} 
 
 }
 
@@ -1958,12 +1979,12 @@ Let's start with an example from \citet{Wickham2014}.
 
 \begin{verbatim}
 ## Unit: nanoseconds
-##           expr  min     lq      mean median      uq   max neval
-##       [32, 11] 8638 9512.0 10160.054 9857.5 10253.5 37064  1000
-##      $carb[32] 4422 5446.5  5962.114 5872.0  6255.0 16138  1000
-##  [[c(11, 32)]] 3617 4456.0  4937.307 4770.0  5128.5 32887  1000
-##     [[11]][32] 3454 4177.5  4680.169 4524.5  4817.0 36249  1000
-##       .subset2  206  261.0   327.642  291.0   344.0 10060  1000
+##           expr  min      lq      mean  median      uq   max neval   cld
+##       [32, 11] 8342 10037.5 11164.021 10536.0 11217.0 67482  1000     e
+##      $carb[32] 4502  5661.0  6482.985  6228.0  6829.5 44521  1000    d 
+##  [[c(11, 32)]] 3726  4632.0  5257.811  5042.5  5491.0 48664  1000   c  
+##     [[11]][32] 3406  4373.0  4974.515  4796.0  5254.0 50837  1000  b   
+##       .subset2  195   265.0   345.953   302.0   376.5 11032  1000 a
 \end{verbatim}
 
 \begin{Shaded}
@@ -1988,17 +2009,6 @@ built-in \texttt{lm} and with two functions we defined in package
 \KeywordTok{data}\NormalTok{(cats, }\DataTypeTok{package =} \StringTok{"MASS"}\NormalTok{)}
 \NormalTok{fit1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Hwt }\OperatorTok{~}\StringTok{ }\NormalTok{Bwt, }\DataTypeTok{data =}\NormalTok{ cats)}
 \NormalTok{fit2 <-}\StringTok{ }\KeywordTok{linmod}\NormalTok{(Hwt }\OperatorTok{~}\StringTok{ }\NormalTok{Bwt, }\DataTypeTok{data =}\NormalTok{ cats)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{fit3 <-}\StringTok{ }\KeywordTok{linmodEst}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(}\DecValTok{1}\NormalTok{, cats}\OperatorTok{$}\NormalTok{Bwt), cats}\OperatorTok{$}\NormalTok{Hwt)}
 \end{Highlighting}
 \end{Shaded}
@@ -2016,10 +2026,7 @@ built-in \texttt{lm} and with two functions we defined in package
 \end{Shaded}
 
 \begin{verbatim}
-## [1] "names for target but not for current"                             
-## [2] "Attributes: < names for current but not for target >"             
-## [3] "Attributes: < Length mismatch: comparison on first 0 components >"
-## [4] "target is numeric, current is matrix"
+## [1] TRUE
 \end{verbatim}
 
 \begin{Shaded}
@@ -2052,30 +2059,15 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2085,72 +2077,30 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2163,54 +2113,21 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2223,93 +2140,39 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2319,27 +2182,9 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2355,48 +2200,18 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2418,24 +2233,15 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2445,12 +2251,6 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2469,12 +2269,6 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2487,9 +2281,6 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2499,21 +2290,9 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2523,9 +2302,6 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2535,45 +2311,18 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2583,69 +2332,27 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 \end{verbatim}
 
 \begin{Shaded}
@@ -2657,13 +2364,13 @@ built-in \texttt{lm} and with two functions we defined in package
 \begin{verbatim}
 ## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 <- lm(Hwt ~ Bwt, data = cats) 652.211 684.1745 744.6122
-##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 577.280 594.6400 620.6632
-##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt) 101.907 114.4030 127.9381
-##    median       uq      max neval
-##  704.6205 740.3750 2641.531   100
-##  605.6345 618.3315 1178.439   100
-##  127.7755 136.1520  254.503   100
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 653.693 675.0420 727.1695
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 550.665 572.1230 597.5103
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  98.558 115.0305 132.9835
+##    median       uq      max neval cld
+##  686.9850 718.7155 1384.296   100   c
+##  585.7725 602.0640  885.322   100  b 
+##  131.9395 138.8425  257.519   100 a
 \end{verbatim}
 
 \begin{Shaded}
@@ -2862,7 +2569,7 @@ or we can rely on base R functions that accept vector inputs
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 4
+## [1] 8
 \end{verbatim}
 
 \begin{Shaded}
@@ -2890,16 +2597,16 @@ or we can rely on base R functions that accept vector inputs
 
 \begin{verbatim}
 ## Unit: microseconds
-##   expr       min         lq       mean     median         uq       max
-##  vacc0  2086.429  2956.0255  3999.6323  3317.8970  4514.0835 11126.833
-##  vacc1  1953.033  2251.3775  3051.6503  2562.9905  3567.9135  9485.836
-##  vacc2   104.668   155.8175   633.4677   223.1705   895.5925  6150.642
-##  vacc3 11708.412 14505.8305 17442.1572 16021.5790 18075.7640 34621.128
-##  neval
-##    100
-##    100
-##    100
-##    100
+##   expr       min        lq       mean    median        uq       max neval
+##  vacc0  2084.109  3274.560  5055.7932  4406.197  5402.729 59183.133   100
+##  vacc1  2013.875  2300.562  3262.6797  2869.896  3477.700 10897.536   100
+##  vacc2   104.941   170.171   599.8415   223.138   731.011  6518.841   100
+##  vacc3 16924.509 20390.434 23406.7190 23660.876 26186.340 30040.545   100
+##   cld
+##    c 
+##   b  
+##  a   
+##     d
 \end{verbatim}
 
 \begin{Shaded}
@@ -2972,7 +2679,7 @@ Reading: \url{http://adv-r.had.co.nz/Rcpp.html}
 
 \begin{verbatim}
 ## function () 
-## invisible(.Primitive(".Call")(<pointer: 0x103195cc0>))
+## invisible(.Primitive(".Call")(<pointer: 0x108bf7100>))
 \end{verbatim}
 
 \begin{Shaded}
@@ -3181,6 +2888,12 @@ accepting vector arguments?
 \end{Highlighting}
 \end{Shaded}
 
+\section{Rcpp packages}\label{rcpp-packages}
+
+Readings: -
+\url{https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-package.pdf}
+- \url{http://adv-r.had.co.nz/Rcpp.html\#rcpp-package}
+
 \chapter{Databases}\label{databases}
 
 \section{Overview}\label{overview}
@@ -3201,7 +2914,7 @@ available})
 
 \begin{figure}
 
-{\centering \includegraphics{images/ch6_tool_list} 
+{\centering \includegraphics[width=10.39in]{images/ch6_tool_list} 
 
 }
 
@@ -3330,6 +3043,9 @@ Reading: \url{https://spark.rstudio.com/}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\NormalTok{conf <-}\StringTok{ }\KeywordTok{spark_config}\NormalTok{()}
+\NormalTok{conf}\OperatorTok{$}\StringTok{`}\DataTypeTok{sparklyr.shell.driver-memory}\StringTok{`}\NormalTok{ <-}\StringTok{ "32G"}
+\NormalTok{conf}\OperatorTok{$}\NormalTok{spark.memory.fraction <-}\StringTok{ }\FloatTok{0.5}
 \NormalTok{sc <-}\StringTok{ }\KeywordTok{spark_connect}\NormalTok{(}\DataTypeTok{master =} \StringTok{"local"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -3403,10 +3119,19 @@ Cache data:
 
 123534969 as well!
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{lm}\NormalTok{(arr_delay }\OperatorTok{~}\StringTok{ }\NormalTok{distance, }\DataTypeTok{data =}\NormalTok{ flights_tbl)}
+\KeywordTok{ml_linear_regression}\NormalTok{(subset_table, }\DataTypeTok{response =} \StringTok{"ArrDelay"}\NormalTok{, }\DataTypeTok{features =} \StringTok{"SchedDeparture"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 TODOL change the \texttt{config} arguments of the connection
 
 \subsection{\texorpdfstring{\texttt{h2o} and
 \texttt{Sparkling\ Water}}{h2o and Sparkling Water}}\label{h2o-and-sparkling-water}
+
+Reading: \url{https://spark.rstudio.com/h2o.html}
 
 \subsection{More?}\label{more}
 
