@@ -507,6 +507,18 @@ Write two functions that implement the `coef.linmod` and `vcov.linmod` methods.
 
 ### Formulas and model frames
 
+Reading: http://genomicsclass.github.io/book/pages/expressing_design_formula.html
+
+> `model.frame` (a generic function) and its methods return a data.frame with the variables needed to use formula and any ... arguments.
+
+> `model.matrix` creates a design (or model) matrix, e.g., by expanding factors to a set of dummy variables (depending on the contrasts) and expanding interactions similarly.
+
+> `model.response` returns the response of a model frame passed as optional arguments to model.frame.
+
+```{exercise}
+What is `model.extract`?
+```
+
 ```{r eval=FALSE}
 linmod.formula <- function(formula, data = list(), ...) {
   mf <- model.frame(formula = formula, data = data)
