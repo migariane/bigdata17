@@ -311,7 +311,7 @@ Reading: http://kbroman.org/pkg_primer/pages/docs.html
 #' data(mtcars)
 #' X <- as.matrix(mtcars[, c("cyl", "disp", "hp")])
 #' y <- mtcars[, "mpg"]
-#' linreg(y, X)
+#' linmodEst(y, X)
 #'
 #' @export
 #'
@@ -368,7 +368,7 @@ Runs an OLS regression not unlike \code{\link{lm}}
 data(mtcars)
 X <- as.matrix(mtcars[, c("cyl", "disp", "hp")])
 y <- mtcars[, "mpg"]
-linreg(y, X)
+linmodEst(y, X)
 
 }
 
@@ -500,6 +500,10 @@ mod1
 - `plot.linmod`
 
 - `coef.linmod`, `vcov.linmod`, ...
+
+```{exercise}
+Write two functions that implement the `coef.linmod` and `vcov.linmod` methods.
+```
 
 ### Formulas and model frames
 

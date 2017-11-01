@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-10-30">
+<meta name="date" content="2017-11-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -278,12 +278,12 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: nanoseconds
-##           expr  min      lq      mean  median      uq     max neval cld
-##       [32, 11] 8216 10072.5 11867.396 11152.0 12381.0   70184  1000   c
-##      $carb[32] 4144  5901.0  7168.992  6713.0  7548.0   66296  1000  b 
-##  [[c(11, 32)]] 3421  5011.0  5941.043  5703.5  6219.5   29443  1000  b 
-##     [[11]][32] 3187  4535.5  7495.212  5305.5  5797.0 2093126  1000  b 
-##       .subset2  190   281.0   401.620   347.0   453.5    3175  1000 a</code></pre>
+##           expr  min     lq      mean median      uq      max neval
+##       [32, 11] 8213 9277.5 10971.448 9868.5 10922.0    83231  1000
+##      $carb[32] 4418 5563.0  6663.742 6020.0  6796.0    51094  1000
+##  [[c(11, 32)]] 3573 4456.5  5393.429 4888.0  5551.0    36356  1000
+##     [[11]][32] 3365 4245.0 29955.512 4649.0  5300.5 24913052  1000
+##       .subset2  207  263.0   411.486  303.0   368.0    31944  1000</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
 </div>
@@ -293,13 +293,19 @@ m</code></pre></div>
 <p>Let’s compare three ways of estimating a linear regression: with built-in <code>lm</code> and with two functions we defined in package <code>Linreg</code> in Chapter <a href="packages.html#packages">3</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(cats, <span class="dt">package =</span> <span class="st">&quot;MASS&quot;</span>)
 fit1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt, <span class="dt">data =</span> cats)
-fit2 &lt;-<span class="st"> </span><span class="kw">linmod</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt, <span class="dt">data =</span> cats)
-fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class="kw">cbind</span>(<span class="dv">1</span>, cats<span class="op">$</span>Bwt), cats<span class="op">$</span>Hwt)</code></pre></div>
+fit2 &lt;-<span class="st"> </span><span class="kw">linmod</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt, <span class="dt">data =</span> cats)</code></pre></div>
+<pre><code>##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class="kw">cbind</span>(<span class="dv">1</span>, cats<span class="op">$</span>Bwt), cats<span class="op">$</span>Hwt)</code></pre></div>
 <pre><code>##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all.equal</span>(<span class="kw">round</span>(<span class="kw">coef</span>(fit1), <span class="dv">5</span>), <span class="kw">round</span>(<span class="kw">coef</span>(fit2), <span class="dv">5</span>))</code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>## [1] &quot;names for target but not for current&quot;                             
+## [2] &quot;Attributes: &lt; names for current but not for target &gt;&quot;             
+## [3] &quot;Attributes: &lt; Length mismatch: comparison on first 0 components &gt;&quot;
+## [4] &quot;target is numeric, current is matrix&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">all.equal</span>(<span class="kw">round</span>(<span class="kw">coef</span>(fit1), <span class="dv">5</span>), <span class="kw">round</span>(fit3<span class="op">$</span>coefficients, <span class="dv">5</span>), <span class="dt">check.names =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>## [1] &quot;Attributes: &lt; names for current but not for target &gt;&quot;             
 ## [2] &quot;Attributes: &lt; Length mismatch: comparison on first 0 components &gt;&quot;
@@ -316,15 +322,30 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -334,30 +355,72 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -370,21 +433,54 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -397,39 +493,93 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -439,9 +589,27 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -457,18 +625,48 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -490,15 +688,24 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -508,6 +715,12 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -526,6 +739,12 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -538,6 +757,9 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -547,9 +769,21 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -559,6 +793,9 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -568,18 +805,45 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -589,37 +853,79 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
-## [2,]  4.0340627</code></pre>
+## [2,]  4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627
+##                   [,1]
+## (Intercept) -0.3566624
+## Bwt          4.0340627</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m</code></pre></div>
 <pre><code>## Unit: microseconds
-##                                             expr     min       lq     mean
-##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 636.567 663.2870 733.3245
-##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 535.859 559.5085 668.1634
-##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  95.290 109.8260 127.4688
-##    median       uq      max neval cld
-##  683.5960 718.9365 3024.722   100   b
-##  576.0310 606.6585 7217.824   100   b
-##  126.7885 132.2405  249.005   100  a</code></pre>
+##                                             expr     min       lq
+##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 652.639 690.1945
+##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 570.266 584.7155
+##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  98.742 114.3290
+##       mean   median       uq      max neval
+##  1019.5402 760.3745 977.3220 9715.855   100
+##   693.6297 608.3040 698.4720 2658.181   100
+##   143.9893 129.2390 152.6115  621.942   100</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
@@ -703,7 +1009,7 @@ out0 &lt;-<span class="st"> </span><span class="kw">vacc0</span>(age, female, il
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(parallel)
 cores &lt;-<span class="st"> </span><span class="kw">detectCores</span>()
 cores</code></pre></div>
-<pre><code>## [1] 8</code></pre>
+<pre><code>## [1] 4</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vacc3 &lt;-<span class="st"> </span><span class="cf">function</span>(age, female, ily) {
   <span class="kw">mcmapply</span>(<span class="cf">function</span>(i) <span class="kw">vacc1a</span>(age[i], female[i], ily[i]), <span class="dv">1</span><span class="op">:</span>n, <span class="dt">mc.cores =</span> cores <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
 }
@@ -718,16 +1024,16 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: microseconds
-##   expr       min        lq       mean    median         uq        max
-##  vacc0  1883.778  3092.583  5996.6871  3905.287  4667.5375 195828.052
-##  vacc1  1967.502  2437.718  3342.3760  3085.624  3743.1575  11828.225
-##  vacc2   123.560   167.498   716.1689   221.719   867.5135   6211.609
-##  vacc3 13863.207 19385.752 21630.8722 21373.298 23214.6985  37252.099
-##  neval cld
-##    100  b 
-##    100 ab 
-##    100 a  
-##    100   c</code></pre>
+##   expr       min         lq       mean     median         uq       max
+##  vacc0  2263.678  3127.7710  3971.2182  3565.5330  4315.5525 13190.999
+##  vacc1  2029.497  2400.6820  3302.9356  2727.1575  3635.5765  9703.088
+##  vacc2   114.941   159.2735   497.3207   213.4165   369.0215  6296.139
+##  vacc3 12711.030 15649.8570 19450.3278 17278.0340 20498.2100 60893.732
+##  neval
+##    100
+##    100
+##    100
+##    100</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
 <p>So, what’s going on?</p>
@@ -763,7 +1069,7 @@ m</code></pre></div>
 <span class="st">}&#39;</span>)
 hello</code></pre></div>
 <pre><code>## function () 
-## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x107860100&gt;))</code></pre>
+## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x10929fcc0&gt;))</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hello</span>()</code></pre></div>
 <pre><code>## Hello, world!</code></pre>
 <p><code>Rprintf</code> is the counterpart of C++ <a href="http://www.cplusplus.com/reference/cstdio/printf/"><code>printf</code></a> function.</p>
