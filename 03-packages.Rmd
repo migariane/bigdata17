@@ -675,7 +675,7 @@ Based on "Creating R Packages: A Tutorial" (Friedrich Leisch, 2009)
 
 ```
 
-are are automatically displayed on GitHub:
+are automatically displayed on GitHub:
 
 ```{r echo=FALSE, fig.align="center", badges, fig.cap=""}
 knitr::include_graphics("images/ch3_badges.png")

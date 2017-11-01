@@ -1412,7 +1412,7 @@ Reading: \url{http://kbroman.org/pkg_primer/pages/docs.html}
 \CommentTok{#' data(mtcars)}
 \CommentTok{#' X <- as.matrix(mtcars[, c("cyl", "disp", "hp")])}
 \CommentTok{#' y <- mtcars[, "mpg"]}
-\CommentTok{#' linreg(y, X)}
+\CommentTok{#' linmodEst(y, X)}
 \CommentTok{#'}
 \CommentTok{#' @export}
 \CommentTok{#'}
@@ -1477,7 +1477,7 @@ File `\texttt{man/linmodEst.Rd} contains:
 \KeywordTok{data}\NormalTok{(mtcars)}
 \NormalTok{X <-}\StringTok{ }\KeywordTok{as.matrix}\NormalTok{(mtcars[, }\KeywordTok{c}\NormalTok{(}\StringTok{"cyl"}\NormalTok{, }\StringTok{"disp"}\NormalTok{, }\StringTok{"hp"}\NormalTok{)])}
 \NormalTok{y <-}\StringTok{ }\NormalTok{mtcars[, }\StringTok{"mpg"}\NormalTok{]}
-\KeywordTok{linreg}\NormalTok{(y, X)}
+\KeywordTok{linmodEst}\NormalTok{(y, X)}
 
 \NormalTok{\}}
 \end{Highlighting}
@@ -1678,7 +1678,38 @@ Reading: \url{http://adv-r.had.co.nz/S4.html}
   \texttt{coef.linmod}, \texttt{vcov.linmod}, \ldots{}
 \end{itemize}
 
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:unnamed-chunk-47}{}{\label{exr:unnamed-chunk-47}
+}Write two functions that implement the \texttt{coef.linmod} and
+\texttt{vcov.linmod} methods.
+\EndKnitrBlock{exercise}
+
 \subsection{Formulas and model frames}\label{formulas-and-model-frames}
+
+Reading:
+\url{http://genomicsclass.github.io/book/pages/expressing_design_formula.html}
+
+\begin{quote}
+\texttt{model.frame} (a generic function) and its methods return a
+data.frame with the variables needed to use formula and any \ldots{}
+arguments.
+\end{quote}
+
+\begin{quote}
+\texttt{model.matrix} creates a design (or model) matrix, e.g., by
+expanding factors to a set of dummy variables (depending on the
+contrasts) and expanding interactions similarly.
+\end{quote}
+
+\begin{quote}
+\texttt{model.response} returns the response of a model frame passed as
+optional arguments to model.frame.
+\end{quote}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:unnamed-chunk-48}{}{\label{exr:unnamed-chunk-48}
+}What is \texttt{model.extract}?
+\EndKnitrBlock{exercise}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1996,12 +2027,12 @@ Let's start with an example from \citet{Wickham2014}.
 
 \begin{verbatim}
 ## Unit: nanoseconds
-##           expr  min     lq      mean median      uq   max neval
-##       [32, 11] 8556 9535.0 10452.708 9940.0 10386.5 57994  1000
-##      $carb[32] 4402 5332.0  6125.413 5807.5  6250.5 42018  1000
-##  [[c(11, 32)]] 3608 4288.0  4852.306 4651.5  5031.0 15538  1000
-##     [[11]][32] 3376 4050.5  4576.783 4393.5  4716.5 41183  1000
-##       .subset2  210  265.0   338.083  297.0   354.0 10068  1000
+##           expr  min      lq      mean  median      uq   max neval
+##       [32, 11] 8984 10217.0 11442.767 10732.0 11444.0 61564  1000
+##      $carb[32] 4811  5833.5  6712.092  6331.5  6915.5 24905  1000
+##  [[c(11, 32)]] 3715  4684.5  5441.555  5091.5  5574.5 56755  1000
+##     [[11]][32] 3415  4445.0  5216.520  4839.5  5300.0 45114  1000
+##       .subset2  203   274.5   369.895   326.0   392.0 10066  1000
 \end{verbatim}
 
 \begin{Shaded}
@@ -2010,7 +2041,7 @@ Let's start with an example from \citet{Wickham2014}.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Computing_for_Big_Data_files/figure-latex/unnamed-chunk-65-1.pdf}
+\includegraphics{Computing_for_Big_Data_files/figure-latex/unnamed-chunk-67-1.pdf}
 
 \subsection{Profiling and
 optimization}\label{profiling-and-optimization}
@@ -2026,17 +2057,6 @@ built-in \texttt{lm} and with two functions we defined in package
 \KeywordTok{data}\NormalTok{(cats, }\DataTypeTok{package =} \StringTok{"MASS"}\NormalTok{)}
 \NormalTok{fit1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(Hwt }\OperatorTok{~}\StringTok{ }\NormalTok{Bwt, }\DataTypeTok{data =}\NormalTok{ cats)}
 \NormalTok{fit2 <-}\StringTok{ }\KeywordTok{linmod}\NormalTok{(Hwt }\OperatorTok{~}\StringTok{ }\NormalTok{Bwt, }\DataTypeTok{data =}\NormalTok{ cats)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \NormalTok{fit3 <-}\StringTok{ }\KeywordTok{linmodEst}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(}\DecValTok{1}\NormalTok{, cats}\OperatorTok{$}\NormalTok{Bwt), cats}\OperatorTok{$}\NormalTok{Hwt)}
 \end{Highlighting}
 \end{Shaded}
@@ -2090,30 +2110,15 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2123,72 +2128,30 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2201,54 +2164,21 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2261,93 +2191,39 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2357,27 +2233,9 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2393,48 +2251,18 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2456,24 +2284,15 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2483,12 +2302,6 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2507,12 +2320,6 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2525,9 +2332,6 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2537,21 +2341,9 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2561,9 +2353,6 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2573,45 +2362,18 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
@@ -2621,69 +2383,27 @@ built-in \texttt{lm} and with two functions we defined in package
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
 ##            [,1]
 ## [1,] -0.3566624
 ## [2,]  4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
-##                   [,1]
-## (Intercept) -0.3566624
-## Bwt          4.0340627
 \end{verbatim}
 
 \begin{Shaded}
@@ -2695,13 +2415,13 @@ built-in \texttt{lm} and with two functions we defined in package
 \begin{verbatim}
 ## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 <- lm(Hwt ~ Bwt, data = cats) 663.238 675.2545 725.8785
-##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 564.406 583.4335 606.4806
-##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt) 100.686 111.7835 126.7885
-##   median       uq      max neval
-##  686.684 704.1975 2766.023   100
-##  594.227 615.3480  720.246   100
-##  124.620 135.4905  256.018   100
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 658.620 679.1640 732.7279
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 533.705 546.0485 568.7039
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  98.062 110.5850 124.2243
+##    median      uq      max neval
+##  689.2440 709.548 2666.826   100
+##  552.4515 567.820  721.017   100
+##  123.7310 132.465  249.417   100
 \end{verbatim}
 
 \begin{Shaded}
@@ -2710,7 +2430,7 @@ built-in \texttt{lm} and with two functions we defined in package
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Computing_for_Big_Data_files/figure-latex/unnamed-chunk-67-1.pdf}
+\includegraphics{Computing_for_Big_Data_files/figure-latex/unnamed-chunk-69-1.pdf}
 
 \section{Improving performance}\label{improving-performance}
 
@@ -2928,11 +2648,11 @@ or we can rely on base R functions that accept vector inputs
 
 \begin{verbatim}
 ## Unit: microseconds
-##   expr       min         lq       mean    median         uq       max
-##  vacc0  2327.358  3199.2290  4420.0718  3752.461  4835.2780 14382.605
-##  vacc1  2016.536  2271.4975  3047.2921  2630.461  3408.3345  9421.878
-##  vacc2   120.001   152.2795   731.9802   201.683   721.5475  6754.642
-##  vacc3 12508.071 16257.4655 19605.5051 18513.723 21728.3050 38685.539
+##   expr       min         lq       mean     median         uq       max
+##  vacc0  2385.520  3055.3875  3983.5677  3512.1135  4146.2655 11812.545
+##  vacc1  2001.636  2201.2780  2811.2800  2468.4745  2878.0900  9597.621
+##  vacc2   104.259   156.0255   682.1359   205.9785   836.2655  7473.581
+##  vacc3 13582.382 16612.2100 20978.5883 18597.0795 22641.4960 52274.626
 ##  neval
 ##    100
 ##    100
@@ -2946,7 +2666,7 @@ or we can rely on base R functions that accept vector inputs
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Computing_for_Big_Data_files/figure-latex/unnamed-chunk-78-1.pdf}
+\includegraphics{Computing_for_Big_Data_files/figure-latex/unnamed-chunk-80-1.pdf}
 
 So, what's going on?
 
@@ -3010,7 +2730,7 @@ Reading: \url{http://adv-r.had.co.nz/Rcpp.html}
 
 \begin{verbatim}
 ## function () 
-## invisible(.Primitive(".Call")(<pointer: 0x104fbccc0>))
+## invisible(.Primitive(".Call")(<pointer: 0x109804cc0>))
 \end{verbatim}
 
 \begin{Shaded}
@@ -3137,7 +2857,7 @@ Reading: \url{http://adv-r.had.co.nz/Rcpp.html\#rcpp-sugar}.
 -x`
 
 \BeginKnitrBlock{exercise}
-\protect\hypertarget{exr:unnamed-chunk-87}{}{\label{exr:unnamed-chunk-87}
+\protect\hypertarget{exr:unnamed-chunk-89}{}{\label{exr:unnamed-chunk-89}
 }Can you write an \texttt{Rcpp} function similar to \texttt{addd} but
 accepting vector arguments?
 \EndKnitrBlock{exercise}
@@ -3193,7 +2913,7 @@ accepting vector arguments?
 \end{itemize}
 
 \BeginKnitrBlock{exercise}
-\protect\hypertarget{exr:unnamed-chunk-90}{}{\label{exr:unnamed-chunk-90}
+\protect\hypertarget{exr:unnamed-chunk-92}{}{\label{exr:unnamed-chunk-92}
 }Can you write an \texttt{Rcpp} function similar to \texttt{linmodEst}?
 \EndKnitrBlock{exercise}
 
@@ -3327,7 +3047,7 @@ also tends to perform better than \texttt{read.csv}.
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-98}I/O comparison}
+\caption{\label{tab:unnamed-chunk-100}I/O comparison}
 \centering
 \begin{tabular}[t]{l|l|l|l}
 \hline

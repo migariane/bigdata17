@@ -578,7 +578,7 @@ lm1</code></pre></div>
 <span class="co">#&#39; data(mtcars)</span>
 <span class="co">#&#39; X &lt;- as.matrix(mtcars[, c(&quot;cyl&quot;, &quot;disp&quot;, &quot;hp&quot;)])</span>
 <span class="co">#&#39; y &lt;- mtcars[, &quot;mpg&quot;]</span>
-<span class="co">#&#39; linreg(y, X)</span>
+<span class="co">#&#39; linmodEst(y, X)</span>
 <span class="co">#&#39;</span>
 <span class="co">#&#39; @export</span>
 <span class="co">#&#39;</span>
@@ -635,7 +635,7 @@ Runs an OLS regression not unlike \code{\link{lm}}
 <span class="kw">data</span>(mtcars)
 X &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(mtcars[, <span class="kw">c</span>(<span class="st">&quot;cyl&quot;</span>, <span class="st">&quot;disp&quot;</span>, <span class="st">&quot;hp&quot;</span>)])
 y &lt;-<span class="st"> </span>mtcars[, <span class="st">&quot;mpg&quot;</span>]
-<span class="kw">linreg</span>(y, X)
+<span class="kw">linmodEst</span>(y, X)
 
 }</code></pre></div>
 </div>
@@ -740,9 +740,29 @@ mod1 &lt;-<span class="st"> </span><span class="kw">linmod</span>(x, y)</code></
 <li><p><code>plot.linmod</code></p></li>
 <li><p><code>coef.linmod</code>, <code>vcov.linmod</code>, …</p></li>
 </ul>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-47" class="exercise"><strong>Exercise 3.1  </strong></span>Write two functions that implement the <code>coef.linmod</code> and <code>vcov.linmod</code> methods.
+</div>
+
 </div>
 <div id="formulas-and-model-frames" class="section level3">
 <h3><span class="header-section-number">3.7.13</span> Formulas and model frames</h3>
+<p>Reading: <a href="http://genomicsclass.github.io/book/pages/expressing_design_formula.html" class="uri">http://genomicsclass.github.io/book/pages/expressing_design_formula.html</a></p>
+<blockquote>
+<p><code>model.frame</code> (a generic function) and its methods return a data.frame with the variables needed to use formula and any … arguments.</p>
+</blockquote>
+<blockquote>
+<p><code>model.matrix</code> creates a design (or model) matrix, e.g., by expanding factors to a set of dummy variables (depending on the contrasts) and expanding interactions similarly.</p>
+</blockquote>
+<blockquote>
+<p><code>model.response</code> returns the response of a model frame passed as optional arguments to model.frame.</p>
+</blockquote>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-48" class="exercise"><strong>Exercise 3.2  </strong></span>What is <code>model.extract</code>?
+</div>
+
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmod.formula &lt;-<span class="st"> </span><span class="cf">function</span>(formula, <span class="dt">data =</span> <span class="kw">list</span>(), ...) {
   mf &lt;-<span class="st"> </span><span class="kw">model.frame</span>(<span class="dt">formula =</span> formula, <span class="dt">data =</span> data)
   x &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="kw">attr</span>(mf, <span class="st">&quot;terms&quot;</span>), <span class="dt">data =</span> mf)
