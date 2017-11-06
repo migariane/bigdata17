@@ -422,6 +422,8 @@ knitr::include_graphics("images/ch3_octocat-de-los-muertos.jpg")
 
 - A scary tree
 
+Reading: https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+
 ```{r echo=FALSE, fig.align="center", halloween_tree, fig.cap="", fig.height=2.7}
 # https://octodex.github.com/images/octocat-de-los-muertos.jpg
 knitr::include_graphics("images/ch3_halloween_tree.jpg")
@@ -583,7 +585,9 @@ DONE ===========================================================================
 
 ## Continuous integration
 
-Reading: http://r-pkgs.had.co.nz/check.html#travis
+Readings:
+    - http://r-pkgs.had.co.nz/check.html#travis
+    - https://juliasilge.com/blog/beginners-guide-to-travis/
 
 Website: https://travis-ci.org/
 
