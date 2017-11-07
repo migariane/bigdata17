@@ -1,7 +1,7 @@
 # Databases {#databases}
 
 ## Overview
-  A database is simply an organized structure for storing and accessing data. There are a number of structures used to store
+  A database is simply an organized structure for storing and accessing data on disk. There are a number of structures used to store data on disk, each with their own languages.  
   
 
 
@@ -39,9 +39,9 @@ To Select the name and birthday of all students in classes taught by Dr. Choirat
     ```
         
         
+### SQLite: An Exercise
 
-
-
+### SQL and R
 
 
 
