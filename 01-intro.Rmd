@@ -1,5 +1,19 @@
 # Introduction {#intro}
 
+## Logistics
+
+- Fall 2 course
+- Tuesday and Thursday, 11:30am-1pm
+- Contact info: Christine Choirat (cchoirat@iq.harvard.edu).  Please use BST232 in the email title.
+- TA's: Qian Di (qiandi@mail.harvard.edu) and Ben Sabath (mbsabath@hsph.harvard.edu)
+- Office hours:
+    - Ben: Tuesday 1:30-2:30pm
+    - Qian:  Thursday 10:30-11:30am
+    - Christine: Tuesday 10:30-11:30am (office 437A)
+- Course GitHub repository https://github.com/cchoirat/bigdata17
+- Open file in folder `_book/index.html`
+- These course notes are **work in progress**.
+
 ## Prerequisites
 
 For BST262 (Computing for Big Data), we assume familiarity with the material covered in BST260 (Introduction to Data Science).
@@ -12,7 +26,30 @@ We will use R to present concepts that are mostly language-agnostic.  We could h
 
 2. Statistical software programs such as R were not designed to handle datasets of massive size.
 
+## Big data bottlenecks
+
+As described by @Lim2015, there are three bottlenecks:
+
+- CPU
+- RAM
+- I/O
+
+```{r echo=FALSE, fig.align="center", bottlenecks, fig.cap="Steps to execute an R program, from @Lim2015, Chapter 1."}
+knitr::include_graphics("images/ch1_bottlenecks.png")
+```
+```{exercise}
+Can you identify points 1--7 in the following code snippet?
+```
+
+```{r eval=FALSE}
+data <- read.csv("mydata.csv")
+totals <- colSums(data)
+write.csv(totals, "totals.csv")
+```
+
 ## Syllabus
+
+Part I – Good code still matters _(even with lots of computing resources)_
 
 Week 1 - Basic tools
 
@@ -29,11 +66,13 @@ Week 3 - Software optimization
 - Lecture 5. Measuring performance: profiling and benchmarking tools
 - Lecture 6. Improving performance: an introduction to C/C++, Rcpp
 
+Part II – Scaling up _(don’t use big data tools for small data)_
+
 Week 4 – Databases
 
 - Lecture 7. Overview of SQL (SQLite, PostgreSQL) and noSQL databases (HBase,
 MongoDB, Cassandra, BigTable, ...)
-- Lecture 8. R database interfaces (in particular through dplyr)
+- Lecture 8. R database interfaces (in particular through dplyr and mongolite)
 
 Week 5 - Analyzing data that does not fit in memory
 
@@ -84,7 +123,7 @@ There are datasets of different sizes.  We will use:
 
 The airlines dataset comes from the U.S. Department of Transportation and were used in the [2009 Data Expo](http://stat-computing.org/dataexpo/2009/) of the American Statistical Association (ASA).
 
-We will use a version curated by [h20o](https://www.h2o.ai/): https://github.com/h2oai/h2o-2/wiki/Hacking-Airline-DataSet-with-H2O. 
+We will use a version curated by [h2o](https://www.h2o.ai/): https://github.com/h2oai/h2o-2/wiki/Hacking-Airline-DataSet-with-H2O. 
 
 ### Insurance claims
 
@@ -109,3 +148,20 @@ If there is enough interest, we might present methylation examples.
 If you have suggestions, you can open a GitHub issue at https://github.com/cchoirat/bigdata17/issues.
 
 If you want to contribute, we welcome [pull requests](https://help.github.com/articles/about-pull-requests/).
+
+## Before we start...
+
+How much R do you know?
+
+Introduction to R: http://tutorials.iq.harvard.edu/R/Rintro/Rintro.html
+
+Regression models in R: http://tutorials.iq.harvard.edu/R/Rstatistics/Rstatistics.html
+
+R graphics: http://tutorials.iq.harvard.edu/R/Rgraphics/Rgraphics.html
+
+R programming: http://tutorials.iq.harvard.edu/R/RProgramming/Rprogramming.html
+
+## Style
+
+Reading: http://adv-r.had.co.nz/Style.html
+

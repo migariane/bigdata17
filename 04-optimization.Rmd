@@ -4,12 +4,394 @@ In this Chapter, we will see how to measure and improve code performance.
 
 ## Measuring performance
 
-### Profiling
-
 ### Benchmarking
+
+Reading: http://adv-r.had.co.nz/Performance.html#microbenchmarking
+
+There are several ways to benchmark code (see http://www.alexejgossmann.com/benchmarking_r/) from `system.time` to dedicated packages such as `rbenchmark` (@rbenchmark) or `microbenchmark` (@microbenchmark).
+
+Let's start with an example from @Wickham2014.
+
+```{r}
+library(microbenchmark)
+m <- microbenchmark(
+  times = 1000, # default is 100
+  "[32, 11]"      = mtcars[32, 11],
+  "$carb[32]"     = mtcars$carb[32],
+  "[[c(11, 32)]]" = mtcars[[c(11, 32)]],
+  "[[11]][32]"    = mtcars[[11]][32],
+  ".subset2"      = .subset2(mtcars, 11)[32]
+)
+m
+```
+
+
+```{r}
+ggplot2::autoplot(m)
+```
+
+
+### Profiling and optimization
+
+Reading: http://adv-r.had.co.nz/Profiling.html#measure-perf
+
+Let's compare three ways of estimating a linear regression: with built-in `lm` and with two functions we defined in package `Linreg` in Chapter \@ref(packages).
+
+```{r echo=FALSE}
+suppressPackageStartupMessages(library(Linreg))
+```
+
+```{r}
+data(cats, package = "MASS")
+fit1 <- lm(Hwt ~ Bwt, data = cats)
+fit2 <- linmod(Hwt ~ Bwt, data = cats)
+fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)
+all.equal(round(coef(fit1), 5), round(coef(fit2), 5))
+all.equal(round(coef(fit1), 5), round(fit3$coefficients, 5), check.names = FALSE)
+
+m <- microbenchmark(
+  fit1 <- lm(Hwt ~ Bwt, data = cats),
+  fit2 <- linmod(Hwt ~ Bwt, data = cats),
+  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)
+  # custom checks can be performed with the 'check' argument
+)
+m
+ggplot2::autoplot(m)
+```
+
 
 ## Improving performance
 
-### Introduction to C/C++
+- Vectorize
+
+- Parallelize
+
+- Use a faster language (C/C++, Fortran, ...)
+
+- Use different tools (as in Chapter \@ref(bigdata))
+
+## Vectorization
+
+Let's take an example from a blog post (that seems to be [gone](http://www.babelgraph.org/wp/?p=358)).  It's used in @Wickham2014 [, Section [Case studies](http://adv-r.had.co.nz/Rcpp.html#rcpp-case-studies)].
+
+```{r}
+vacc1a <- function(age, female, ily) {
+  p <- 0.25 + 0.3 * 1 / (1 - exp(0.04 * age)) + 0.1 * ily
+  p <- p * if (female) 1.25 else 0.75
+  p <- max(0, p)
+  p <- min(1, p)
+  p
+}
+
+set.seed(1959)
+n <- 1000
+age <- rnorm(n, mean = 50, sd = 10)
+female <- sample(c(T, F), n, rep = TRUE)
+ily <- sample(c(T, F), n, prob = c(0.8, 0.2), rep = TRUE)
+
+vacc1a(age[1], female[1], ily[1])
+vacc1a(age[2], female[2], ily[2])
+vacc1a(age[3], female[3], ily[3])
+```
+
+`vacc1a` is not designed for vector inputs
+
+```{r}
+vacc1a(age, female, ily)
+```
+
+It should be called
+
+```{r}
+vacc1a(age[1], female[1], ily[1])
+vacc1a(age[2], female[2], ily[2])
+vacc1a(age[3], female[3], ily[3])
+
+```
+
+We can use a loop:
+
+```{r}
+out <- numeric(n)
+for (i in 1:n)
+  out[i] <- vacc1a(age[i], female[i], ily[i])
+```
+
+or one of the `apply` functions:
+
+```{r}
+vacc0<- function(age, female, ily) {
+  sapply(1:n, function(i) vacc1a(age[i], female[i], ily[i]))
+}
+
+out0 <- vacc0(age, female, ily)
+```
+
+```{r}
+all.equal(out, out0)
+```
+
+But, it's convenient for the function to support vector inputs, instead of relying on users writing their own wrappers.  We can loop inside the function body.
+
+```{r}
+vacc1 <- function(age, female, ily) {
+  n <- length(age)
+  out <- numeric(n)
+  for (i in seq_len(n)) {
+    out[i] <- vacc1a(age[i], female[i], ily[i])
+  }
+  out
+}
+```
+
+or we can rely on base R functions that accept vector inputs
+
+```{r}
+vacc2 <- function(age, female, ily) {
+  p <- 0.25 + 0.3 * 1 / (1 - exp(0.04 * age)) + 0.1 * ily
+  p <- p * ifelse(female, 1.25, 0.75)
+  p <- pmax(0, p)
+  p <- pmin(1, p)
+  p
+}
+```
+
+## Parallelization
+
+```{r}
+library(parallel)
+cores <- detectCores()
+cores
+```
+
+```{r}
+vacc3 <- function(age, female, ily) {
+  mcmapply(function(i) vacc1a(age[i], female[i], ily[i]), 1:n, mc.cores = cores - 1)
+}
+
+out3 <- vacc3(age, female, ily)
+```
+
+```{r}
+library(microbenchmark)
+m <- microbenchmark(
+  vacc0 = vacc0(age, female, ily),
+  vacc1 = vacc1(age, female, ily),
+  vacc2 = vacc2(age, female, ily),
+  vacc3 = vacc3(age, female, ily)
+)
+m
+ggplot2::autoplot(m)
+```
+
+So, what's going on?
+
+We will talk more about parallelization tools and techniques in Chapter `@ref(bigdata).
+
+## Introduction to C++
+
+- C++ is a very powerful object-oriented language.
+
+- Many tutorials are available on-line, for example http://www.cplusplus.com/doc/tutorial/.
+
+- R is _intepreted_, C++ is _compiled_ and typically much faster (in loops for examples).
+
+- Our introduction to C++ is from an R perspective.  Python (and most interpreted languages) can be extended with C++ too.
 
 ### Rcpp
+
+Reading: http://adv-r.had.co.nz/Rcpp.html
+
+- `Rcpp` @Eddelbuettel2013 makes it very easy to use C++ code in R (for example to speed up a function or to wrap methods already implemented in C++).
+
+- `Rcpp` provides "syntactic sugar" that makes is easy to leverage C++ even without a deep knowledge of it.
+
+- To use `Rcpp`, you need a C++ compiler:
+    - Windows: [Rtools](https://cran.r-project.org/bin/windows/Rtools/)
+    - OS X: [Xcode](https://developer.apple.com/xcode/)
+    - Linux: `r-base-dev` from package manager
+    
+### Hello World!
+
+```{r}
+library(Rcpp)
+cppFunction('void hello(){
+  Rprintf("Hello, world!");
+}')
+hello
+hello()
+```
+
+`Rprintf` is the counterpart of C++ [`printf`](http://www.cplusplus.com/reference/cstdio/printf/) function.
+
+Let's take the first example of @Wickham2014, Section [Getting started with C++](http://adv-r.had.co.nz/Rcpp.html#rcpp-intro).
+
+```{r eval=FALSE}
+cppFunction('int add(int x, int y, int z) {
+  int sum = x + y + z;
+  return sum;
+}')
+```
+
+We have to specify the input type and the output type.  As expected
+
+```{r eval=FALSE}
+add(1, 2, 3)
+```
+
+returns 6. How about?
+
+```{r eval=FALSE}
+add(1.1, 2.2, 3.3)
+```
+
+```{r eval=FALSE}
+cppFunction('double addd(double x, double y, double z) {
+  double sum = x + y + z;
+  return sum;
+}')
+```
+
+With `addd` we do get 6.6:
+
+```{r eval=FALSE}
+addd(1.1, 2.2, 3.3)
+```
+
+### `sourceCpp`
+
+When C++ code takes more than a couple of lines, it's more convenient to create a stand-alone C++ source file.
+
+From the RStudio default template:
+
+```{r engine="cpp", eval=FALSE}
+#include <Rcpp.h>
+using namespace Rcpp;
+
+NumericVector timesTwo(NumericVector x) {
+  return x * 2;
+}
+
+/*** R
+timesTwo(42)
+*/
+```
+
+From R, we can use `sourceCpp` to access `timesTwo` in R:
+
+```{r eval=FALSE}
+sourceCpp("src/times-two.cpp")
+timesTwo(100)
+```
+
+### Data types
+
+`int`
+`double`
+`bool`
+`string`
+
+`NumericVector`
+`LogicalVector`
+`IntegerVector`
+`CharacterVector`
+
+`NumericMatrix`
+`IntegerMatrix`
+`LogicalMatrix`
+`CharacterMatrix`
+
+`NA_REAL`
+`NA_INTEGER`
+`NA_STRING`
+`NA_LOGICAL`
+
+`List`
+`DataFrame`
+`Function`
+
+...
+
+### Sugar
+
+Reading: http://adv-r.had.co.nz/Rcpp.html#rcpp-sugar.
+
+- Vectorization of `+`, `*`, `-`, `/`, `pow`, `<`, `<=`, `>`, `>=`, `==`, `!=`, `!`
+
+-x`
+
+
+```{exercise}
+Can you write an `Rcpp` function similar to `addd` but accepting vector arguments?
+```
+
+```{r}
+cppFunction('NumericVector addv(NumericVector x, NumericVector y, NumericVector z) {
+  NumericVector sum = x + y + z;
+  return sum;
+}')
+```
+
+### Example (continued)
+
+```{r engine="cpp", eval=FALSE}
+#include <Rcpp.h>
+using namespace Rcpp;
+
+double vacc3a(double age, bool female, bool ily){
+  double p = 0.25 + 0.3 * 1 / (1 - exp(0.04 * age)) + 0.1 * ily;
+  p = p * (female ? 1.25 : 0.75);
+  p = std::max(p, 0.0);
+  p = std::min(p, 1.0);
+  return p;
+}
+
+// [[Rcpp::export]]
+NumericVector vacc3(NumericVector age, LogicalVector female, 
+                    LogicalVector ily) {
+  int n = age.size();
+  NumericVector out(n);
+
+  for(int i = 0; i < n; ++i) {
+    out[i] = vacc3a(age[i], female[i], ily[i]);
+  }
+
+  return out;
+}
+```
+
+### Back to Linreg
+
+- `armadillo` is a very powerful C++ linear algebra library: http://arma.sourceforge.net/
+
+- It can be used in `Rcpp` via the `RcppArmadillo` package.
+
+```{exercise}
+Can you write an `Rcpp` function similar to `linmodEst`?
+```
+
+```{r eval=TRUE}
+linmodEst <- function(x, y) {
+  ## CC: crossprod or a QR decomposition (as in the original version) are more efficient
+  coef <- solve(t(x) %*% x) %*% t(x) %*% y
+  print(coef)
+  ## degrees of freedom and standard deviation of residuals
+  df <- nrow(x) - ncol(x)
+  sigma2 <- sum((y - x %*% coef) ^ 2) / df
+  ## compute sigma^2 * (x’x)^-1
+  vcov <- sigma2 * solve(t(x) %*% x)
+  colnames(vcov) <- rownames(vcov) <- colnames(x)
+  list(
+    coefficients = coef,
+    vcov = vcov,
+    sigma = sqrt(sigma2),
+    df = df
+  )
+}
+```
+
+## Rcpp packages
+
+Readings:
+    - https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-package.pdf
+    - http://adv-r.had.co.nz/Rcpp.html#rcpp-package

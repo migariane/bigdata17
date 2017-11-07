@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-10-12}
+  \date{2017-10-16}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -159,6 +159,31 @@
 }
 \chapter{Introduction}\label{intro}
 
+\section{Logistics}\label{logistics}
+
+\begin{itemize}
+\tightlist
+\item
+  Fall 2 course
+\item
+  Tuesday and Wednesday, 11:30am-1pm
+\item
+  Contact info:
+  \href{mailto:cchoirat@iq.harvard.edu}{\nolinkurl{cchoirat@iq.harvard.edu}}.
+  Please use BST232 in the email title.
+\item
+  TA's: Qian Di
+  (\href{mailto:qiandi@mail.harvard.edu}{\nolinkurl{qiandi@mail.harvard.edu}})
+  and Ben Sabath
+  (\href{mailto:mbsabath@hsph.harvard.edu}{\nolinkurl{mbsabath@hsph.harvard.edu}})
+\item
+  Office hours: TBD
+\item
+  Course GitHub repository \url{https://github.com/cchoirat/bigdata17}
+\item
+  Open file in folder \texttt{\_book/index.html}
+\end{itemize}
+
 \section{Prerequisites}\label{prerequisites}
 
 For BST262 (Computing for Big Data), we assume familiarity with the
@@ -178,6 +203,42 @@ could have used Python, as in BST261 (Data Science II).
   Statistical software programs such as R were not designed to handle
   datasets of massive size.
 \end{enumerate}
+
+\section{Big data bottlenecks}\label{big-data-bottlenecks}
+
+As described by \citet{Lim2015}, there are three bottlenecks:
+
+\begin{itemize}
+\tightlist
+\item
+  CPU
+\item
+  RAM
+\item
+  I/O
+\end{itemize}
+
+\begin{figure}
+
+{\centering \includegraphics{images/ch1_bottlenecks} 
+
+}
+
+\caption{Steps to execute an R program, from @Lim2015, Chapter 1.}\label{fig:bottlenecks}
+\end{figure}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:unnamed-chunk-1}{}{\label{exr:unnamed-chunk-1} }Can
+you identify points 1--7 in the following code snippet?
+\EndKnitrBlock{exercise}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"mydata.csv"}\NormalTok{)}
+\NormalTok{totals <-}\StringTok{ }\KeywordTok{colSums}\NormalTok{(data)}
+\KeywordTok{write.csv}\NormalTok{(totals, }\StringTok{"totals.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \section{Syllabus}\label{syllabus}
 
@@ -546,8 +607,8 @@ names) and select rows such that the second variable
 \end{verbatim}
 
 \BeginKnitrBlock{exercise}
-\protect\hypertarget{exr:unnamed-chunk-9}{}{\label{exr:unnamed-chunk-9} }The
-iris dataset is also saved in .csv format at
+\protect\hypertarget{exr:unnamed-chunk-11}{}{\label{exr:unnamed-chunk-11}
+}The iris dataset is also saved in .csv format at
 \texttt{\textasciitilde{}/Dropbox/Data17/iris/iris.csv}. Use
 \texttt{AWK} and \texttt{tail} to select the last 5 observations where
 \texttt{Sepal.Width} is larger than 3.5 and \texttt{Petal.Length} is
@@ -780,6 +841,16 @@ Zahn}.
 
 \chapter{Packages}\label{packages}
 
+We strongly recommand \citet{Wickham2015}.
+
+We assume the following packages are installed:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"roxygen2"}\NormalTok{, }\StringTok{"testthat"}\NormalTok{, }\StringTok{"knitr"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
 \section{Why?}\label{why}
 
 \begin{itemize}
@@ -904,8 +975,8 @@ re-building the vignette PDFs.}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{package.skeleton}\NormalTok{() }\CommentTok{# "in "fresh" session ("anRpackage")}
-\KeywordTok{package.skeleton}\NormalTok{(}\StringTok{"pkgname"}\NormalTok{) }\CommentTok{# in "fresh" session}
+\KeywordTok{package.skeleton}\NormalTok{() }\CommentTok{# "in "clean" session ("anRpackage")}
+\KeywordTok{package.skeleton}\NormalTok{(}\StringTok{"pkgname"}\NormalTok{) }\CommentTok{# in "clean" session}
 
 \KeywordTok{set.seed}\NormalTok{(}\DecValTok{02138}\NormalTok{)}
 \NormalTok{f <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x, y) x}\OperatorTok{+}\NormalTok{y}
@@ -926,14 +997,74 @@ re-building the vignette PDFs.}
 
 \subsection{Submit to CRAN}\label{submit-to-cran}
 
-\url{http://r-pkgs.had.co.nz/release.html}
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_hydra} 
+
+}
+
+\caption{Submittin to CRAN.  It's not that bad...}\label{fig:hydra}
+\end{figure}
+
+Reading: \url{http://r-pkgs.had.co.nz/release.html}
 
 \section{R packages on GitHub}\label{r-packages-on-github}
 
-\url{http://r-pkgs.had.co.nz/git.html}
+Reading: \url{http://r-pkgs.had.co.nz/git.html}
+
+\begin{itemize}
+\item
+  Version control
+\item
+  Website
+\item
+  Easy install: \texttt{install\_github} from \texttt{devtools}
+\item
+  Collaboration
+\end{itemize}
 
 \subsubsection{RStudio and GitHub
 integration}\label{rstudio-and-github-integration}
+
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_create_git_package_1} 
+
+}
+
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_create_git_package_2} 
+
+}
+
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_create_git_package_3} 
+
+}
+
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_create_git_package_4} 
+
+}
+
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_create_git_package_5} 
+
+}
+
+\end{figure}
 
 \textbf{Command line}
 
@@ -946,6 +1077,22 @@ integration}\label{rstudio-and-github-integration}
 \NormalTok{git push }\OperatorTok{-}\NormalTok{u origin master}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_create_git_package_6} 
+
+}
+
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_create_git_package_7} 
+
+}
+
+\end{figure}
 
 \subsection{Installing from GitHub}\label{installing-from-github}
 
@@ -1253,6 +1400,14 @@ documentation}\label{add-roxygen2-documentation}
 \end{Shaded}
 
 \subsection{Formatted output}\label{formatted-output}
+
+\begin{figure}
+
+{\centering \includegraphics{images/ch3_formatted_help} 
+
+}
+
+\end{figure}
 
 \subsection{\texorpdfstring{\texttt{DESCRIPTION}}{DESCRIPTION}}\label{description}
 

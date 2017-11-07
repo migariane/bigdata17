@@ -1,6 +1,6 @@
 # Basic tools {#basics}
 
-In this Chapter, we present basic tools that will be important when interacting with big data systems, most importantly the command-line interface (CLI) in a Unix shell and several utilities (`less`, `awk`, `vi` and `make`).
+In this Chapter, we present basic tools that will be important when interacting with big data systems: the command-line interface (CLI) in a Unix shell and several utilities (`less`, `awk`, `vi` and `make`).
 
 ## Command line tools
 
@@ -14,15 +14,25 @@ We also assume that you have access to a shell, either because you use Linux or 
 
 - Cluster and cloud computing
 
-### Basic Unix commands
+### Basic Unix tools
 
 ### Useful tools
 
 #### `less`
 
+`less` is a pager that lets you view one page at a time files that can be very large.
+
+File `DE1_0_2008_to_2010_Carrier_Claims_Sample_1A.csv` in `Data17/SyntheticMedicare` is 1.2GB.  Even if we have enough RAM to process the data, `less` helps get a very quick sense of the data (variable names, separators, etc.) 
+
 #### `awk`
 
+`awk` is a text-processing programming language available on most Unix systems.  It can be used for data extraction.
+
 #### `vi`
+
+`vi` is a screen-based text editor available on almost all Unix systems.  Most versions are actually [`Vim`](http://www.vim.org/) (that stands for "Vi IMproved").
+
+There are many cheat sheets and tutorials available on-line (for example, the interactive http://www.openvim.com/).  I invite you to learn basics `vi` commands.
 
 ### Example
 
@@ -39,7 +49,7 @@ In a shell, we can use:
 head -n 6 ~/Dropbox/Data17/iris/iris.tab
 ```
 
-Suppose that we only need to select two variables in our model, `Sepal.Length` and `Species`.  In R, we can use:
+Suppose  we only need to select two variables in our model, `Sepal.Length` and `Species`.  In R, we can use:
 
 ```{r, eval=FALSE}
 iris_subset <- iris[, c("Sepal.Length", "Species")]
@@ -88,7 +98,7 @@ The iris dataset is also saved in .csv format at `~/Dropbox/Data17/iris/iris.csv
 
 ## Makefiles
 
-`make` is a tool that helps put all the pieces of an analytic workflow together:
+`make` is a tool that helps put all the (interdependent) pieces of an analytic workflow together:
 
 - data retrieving
 - data cleaning
@@ -96,8 +106,6 @@ The iris dataset is also saved in .csv format at `~/Dropbox/Data17/iris/iris.csv
 - graphs
 - reports
 - ...
-
-Dependency management
 
 ### Simulate data in R
 
@@ -144,7 +152,7 @@ knitr::include_graphics("images/ch1_plot.jpg")
 
 ### Run statistical model in R
 
-We can print the model output with:
+We can estimate the model with R:
 
 ```{r echo = TRUE, eval = TRUE}
 sim_data <- read.csv("sample_data.csv")
@@ -158,9 +166,6 @@ To save the output, we use the `sink` function.
 File `estimate_model.R`
 
 ```{r echo = TRUE, eval = FALSE}
-sim_data <- read.csv("sample_data.csv")
-summary(lm(Y ~ X1 + X2, data = sim_data))
-
 sink("estimation_summary.txt")
 summary(lm(Y ~ X1 + X2, data = sim_data))
 sink()

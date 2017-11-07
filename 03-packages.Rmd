@@ -1,5 +1,13 @@
 # Packages {#packages}
 
+We strongly recommand @Wickham2015.
+
+We assume the following packages are installed:
+
+```{r, eval=FALSE}
+install.packages(c("devtools", "roxygen2", "testthat", "knitr"))
+```
+
 ## Why?
 
 - Organize your code
@@ -74,8 +82,8 @@ _A variety of diagnostic checks on directory structure, index and control files 
 ### `utils::package.skeleton`
 
 ```{r eval=FALSE}
-package.skeleton() # "in "fresh" session ("anRpackage")
-package.skeleton("pkgname") # in "fresh" session
+package.skeleton() # "in "clean" session ("anRpackage")
+package.skeleton("pkgname") # in "clean" session
 
 set.seed(02138)
 f <- function(x, y) x+y
@@ -91,69 +99,76 @@ package.skeleton(list = c("f","g","d","e"), name = "pkgname")
 devtools::create("path/to/package/pkgname")
 ```
 
+Also from RStudio (`File -> New Project').
+
 ### Submit to CRAN
 
-<div class="centered">
-<img src="http://etc.ancient.eu/wp-content/uploads/2014/12/Hydra-1024x521.jpg" width="600px"/>
-</div>
+```{r echo=FALSE, fig.align="center", hydra, fig.cap="Submitting to CRAN.  It's not that bad..."}
+knitr::include_graphics("images/ch3_hydra.jpg")
+```
 
-http://r-pkgs.had.co.nz/release.html
+Reading: http://r-pkgs.had.co.nz/release.html
 
 ## R packages on GitHub
 
-http://r-pkgs.had.co.nz/git.html
+Reading: http://r-pkgs.had.co.nz/git.html
 
-<iframe src="http://r-pkgs.had.co.nz/git.html"></iframe>
+- Version control
+
+- Website, wiki, project management
+
+- Easy install: `install_github` from `devtools`
+
+- Collaboration
+
+- Issue tracking
 
 #### RStudio and GitHub integration
 
-<div class="centered">
-<img src="doc_packages/create_git_package_1.png" width="600px"/>
-</div>
+```{r echo=FALSE, fig.align="center", pkg1, fig.cap="Create a new Linreg repository on GitHub"}
+knitr::include_graphics("images/ch3_pkg_1_github.png")
+```
 
-<div class="centered">
-<img src="doc_packages/create_git_package_2.png" width="600px"/>
-</div>
+```{r echo=FALSE, fig.align="center", pkg2, fig.cap="Create a new project in RStudio"}
+knitr::include_graphics("images/ch3_pkg_2_project.png")
+```
 
-<div class="centered">
-<img src="doc_packages/create_git_package_3.png" width="600px"/>
-</div>
+```{r echo=FALSE, fig.align="center", pkg3, fig.cap="Select R package"}
+knitr::include_graphics("images/ch3_pkg_3_package.png")
+```
 
-<div class="centered">
-<img src="doc_packages/create_git_package_4.png" width="600px"/>
-</div>
+```{r echo=FALSE, fig.align="center", pkg4, fig.cap="Create the Linreg R package as a Git repository"}
+knitr::include_graphics("images/ch3_pkg_4_create.png")
+```
 
-<div class="centered">
-<img src="doc_packages/create_git_package_5.png" width="600px"/>
-</div>
+```{r echo=FALSE, fig.align="center", pkg5, fig.cap="Automatically created files"}
+knitr::include_graphics("images/ch3_pkg_5_filelist.png")
+```
+
+```{r echo=FALSE, fig.align="center", pkg6, fig.cap="Build tab in RStudio"}
+knitr::include_graphics("images/ch3_pkg_6_install.png")
+```
+
+```{r echo=FALSE, fig.align="center", pkg7, fig.cap="Github webpage"}
+knitr::include_graphics("images/ch3_pkg_7_github.png")
+```
+
+```{r echo=FALSE, fig.align="center", term, fig.cap="Open a terminal"}
+knitr::include_graphics("images/ch3_pkg_8_terminal.png")
+```
 
 __Command line__
 
 ```{r eval=FALSE}
-git init
+# git init # already run when creating package with RStudio
 git add *
 git commit -m "First commit"
-git remote add origin git@github.com:harvard-P01/pkgtemplate.git
+git remote add origin https://github.com/cchoirat/Linreg
 git push -u origin master
 ```
 
-<div class="centered">
-<img src="doc_packages/create_git_package_6.png" width="600px"/>
-</div>
-
-<div class="centered">
-<img src="doc_packages/create_git_package_7.png" width="600px"/>
-</div>
-
-### Installing from GitHub
-
-```{r eval=FALSE}
-devtools::install_github("harvard-P01/pkgtemplate")
-```
-
-```{r eval=FALSE}
-devtools::install_github("harvard-P01/pkgtemplate",
-                         build_vignettes = TRUE)
+```{r echo=FALSE, fig.align="center", pkg9, fig.cap="Github webpage is updated"}
+knitr::include_graphics("images/ch3_pkg_9_github.png")
 ```
 
 ### `.gitignore`
@@ -186,7 +201,7 @@ vignettes/*.pdf
 
 ## RStudio projects
 
-- `.Rproj` file extension, in our example `pkgtemplate.Rproj`
+- `.Rproj` file extension, in our example `Linreg.Rproj`
 
 - A project has its own:
     - R session
@@ -228,27 +243,26 @@ PackageInstallArgs: --no-multiarch --with-keep.source
 
 - Vignettes
     - PDF
-    - `knitr` (or `Sweave`)
+    - `knitr`
 
 ## Package workflow example
 
 Creating R Packages: A Tutorial (Friedrich Leisch, 2009)
 
-- https://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf
+Our example is adapted from https://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf.
 
 ### Add `linreg.R` to `R/` directory
 
 ```{r eval=TRUE}
 linmodEst <- function(x, y) {
-  ## compute QR-decomposition of x
-  qx <- qr(x)
-  ## compute (x’x)^(-1) x’y
-  coef <- solve.qr(qx, y)
+  ## CC: crossprod or a QR decomposition (as in the original version) are more efficient
+  coef <- solve(t(x) %*% x) %*% t(x) %*% y
+  print(coef)
   ## degrees of freedom and standard deviation of residuals
   df <- nrow(x) - ncol(x)
   sigma2 <- sum((y - x %*% coef) ^ 2) / df
   ## compute sigma^2 * (x’x)^-1
-  vcov <- sigma2 * chol2inv(qx$qr)
+  vcov <- sigma2 * solve(t(x) %*% x)
   colnames(vcov) <- rownames(vcov) <- colnames(x)
   list(
     coefficients = coef,
@@ -269,7 +283,7 @@ linmodEst(cbind(1, cats$Bwt), cats$Hwt)
 We can compare the output with `lm`.
 
 ```{r}
-lm1 <- lm(Hwt ~ Bwt, data=cats)
+lm1 <- lm(Hwt ~ Bwt, data = cats)
 lm1
 coef(lm1)
 ```
@@ -280,6 +294,8 @@ summary(lm1)$sigma
 ```
 
 ### Add ROxygen2 documentation
+
+Reading: http://kbroman.org/pkg_primer/pages/docs.html
 
 ```{r eval=FALSE}
 #' Linear regression
@@ -295,20 +311,19 @@ summary(lm1)$sigma
 #' data(mtcars)
 #' X <- as.matrix(mtcars[, c("cyl", "disp", "hp")])
 #' y <- mtcars[, "mpg"]
-#' linreg(y, X)
+#' linmodEst(y, X)
 #'
 #' @export
 #'
 linmodEst <- function(x, y) {
-  ## compute QR-decomposition of x
-  qx <- qr(x)
-  ## compute (x’x)^(-1) x’y
-  coef <- solve.qr(qx, y)
+  ## CC: crossprod or a QR decomposition (as in the original version) are more efficient
+  coef <- solve(t(x) %*% x) %*% t(x) %*% y
+  print(coef)
   ## degrees of freedom and standard deviation of residuals
   df <- nrow(x) - ncol(x)
   sigma2 <- sum((y - x %*% coef) ^ 2) / df
   ## compute sigma^2 * (x’x)^-1
-  vcov <- sigma2 * chol2inv(qx$qr)
+  vcov <- sigma2 * solve(t(x) %*% x)
   colnames(vcov) <- rownames(vcov) <- colnames(x)
   list(
     coefficients = coef,
@@ -321,15 +336,17 @@ linmodEst <- function(x, y) {
 
 ### Configure Build Tools
 
-<div class="centered">
-<img src="doc_packages/configure_build_tools.png" width="400px"/>
-</div>
+```{r echo=FALSE, fig.align="center", pkg8, fig.cap="Roxygen options"}
+knitr::include_graphics("images/ch3_configure_build_tools.png")
+```
 
-### `man/linmodEst.Rd`
+### `man` page
+
+File ``man/linmodEst.Rd` contains:
 
 ```{r eval=FALSE}
-% Generated by roxygen2 (4.1.1): do not edit by hand
-% Please edit documentation in R/linmodEst.R
+% Generated by roxygen2: do not edit by hand
+% Please edit documentation in R/linreg.R
 \name{linmodEst}
 \alias{linmodEst}
 \title{Linear regression}
@@ -352,31 +369,39 @@ data(mtcars)
 X <- as.matrix(mtcars[, c("cyl", "disp", "hp")])
 y <- mtcars[, "mpg"]
 linmodEst(y, X)
+
 }
+
 ```
 
 ### Formatted output
 
-<div class="centered">
-<img src="doc_packages/formatted_help.png" width="400px"/>
-</div>
+```{r echo=FALSE, fig.align="center", help, fig.cap=""}
+knitr::include_graphics("images/ch3_formatted_help.png")
+```
 
 ### `DESCRIPTION`
 
+Reading: http://r-pkgs.had.co.nz/description.html
+
 ```{r eval=FALSE}
-Package: pkgtemplate
+Package: Linreg
 Type: Package
 Title: What the Package Does (Title Case)
-Version: 0.1
-Date: 2015-10-24
+Version: 0.1.0
 Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
+Maintainer: The package maintainer <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
 License: What license is it under?
-LazyData: TRUE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
 ```
 
 ### `NAMESPACE`
+
+Reading: http://r-pkgs.had.co.nz/namespace.html, in particular `Imports` vs `Suggests`
 
 `export`'s automatically generated when parsing ROxygen2 snippets
 
@@ -384,7 +409,27 @@ LazyData: TRUE
 export(linmodEst)
 ```
 
+```{r echo=FALSE, fig.align="center", pumpkin, fig.cap=""}
+knitr::include_graphics("images/ch3_pumpkin.jpg")
+```
+
+```{r echo=FALSE, fig.align="center", octocat, fig.cap="", fig.height=2.5}
+# https://octodex.github.com/images/octocat-de-los-muertos.jpg
+knitr::include_graphics("images/ch3_octocat-de-los-muertos.jpg")
+```
+
+- A scary hack
+
+- A scary tree
+
+```{r echo=FALSE, fig.align="center", halloween_tree, fig.cap="", fig.height=2.7}
+# https://octodex.github.com/images/octocat-de-los-muertos.jpg
+knitr::include_graphics("images/ch3_halloween_tree.jpg")
+```
+
 ### S3 basics
+
+Reading: http://adv-r.had.co.nz/S3.html
 
 ```{r}
 hello <- function() {
@@ -396,8 +441,6 @@ hello <- function() {
 hello()
 ```
 
-### S3 basics
-
 ```{r}
 print.hi <- function(...) {
   print("Surprise!")
@@ -407,6 +450,8 @@ hello()
 ```
 
 ### S3 and S4 generics
+
+Reading: http://adv-r.had.co.nz/S4.html
 
 ```{r}
 linmod <- function(x, ...)
@@ -456,7 +501,23 @@ mod1
 
 - `coef.linmod`, `vcov.linmod`, ...
 
+```{exercise}
+Write two functions that implement the `coef.linmod` and `vcov.linmod` methods.
+```
+
 ### Formulas and model frames
+
+Reading: http://genomicsclass.github.io/book/pages/expressing_design_formula.html
+
+> `model.frame` (a generic function) and its methods return a data.frame with the variables needed to use formula and any ... arguments.
+
+> `model.matrix` creates a design (or model) matrix, e.g., by expanding factors to a set of dummy variables (depending on the contrasts) and expanding interactions similarly.
+
+> `model.response` returns the response of a model frame passed as optional arguments to model.frame.
+
+```{exercise}
+What is `model.extract`?
+```
 
 ```{r eval=FALSE}
 linmod.formula <- function(formula, data = list(), ...) {
@@ -470,11 +531,24 @@ linmod.formula <- function(formula, data = list(), ...) {
 }
 ```
 
+```{r eval=FALSE}
+linmod(Hwt ~ - 1 + Bwt * Sex, data = cats)
+```
+
+```{r eval=FALSE}
+Call:
+linmod.formula(formula = Hwt ~ -1 + Bwt * Sex, data = cats)
+
+Coefficients:
+      Bwt      SexF      SexM  Bwt:SexM 
+ 2.636414  2.981312 -1.184088  1.676265 
+```
+
 ## Unit testing
 
 ### Unit tests and `testthat`
 
-http://r-pkgs.had.co.nz/tests.html
+Reading: http://r-pkgs.had.co.nz/tests.html
 
 In package directory:
 
@@ -494,30 +568,163 @@ l1 <- linmod(Hwt ~ Bwt * Sex, data = cats)
 l2 <- lm(Hwt ~ Bwt * Sex, data = cats)
 
 test_that("same estimated coefficients as lm function", {
-  expect_equal(l1$coefficients, l2$coefficients)
+  expect_equal(round(l1$coefficients, 3), round(l2$coefficients, 3))
 })
 ```
 
 ```{r eval=FALSE}
-==> devtools::test()
-
-Loading pkgtemplate
+> devtools::test()
+Loading Linreg
 Loading required package: testthat
-Testing pkgtemplate
+Testing Linreg
 .
-Woot! 
+DONE =========================================================================================
 ```
-
-## Code coverage
 
 ## Continuous integration
 
-## Vignettes
+Reading: http://r-pkgs.had.co.nz/check.html#travis
 
-http://r-pkgs.had.co.nz/vignettes.html
+Website: https://travis-ci.org/
 
-```{r eval=FALSE}
-devtools::use_vignette("linmod")
+First step is to create a Travis account and link it to you GitHub account.
+
+```{r echo=FALSE, fig.align="center", travis, fig.cap=""}
+knitr::include_graphics("images/ch3_travis_github.png")
 ```
 
-https://github.com/harvard-P01/pkgtemplate/blob/master/vignettes/linmod.Rmd
+Travis will list all your public GitHub repositories for you to select the ones you want to test.
+
+```{r echo=FALSE, fig.align="center", travis_linreg, fig.cap=""}
+knitr::include_graphics("images/ch3_travis_Linreg.png")
+```
+
+Calling
+
+```{r eval=FALSE}
+devtools::use_coverage(pkg = ".", type = c("codecov"))
+```
+
+creates the `.travis.yml` file:
+
+```{r eval=FALSE}
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: R
+sudo: false
+cache: packages
+
+```
+
+and pushing `Linreg` code to GitHub will automatically triggers a Travis build... which fails!
+
+```{r echo=FALSE, fig.align="center", travis_failed, fig.cap=""}
+knitr::include_graphics("images/ch3_travis_failed_build.png")
+```
+
+To be continued...
+
+## Code coverage
+
+Reading: https://walczak.org/2017/06/how-to-add-code-coverage-codecov-to-your-r-package/
+
+Website: https://codecov.io/
+
+Like Travis, codecov has to be linked to a GitHub account:
+
+```{r echo=FALSE, fig.align="center", codecov, fig.cap=""}
+knitr::include_graphics("images/ch3_codecov_github.png")
+```
+
+```{r eval=FALSE}
+devtools::use_coverage(pkg = ".", type = c("codecov"))
+```
+
+creates the `codecov.yml` file:
+
+```{r eval=FALSE}
+comment: false
+```
+
+A call to
+
+```{r eval=FALSE}
+covr::codecov(token = "YOUR_TOKEN")
+```
+
+will give you code coverage information:
+
+```{r echo=FALSE, fig.align="center", codecov_out, fig.cap=""}
+knitr::include_graphics("images/ch3_codecov_out.png")
+```
+
+## Back to GitHub
+
+Badges can be added to `README.md`:
+
+```{r eval=FALSE}
+<!--- Badges ----->
+[![Travis (LINUX) Build Status](https://travis-ci.org/cchoirat/Linreg.svg?branch=master)](https://travis-ci.org/cchoirat/Linreg)
+[![codecov](https://codecov.io/gh/cchoirat/Linreg/branch/master/graph/badge.svg)](https://codecov.io/gh/cchoirat/Linreg)
+
+## `Linreg` package template
+
+Based on "Creating R Packages: A Tutorial" (Friedrich Leisch, 2009)
+
+- https://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf
+
+```
+
+are automatically displayed on GitHub:
+
+```{r echo=FALSE, fig.align="center", badges, fig.cap=""}
+knitr::include_graphics("images/ch3_badges.png")
+```
+
+## Vignettes
+
+Reading: http://r-pkgs.had.co.nz/vignettes.html
+
+Reading: http://kbroman.org/pkg_primer/pages/vignettes.html
+
+Even if all the functions and datasets of your package are documented, it is still useful to have a more detailed illustation on how to use your package.  A _vignette_ is the right place to explain a worflow and a statistical method.
+
+Running:
+
+```{r eval=FALSE}
+devtools::use_vignette("my-linear-regression")
+```
+
+creates a `vignettes` folder and provide a template in RMarkdown format `my-linear-regression.Rmd`:
+
+https://github.com/cchoirat/Linreg/blob/master/vignettes/my-linear-regression.Rmd
+
+It also indicates in `DESCRIPTION` that vignettes should be built with `knitr`.
+
+```{r eval=FALSE}
+VignetteBuilder: knitr
+```
+
+The vignette is built into a HTML document with
+
+```{r eval=FALSE}
+devtools::build_vignettes()
+```
+
+```{r eval=FALSE}
+Building Linreg vignettes
+Moving my-linear-regression.html, my-linear-regression.R to inst/doc/
+Copying my-linear-regression.Rmd to inst/doc/
+```
+
+The vignette is accessible with
+
+```{r eval=FALSE}
+vignette("my-linear-regression")
+vignette("my-linear-regression", package = "Linreg")
+```
+
+
+```{r echo=FALSE, fig.align="center", vignette_html, fig.cap=""}
+knitr::include_graphics("images/ch3_vignette_html.png")
+```
