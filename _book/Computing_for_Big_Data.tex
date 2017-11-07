@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-11-06}
+  \date{2017-11-07}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -2031,12 +2031,12 @@ Let's start with an example from \citet{Wickham2014}.
 
 \begin{verbatim}
 ## Unit: nanoseconds
-##           expr  min     lq      mean  median      uq    max neval
-##       [32, 11] 8664 9669.5 10643.859 10004.5 10450.0 130199  1000
-##      $carb[32] 4484 5424.0  6103.493  5897.5  6313.0  39690  1000
-##  [[c(11, 32)]] 3699 4458.0  5068.642  4795.0  5171.5  42796  1000
-##     [[11]][32] 3447 4202.5  4775.275  4537.0  4957.5  44194  1000
-##       .subset2  208  266.0   357.048   303.5   354.0   9914  1000
+##           expr  min     lq      mean  median    uq   max neval   cld
+##       [32, 11] 8583 9969.5 11632.638 10438.0 11060 69372  1000     e
+##      $carb[32] 4587 5766.5  6736.026  6231.0  6749 47040  1000    d 
+##  [[c(11, 32)]] 3690 4595.0  5509.535  5024.0  5468 38750  1000   c  
+##     [[11]][32] 3419 4364.5  5117.320  4765.0  5176 44542  1000  b   
+##       .subset2  194  244.5   328.320   280.5   350  9545  1000 a
 \end{verbatim}
 
 \begin{Shaded}
@@ -2420,13 +2420,13 @@ built-in \texttt{lm} and with two functions we defined in package
 \begin{verbatim}
 ## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 <- lm(Hwt ~ Bwt, data = cats) 657.088 674.0680 712.9026
-##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 521.696 536.2135 555.4032
-##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  94.655 109.0620 125.1254
-##    median       uq      max neval
-##  682.3740 697.2690 2641.023   100
-##  544.5880 556.3180  800.897   100
-##  123.0135 134.2335  273.049   100
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 668.558 698.6775 783.9467
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 528.679 564.5290 629.0916
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  99.952 120.6320 146.9717
+##    median       uq      max neval cld
+##  741.0075 835.9320 1349.394   100   c
+##  602.7800 669.1115  924.810   100  b 
+##  137.0685 155.5920  281.642   100 a
 \end{verbatim}
 
 \begin{Shaded}
@@ -2625,7 +2625,7 @@ or we can rely on base R functions that accept vector inputs
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 4
+## [1] 8
 \end{verbatim}
 
 \begin{Shaded}
@@ -2653,16 +2653,16 @@ or we can rely on base R functions that accept vector inputs
 
 \begin{verbatim}
 ## Unit: microseconds
-##   expr       min         lq       mean     median         uq       max
-##  vacc0  2068.622  3175.3420  5480.6884  3623.3380  4989.9115 96376.662
-##  vacc1  1886.890  2288.7455  3281.2769  2757.0205  3747.0250 12476.585
-##  vacc2   112.520   158.0325   553.2907   199.3975   636.1705  6188.796
-##  vacc3 12240.252 17468.3910 20149.0114 18872.6745 21170.5670 44715.911
-##  neval
-##    100
-##    100
-##    100
-##    100
+##   expr       min         lq       mean    median        uq       max neval
+##  vacc0  2295.297  3524.0385  4919.3689  4470.390  5485.436 16355.518   100
+##  vacc1  2008.117  2335.6830  3731.5443  3280.036  3998.505 27521.868   100
+##  vacc2   132.924   209.0065   741.1817   292.685   830.569  7471.711   100
+##  vacc3 16007.282 21003.0965 23354.2862 23513.269 25777.588 32004.426   100
+##   cld
+##    c 
+##   b  
+##  a   
+##     d
 \end{verbatim}
 
 \begin{Shaded}
@@ -2735,7 +2735,7 @@ Reading: \url{http://adv-r.had.co.nz/Rcpp.html}
 
 \begin{verbatim}
 ## function () 
-## invisible(.Primitive(".Call")(<pointer: 0x10420bcc0>))
+## invisible(.Primitive(".Call")(<pointer: 0x106f32100>))
 \end{verbatim}
 
 \begin{Shaded}

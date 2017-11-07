@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-11-06">
+<meta name="date" content="2017-11-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -278,12 +278,12 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: nanoseconds
-##           expr  min   lq       mean median      uq       max neval
-##       [32, 11] 8307 9328  10456.837 9779.5 10391.0    124785  1000
-##      $carb[32] 4426 5440   6259.640 5903.0  6462.5     18874  1000
-##  [[c(11, 32)]] 3510 4443   5140.113 4818.0  5389.5     54066  1000
-##     [[11]][32] 3426 4198 114798.894 4601.5  5100.5 109893092  1000
-##       .subset2  208  261    352.572  288.0   349.5     10106  1000</code></pre>
+##           expr  min      lq      mean  median      uq     max neval cld
+##       [32, 11] 8128 10000.5 12099.241 10807.5 12832.0   81147  1000   c
+##      $carb[32] 4312  5851.5  7496.196  6679.0  7740.0  215028  1000  b 
+##  [[c(11, 32)]] 3616  4767.0  5938.602  5371.0  6392.5   28068  1000  b 
+##     [[11]][32] 3412  4522.0  6754.146  5115.0  5906.5 1232446  1000  b 
+##       .subset2  193   265.0   430.026   327.0   413.5   41594  1000 a</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
@@ -617,13 +617,13 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m</code></pre></div>
 <pre><code>## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 643.535 671.1985 728.2081
-##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 515.825 530.3655 614.4947
-##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  97.592 110.6555 122.9467
-##    median       uq      max neval
-##  681.8575 699.5010 2373.755   100
-##  541.9215 553.4800 7245.314   100
-##  119.8030 133.3655  246.907   100</code></pre>
+##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 640.681 681.1580 734.0132
+##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 517.675 540.2695 675.0887
+##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  95.478 110.6630 128.0282
+##    median       uq      max neval cld
+##  699.3115 742.9990 1375.582   100   b
+##  554.6985 600.2115 7546.928   100   b
+##  125.7470 135.4270  234.794   100  a</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 </div>
@@ -707,7 +707,7 @@ out0 &lt;-<span class="st"> </span><span class="kw">vacc0</span>(age, female, il
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(parallel)
 cores &lt;-<span class="st"> </span><span class="kw">detectCores</span>()
 cores</code></pre></div>
-<pre><code>## [1] 4</code></pre>
+<pre><code>## [1] 8</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vacc3 &lt;-<span class="st"> </span><span class="cf">function</span>(age, female, ily) {
   <span class="kw">mcmapply</span>(<span class="cf">function</span>(i) <span class="kw">vacc1a</span>(age[i], female[i], ily[i]), <span class="dv">1</span><span class="op">:</span>n, <span class="dt">mc.cores =</span> cores <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
 }
@@ -722,16 +722,16 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: microseconds
-##   expr       min         lq       mean     median         uq       max
-##  vacc0  1902.727  3277.2610  4562.6878  3874.4405  5296.2910 13370.234
-##  vacc1  1959.827  2449.0840  3590.3261  2879.7670  3633.7250 12312.489
-##  vacc2   108.917   160.8265   446.4927   209.7705   596.1215  6061.801
-##  vacc3 13185.135 17567.4905 22469.8820 20420.6905 24348.6500 75992.779
-##  neval
-##    100
-##    100
-##    100
-##    100</code></pre>
+##   expr       min         lq       mean     median         uq         max
+##  vacc0  2075.574  2786.1995  3717.2083  3342.4125  4209.8295    8153.653
+##  vacc1  1554.369  2133.6940  5222.1485  2420.2550  3343.8280  230413.960
+##  vacc2   124.576   150.9425   640.2083   198.3585   817.6025    6372.775
+##  vacc3 17166.901 22440.3760 39333.1898 23786.9740 25014.9685 1536242.246
+##  neval cld
+##    100  a 
+##    100  a 
+##    100  a 
+##    100   b</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
 <p>So, what’s going on?</p>
@@ -767,7 +767,7 @@ m</code></pre></div>
 <span class="st">}&#39;</span>)
 hello</code></pre></div>
 <pre><code>## function () 
-## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x10633fcc0&gt;))</code></pre>
+## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x109c65100&gt;))</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hello</span>()</code></pre></div>
 <pre><code>## Hello, world!</code></pre>
 <p><code>Rprintf</code> is the counterpart of C++ <a href="http://www.cplusplus.com/reference/cstdio/printf/"><code>printf</code></a> function.</p>
