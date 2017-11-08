@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-11-01">
+<meta name="date" content="2017-11-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -278,12 +278,12 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: nanoseconds
-##           expr  min     lq      mean  median      uq      max neval
-##       [32, 11] 8063 9408.0 11069.699 10012.0 11070.5   157349  1000
-##      $carb[32] 4462 5641.0  6587.396  6159.5  6764.5    67805  1000
-##  [[c(11, 32)]] 3666 4561.5  5290.074  4956.0  5555.5    24592  1000
-##     [[11]][32] 3405 4329.0 61606.003  4739.5  5297.5 56215653  1000
-##       .subset2  207  267.0   400.909   305.5   361.0    42431  1000</code></pre>
+##           expr  min      lq      mean  median      uq     max neval cld
+##       [32, 11] 8128 10000.5 12099.241 10807.5 12832.0   81147  1000   c
+##      $carb[32] 4312  5851.5  7496.196  6679.0  7740.0  215028  1000  b 
+##  [[c(11, 32)]] 3616  4767.0  5938.602  5371.0  6392.5   28068  1000  b 
+##     [[11]][32] 3412  4522.0  6754.146  5115.0  5906.5 1232446  1000  b 
+##       .subset2  193   265.0   430.026   327.0   413.5   41594  1000 a</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
@@ -291,7 +291,8 @@ m</code></pre></div>
 <h3><span class="header-section-number">4.1.2</span> Profiling and optimization</h3>
 <p>Reading: <a href="http://adv-r.had.co.nz/Profiling.html#measure-perf" class="uri">http://adv-r.had.co.nz/Profiling.html#measure-perf</a></p>
 <p>Let’s compare three ways of estimating a linear regression: with built-in <code>lm</code> and with two functions we defined in package <code>Linreg</code> in Chapter <a href="packages.html#packages">3</a>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(cats, <span class="dt">package =</span> <span class="st">&quot;MASS&quot;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Linreg)
+<span class="kw">data</span>(cats, <span class="dt">package =</span> <span class="st">&quot;MASS&quot;</span>)
 fit1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt, <span class="dt">data =</span> cats)
 fit2 &lt;-<span class="st"> </span><span class="kw">linmod</span>(Hwt <span class="op">~</span><span class="st"> </span>Bwt, <span class="dt">data =</span> cats)
 fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class="kw">cbind</span>(<span class="dv">1</span>, cats<span class="op">$</span>Bwt), cats<span class="op">$</span>Hwt)</code></pre></div>
@@ -616,13 +617,13 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m</code></pre></div>
 <pre><code>## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 646.388 664.5560 721.3481
-##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 513.974 530.1155 619.1042
-##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  94.557 103.7445 120.5777
-##    median       uq      max neval
-##  680.9695 695.5920 2370.540   100
-##  545.3110 558.2365 7365.788   100
-##  117.2250 128.4665  249.931   100</code></pre>
+##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 640.681 681.1580 734.0132
+##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 517.675 540.2695 675.0887
+##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  95.478 110.6630 128.0282
+##    median       uq      max neval cld
+##  699.3115 742.9990 1375.582   100   b
+##  554.6985 600.2115 7546.928   100   b
+##  125.7470 135.4270  234.794   100  a</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 </div>
@@ -706,7 +707,7 @@ out0 &lt;-<span class="st"> </span><span class="kw">vacc0</span>(age, female, il
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(parallel)
 cores &lt;-<span class="st"> </span><span class="kw">detectCores</span>()
 cores</code></pre></div>
-<pre><code>## [1] 4</code></pre>
+<pre><code>## [1] 8</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vacc3 &lt;-<span class="st"> </span><span class="cf">function</span>(age, female, ily) {
   <span class="kw">mcmapply</span>(<span class="cf">function</span>(i) <span class="kw">vacc1a</span>(age[i], female[i], ily[i]), <span class="dv">1</span><span class="op">:</span>n, <span class="dt">mc.cores =</span> cores <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
 }
@@ -721,16 +722,16 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: microseconds
-##   expr       min         lq       mean     median         uq       max
-##  vacc0  2045.302  3021.4190  3831.9487  3416.6850  4391.0375  9762.205
-##  vacc1  1964.595  2260.8010  3010.5391  2589.8265  3036.2840 10265.966
-##  vacc2    96.616   149.5855   526.8924   181.8685   478.0645  6395.960
-##  vacc3 13390.863 15545.5250 18497.0714 16783.8120 18479.3405 45611.304
-##  neval
-##    100
-##    100
-##    100
-##    100</code></pre>
+##   expr       min         lq       mean     median         uq         max
+##  vacc0  2075.574  2786.1995  3717.2083  3342.4125  4209.8295    8153.653
+##  vacc1  1554.369  2133.6940  5222.1485  2420.2550  3343.8280  230413.960
+##  vacc2   124.576   150.9425   640.2083   198.3585   817.6025    6372.775
+##  vacc3 17166.901 22440.3760 39333.1898 23786.9740 25014.9685 1536242.246
+##  neval cld
+##    100  a 
+##    100  a 
+##    100  a 
+##    100   b</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
 <p>So, what’s going on?</p>
@@ -766,7 +767,7 @@ m</code></pre></div>
 <span class="st">}&#39;</span>)
 hello</code></pre></div>
 <pre><code>## function () 
-## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x10dacecc0&gt;))</code></pre>
+## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x109c65100&gt;))</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hello</span>()</code></pre></div>
 <pre><code>## Hello, world!</code></pre>
 <p><code>Rprintf</code> is the counterpart of C++ <a href="http://www.cplusplus.com/reference/cstdio/printf/"><code>printf</code></a> function.</p>
@@ -870,7 +871,6 @@ NumericVector vacc3(NumericVector age, LogicalVector female,
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">linmodEst &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
   ## CC: crossprod or a QR decomposition (as in the original version) are more efficient
   coef &lt;-<span class="st"> </span><span class="kw">solve</span>(<span class="kw">t</span>(x) <span class="op">%*%</span><span class="st"> </span>x) <span class="op">%*%</span><span class="st"> </span><span class="kw">t</span>(x) <span class="op">%*%</span><span class="st"> </span>y
-  <span class="kw">print</span>(coef)
   ## degrees of freedom and standard deviation of residuals
   df &lt;-<span class="st"> </span><span class="kw">nrow</span>(x) <span class="op">-</span><span class="st"> </span><span class="kw">ncol</span>(x)
   sigma2 &lt;-<span class="st"> </span><span class="kw">sum</span>((y <span class="op">-</span><span class="st"> </span>x <span class="op">%*%</span><span class="st"> </span>coef) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>df

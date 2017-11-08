@@ -25,7 +25,9 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-10-13">
+
+<meta name="date" content="2017-11-07">
+
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -201,6 +203,12 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
+
+<div id="header">
+<h1 class="title">Computing for Big Data (BST-262)</h1>
+<h4 class="author"><em>Christine Choirat</em></h4>
+<h4 class="date"><em>2017-11-07</em></h4>
+</div>
 <div id="intro" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Introduction</h1>
 <div id="prerequisites" class="section level2">
@@ -215,6 +223,31 @@
 <li><p>Statistical software programs such as R were not designed to handle datasets of massive size.</p></li>
 </ol>
 </div>
+
+<div id="big-data-bottlenecks" class="section level2">
+<h2><span class="header-section-number">1.4</span> Big data bottlenecks</h2>
+<p>As described by <span class="citation">Lim and Tjhi (<a href="#ref-Lim2015">2015</a>)</span>, there are three bottlenecks:</p>
+<ul>
+<li>CPU</li>
+<li>RAM</li>
+<li>I/O</li>
+</ul>
+<div class="figure" style="text-align: center"><span id="fig:bottlenecks"></span>
+<img src="images/ch1_bottlenecks.png" alt="Steps to execute an R program, from @Lim2015, Chapter 1." width="255" />
+<p class="caption">
+Figure 1.1: Steps to execute an R program, from <span class="citation">Lim and Tjhi (<a href="#ref-Lim2015">2015</a>)</span>, Chapter 1.
+</p>
+</div>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-1" class="exercise"><strong>Exercise 1.1  </strong></span>Can you identify points 1–7 in the following code snippet?
+</div>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;mydata.csv&quot;</span>)
+totals &lt;-<span class="st"> </span><span class="kw">colSums</span>(data)
+<span class="kw">write.csv</span>(totals, <span class="st">&quot;totals.csv&quot;</span>)</code></pre></div>
+</div>
+
 <div id="syllabus" class="section level2">
 <h2><span class="header-section-number">2.3</span> Syllabus</h2>
 <p>Week 1 - Basic tools</p>

@@ -42,6 +42,7 @@ suppressPackageStartupMessages(library(Linreg))
 ```
 
 ```{r}
+library(Linreg)
 data(cats, package = "MASS")
 fit1 <- lm(Hwt ~ Bwt, data = cats)
 fit2 <- linmod(Hwt ~ Bwt, data = cats)
@@ -370,11 +371,10 @@ NumericVector vacc3(NumericVector age, LogicalVector female,
 Can you write an `Rcpp` function similar to `linmodEst`?
 ```
 
-```{r eval=TRUE}
+```{r eval=TRUE, eval=FALSE}
 linmodEst <- function(x, y) {
   ## CC: crossprod or a QR decomposition (as in the original version) are more efficient
   coef <- solve(t(x) %*% x) %*% t(x) %*% y
-  print(coef)
   ## degrees of freedom and standard deviation of residuals
   df <- nrow(x) - ncol(x)
   sigma2 <- sum((y - x %*% coef) ^ 2) / df
@@ -393,5 +393,5 @@ linmodEst <- function(x, y) {
 ## Rcpp packages
 
 Readings:
-    - https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-package.pdf
-    - http://adv-r.had.co.nz/Rcpp.html#rcpp-package
+- https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-package.pdf
+- http://adv-r.had.co.nz/Rcpp.html#rcpp-package
