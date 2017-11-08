@@ -1,19 +1,40 @@
-# Databases {#databases}
+# SQL {#SQL}
 
-## Overview
-  A database is simply an organized structure for storing and accessing data on disk. There are a number of structures used to store data on disk, each with their own languages.  
+## What is SQL?
+
+SQL (Structured Query Language) is a standard way of specifying the information you want to receive from a database. There are a number of variations on the language, and a number of online resources available for learning their various complexities. However, the general structure of all SQL queries is consistent across implementations. 
+
+SQL is an imperative computer language. This means that it describes the output desired without actually describing the calculations required to get the output described. This allows for the verbs and structures of the language to be used across database systems, as well as in other areas of data handling.
   
+### What is a database?
+  
+A database is simply an organized structure for storing and accessing data on disk. There are a number of structures used to store data on disk, each with their own languages. However, despite the variations in structure, the goals (and song) remain the same. The process of data storage on disk is controlled by the database management system (DBMS).  
 
 
-## Relational Databases (SQL)
 
-A Relational Database stores information in a the form of entities and the relationships between them. Entities are typically nouns and relationships are typically verbs. For example, if we wanted to store information about class enrollment at a university, the entities would consist of objects like a student, class, and professor. The relationships would consist of takes and teaches. Relationships can be one to one, many to many, or one to many.
+### Relational Databases (SQL)
+
+The most common type of DBMS is a relational database (RDBMS). A Relational Database stores information in a the form of entities and the relationships between them. Entities are typically nouns and relationships are typically verbs. For example, if we wanted to store information about class enrollment at a university, the entities would consist of objects like a student, class, and professor. The relationships would consist of takes and teaches. Relationships can be one to one, many to many, or one to many.
+
+### Types of Relational Databases
+
+
+- Commercial
+    - Oracle Database
+    - Microsoft
+    - SQL Server
+    - ...
+- Open-source
+    - MySQL
+    - PostgreSQL
+    - SQLite
+    - ...
+    
+- SQLite is the easiest way to start: unlike the others, it's not a client-server DB.  The whole DB can live in a (portable) folder.  All the required tools are included in `dplyr`.
 
 ### SQL
 
-SQL (Structured Query Language) is the standard way that information stored in relational databases is queried. There are a number of variations on the language, and a number of online resources available for learning their various complexities. However, the general structure of all SQL queries is consistent across implementations. 
-
-In SQL systems, entities and relationships are represented by tables, where each row or record in a table represents a particular instance of of that general object. Continuing the class example, students would be stored in `Student`, classes in `Class`, and professors in `Professor`. The table containing the relationships between students and classes would be likely named `StudentClass` and the 
+In relational databases, entities and relationships are represented by tables, where each row or record in a table represents a particular instance of of that general object. Continuing the class example, students would be stored in `Student`, classes in `Class`, and professors in `Professor`. The table containing the relationships between students and classes would be likely named `StudentClass` and the 
 
 The three key parts of a SQL query are the `SELECT` clause, the `FROM` clause, and the `WHERE` clause. The `SELECT` clause specifies the pieces of information you want about an individual record, the `FROM` clause specifies the tables that will be used
 
@@ -39,20 +60,110 @@ To Select the name and birthday of all students in classes taught by Dr. Choirat
     ```
         
         
-### SQLite: An Exercise
+## SQLite: An Exercise
 
-### SQL and R
+Create an in memory DB
+
+```sqlite3 ```
+
+### Make a Table
+
+```{SQL}
+CREATE TABLE table1(x,y,z);
+
+```
+
+### Insert Values
+
+```{SQL}
+INSERT INTO table1 VALUES (1,2,3),(4,5,6),(7,8,9);
+```
+
+### Select Values
+
+Select All Values
+```{SQL}
+SELECT * FROM table1;
+```
+
+Select specific values
+```{SQL}
+SELECT z from table1 WHERE x = 4;
+```
+
+## SQL and R
+
+There are a number of R packages for interfacing directly with RDBs. RODBC is one sucn example that allows for queries to be submitted to previsously set up database connections with the results being returned as a data frame for further analysis in R. There's a large amount of documentation available online for these methods. Each system has its own idiosyncracies.
+
+### Data: `oscars` and `movies` again: 2016 Oscars Nominations 
+
+```{r eval = FALSE}
+library(readr)
+library(dplyr)
+
+db <- src_sqlite("db.sqlite3", create = TRUE)
+
+oscars <-"
+name,movie,category
+Adam McKay,The Big Short,Best Director
+Alejandro González Iñárritu,The Revenant,Best Director
+Lenny Abrahamson,Room,Best Director
+Tom McCarthy,Spotlight,Best Director
+George Miller,Mad Max: Fury Road,Best Director
+Bryan Cranston,Trumbo,Best Actor
+Matt Damon,The Martian,Best Actor
+Michael Fassbender,Steve Jobs,Best Actor
+Leonardo DiCaprio,The Revenant,Best Actor
+Eddie Redmayne,The Danish Girl,Best Actor
+Cate Blanchett,Carol,Best Actress
+Brie Larson,Room,Best Actress
+Jennifer Lawrence,Joy,Best Actress
+Charlotte Rampling,45 Years,Best Actress
+Saoirse Ronan,Brooklyn,Best Actress
+"
+oscars <- read_csv(oscars, trim_ws = TRUE, skip = 1)
+
+movies <-"
+movie,length_mins
+The Big Short,130
+Star Wars: The Force Awakens,135
+Brooklyn,111
+Mad Max: Fury Road,120
+Room,118
+The Martian,144
+The Revenant,156
+Spotlight,128
+"
+movies <- read_csv(movies, trim_ws = TRUE, skip = 1)
+
+oscars_table <- copy_to(db, oscars)
+movies_table <- copy_to(db, movies)
+
+db
+```
 
 
 
 ## Non-Relational Databases (noSQL)
 
-NoSQL Databases were developed to solve some of the limitations that can come with SQL databases.
+### Drawbacks of Relational Databases
+
+- Looking up all information about one entity can be expensive
+- Require a large amount of overhead
+- Difficult to distribute across multiple disks
+- Considered to by some to be inflexible
+
 
 ### Common Types of NoSQL Databases
+- Graph Databases
+  - Neo4j
+  - OrientDB
 
-#### Graph Databases
+- Document Databases
+  - MongoDB
+  - JSON Databases
+  - XML Databases
+  
 
-#### Object Databases
 
-## R interfaces
+
