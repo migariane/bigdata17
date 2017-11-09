@@ -164,6 +164,11 @@ db
   - JSON Databases
   - XML Databases
   
+## Citations
+
+The Oscar movie example comes from this lecture by Rafa Irizarry:
+https://github.com/datasciencelabs/2016/blob/master/lectures/wrangling/data-wrangling-with-dplyr.Rmd
+  
 
 
 
