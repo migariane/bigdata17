@@ -156,13 +156,13 @@ db
 
 ### Common Types of NoSQL Databases
 - Graph Databases
-  - Neo4j
-  - OrientDB
+    - Neo4j
+    - OrientDB
 
 - Document Databases
-  - MongoDB
-  - JSON Databases
-  - XML Databases
+    - MongoDB
+    - JSON Databases
+    - XML Databases
   
 
 ## References
