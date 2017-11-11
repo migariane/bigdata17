@@ -1,5 +1,19 @@
 # Big data {#bigdata}
 
+## How to deal with (very / too) large datasets?
+
+1. Use more RAM / processors / drive space...
+2. Use less data: (re)sample, ...
+3. Use a database
+4. Use specific R packages (`ff`, `bigmemory`)
+5. Use other tools
+
+## How big is big?
+
+1. Fits in RAM and on drive (but slow)
+2. Doesn't fit in RAM but fits on drive
+3. Doesn't fit in RAM and doesn't fit on drive
+
 ## List of tools
 
 Reading: @Varian2014 ([PDF available](http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.28.2.3))
@@ -64,8 +78,6 @@ system.time(ratings <- read_csv("~/Dropbox/Data17/ml-20m/ratings.csv"))
 
 also tends to perform better than `read.csv`.
 
-### Reference vs copy
-
 ```{r echo = FALSE, results = 'asis'}
 library(knitr)
 tools <- data.frame("package" = c("base", "data.table", "readr"),
@@ -75,13 +87,44 @@ tools <- data.frame("package" = c("base", "data.table", "readr"),
 kable(tools, caption = "I/O comparison")
 ```
 
+### Reference vs copy
+
 ## Data that doesn't fit in memory (but fits on drive)
+
+Let's try to work with a 12GB file and 4/8 GB of memory...
+
+
 
 ## Pure R solutions
 
 ### Sampling
 
 ### `bigmemory`
+
+https://cran.r-project.org/web/packages/bigmemory/index.html
+
+Reading: https://cran.r-project.org/web/packages/bigmemory/vignettes/Overview.pdf
+
+__bigmemory__: Manage Massive Matrices with Shared Memory and Memory-Mapped Files
+
+Create, store, access, and manipulate massive matrices. Matrices are allocated to shared memory and may use memory-mapped files. Packages 'biganalytics', 'bigtabulate', 'synchronicity', and 'bigalgebra' provide advanced functionality.
+
+__(+)__ pure R solution from a user perspective
+
+__(-)__ mostly for numeric data matrices
+
+## `bigmemory`
+
+```{r eval=FALSE}
+library(bigmemory)
+library(biganalytics)
+
+x <- read.big.matrix(
+  "~/Dropbox/Data17/AirFlights/allyears.csv", header = TRUE ,
+  backingfile = "~/Downloads/airline.bin",
+  descriptorfile = "~/Downloads/airline.desc"
+  )
+```
 
 ### Database connections and lazy evaluation
 
