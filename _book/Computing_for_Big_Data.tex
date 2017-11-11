@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-11-07}
+  \date{2017-11-11}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -2031,12 +2031,12 @@ Let's start with an example from \citet{Wickham2014}.
 
 \begin{verbatim}
 ## Unit: nanoseconds
-##           expr  min     lq      mean  median    uq   max neval   cld
-##       [32, 11] 8583 9969.5 11632.638 10438.0 11060 69372  1000     e
-##      $carb[32] 4587 5766.5  6736.026  6231.0  6749 47040  1000    d 
-##  [[c(11, 32)]] 3690 4595.0  5509.535  5024.0  5468 38750  1000   c  
-##     [[11]][32] 3419 4364.5  5117.320  4765.0  5176 44542  1000  b   
-##       .subset2  194  244.5   328.320   280.5   350  9545  1000 a
+##           expr  min     lq      mean  median      uq   max neval
+##       [32, 11] 8788 9719.5 10156.050 10071.0 10448.0 35213  1000
+##      $carb[32] 4436 5409.0  5849.557  5821.0  6192.5 16784  1000
+##  [[c(11, 32)]] 3668 4340.0  4712.058  4694.5  5032.0  9905  1000
+##     [[11]][32] 3391 4088.0  4473.616  4430.5  4763.5 30316  1000
+##       .subset2  207  259.0   310.075   288.0   347.0  1016  1000
 \end{verbatim}
 
 \begin{Shaded}
@@ -2420,13 +2420,13 @@ built-in \texttt{lm} and with two functions we defined in package
 \begin{verbatim}
 ## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 <- lm(Hwt ~ Bwt, data = cats) 668.558 698.6775 783.9467
-##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 528.679 564.5290 629.0916
-##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  99.952 120.6320 146.9717
-##    median       uq      max neval cld
-##  741.0075 835.9320 1349.394   100   c
-##  602.7800 669.1115  924.810   100  b 
-##  137.0685 155.5920  281.642   100 a
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 652.532 669.1460 704.3446
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 520.718 537.1575 549.8910
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  96.547 105.8740 124.4665
+##    median       uq      max neval
+##  677.6445 690.3230 2783.111   100
+##  544.0920 549.5945 1102.711   100
+##  120.7450 128.9790  631.633   100
 \end{verbatim}
 
 \begin{Shaded}
@@ -2625,7 +2625,7 @@ or we can rely on base R functions that accept vector inputs
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 8
+## [1] 4
 \end{verbatim}
 
 \begin{Shaded}
@@ -2653,16 +2653,16 @@ or we can rely on base R functions that accept vector inputs
 
 \begin{verbatim}
 ## Unit: microseconds
-##   expr       min         lq       mean    median        uq       max neval
-##  vacc0  2295.297  3524.0385  4919.3689  4470.390  5485.436 16355.518   100
-##  vacc1  2008.117  2335.6830  3731.5443  3280.036  3998.505 27521.868   100
-##  vacc2   132.924   209.0065   741.1817   292.685   830.569  7471.711   100
-##  vacc3 16007.282 21003.0965 23354.2862 23513.269 25777.588 32004.426   100
-##   cld
-##    c 
-##   b  
-##  a   
-##     d
+##   expr       min        lq       mean     median        uq        max
+##  vacc0  1863.795  2981.287  5055.9760  3509.6800  4507.682 110750.868
+##  vacc1  1482.255  2213.741  2819.9827  2458.2980  3044.828  11327.754
+##  vacc2    94.466   148.690   488.7539   176.9885   621.551   6082.346
+##  vacc3 13481.559 15783.546 21379.9628 17115.4995 18742.185 199551.772
+##  neval
+##    100
+##    100
+##    100
+##    100
 \end{verbatim}
 
 \begin{Shaded}
@@ -2735,7 +2735,7 @@ Reading: \url{http://adv-r.had.co.nz/Rcpp.html}
 
 \begin{verbatim}
 ## function () 
-## invisible(.Primitive(".Call")(<pointer: 0x106f32100>))
+## invisible(.Primitive(".Call")(<pointer: 0x107604cc0>))
 \end{verbatim}
 
 \begin{Shaded}
@@ -2949,15 +2949,291 @@ Readings: -
 \url{https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-package.pdf}
 - \url{http://adv-r.had.co.nz/Rcpp.html\#rcpp-package}
 
-\chapter{Databases}\label{databases}
+\section{Profiling}\label{profiling}
 
-\section{Overview}\label{overview}
+Reading: \url{https://rstudio.github.io/profvis/}
 
-\section{SQL}\label{sql}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(profvis)}
 
-\section{noSQL}\label{nosql}
+\KeywordTok{profvis}\NormalTok{(\{}
+  \KeywordTok{data}\NormalTok{(diamonds, }\DataTypeTok{package =} \StringTok{"ggplot2"}\NormalTok{)}
 
-\section{R interfaces}\label{r-interfaces}
+  \KeywordTok{plot}\NormalTok{(price }\OperatorTok{~}\StringTok{ }\NormalTok{carat, }\DataTypeTok{data =}\NormalTok{ diamonds)}
+\NormalTok{  m <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(price }\OperatorTok{~}\StringTok{ }\NormalTok{carat, }\DataTypeTok{data =}\NormalTok{ diamonds)}
+  \KeywordTok{abline}\NormalTok{(m, }\DataTypeTok{col =} \StringTok{"red"}\NormalTok{)}
+\NormalTok{\})}
+\end{Highlighting}
+\end{Shaded}
+
+\chapter{SQL}\label{databases}
+
+\section{What is SQL?}\label{what-is-sql}
+
+SQL (Structured Query Language) is a standard way of specifying the
+information you want to receive from a database. There are a number of
+variations on the language, and a number of online resources available
+for learning their various complexities. However, the general structure
+of all SQL queries is consistent across implementations.
+
+SQL is an imperative computer language. This means that it describes the
+output desired without actually describing the calculations required to
+get the output described. This allows for the verbs and structures of
+the language to be used across database systems, as well as in other
+areas of data handling.
+
+\subsection{What is a database?}\label{what-is-a-database}
+
+A database is simply an organized structure for storing and accessing
+data on disk. There are a number of structures used to store data on
+disk, each with their own languages. However, despite the variations in
+structure, the goals (and song) remain the same. The process of data
+storage on disk is controlled by the database management system (DBMS).
+
+\subsection{Relational Databases (SQL)}\label{relational-databases-sql}
+
+The most common type of DBMS is a relational database (RDBMS). A
+Relational Database stores information in a the form of entities and the
+relationships between them. Entities are typically nouns and
+relationships are typically verbs. For example, if we wanted to store
+information about class enrollment at a university, the entities would
+consist of objects like a student, class, and professor. The
+relationships would consist of takes and teaches. Relationships can be
+one to one, many to many, or one to many.
+
+\subsection{Types of Relational
+Databases}\label{types-of-relational-databases}
+
+\begin{itemize}
+\tightlist
+\item
+  Commercial
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Oracle Database
+  \item
+    Microsoft
+  \item
+    SQL Server
+  \item
+    \ldots{}
+  \end{itemize}
+\item
+  Open-source
+
+  \begin{itemize}
+  \tightlist
+  \item
+    MySQL
+  \item
+    PostgreSQL
+  \item
+    SQLite
+  \item
+    \ldots{}
+  \end{itemize}
+\item
+  SQLite is the easiest way to start: unlike the others, it's not a
+  client-server DB. The whole DB can live in a (portable) folder. All
+  the required tools are included in \texttt{dplyr}.
+\end{itemize}
+
+\subsection{SQL}\label{sql}
+
+In relational databases, entities and relationships are represented by
+tables, where each row or record in a table represents a particular
+instance of of that general object. Continuing the class example,
+students would be stored in \texttt{Student}, classes in \texttt{Class},
+and professors in \texttt{Professor}. The table containing the
+relationships between students and classes would be likely named
+\texttt{StudentClass} and the
+
+The three key parts of a SQL query are the \texttt{SELECT} clause, the
+\texttt{FROM} clause, and the \texttt{WHERE} clause. The \texttt{SELECT}
+clause specifies the pieces of information you want about an individual
+record, the \texttt{FROM} clause specifies the tables that will be used
+
+To get all information about all students we would type the following:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT}\NormalTok{ * }\KeywordTok{FROM}\NormalTok{ STUDENT}
+\end{Highlighting}
+\end{Shaded}
+
+To Select the name and birthday of all students in classes taught by
+Dr.~Choirat would be a more complex query, which would likely look
+something like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+   \KeywordTok{SELECT}\NormalTok{ Name,}
+\NormalTok{          DOB}
+   \KeywordTok{FROM}\NormalTok{ Student s }
+        \KeywordTok{inner} \KeywordTok{join}\NormalTok{ StudentClass sc }\KeywordTok{on} 
+\NormalTok{            s.ID = sc.studentid}
+        \KeywordTok{inner} \KeywordTok{join}\NormalTok{ ProfessorClass pc }\KeywordTok{on}
+\NormalTok{            sc.classid = pc.classid}
+        \KeywordTok{inner} \KeywordTok{join}\NormalTok{ Professor p }\KeywordTok{on}
+\NormalTok{            pc.profid = p.id}
+    \KeywordTok{WHERE}\NormalTok{ p.lastname = }\OtherTok{"Choirat"}
+\end{Highlighting}
+\end{Shaded}
+
+\section{SQLite: An Exercise}\label{sqlite-an-exercise}
+
+Create an in memory DB
+
+\texttt{sqlite3}
+
+\subsection{Make a Table}\label{make-a-table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{CREATE} \KeywordTok{TABLE}\NormalTok{ table1(x,y,z);}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Insert Values}\label{insert-values}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{INSERT} \KeywordTok{INTO}\NormalTok{ table1 }\KeywordTok{VALUES}\NormalTok{ (}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{),(}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{),(}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{);}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Select Values}\label{select-values}
+
+Select All Values
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT}\NormalTok{ * }\KeywordTok{FROM}\NormalTok{ table1;}
+\end{Highlighting}
+\end{Shaded}
+
+Select specific values
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{SELECT}\NormalTok{ z }\KeywordTok{from}\NormalTok{ table1 }\KeywordTok{WHERE}\NormalTok{ x = }\DecValTok{4}\NormalTok{;}
+\end{Highlighting}
+\end{Shaded}
+
+\section{SQL and R}\label{sql-and-r}
+
+There are a number of R packages for interfacing directly with RDBs.
+RODBC is one sucn example that allows for queries to be submitted to
+previsously set up database connections with the results being returned
+as a data frame for further analysis in R. There's a large amount of
+documentation available online for these methods. Each system has its
+own idiosyncracies.
+
+\subsection{\texorpdfstring{Data: \texttt{oscars} and \texttt{movies}
+again: 2016 Oscars
+Nominations}{Data: oscars and movies again: 2016 Oscars Nominations}}\label{data-oscars-and-movies-again-2016-oscars-nominations}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(readr)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+
+\NormalTok{db <-}\StringTok{ }\KeywordTok{src_sqlite}\NormalTok{(}\StringTok{"db.sqlite3"}\NormalTok{, }\DataTypeTok{create =} \OtherTok{TRUE}\NormalTok{)}
+
+\NormalTok{oscars <-}\StringTok{"}
+\StringTok{name,movie,category}
+\StringTok{Adam McKay,The Big Short,Best Director}
+\StringTok{Alejandro González Iñárritu,The Revenant,Best Director}
+\StringTok{Lenny Abrahamson,Room,Best Director}
+\StringTok{Tom McCarthy,Spotlight,Best Director}
+\StringTok{George Miller,Mad Max: Fury Road,Best Director}
+\StringTok{Bryan Cranston,Trumbo,Best Actor}
+\StringTok{Matt Damon,The Martian,Best Actor}
+\StringTok{Michael Fassbender,Steve Jobs,Best Actor}
+\StringTok{Leonardo DiCaprio,The Revenant,Best Actor}
+\StringTok{Eddie Redmayne,The Danish Girl,Best Actor}
+\StringTok{Cate Blanchett,Carol,Best Actress}
+\StringTok{Brie Larson,Room,Best Actress}
+\StringTok{Jennifer Lawrence,Joy,Best Actress}
+\StringTok{Charlotte Rampling,45 Years,Best Actress}
+\StringTok{Saoirse Ronan,Brooklyn,Best Actress}
+\StringTok{"}
+\NormalTok{oscars <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(oscars, }\DataTypeTok{trim_ws =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{skip =} \DecValTok{1}\NormalTok{)}
+
+\NormalTok{movies <-}\StringTok{"}
+\StringTok{movie,length_mins}
+\StringTok{The Big Short,130}
+\StringTok{Star Wars: The Force Awakens,135}
+\StringTok{Brooklyn,111}
+\StringTok{Mad Max: Fury Road,120}
+\StringTok{Room,118}
+\StringTok{The Martian,144}
+\StringTok{The Revenant,156}
+\StringTok{Spotlight,128}
+\StringTok{"}
+\NormalTok{movies <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(movies, }\DataTypeTok{trim_ws =} \OtherTok{TRUE}\NormalTok{, }\DataTypeTok{skip =} \DecValTok{1}\NormalTok{)}
+
+\NormalTok{oscars_table <-}\StringTok{ }\KeywordTok{copy_to}\NormalTok{(db, oscars)}
+\NormalTok{movies_table <-}\StringTok{ }\KeywordTok{copy_to}\NormalTok{(db, movies)}
+
+\NormalTok{db}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Non-Relational Databases
+(noSQL)}\label{non-relational-databases-nosql}
+
+\subsection{Drawbacks of Relational
+Databases}\label{drawbacks-of-relational-databases}
+
+\begin{itemize}
+\tightlist
+\item
+  Looking up all information about one entity can be expensive
+\item
+  Require a large amount of overhead
+\item
+  Difficult to distribute across multiple disks
+\item
+  Considered to by some to be inflexible
+\end{itemize}
+
+\subsection{Common Types of NoSQL
+Databases}\label{common-types-of-nosql-databases}
+
+\begin{itemize}
+\tightlist
+\item
+  Graph Databases
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Neo4j
+  \item
+    OrientDB
+  \end{itemize}
+\item
+  Document Databases
+
+  \begin{itemize}
+  \tightlist
+  \item
+    MongoDB
+  \item
+    JSON Databases
+  \item
+    XML Databases
+  \end{itemize}
+\end{itemize}
+
+\section{References}\label{references}
+
+The Oscar movie example comes from this lecture by Rafa Irizarry:
+\url{https://github.com/datasciencelabs/2016/blob/master/lectures/wrangling/data-wrangling-with-dplyr.Rmd}
 
 \chapter{Big data}\label{bigdata}
 
@@ -3051,7 +3327,7 @@ also tends to perform better than \texttt{read.csv}.
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-100}I/O comparison}
+\caption{\label{tab:unnamed-chunk-108}I/O comparison}
 \centering
 \begin{tabular}[t]{l|l|l|l}
 \hline
@@ -3198,7 +3474,7 @@ GPU
 
 \section{Maps and GIS}\label{maps-and-gis}
 
-\bibliography{packages.bib,book.bib}
+\bibliography{book.bib,packages.bib}
 
 
 \end{document}

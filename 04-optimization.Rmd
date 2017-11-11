@@ -395,3 +395,20 @@ linmodEst <- function(x, y) {
 Readings:
 - https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-package.pdf
 - http://adv-r.had.co.nz/Rcpp.html#rcpp-package
+
+## Profiling
+
+Reading: https://rstudio.github.io/profvis/
+
+```{r eval=FALSE}
+library(profvis)
+
+profvis({
+  data(diamonds, package = "ggplot2")
+
+  plot(price ~ carat, data = diamonds)
+  m <- lm(price ~ carat, data = diamonds)
+  abline(m, col = "red")
+})
+```
+
