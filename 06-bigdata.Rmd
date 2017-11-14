@@ -118,13 +118,33 @@ __(-)__ mostly for numeric data matrices
 ```{r eval=FALSE}
 library(bigmemory)
 library(biganalytics)
+library(bigtabulate)
+library(biglm)
 
-x <- read.big.matrix(
-  "~/Dropbox/Data17/AirFlights/allyears.csv", header = TRUE ,
-  backingfile = "~/Downloads/airline.bin",
-  descriptorfile = "~/Downloads/airline.desc"
-  )
+flights <- read.big.matrix(
+  "/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.csv",
+  header = TRUE,
+  backingfile = "allyears2k.bin",
+  backingpath = "/Users/cchoirat/Dropbox/Data17/AirFlights/",
+  descriptorfile = "allyears2k.desc",
+  shared = TRUE)
+
+f <- attach.big.matrix("/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.desc")
+dim(f)
+colnames(f)
+mean(f[, "ArrDelay"], na.rm = TRUE)
+
+fit <- biglm.big.matrix(ArrDelay ~ Distance, data = f)
+summary(fit)
 ```
+
+```{r eval=FALSE}
+library(data.table)
+airlines <- fread("/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.csv")
+rfit <- lm(ArrDelay ~ Distance, data = airlines)
+summary(rfit)
+```
+
 
 ### Database connections and lazy evaluation
 
