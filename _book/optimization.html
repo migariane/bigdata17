@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-11-11">
+<meta name="date" content="2017-11-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -205,7 +205,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.5.7" data-path="optimization.html"><a href="optimization.html#back-to-linreg"><i class="fa fa-check"></i><b>4.5.7</b> Back to Linreg</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="optimization.html"><a href="optimization.html#rcpp-packages"><i class="fa fa-check"></i><b>4.6</b> Rcpp packages</a></li>
-<li class="chapter" data-level="4.7" data-path="optimization.html"><a href="optimization.html#profiling"><i class="fa fa-check"></i><b>4.7</b> Profiling</a></li>
+<li class="chapter" data-level="4.7" data-path="optimization.html"><a href="optimization.html#getting-serious-about-c"><i class="fa fa-check"></i><b>4.7</b> Getting serious about C++</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="optimization.html"><a href="optimization.html#stl"><i class="fa fa-check"></i><b>4.7.1</b> STL</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="optimization.html"><a href="optimization.html#profiling"><i class="fa fa-check"></i><b>4.8</b> Profiling</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>5</b> SQL</a><ul>
 <li class="chapter" data-level="5.1" data-path="databases.html"><a href="databases.html#what-is-sql"><i class="fa fa-check"></i><b>5.1</b> What is SQL?</a><ul>
@@ -229,23 +232,32 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.5" data-path="databases.html"><a href="databases.html#references"><i class="fa fa-check"></i><b>5.5</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>6</b> Big data</a><ul>
-<li class="chapter" data-level="6.1" data-path="bigdata.html"><a href="bigdata.html#list-of-tools"><i class="fa fa-check"></i><b>6.1</b> List of tools</a></li>
-<li class="chapter" data-level="6.2" data-path="bigdata.html"><a href="bigdata.html#data-that-fits-in-memory"><i class="fa fa-check"></i><b>6.2</b> Data that fits in memory</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="bigdata.html"><a href="bigdata.html#faster-io"><i class="fa fa-check"></i><b>6.2.1</b> Faster I/O</a></li>
-<li class="chapter" data-level="6.2.2" data-path="bigdata.html"><a href="bigdata.html#reference-vs-copy"><i class="fa fa-check"></i><b>6.2.2</b> Reference vs copy</a></li>
+<li class="chapter" data-level="6.1" data-path="bigdata.html"><a href="bigdata.html#how-to-deal-with-very-too-large-datasets"><i class="fa fa-check"></i><b>6.1</b> How to deal with (very / too) large datasets?</a></li>
+<li class="chapter" data-level="6.2" data-path="bigdata.html"><a href="bigdata.html#how-big-is-big"><i class="fa fa-check"></i><b>6.2</b> How big is big?</a></li>
+<li class="chapter" data-level="6.3" data-path="bigdata.html"><a href="bigdata.html#list-of-tools"><i class="fa fa-check"></i><b>6.3</b> List of tools</a></li>
+<li class="chapter" data-level="6.4" data-path="bigdata.html"><a href="bigdata.html#data-that-fits-in-memory"><i class="fa fa-check"></i><b>6.4</b> Data that fits in memory</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="bigdata.html"><a href="bigdata.html#faster-io"><i class="fa fa-check"></i><b>6.4.1</b> Faster I/O</a></li>
+<li class="chapter" data-level="6.4.2" data-path="bigdata.html"><a href="bigdata.html#reference-vs-copy"><i class="fa fa-check"></i><b>6.4.2</b> Reference vs copy</a></li>
+<li class="chapter" data-level="6.4.3" data-path="bigdata.html"><a href="bigdata.html#data.table-another-data-manipulation-grammar"><i class="fa fa-check"></i><b>6.4.3</b> data.table: another data manipulation grammar</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="bigdata.html"><a href="bigdata.html#data-that-doesnt-fit-in-memory-but-fits-on-drive"><i class="fa fa-check"></i><b>6.3</b> Data that doesn’t fit in memory (but fits on drive)</a></li>
-<li class="chapter" data-level="6.4" data-path="bigdata.html"><a href="bigdata.html#pure-r-solutions"><i class="fa fa-check"></i><b>6.4</b> Pure R solutions</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="bigdata.html"><a href="bigdata.html#sampling"><i class="fa fa-check"></i><b>6.4.1</b> Sampling</a></li>
-<li class="chapter" data-level="6.4.2" data-path="bigdata.html"><a href="bigdata.html#bigmemory"><i class="fa fa-check"></i><b>6.4.2</b> <code>bigmemory</code></a></li>
-<li class="chapter" data-level="6.4.3" data-path="bigdata.html"><a href="bigdata.html#database-connections-and-lazy-evaluation"><i class="fa fa-check"></i><b>6.4.3</b> Database connections and lazy evaluation</a></li>
+<li class="chapter" data-level="6.5" data-path="bigdata.html"><a href="bigdata.html#data-that-doesnt-fit-in-memory-but-fits-on-drive"><i class="fa fa-check"></i><b>6.5</b> Data that doesn’t fit in memory (but fits on drive)</a></li>
+<li class="chapter" data-level="6.6" data-path="bigdata.html"><a href="bigdata.html#pure-r-solutions"><i class="fa fa-check"></i><b>6.6</b> Pure R solutions</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="bigdata.html"><a href="bigdata.html#a-regressions-example"><i class="fa fa-check"></i><b>6.6.1</b> A regressions example</a></li>
+<li class="chapter" data-level="6.6.2" data-path="bigdata.html"><a href="bigdata.html#sampling"><i class="fa fa-check"></i><b>6.6.2</b> Sampling</a></li>
+<li class="chapter" data-level="6.6.3" data-path="bigdata.html"><a href="bigdata.html#bigmemory"><i class="fa fa-check"></i><b>6.6.3</b> <code>bigmemory</code></a></li>
+<li class="chapter" data-level="6.6.4" data-path="bigdata.html"><a href="bigdata.html#database-connections-and-lazy-evaluation"><i class="fa fa-check"></i><b>6.6.4</b> Database connections and lazy evaluation</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="bigdata.html"><a href="bigdata.html#scaling-up"><i class="fa fa-check"></i><b>6.5</b> Scaling up</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="bigdata.html"><a href="bigdata.html#parallel-computing-and-clusters"><i class="fa fa-check"></i><b>6.5.1</b> Parallel computing and clusters</a></li>
-<li class="chapter" data-level="6.5.2" data-path="bigdata.html"><a href="bigdata.html#cloud-computing"><i class="fa fa-check"></i><b>6.5.2</b> Cloud computing</a></li>
-<li class="chapter" data-level="6.5.3" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.5.3</b> Spark</a></li>
-<li class="chapter" data-level="6.5.4" data-path="bigdata.html"><a href="bigdata.html#h2o-and-sparkling-water"><i class="fa fa-check"></i><b>6.5.4</b> <code>h2o</code> and <code>Sparkling Water</code></a></li>
-<li class="chapter" data-level="6.5.5" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.5.5</b> More?</a></li>
+<li class="chapter" data-level="6.7" data-path="bigdata.html"><a href="bigdata.html#scaling-up"><i class="fa fa-check"></i><b>6.7</b> Scaling up</a></li>
+<li class="chapter" data-level="6.8" data-path="bigdata.html"><a href="bigdata.html#parallel-computing-and-clusters"><i class="fa fa-check"></i><b>6.8</b> Parallel computing and clusters</a></li>
+<li class="chapter" data-level="6.9" data-path="bigdata.html"><a href="bigdata.html#cloud-computing"><i class="fa fa-check"></i><b>6.9</b> Cloud computing</a></li>
+<li class="chapter" data-level="6.10" data-path="bigdata.html"><a href="bigdata.html#h2o-fast-scalable-machine-learning"><i class="fa fa-check"></i><b>6.10</b> <code>h2o</code>: “Fast Scalable Machine Learning”</a><ul>
+<li class="chapter" data-level="6.10.1" data-path="bigdata.html"><a href="bigdata.html#ecosystem"><i class="fa fa-check"></i><b>6.10.1</b> Ecosystem</a></li>
+</ul></li>
+<li class="chapter" data-level="6.11" data-path="bigdata.html"><a href="bigdata.html#running-h20-locally-within-r"><i class="fa fa-check"></i><b>6.11</b> Running h20 locally within R</a></li>
+<li class="chapter" data-level="6.12" data-path="bigdata.html"><a href="bigdata.html#state-of-the-jvm"><i class="fa fa-check"></i><b>6.12</b> State of the JVM</a></li>
+<li class="chapter" data-level="6.13" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.13</b> Spark</a></li>
+<li class="chapter" data-level="6.14" data-path="bigdata.html"><a href="bigdata.html#sparkling-water"><i class="fa fa-check"></i><b>6.14</b> <code>Sparkling Water</code></a><ul>
+<li class="chapter" data-level="6.14.1" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.14.1</b> More?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>7</b> Visualization</a><ul>
@@ -294,12 +306,12 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: nanoseconds
-##           expr  min     lq      mean median      uq      max neval
-##       [32, 11] 8209 9349.0 10073.124 9712.0 10164.5    40494  1000
-##      $carb[32] 4473 5487.0  6088.267 5893.0  6353.0    33372  1000
-##  [[c(11, 32)]] 3621 4464.5  4973.705 4798.5  5159.5    19601  1000
-##     [[11]][32] 3406 4199.0 52944.168 4523.5  4845.0 48309871  1000
-##       .subset2  208  260.0   325.690  290.0   346.0     2134  1000</code></pre>
+##           expr  min     lq       mean median      uq       max neval
+##       [32, 11] 8008 9413.0  10410.267 9871.5 10552.0     41045  1000
+##      $carb[32] 4499 5603.5   6353.816 6030.5  6591.5     55748  1000
+##  [[c(11, 32)]] 3618 4580.0   5327.440 4924.5  5327.5     84820  1000
+##     [[11]][32] 3487 4299.5 122116.398 4689.0  5080.5 117170755  1000
+##       .subset2  234  297.0    417.075  335.5   387.5     26579  1000</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
@@ -632,14 +644,14 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ## [2,]  4.0340627</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m</code></pre></div>
 <pre><code>## Unit: microseconds
-##                                             expr     min      lq     mean
-##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 644.304 661.937 726.0746
-##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 511.111 526.569 615.8178
-##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  91.683 106.113 124.7455
-##    median      uq      max neval
-##  671.1130 702.951 2441.540   100
-##  532.0240 547.500 7462.869   100
-##  119.2855 127.480  619.003   100</code></pre>
+##                                             expr     min       lq
+##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 676.014 855.2615
+##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 540.335 699.8165
+##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  98.508 126.3095
+##       mean    median        uq       max neval
+##  1744.4195 1076.3465 1494.5970 21763.882   100
+##  1410.3915  885.4970 1070.0250 34200.688   100
+##   188.5125  168.7755  208.8775   863.421   100</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 </div>
@@ -738,11 +750,11 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: microseconds
-##   expr       min        lq       mean    median        uq       max neval
-##  vacc0  1991.071  2942.622  3876.4734  3328.416  4066.517 10831.169   100
-##  vacc1  1950.515  2304.638  3032.8473  2501.854  3032.547 10313.653   100
-##  vacc2    92.072   142.886   521.0605   168.014   710.347  6102.599   100
-##  vacc3 11644.161 15491.732 17463.0133 16905.290 18390.364 34922.300   100</code></pre>
+##   expr       min        lq       mean    median         uq       max neval
+##  vacc0  2573.131  3095.965  4172.1414  3606.430  4693.0140 11562.773   100
+##  vacc1  1982.955  2332.806  3338.8971  2706.229  3554.7670 10542.761   100
+##  vacc2    89.912   147.387   590.9685   202.371   622.5555  7068.805   100
+##  vacc3 12300.447 16357.139 19495.7578 17851.204 20733.6690 44545.539   100</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
 <p>So, what’s going on?</p>
@@ -778,7 +790,7 @@ m</code></pre></div>
 <span class="st">}&#39;</span>)
 hello</code></pre></div>
 <pre><code>## function () 
-## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x109736cc0&gt;))</code></pre>
+## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x10dfdacc0&gt;))</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hello</span>()</code></pre></div>
 <pre><code>## Hello, world!</code></pre>
 <p><code>Rprintf</code> is the counterpart of C++ <a href="http://www.cplusplus.com/reference/cstdio/printf/"><code>printf</code></a> function.</p>
@@ -829,9 +841,9 @@ NumericVector timesTwo(NumericVector x) {
 <h3><span class="header-section-number">4.5.5</span> Sugar</h3>
 <p>Reading: <a href="http://adv-r.had.co.nz/Rcpp.html#rcpp-sugar" class="uri">http://adv-r.had.co.nz/Rcpp.html#rcpp-sugar</a>.</p>
 <ul>
-<li>Vectorization of <code>+</code>, <code>*</code>, <code>-</code>, <code>/</code>, <code>pow</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>==</code>, <code>!=</code>, <code>!</code></li>
+<li><p>Vectorization of <code>+</code>, <code>*</code>, <code>-</code>, <code>/</code>, <code>pow</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>==</code>, <code>!=</code>, …</p></li>
+<li><p>Vectorization of R-like functions: <code>abs()</code>, <code>exp()</code>, <code>factorial()</code>, …</p></li>
 </ul>
-<p>-x`</p>
 
 <div class="exercise">
 <span id="exr:unnamed-chunk-89" class="exercise"><strong>Exercise 4.1  </strong></span>Can you write an <code>Rcpp</code> function similar to <code>addd</code> but accepting vector arguments?
@@ -901,8 +913,16 @@ NumericVector vacc3(NumericVector age, LogicalVector female,
 <h2><span class="header-section-number">4.6</span> Rcpp packages</h2>
 <p>Readings: - <a href="https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-package.pdf" class="uri">https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-package.pdf</a> - <a href="http://adv-r.had.co.nz/Rcpp.html#rcpp-package" class="uri">http://adv-r.had.co.nz/Rcpp.html#rcpp-package</a></p>
 </div>
+<div id="getting-serious-about-c" class="section level2">
+<h2><span class="header-section-number">4.7</span> Getting serious about C++</h2>
+<div id="stl" class="section level3">
+<h3><span class="header-section-number">4.7.1</span> STL</h3>
+<p>STL: Standard Template Library</p>
+<p>Reading: <a href="http://adv-r.had.co.nz/Rcpp.html#stl" class="uri">http://adv-r.had.co.nz/Rcpp.html#stl</a></p>
+</div>
+</div>
 <div id="profiling" class="section level2">
-<h2><span class="header-section-number">4.7</span> Profiling</h2>
+<h2><span class="header-section-number">4.8</span> Profiling</h2>
 <p>Reading: <a href="https://rstudio.github.io/profvis/" class="uri">https://rstudio.github.io/profvis/</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(profvis)
 

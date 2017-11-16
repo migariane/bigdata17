@@ -89,15 +89,67 @@ kable(tools, caption = "I/O comparison")
 
 ### Reference vs copy
 
+Reading: http://adv-r.had.co.nz/memory.html
+Reading: https://jangorecki.gitlab.io/data.table/library/data.table/html/assign.html
+
+```{r eval=FALSE}
+library(pryr)
+library(data.table)
+
+d <- read.csv("~/Dropbox/Data17/ml-latest-small/ratings.csv")
+D <- fread("~/Dropbox/Data17/ml-latest-small/ratings.csv")
+
+object_size(d)
+object_size(D)
+
+mem_change(d$Idx <- 1:nrow(d))
+mem_change(D[, Idx:= 1:.N])
+
+object_size(d$Idx)
+object_size(D$Idx)
+```
+
+```{r eval=FALSE}
+d <- read.csv("~/Dropbox/Data17/ml-latest-small/ratings.csv")
+D <- fread("~/Dropbox/Data17/ml-latest-small/ratings.csv")
+
+.Internal(inspect(d))
+d$Idx <- 1:nrow(d)
+.Internal(inspect(d))
+
+.Internal(inspect(D))
+D[, Idx:= 1:.N]
+.Internal(inspect(D))
+```
+
+### data.table: another data manipulation grammar
+
+Reading: https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html
+
+```{exercise}
+Benchmark adding a column to a large data frame vs a large data table.
+```
+
 ## Data that doesn't fit in memory (but fits on drive)
 
 Let's try to work with a 12GB file and 4/8 GB of memory...
 
-
-
 ## Pure R solutions
 
+### A regressions example
+
+```{r eval=FALSE}
+library(data.table)
+airlines <- fread("/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.csv")
+rfit <- lm(ArrDelay ~ Distance, data = airlines)
+summary(rfit)
+```
+
 ### Sampling
+
+- Read the data (even line by line)
+- Select a sample of rows
+- Run your model on the random sample
 
 ### `bigmemory`
 
@@ -111,15 +163,14 @@ Create, store, access, and manipulate massive matrices. Matrices are allocated t
 
 __(+)__ pure R solution from a user perspective
 
-__(-)__ mostly for numeric data matrices
+__(-)__ mostly for numeric data matrices, mostly to speed up computations on data of +/- RAM size
 
-## `bigmemory`
 
 ```{r eval=FALSE}
 library(bigmemory)
 library(biganalytics)
-library(bigtabulate)
-library(biglm)
+# library(bigtabulate)
+# library(biglm)
 
 flights <- read.big.matrix(
   "/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.csv",
@@ -129,32 +180,88 @@ flights <- read.big.matrix(
   descriptorfile = "allyears2k.desc",
   shared = TRUE)
 
-f <- attach.big.matrix("/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.desc")
-dim(f)
-colnames(f)
-mean(f[, "ArrDelay"], na.rm = TRUE)
+air_flights <- attach.big.matrix("/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.desc")
+dim(air_flights)
+colnames(air_flights)
+mean(air_flights[, "ArrDelay"], na.rm = TRUE)
 
-fit <- biglm.big.matrix(ArrDelay ~ Distance, data = f)
+fit <- biglm.big.matrix(ArrDelay ~ Distance, data = air_flights)
+fit
 summary(fit)
 ```
 
+### Database connections and lazy evaluation
+
 ```{r eval=FALSE}
-library(data.table)
-airlines <- fread("/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.csv")
-rfit <- lm(ArrDelay ~ Distance, data = airlines)
-summary(rfit)
+D <- fread("~/Dropbox/Data17/AirFlights/")
 ```
 
 
-### Database connections and lazy evaluation
-
 ## Scaling up
 
-### Parallel computing and clusters
+## Parallel computing and clusters
 
-### Cloud computing
+## Cloud computing
 
-### Spark
+More soon with the Odyssey guest lecture (https://www.rc.fas.harvard.edu/odyssey/).
+
+## `h2o`: "Fast Scalable Machine Learning"
+
+http://www.h2o.ai/
+
+http://www.r-bloggers.com/scalable-machine-learning-for-big-data-using-r-and-h2o/
+
+http://venturebeat.com/2014/11/07/h2o-funding/
+https://www.h2o.ai/driverless-ai/
+https://www.infoworld.com/article/3236048/machine-learning/review-h2oai-automates-machine-learning.html
+
+### Ecosystem
+
+Readings:
+
+- http://docs.h2o.ai/h2o/latest-stable/h2o-docs/welcome.html
+
+- http://www.h2o.ai/download/h2o/r
+
+- https://cran.r-project.org/web/packages/h2o/index.html
+
+> To build H2O or run H2O tests, the 64-bit JDK is required.
+>
+> To run the H2O binary using either the command line, R, or Python packages, only 64-bit JRE is required.
+
+```{r eval=FALSE}
+if ("package:h2o" %in% search()) { detach("package:h2o", unload=TRUE) }
+if ("h2o" %in% rownames(installed.packages())) { remove.packages("h2o") }
+install.packages("h2o")
+```
+
+## Running h20 locally within R
+
+```{r eval=FALSE}
+library(h2o)
+localH2O <- h2o.init(min_mem_size = "20g")
+```
+
+```{r eval=FALSE}
+# h2o.init(ip = "localhost", port = 54321, startH2O = TRUE,
+#          forceDL = FALSE, enable_assertions = TRUE, license = NULL,
+#          nthreads = -2, max_mem_size = NULL, min_mem_size = NULL,
+#          ice_root = tempdir(), strict_version_check = TRUE,
+#          proxy = NA_character_, https = FALSE, insecure = FALSE,
+#          username = NA_character_, password = NA_character_)
+```
+
+(No persistence beyond the R session when h2O is started from R.)
+
+## State of the JVM
+
+```{r eval=FALSE}
+h2o.clusterInfo()
+```
+
+Let's check http://localhost:54321/.
+
+## Spark
 
 Reading: https://spark.rstudio.com/
 
@@ -184,7 +291,6 @@ file_columns <- top_rows %>%
   purrr::map(function(x)"character")
 rm(top_rows)
 ```
-
 
 ```{r eval=FALSE}
 sp_flights <- spark_read_csv(sc, 
@@ -231,11 +337,9 @@ lm(arr_delay ~ distance, data = flights_tbl)
 ml_linear_regression(subset_table, response = "ArrDelay", features = "SchedDeparture")
 ```
 
-
-
 TODOL change the `config` arguments of the connection
 
-### `h2o` and `Sparkling Water`
+## `Sparkling Water`
 
 Reading: https://spark.rstudio.com/h2o.html
 

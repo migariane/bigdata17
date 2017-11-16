@@ -317,9 +317,9 @@ timesTwo(100)
 
 Reading: http://adv-r.had.co.nz/Rcpp.html#rcpp-sugar.
 
-- Vectorization of `+`, `*`, `-`, `/`, `pow`, `<`, `<=`, `>`, `>=`, `==`, `!=`, `!`
+- Vectorization of `+`, `*`, `-`, `/`, `pow`, `<`, `<=`, `>`, `>=`, `==`, `!=`, ...
 
--x`
+- Vectorization of R-like functions: `abs()`, `exp()`, `factorial()`, ...
 
 
 ```{exercise}
@@ -395,6 +395,14 @@ linmodEst <- function(x, y) {
 Readings:
 - https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-package.pdf
 - http://adv-r.had.co.nz/Rcpp.html#rcpp-package
+
+## Getting serious about C++
+
+### STL
+
+STL: Standard Template Library
+
+Reading: http://adv-r.had.co.nz/Rcpp.html#stl
 
 ## Profiling
 

@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-11-11}
+  \date{2017-11-15}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -2031,12 +2031,12 @@ Let's start with an example from \citet{Wickham2014}.
 
 \begin{verbatim}
 ## Unit: nanoseconds
-##           expr  min     lq      mean  median      uq   max neval
-##       [32, 11] 8788 9719.5 10156.050 10071.0 10448.0 35213  1000
-##      $carb[32] 4436 5409.0  5849.557  5821.0  6192.5 16784  1000
-##  [[c(11, 32)]] 3668 4340.0  4712.058  4694.5  5032.0  9905  1000
-##     [[11]][32] 3391 4088.0  4473.616  4430.5  4763.5 30316  1000
-##       .subset2  207  259.0   310.075   288.0   347.0  1016  1000
+##           expr  min      lq      mean  median      uq   max neval
+##       [32, 11] 8807 10031.0 11311.322 10604.5 11611.5 47224  1000
+##      $carb[32] 4706  5755.5  6662.238  6344.0  6973.5 58510  1000
+##  [[c(11, 32)]] 3710  4639.0  5570.223  5078.0  5682.0 57917  1000
+##     [[11]][32] 3429  4395.5  5184.655  4817.0  5310.0 71453  1000
+##       .subset2  234   303.0   421.053   342.0   403.0 12955  1000
 \end{verbatim}
 
 \begin{Shaded}
@@ -2420,13 +2420,13 @@ built-in \texttt{lm} and with two functions we defined in package
 \begin{verbatim}
 ## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 <- lm(Hwt ~ Bwt, data = cats) 652.532 669.1460 704.3446
-##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 520.718 537.1575 549.8910
-##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  96.547 105.8740 124.4665
-##    median       uq      max neval
-##  677.6445 690.3230 2783.111   100
-##  544.0920 549.5945 1102.711   100
-##  120.7450 128.9790  631.633   100
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 666.007 697.4205 781.0600
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 541.463 555.2515 589.2255
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt) 100.254 111.9720 143.6063
+##   median       uq      max neval
+##  726.357 802.3330 3187.172   100
+##  571.011 604.9050  857.500   100
+##  126.141 148.0375  719.880   100
 \end{verbatim}
 
 \begin{Shaded}
@@ -2653,16 +2653,11 @@ or we can rely on base R functions that accept vector inputs
 
 \begin{verbatim}
 ## Unit: microseconds
-##   expr       min        lq       mean     median        uq        max
-##  vacc0  1863.795  2981.287  5055.9760  3509.6800  4507.682 110750.868
-##  vacc1  1482.255  2213.741  2819.9827  2458.2980  3044.828  11327.754
-##  vacc2    94.466   148.690   488.7539   176.9885   621.551   6082.346
-##  vacc3 13481.559 15783.546 21379.9628 17115.4995 18742.185 199551.772
-##  neval
-##    100
-##    100
-##    100
-##    100
+##   expr       min        lq       mean    median        uq        max neval
+##  vacc0  1879.759  3024.845  4191.3621  3430.597  4627.967  15945.108   100
+##  vacc1  1991.707  2315.199  4149.8630  2507.043  3648.207 108301.402   100
+##  vacc2   101.263   154.749   649.0651   200.483   776.283   6349.812   100
+##  vacc3 12278.343 15859.505 20638.0373 17360.429 19342.533 248256.433   100
 \end{verbatim}
 
 \begin{Shaded}
@@ -2735,7 +2730,7 @@ Reading: \url{http://adv-r.had.co.nz/Rcpp.html}
 
 \begin{verbatim}
 ## function () 
-## invisible(.Primitive(".Call")(<pointer: 0x107604cc0>))
+## invisible(.Primitive(".Call")(<pointer: 0x10bea8cc0>))
 \end{verbatim}
 
 \begin{Shaded}
@@ -2851,15 +2846,15 @@ From R, we can use \texttt{sourceCpp} to access \texttt{timesTwo} in R:
 Reading: \url{http://adv-r.had.co.nz/Rcpp.html\#rcpp-sugar}.
 
 \begin{itemize}
-\tightlist
 \item
   Vectorization of \texttt{+}, \texttt{*}, \texttt{-}, \texttt{/},
   \texttt{pow}, \texttt{\textless{}}, \texttt{\textless{}=},
   \texttt{\textgreater{}}, \texttt{\textgreater{}=}, \texttt{==},
-  \texttt{!=}, \texttt{!}
+  \texttt{!=}, \ldots{}
+\item
+  Vectorization of R-like functions: \texttt{abs()}, \texttt{exp()},
+  \texttt{factorial()}, \ldots{}
 \end{itemize}
-
--x`
 
 \BeginKnitrBlock{exercise}
 \protect\hypertarget{exr:unnamed-chunk-89}{}{\label{exr:unnamed-chunk-89}
@@ -2948,6 +2943,14 @@ accepting vector arguments?
 Readings: -
 \url{https://cran.r-project.org/web/packages/Rcpp/vignettes/Rcpp-package.pdf}
 - \url{http://adv-r.had.co.nz/Rcpp.html\#rcpp-package}
+
+\section{Getting serious about C++}\label{getting-serious-about-c}
+
+\subsection{STL}\label{stl}
+
+STL: Standard Template Library
+
+Reading: \url{http://adv-r.had.co.nz/Rcpp.html\#stl}
 
 \section{Profiling}\label{profiling}
 
@@ -3237,6 +3240,37 @@ The Oscar movie example comes from this lecture by Rafa Irizarry:
 
 \chapter{Big data}\label{bigdata}
 
+\section{How to deal with (very / too) large
+datasets?}\label{how-to-deal-with-very-too-large-datasets}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Use more RAM / processors / drive space\ldots{}
+\item
+  Use less data: (re)sample, \ldots{}
+\item
+  Use a database
+\item
+  Use specific R packages (\texttt{ff}, \texttt{bigmemory})
+\item
+  Use other tools
+\end{enumerate}
+
+\section{How big is big?}\label{how-big-is-big}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Fits in RAM and on drive (but slow)
+\item
+  Doesn't fit in RAM but fits on drive
+\item
+  Doesn't fit in RAM and doesn't fit on drive
+\end{enumerate}
+
 \section{List of tools}\label{list-of-tools}
 
 Reading: \citet{Varian2014}
@@ -3323,8 +3357,6 @@ faster.
 
 also tends to perform better than \texttt{read.csv}.
 
-\subsection{Reference vs copy}\label{reference-vs-copy}
-
 \begin{table}
 
 \caption{\label{tab:unnamed-chunk-108}I/O comparison}
@@ -3342,26 +3374,224 @@ readr & read\_csv & fast & tibble\\
 \end{tabular}
 \end{table}
 
+\subsection{Reference vs copy}\label{reference-vs-copy}
+
+Reading: \url{http://adv-r.had.co.nz/memory.html} Reading:
+\url{https://jangorecki.gitlab.io/data.table/library/data.table/html/assign.html}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(pryr)}
+\KeywordTok{library}\NormalTok{(data.table)}
+
+\NormalTok{d <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"~/Dropbox/Data17/ml-latest-small/ratings.csv"}\NormalTok{)}
+\NormalTok{D <-}\StringTok{ }\KeywordTok{fread}\NormalTok{(}\StringTok{"~/Dropbox/Data17/ml-latest-small/ratings.csv"}\NormalTok{)}
+
+\KeywordTok{object_size}\NormalTok{(d)}
+\KeywordTok{object_size}\NormalTok{(D)}
+
+\KeywordTok{mem_change}\NormalTok{(d}\OperatorTok{$}\NormalTok{Idx <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(d))}
+\KeywordTok{mem_change}\NormalTok{(D[, Idx}\OperatorTok{:}\ErrorTok{=}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{.N])}
+
+\KeywordTok{object_size}\NormalTok{(d}\OperatorTok{$}\NormalTok{Idx)}
+\KeywordTok{object_size}\NormalTok{(D}\OperatorTok{$}\NormalTok{Idx)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{d <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"~/Dropbox/Data17/ml-latest-small/ratings.csv"}\NormalTok{)}
+\NormalTok{D <-}\StringTok{ }\KeywordTok{fread}\NormalTok{(}\StringTok{"~/Dropbox/Data17/ml-latest-small/ratings.csv"}\NormalTok{)}
+
+\KeywordTok{.Internal}\NormalTok{(}\KeywordTok{inspect}\NormalTok{(d))}
+\NormalTok{d}\OperatorTok{$}\NormalTok{Idx <-}\StringTok{ }\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(d)}
+\KeywordTok{.Internal}\NormalTok{(}\KeywordTok{inspect}\NormalTok{(d))}
+
+\KeywordTok{.Internal}\NormalTok{(}\KeywordTok{inspect}\NormalTok{(D))}
+\NormalTok{D[, Idx}\OperatorTok{:}\ErrorTok{=}\StringTok{ }\DecValTok{1}\OperatorTok{:}\NormalTok{.N]}
+\KeywordTok{.Internal}\NormalTok{(}\KeywordTok{inspect}\NormalTok{(D))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{data.table: another data manipulation
+grammar}\label{data.table-another-data-manipulation-grammar}
+
+Reading:
+\url{https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:unnamed-chunk-111}{}{\label{exr:unnamed-chunk-111}
+}Benchmark adding a column to a large data frame vs a large data table.
+\EndKnitrBlock{exercise}
+
 \section{Data that doesn't fit in memory (but fits on
 drive)}\label{data-that-doesnt-fit-in-memory-but-fits-on-drive}
 
+Let's try to work with a 12GB file and 4/8 GB of memory\ldots{}
+
 \section{Pure R solutions}\label{pure-r-solutions}
+
+\subsection{A regressions example}\label{a-regressions-example}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(data.table)}
+\NormalTok{airlines <-}\StringTok{ }\KeywordTok{fread}\NormalTok{(}\StringTok{"/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.csv"}\NormalTok{)}
+\NormalTok{rfit <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(ArrDelay }\OperatorTok{~}\StringTok{ }\NormalTok{Distance, }\DataTypeTok{data =}\NormalTok{ airlines)}
+\KeywordTok{summary}\NormalTok{(rfit)}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{Sampling}\label{sampling}
 
+\begin{itemize}
+\tightlist
+\item
+  Read the data (even line by line)
+\item
+  Select a sample of rows
+\item
+  Run your model on the random sample
+\end{itemize}
+
 \subsection{\texorpdfstring{\texttt{bigmemory}}{bigmemory}}\label{bigmemory}
+
+\url{https://cran.r-project.org/web/packages/bigmemory/index.html}
+
+Reading:
+\url{https://cran.r-project.org/web/packages/bigmemory/vignettes/Overview.pdf}
+
+\textbf{bigmemory}: Manage Massive Matrices with Shared Memory and
+Memory-Mapped Files
+
+Create, store, access, and manipulate massive matrices. Matrices are
+allocated to shared memory and may use memory-mapped files. Packages
+`biganalytics', `bigtabulate', `synchronicity', and `bigalgebra' provide
+advanced functionality.
+
+\textbf{(+)} pure R solution from a user perspective
+
+\textbf{(-)} mostly for numeric data matrices, mostly to speed up
+computations on data of +/- RAM size
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(bigmemory)}
+\KeywordTok{library}\NormalTok{(biganalytics)}
+\CommentTok{# library(bigtabulate)}
+\CommentTok{# library(biglm)}
+
+\NormalTok{flights <-}\StringTok{ }\KeywordTok{read.big.matrix}\NormalTok{(}
+  \StringTok{"/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.csv"}\NormalTok{,}
+  \DataTypeTok{header =} \OtherTok{TRUE}\NormalTok{,}
+  \DataTypeTok{backingfile =} \StringTok{"allyears2k.bin"}\NormalTok{,}
+  \DataTypeTok{backingpath =} \StringTok{"/Users/cchoirat/Dropbox/Data17/AirFlights/"}\NormalTok{,}
+  \DataTypeTok{descriptorfile =} \StringTok{"allyears2k.desc"}\NormalTok{,}
+  \DataTypeTok{shared =} \OtherTok{TRUE}\NormalTok{)}
+
+\NormalTok{air_flights <-}\StringTok{ }\KeywordTok{attach.big.matrix}\NormalTok{(}\StringTok{"/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.desc"}\NormalTok{)}
+\KeywordTok{dim}\NormalTok{(air_flights)}
+\KeywordTok{colnames}\NormalTok{(air_flights)}
+\KeywordTok{mean}\NormalTok{(air_flights[, }\StringTok{"ArrDelay"}\NormalTok{], }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}
+
+\NormalTok{fit <-}\StringTok{ }\KeywordTok{biglm.big.matrix}\NormalTok{(ArrDelay }\OperatorTok{~}\StringTok{ }\NormalTok{Distance, }\DataTypeTok{data =}\NormalTok{ air_flights)}
+\NormalTok{fit}
+\KeywordTok{summary}\NormalTok{(fit)}
+\end{Highlighting}
+\end{Shaded}
 
 \subsection{Database connections and lazy
 evaluation}\label{database-connections-and-lazy-evaluation}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{D <-}\StringTok{ }\KeywordTok{fread}\NormalTok{(}\StringTok{"~/Dropbox/Data17/AirFlights/"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \section{Scaling up}\label{scaling-up}
 
-\subsection{Parallel computing and
+\section{Parallel computing and
 clusters}\label{parallel-computing-and-clusters}
 
-\subsection{Cloud computing}\label{cloud-computing}
+\section{Cloud computing}\label{cloud-computing}
 
-\subsection{Spark}\label{spark}
+More soon with the Odyssey guest lecture
+(\url{https://www.rc.fas.harvard.edu/odyssey/}).
+
+\section{\texorpdfstring{\texttt{h2o}: ``Fast Scalable Machine
+Learning''}{h2o: Fast Scalable Machine Learning}}\label{h2o-fast-scalable-machine-learning}
+
+\url{http://www.h2o.ai/}
+
+\url{http://www.r-bloggers.com/scalable-machine-learning-for-big-data-using-r-and-h2o/}
+
+\url{http://venturebeat.com/2014/11/07/h2o-funding/}
+\url{https://www.h2o.ai/driverless-ai/}
+\url{https://www.infoworld.com/article/3236048/machine-learning/review-h2oai-automates-machine-learning.html}
+
+\subsection{Ecosystem}\label{ecosystem}
+
+Readings:
+
+\begin{itemize}
+\item
+  \url{http://docs.h2o.ai/h2o/latest-stable/h2o-docs/welcome.html}
+\item
+  \url{http://www.h2o.ai/download/h2o/r}
+\item
+  \url{https://cran.r-project.org/web/packages/h2o/index.html}
+\end{itemize}
+
+\begin{quote}
+To build H2O or run H2O tests, the 64-bit JDK is required.
+
+To run the H2O binary using either the command line, R, or Python
+packages, only 64-bit JRE is required.
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ControlFlowTok{if}\NormalTok{ (}\StringTok{"package:h2o"} \OperatorTok{%in%}\StringTok{ }\KeywordTok{search}\NormalTok{()) \{ }\KeywordTok{detach}\NormalTok{(}\StringTok{"package:h2o"}\NormalTok{, }\DataTypeTok{unload=}\OtherTok{TRUE}\NormalTok{) \}}
+\ControlFlowTok{if}\NormalTok{ (}\StringTok{"h2o"} \OperatorTok{%in%}\StringTok{ }\KeywordTok{rownames}\NormalTok{(}\KeywordTok{installed.packages}\NormalTok{())) \{ }\KeywordTok{remove.packages}\NormalTok{(}\StringTok{"h2o"}\NormalTok{) \}}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"h2o"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Running h20 locally within
+R}\label{running-h20-locally-within-r}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(h2o)}
+\NormalTok{localH2O <-}\StringTok{ }\KeywordTok{h2o.init}\NormalTok{(}\DataTypeTok{min_mem_size =} \StringTok{"20g"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# h2o.init(ip = "localhost", port = 54321, startH2O = TRUE,}
+\CommentTok{#          forceDL = FALSE, enable_assertions = TRUE, license = NULL,}
+\CommentTok{#          nthreads = -2, max_mem_size = NULL, min_mem_size = NULL,}
+\CommentTok{#          ice_root = tempdir(), strict_version_check = TRUE,}
+\CommentTok{#          proxy = NA_character_, https = FALSE, insecure = FALSE,}
+\CommentTok{#          username = NA_character_, password = NA_character_)}
+\end{Highlighting}
+\end{Shaded}
+
+(No persistence beyond the R session when h2O is started from R.)
+
+\section{State of the JVM}\label{state-of-the-jvm}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{h2o.clusterInfo}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+Let's check \url{http://localhost:54321/}.
+
+\section{Spark}\label{spark}
 
 Reading: \url{https://spark.rstudio.com/}
 
@@ -3459,8 +3689,7 @@ Cache data:
 
 TODOL change the \texttt{config} arguments of the connection
 
-\subsection{\texorpdfstring{\texttt{h2o} and
-\texttt{Sparkling\ Water}}{h2o and Sparkling Water}}\label{h2o-and-sparkling-water}
+\section{\texorpdfstring{\texttt{Sparkling\ Water}}{Sparkling Water}}\label{sparkling-water}
 
 Reading: \url{https://spark.rstudio.com/h2o.html}
 

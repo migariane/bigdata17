@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-11-11">
+<meta name="date" content="2017-11-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -205,7 +205,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.5.7" data-path="optimization.html"><a href="optimization.html#back-to-linreg"><i class="fa fa-check"></i><b>4.5.7</b> Back to Linreg</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="optimization.html"><a href="optimization.html#rcpp-packages"><i class="fa fa-check"></i><b>4.6</b> Rcpp packages</a></li>
-<li class="chapter" data-level="4.7" data-path="optimization.html"><a href="optimization.html#profiling"><i class="fa fa-check"></i><b>4.7</b> Profiling</a></li>
+<li class="chapter" data-level="4.7" data-path="optimization.html"><a href="optimization.html#getting-serious-about-c"><i class="fa fa-check"></i><b>4.7</b> Getting serious about C++</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="optimization.html"><a href="optimization.html#stl"><i class="fa fa-check"></i><b>4.7.1</b> STL</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="optimization.html"><a href="optimization.html#profiling"><i class="fa fa-check"></i><b>4.8</b> Profiling</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>5</b> SQL</a><ul>
 <li class="chapter" data-level="5.1" data-path="databases.html"><a href="databases.html#what-is-sql"><i class="fa fa-check"></i><b>5.1</b> What is SQL?</a><ul>
@@ -229,23 +232,32 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.5" data-path="databases.html"><a href="databases.html#references"><i class="fa fa-check"></i><b>5.5</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>6</b> Big data</a><ul>
-<li class="chapter" data-level="6.1" data-path="bigdata.html"><a href="bigdata.html#list-of-tools"><i class="fa fa-check"></i><b>6.1</b> List of tools</a></li>
-<li class="chapter" data-level="6.2" data-path="bigdata.html"><a href="bigdata.html#data-that-fits-in-memory"><i class="fa fa-check"></i><b>6.2</b> Data that fits in memory</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="bigdata.html"><a href="bigdata.html#faster-io"><i class="fa fa-check"></i><b>6.2.1</b> Faster I/O</a></li>
-<li class="chapter" data-level="6.2.2" data-path="bigdata.html"><a href="bigdata.html#reference-vs-copy"><i class="fa fa-check"></i><b>6.2.2</b> Reference vs copy</a></li>
+<li class="chapter" data-level="6.1" data-path="bigdata.html"><a href="bigdata.html#how-to-deal-with-very-too-large-datasets"><i class="fa fa-check"></i><b>6.1</b> How to deal with (very / too) large datasets?</a></li>
+<li class="chapter" data-level="6.2" data-path="bigdata.html"><a href="bigdata.html#how-big-is-big"><i class="fa fa-check"></i><b>6.2</b> How big is big?</a></li>
+<li class="chapter" data-level="6.3" data-path="bigdata.html"><a href="bigdata.html#list-of-tools"><i class="fa fa-check"></i><b>6.3</b> List of tools</a></li>
+<li class="chapter" data-level="6.4" data-path="bigdata.html"><a href="bigdata.html#data-that-fits-in-memory"><i class="fa fa-check"></i><b>6.4</b> Data that fits in memory</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="bigdata.html"><a href="bigdata.html#faster-io"><i class="fa fa-check"></i><b>6.4.1</b> Faster I/O</a></li>
+<li class="chapter" data-level="6.4.2" data-path="bigdata.html"><a href="bigdata.html#reference-vs-copy"><i class="fa fa-check"></i><b>6.4.2</b> Reference vs copy</a></li>
+<li class="chapter" data-level="6.4.3" data-path="bigdata.html"><a href="bigdata.html#data.table-another-data-manipulation-grammar"><i class="fa fa-check"></i><b>6.4.3</b> data.table: another data manipulation grammar</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="bigdata.html"><a href="bigdata.html#data-that-doesnt-fit-in-memory-but-fits-on-drive"><i class="fa fa-check"></i><b>6.3</b> Data that doesn’t fit in memory (but fits on drive)</a></li>
-<li class="chapter" data-level="6.4" data-path="bigdata.html"><a href="bigdata.html#pure-r-solutions"><i class="fa fa-check"></i><b>6.4</b> Pure R solutions</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="bigdata.html"><a href="bigdata.html#sampling"><i class="fa fa-check"></i><b>6.4.1</b> Sampling</a></li>
-<li class="chapter" data-level="6.4.2" data-path="bigdata.html"><a href="bigdata.html#bigmemory"><i class="fa fa-check"></i><b>6.4.2</b> <code>bigmemory</code></a></li>
-<li class="chapter" data-level="6.4.3" data-path="bigdata.html"><a href="bigdata.html#database-connections-and-lazy-evaluation"><i class="fa fa-check"></i><b>6.4.3</b> Database connections and lazy evaluation</a></li>
+<li class="chapter" data-level="6.5" data-path="bigdata.html"><a href="bigdata.html#data-that-doesnt-fit-in-memory-but-fits-on-drive"><i class="fa fa-check"></i><b>6.5</b> Data that doesn’t fit in memory (but fits on drive)</a></li>
+<li class="chapter" data-level="6.6" data-path="bigdata.html"><a href="bigdata.html#pure-r-solutions"><i class="fa fa-check"></i><b>6.6</b> Pure R solutions</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="bigdata.html"><a href="bigdata.html#a-regressions-example"><i class="fa fa-check"></i><b>6.6.1</b> A regressions example</a></li>
+<li class="chapter" data-level="6.6.2" data-path="bigdata.html"><a href="bigdata.html#sampling"><i class="fa fa-check"></i><b>6.6.2</b> Sampling</a></li>
+<li class="chapter" data-level="6.6.3" data-path="bigdata.html"><a href="bigdata.html#bigmemory"><i class="fa fa-check"></i><b>6.6.3</b> <code>bigmemory</code></a></li>
+<li class="chapter" data-level="6.6.4" data-path="bigdata.html"><a href="bigdata.html#database-connections-and-lazy-evaluation"><i class="fa fa-check"></i><b>6.6.4</b> Database connections and lazy evaluation</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="bigdata.html"><a href="bigdata.html#scaling-up"><i class="fa fa-check"></i><b>6.5</b> Scaling up</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="bigdata.html"><a href="bigdata.html#parallel-computing-and-clusters"><i class="fa fa-check"></i><b>6.5.1</b> Parallel computing and clusters</a></li>
-<li class="chapter" data-level="6.5.2" data-path="bigdata.html"><a href="bigdata.html#cloud-computing"><i class="fa fa-check"></i><b>6.5.2</b> Cloud computing</a></li>
-<li class="chapter" data-level="6.5.3" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.5.3</b> Spark</a></li>
-<li class="chapter" data-level="6.5.4" data-path="bigdata.html"><a href="bigdata.html#h2o-and-sparkling-water"><i class="fa fa-check"></i><b>6.5.4</b> <code>h2o</code> and <code>Sparkling Water</code></a></li>
-<li class="chapter" data-level="6.5.5" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.5.5</b> More?</a></li>
+<li class="chapter" data-level="6.7" data-path="bigdata.html"><a href="bigdata.html#scaling-up"><i class="fa fa-check"></i><b>6.7</b> Scaling up</a></li>
+<li class="chapter" data-level="6.8" data-path="bigdata.html"><a href="bigdata.html#parallel-computing-and-clusters"><i class="fa fa-check"></i><b>6.8</b> Parallel computing and clusters</a></li>
+<li class="chapter" data-level="6.9" data-path="bigdata.html"><a href="bigdata.html#cloud-computing"><i class="fa fa-check"></i><b>6.9</b> Cloud computing</a></li>
+<li class="chapter" data-level="6.10" data-path="bigdata.html"><a href="bigdata.html#h2o-fast-scalable-machine-learning"><i class="fa fa-check"></i><b>6.10</b> <code>h2o</code>: “Fast Scalable Machine Learning”</a><ul>
+<li class="chapter" data-level="6.10.1" data-path="bigdata.html"><a href="bigdata.html#ecosystem"><i class="fa fa-check"></i><b>6.10.1</b> Ecosystem</a></li>
+</ul></li>
+<li class="chapter" data-level="6.11" data-path="bigdata.html"><a href="bigdata.html#running-h20-locally-within-r"><i class="fa fa-check"></i><b>6.11</b> Running h20 locally within R</a></li>
+<li class="chapter" data-level="6.12" data-path="bigdata.html"><a href="bigdata.html#state-of-the-jvm"><i class="fa fa-check"></i><b>6.12</b> State of the JVM</a></li>
+<li class="chapter" data-level="6.13" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.13</b> Spark</a></li>
+<li class="chapter" data-level="6.14" data-path="bigdata.html"><a href="bigdata.html#sparkling-water"><i class="fa fa-check"></i><b>6.14</b> <code>Sparkling Water</code></a><ul>
+<li class="chapter" data-level="6.14.1" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.14.1</b> More?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>7</b> Visualization</a><ul>
@@ -275,8 +287,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="bigdata" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Big data</h1>
+<div id="how-to-deal-with-very-too-large-datasets" class="section level2">
+<h2><span class="header-section-number">6.1</span> How to deal with (very / too) large datasets?</h2>
+<ol style="list-style-type: decimal">
+<li>Use more RAM / processors / drive space…</li>
+<li>Use less data: (re)sample, …</li>
+<li>Use a database</li>
+<li>Use specific R packages (<code>ff</code>, <code>bigmemory</code>)</li>
+<li>Use other tools</li>
+</ol>
+</div>
+<div id="how-big-is-big" class="section level2">
+<h2><span class="header-section-number">6.2</span> How big is big?</h2>
+<ol style="list-style-type: decimal">
+<li>Fits in RAM and on drive (but slow)</li>
+<li>Doesn’t fit in RAM but fits on drive</li>
+<li>Doesn’t fit in RAM and doesn’t fit on drive</li>
+</ol>
+</div>
 <div id="list-of-tools" class="section level2">
-<h2><span class="header-section-number">6.1</span> List of tools</h2>
+<h2><span class="header-section-number">6.3</span> List of tools</h2>
 <p>Reading: <span class="citation">Varian (<a href="#ref-Varian2014">2014</a>)</span> (<a href="http://pubs.aeaweb.org/doi/pdfplus/10.1257/jep.28.2.3">PDF available</a>)</p>
 <p><img src="images/ch6_tool_list.png" width="374" style="display: block; margin: auto;" /></p>
 <p>Spark? h2o? More? Let’s go back to the bottlenecks</p>
@@ -287,9 +317,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 </div>
 <div id="data-that-fits-in-memory" class="section level2">
-<h2><span class="header-section-number">6.2</span> Data that fits in memory</h2>
+<h2><span class="header-section-number">6.4</span> Data that fits in memory</h2>
 <div id="faster-io" class="section level3">
-<h3><span class="header-section-number">6.2.1</span> Faster I/O</h3>
+<h3><span class="header-section-number">6.4.1</span> Faster I/O</h3>
 <p>Reading: <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html" class="uri">https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html</a></p>
 <p><code>data.table</code> provides an enhanced of a <code>data.frame</code> and faster I/O with <code>fread</code> and <code>fwrite</code>.</p>
 <p>To read the 0.5GB ratings file from MovieLens</p>
@@ -310,9 +340,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <pre class="txt"><code>   user  system elapsed 
  10.290   3.037  18.450 </code></pre>
 <p>also tends to perform better than <code>read.csv</code>.</p>
-</div>
-<div id="reference-vs-copy" class="section level3">
-<h3><span class="header-section-number">6.2.2</span> Reference vs copy</h3>
 <table>
 <caption><span id="tab:unnamed-chunk-108">Table 6.1: </span>I/O comparison</caption>
 <thead>
@@ -345,32 +372,151 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </tbody>
 </table>
 </div>
+<div id="reference-vs-copy" class="section level3">
+<h3><span class="header-section-number">6.4.2</span> Reference vs copy</h3>
+<p>Reading: <a href="http://adv-r.had.co.nz/memory.html" class="uri">http://adv-r.had.co.nz/memory.html</a> Reading: <a href="https://jangorecki.gitlab.io/data.table/library/data.table/html/assign.html" class="uri">https://jangorecki.gitlab.io/data.table/library/data.table/html/assign.html</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pryr)
+<span class="kw">library</span>(data.table)
+
+d &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/Data17/ml-latest-small/ratings.csv&quot;</span>)
+D &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;~/Dropbox/Data17/ml-latest-small/ratings.csv&quot;</span>)
+
+<span class="kw">object_size</span>(d)
+<span class="kw">object_size</span>(D)
+
+<span class="kw">mem_change</span>(d<span class="op">$</span>Idx &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(d))
+<span class="kw">mem_change</span>(D[, Idx<span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span>.N])
+
+<span class="kw">object_size</span>(d<span class="op">$</span>Idx)
+<span class="kw">object_size</span>(D<span class="op">$</span>Idx)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/Data17/ml-latest-small/ratings.csv&quot;</span>)
+D &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;~/Dropbox/Data17/ml-latest-small/ratings.csv&quot;</span>)
+
+<span class="kw">.Internal</span>(<span class="kw">inspect</span>(d))
+d<span class="op">$</span>Idx &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(d)
+<span class="kw">.Internal</span>(<span class="kw">inspect</span>(d))
+
+<span class="kw">.Internal</span>(<span class="kw">inspect</span>(D))
+D[, Idx<span class="op">:</span><span class="er">=</span><span class="st"> </span><span class="dv">1</span><span class="op">:</span>.N]
+<span class="kw">.Internal</span>(<span class="kw">inspect</span>(D))</code></pre></div>
+</div>
+<div id="data.table-another-data-manipulation-grammar" class="section level3">
+<h3><span class="header-section-number">6.4.3</span> data.table: another data manipulation grammar</h3>
+<p>Reading: <a href="https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html" class="uri">https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html</a></p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-111" class="exercise"><strong>Exercise 6.1  </strong></span>Benchmark adding a column to a large data frame vs a large data table.
+</div>
+
+</div>
 </div>
 <div id="data-that-doesnt-fit-in-memory-but-fits-on-drive" class="section level2">
-<h2><span class="header-section-number">6.3</span> Data that doesn’t fit in memory (but fits on drive)</h2>
+<h2><span class="header-section-number">6.5</span> Data that doesn’t fit in memory (but fits on drive)</h2>
+<p>Let’s try to work with a 12GB file and 4/8 GB of memory…</p>
 </div>
 <div id="pure-r-solutions" class="section level2">
-<h2><span class="header-section-number">6.4</span> Pure R solutions</h2>
+<h2><span class="header-section-number">6.6</span> Pure R solutions</h2>
+<div id="a-regressions-example" class="section level3">
+<h3><span class="header-section-number">6.6.1</span> A regressions example</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table)
+airlines &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.csv&quot;</span>)
+rfit &lt;-<span class="st"> </span><span class="kw">lm</span>(ArrDelay <span class="op">~</span><span class="st"> </span>Distance, <span class="dt">data =</span> airlines)
+<span class="kw">summary</span>(rfit)</code></pre></div>
+</div>
 <div id="sampling" class="section level3">
-<h3><span class="header-section-number">6.4.1</span> Sampling</h3>
+<h3><span class="header-section-number">6.6.2</span> Sampling</h3>
+<ul>
+<li>Read the data (even line by line)</li>
+<li>Select a sample of rows</li>
+<li>Run your model on the random sample</li>
+</ul>
 </div>
 <div id="bigmemory" class="section level3">
-<h3><span class="header-section-number">6.4.2</span> <code>bigmemory</code></h3>
+<h3><span class="header-section-number">6.6.3</span> <code>bigmemory</code></h3>
+<p><a href="https://cran.r-project.org/web/packages/bigmemory/index.html" class="uri">https://cran.r-project.org/web/packages/bigmemory/index.html</a></p>
+<p>Reading: <a href="https://cran.r-project.org/web/packages/bigmemory/vignettes/Overview.pdf" class="uri">https://cran.r-project.org/web/packages/bigmemory/vignettes/Overview.pdf</a></p>
+<p><strong>bigmemory</strong>: Manage Massive Matrices with Shared Memory and Memory-Mapped Files</p>
+<p>Create, store, access, and manipulate massive matrices. Matrices are allocated to shared memory and may use memory-mapped files. Packages ‘biganalytics’, ‘bigtabulate’, ‘synchronicity’, and ‘bigalgebra’ provide advanced functionality.</p>
+<p><strong>(+)</strong> pure R solution from a user perspective</p>
+<p><strong>(-)</strong> mostly for numeric data matrices, mostly to speed up computations on data of +/- RAM size</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(bigmemory)
+<span class="kw">library</span>(biganalytics)
+<span class="co"># library(bigtabulate)</span>
+<span class="co"># library(biglm)</span>
+
+flights &lt;-<span class="st"> </span><span class="kw">read.big.matrix</span>(
+  <span class="st">&quot;/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.csv&quot;</span>,
+  <span class="dt">header =</span> <span class="ot">TRUE</span>,
+  <span class="dt">backingfile =</span> <span class="st">&quot;allyears2k.bin&quot;</span>,
+  <span class="dt">backingpath =</span> <span class="st">&quot;/Users/cchoirat/Dropbox/Data17/AirFlights/&quot;</span>,
+  <span class="dt">descriptorfile =</span> <span class="st">&quot;allyears2k.desc&quot;</span>,
+  <span class="dt">shared =</span> <span class="ot">TRUE</span>)
+
+air_flights &lt;-<span class="st"> </span><span class="kw">attach.big.matrix</span>(<span class="st">&quot;/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.desc&quot;</span>)
+<span class="kw">dim</span>(air_flights)
+<span class="kw">colnames</span>(air_flights)
+<span class="kw">mean</span>(air_flights[, <span class="st">&quot;ArrDelay&quot;</span>], <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
+
+fit &lt;-<span class="st"> </span><span class="kw">biglm.big.matrix</span>(ArrDelay <span class="op">~</span><span class="st"> </span>Distance, <span class="dt">data =</span> air_flights)
+fit
+<span class="kw">summary</span>(fit)</code></pre></div>
 </div>
 <div id="database-connections-and-lazy-evaluation" class="section level3">
-<h3><span class="header-section-number">6.4.3</span> Database connections and lazy evaluation</h3>
+<h3><span class="header-section-number">6.6.4</span> Database connections and lazy evaluation</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">D &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;~/Dropbox/Data17/AirFlights/&quot;</span>)</code></pre></div>
 </div>
 </div>
 <div id="scaling-up" class="section level2">
-<h2><span class="header-section-number">6.5</span> Scaling up</h2>
-<div id="parallel-computing-and-clusters" class="section level3">
-<h3><span class="header-section-number">6.5.1</span> Parallel computing and clusters</h3>
+<h2><span class="header-section-number">6.7</span> Scaling up</h2>
 </div>
-<div id="cloud-computing" class="section level3">
-<h3><span class="header-section-number">6.5.2</span> Cloud computing</h3>
+<div id="parallel-computing-and-clusters" class="section level2">
+<h2><span class="header-section-number">6.8</span> Parallel computing and clusters</h2>
 </div>
-<div id="spark" class="section level3">
-<h3><span class="header-section-number">6.5.3</span> Spark</h3>
+<div id="cloud-computing" class="section level2">
+<h2><span class="header-section-number">6.9</span> Cloud computing</h2>
+<p>More soon with the Odyssey guest lecture (<a href="https://www.rc.fas.harvard.edu/odyssey/" class="uri">https://www.rc.fas.harvard.edu/odyssey/</a>).</p>
+</div>
+<div id="h2o-fast-scalable-machine-learning" class="section level2">
+<h2><span class="header-section-number">6.10</span> <code>h2o</code>: “Fast Scalable Machine Learning”</h2>
+<p><a href="http://www.h2o.ai/" class="uri">http://www.h2o.ai/</a></p>
+<p><a href="http://www.r-bloggers.com/scalable-machine-learning-for-big-data-using-r-and-h2o/" class="uri">http://www.r-bloggers.com/scalable-machine-learning-for-big-data-using-r-and-h2o/</a></p>
+<p><a href="http://venturebeat.com/2014/11/07/h2o-funding/" class="uri">http://venturebeat.com/2014/11/07/h2o-funding/</a> <a href="https://www.h2o.ai/driverless-ai/" class="uri">https://www.h2o.ai/driverless-ai/</a> <a href="https://www.infoworld.com/article/3236048/machine-learning/review-h2oai-automates-machine-learning.html" class="uri">https://www.infoworld.com/article/3236048/machine-learning/review-h2oai-automates-machine-learning.html</a></p>
+<div id="ecosystem" class="section level3">
+<h3><span class="header-section-number">6.10.1</span> Ecosystem</h3>
+<p>Readings:</p>
+<ul>
+<li><p><a href="http://docs.h2o.ai/h2o/latest-stable/h2o-docs/welcome.html" class="uri">http://docs.h2o.ai/h2o/latest-stable/h2o-docs/welcome.html</a></p></li>
+<li><p><a href="http://www.h2o.ai/download/h2o/r" class="uri">http://www.h2o.ai/download/h2o/r</a></p></li>
+<li><p><a href="https://cran.r-project.org/web/packages/h2o/index.html" class="uri">https://cran.r-project.org/web/packages/h2o/index.html</a></p></li>
+</ul>
+<blockquote>
+<p>To build H2O or run H2O tests, the 64-bit JDK is required.</p>
+<p>To run the H2O binary using either the command line, R, or Python packages, only 64-bit JRE is required.</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (<span class="st">&quot;package:h2o&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">search</span>()) { <span class="kw">detach</span>(<span class="st">&quot;package:h2o&quot;</span>, <span class="dt">unload=</span><span class="ot">TRUE</span>) }
+<span class="cf">if</span> (<span class="st">&quot;h2o&quot;</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">rownames</span>(<span class="kw">installed.packages</span>())) { <span class="kw">remove.packages</span>(<span class="st">&quot;h2o&quot;</span>) }
+<span class="kw">install.packages</span>(<span class="st">&quot;h2o&quot;</span>)</code></pre></div>
+</div>
+</div>
+<div id="running-h20-locally-within-r" class="section level2">
+<h2><span class="header-section-number">6.11</span> Running h20 locally within R</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(h2o)
+localH2O &lt;-<span class="st"> </span><span class="kw">h2o.init</span>(<span class="dt">min_mem_size =</span> <span class="st">&quot;20g&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># h2o.init(ip = &quot;localhost&quot;, port = 54321, startH2O = TRUE,</span>
+<span class="co">#          forceDL = FALSE, enable_assertions = TRUE, license = NULL,</span>
+<span class="co">#          nthreads = -2, max_mem_size = NULL, min_mem_size = NULL,</span>
+<span class="co">#          ice_root = tempdir(), strict_version_check = TRUE,</span>
+<span class="co">#          proxy = NA_character_, https = FALSE, insecure = FALSE,</span>
+<span class="co">#          username = NA_character_, password = NA_character_)</span></code></pre></div>
+<p>(No persistence beyond the R session when h2O is started from R.)</p>
+</div>
+<div id="state-of-the-jvm" class="section level2">
+<h2><span class="header-section-number">6.12</span> State of the JVM</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">h2o.clusterInfo</span>()</code></pre></div>
+<p>Let’s check <a href="http://localhost:54321/" class="uri">http://localhost:54321/</a>.</p>
+</div>
+<div id="spark" class="section level2">
+<h2><span class="header-section-number">6.13</span> Spark</h2>
 <p>Reading: <a href="https://spark.rstudio.com/" class="uri">https://spark.rstudio.com/</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sparklyr)
 <span class="kw">spark_install</span>(<span class="dt">version =</span> <span class="st">&quot;2.1.0&quot;</span>)</code></pre></div>
@@ -413,12 +559,11 @@ flights_table <span class="op">%&gt;%</span><span class="st"> </span>head</code>
 <span class="kw">ml_linear_regression</span>(subset_table, <span class="dt">response =</span> <span class="st">&quot;ArrDelay&quot;</span>, <span class="dt">features =</span> <span class="st">&quot;SchedDeparture&quot;</span>)</code></pre></div>
 <p>TODOL change the <code>config</code> arguments of the connection</p>
 </div>
-<div id="h2o-and-sparkling-water" class="section level3">
-<h3><span class="header-section-number">6.5.4</span> <code>h2o</code> and <code>Sparkling Water</code></h3>
+<div id="sparkling-water" class="section level2">
+<h2><span class="header-section-number">6.14</span> <code>Sparkling Water</code></h2>
 <p>Reading: <a href="https://spark.rstudio.com/h2o.html" class="uri">https://spark.rstudio.com/h2o.html</a></p>
-</div>
 <div id="more" class="section level3">
-<h3><span class="header-section-number">6.5.5</span> More?</h3>
+<h3><span class="header-section-number">6.14.1</span> More?</h3>
 <p>GPU</p>
 
 </div>

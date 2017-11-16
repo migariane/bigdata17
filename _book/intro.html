@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-11-11">
+<meta name="date" content="2017-11-15">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -205,7 +205,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.5.7" data-path="optimization.html"><a href="optimization.html#back-to-linreg"><i class="fa fa-check"></i><b>4.5.7</b> Back to Linreg</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="optimization.html"><a href="optimization.html#rcpp-packages"><i class="fa fa-check"></i><b>4.6</b> Rcpp packages</a></li>
-<li class="chapter" data-level="4.7" data-path="optimization.html"><a href="optimization.html#profiling"><i class="fa fa-check"></i><b>4.7</b> Profiling</a></li>
+<li class="chapter" data-level="4.7" data-path="optimization.html"><a href="optimization.html#getting-serious-about-c"><i class="fa fa-check"></i><b>4.7</b> Getting serious about C++</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="optimization.html"><a href="optimization.html#stl"><i class="fa fa-check"></i><b>4.7.1</b> STL</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="optimization.html"><a href="optimization.html#profiling"><i class="fa fa-check"></i><b>4.8</b> Profiling</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="databases.html"><a href="databases.html"><i class="fa fa-check"></i><b>5</b> SQL</a><ul>
 <li class="chapter" data-level="5.1" data-path="databases.html"><a href="databases.html#what-is-sql"><i class="fa fa-check"></i><b>5.1</b> What is SQL?</a><ul>
@@ -229,23 +232,32 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.5" data-path="databases.html"><a href="databases.html#references"><i class="fa fa-check"></i><b>5.5</b> References</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>6</b> Big data</a><ul>
-<li class="chapter" data-level="6.1" data-path="bigdata.html"><a href="bigdata.html#list-of-tools"><i class="fa fa-check"></i><b>6.1</b> List of tools</a></li>
-<li class="chapter" data-level="6.2" data-path="bigdata.html"><a href="bigdata.html#data-that-fits-in-memory"><i class="fa fa-check"></i><b>6.2</b> Data that fits in memory</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="bigdata.html"><a href="bigdata.html#faster-io"><i class="fa fa-check"></i><b>6.2.1</b> Faster I/O</a></li>
-<li class="chapter" data-level="6.2.2" data-path="bigdata.html"><a href="bigdata.html#reference-vs-copy"><i class="fa fa-check"></i><b>6.2.2</b> Reference vs copy</a></li>
+<li class="chapter" data-level="6.1" data-path="bigdata.html"><a href="bigdata.html#how-to-deal-with-very-too-large-datasets"><i class="fa fa-check"></i><b>6.1</b> How to deal with (very / too) large datasets?</a></li>
+<li class="chapter" data-level="6.2" data-path="bigdata.html"><a href="bigdata.html#how-big-is-big"><i class="fa fa-check"></i><b>6.2</b> How big is big?</a></li>
+<li class="chapter" data-level="6.3" data-path="bigdata.html"><a href="bigdata.html#list-of-tools"><i class="fa fa-check"></i><b>6.3</b> List of tools</a></li>
+<li class="chapter" data-level="6.4" data-path="bigdata.html"><a href="bigdata.html#data-that-fits-in-memory"><i class="fa fa-check"></i><b>6.4</b> Data that fits in memory</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="bigdata.html"><a href="bigdata.html#faster-io"><i class="fa fa-check"></i><b>6.4.1</b> Faster I/O</a></li>
+<li class="chapter" data-level="6.4.2" data-path="bigdata.html"><a href="bigdata.html#reference-vs-copy"><i class="fa fa-check"></i><b>6.4.2</b> Reference vs copy</a></li>
+<li class="chapter" data-level="6.4.3" data-path="bigdata.html"><a href="bigdata.html#data.table-another-data-manipulation-grammar"><i class="fa fa-check"></i><b>6.4.3</b> data.table: another data manipulation grammar</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="bigdata.html"><a href="bigdata.html#data-that-doesnt-fit-in-memory-but-fits-on-drive"><i class="fa fa-check"></i><b>6.3</b> Data that doesn’t fit in memory (but fits on drive)</a></li>
-<li class="chapter" data-level="6.4" data-path="bigdata.html"><a href="bigdata.html#pure-r-solutions"><i class="fa fa-check"></i><b>6.4</b> Pure R solutions</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="bigdata.html"><a href="bigdata.html#sampling"><i class="fa fa-check"></i><b>6.4.1</b> Sampling</a></li>
-<li class="chapter" data-level="6.4.2" data-path="bigdata.html"><a href="bigdata.html#bigmemory"><i class="fa fa-check"></i><b>6.4.2</b> <code>bigmemory</code></a></li>
-<li class="chapter" data-level="6.4.3" data-path="bigdata.html"><a href="bigdata.html#database-connections-and-lazy-evaluation"><i class="fa fa-check"></i><b>6.4.3</b> Database connections and lazy evaluation</a></li>
+<li class="chapter" data-level="6.5" data-path="bigdata.html"><a href="bigdata.html#data-that-doesnt-fit-in-memory-but-fits-on-drive"><i class="fa fa-check"></i><b>6.5</b> Data that doesn’t fit in memory (but fits on drive)</a></li>
+<li class="chapter" data-level="6.6" data-path="bigdata.html"><a href="bigdata.html#pure-r-solutions"><i class="fa fa-check"></i><b>6.6</b> Pure R solutions</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="bigdata.html"><a href="bigdata.html#a-regressions-example"><i class="fa fa-check"></i><b>6.6.1</b> A regressions example</a></li>
+<li class="chapter" data-level="6.6.2" data-path="bigdata.html"><a href="bigdata.html#sampling"><i class="fa fa-check"></i><b>6.6.2</b> Sampling</a></li>
+<li class="chapter" data-level="6.6.3" data-path="bigdata.html"><a href="bigdata.html#bigmemory"><i class="fa fa-check"></i><b>6.6.3</b> <code>bigmemory</code></a></li>
+<li class="chapter" data-level="6.6.4" data-path="bigdata.html"><a href="bigdata.html#database-connections-and-lazy-evaluation"><i class="fa fa-check"></i><b>6.6.4</b> Database connections and lazy evaluation</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="bigdata.html"><a href="bigdata.html#scaling-up"><i class="fa fa-check"></i><b>6.5</b> Scaling up</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="bigdata.html"><a href="bigdata.html#parallel-computing-and-clusters"><i class="fa fa-check"></i><b>6.5.1</b> Parallel computing and clusters</a></li>
-<li class="chapter" data-level="6.5.2" data-path="bigdata.html"><a href="bigdata.html#cloud-computing"><i class="fa fa-check"></i><b>6.5.2</b> Cloud computing</a></li>
-<li class="chapter" data-level="6.5.3" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.5.3</b> Spark</a></li>
-<li class="chapter" data-level="6.5.4" data-path="bigdata.html"><a href="bigdata.html#h2o-and-sparkling-water"><i class="fa fa-check"></i><b>6.5.4</b> <code>h2o</code> and <code>Sparkling Water</code></a></li>
-<li class="chapter" data-level="6.5.5" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.5.5</b> More?</a></li>
+<li class="chapter" data-level="6.7" data-path="bigdata.html"><a href="bigdata.html#scaling-up"><i class="fa fa-check"></i><b>6.7</b> Scaling up</a></li>
+<li class="chapter" data-level="6.8" data-path="bigdata.html"><a href="bigdata.html#parallel-computing-and-clusters"><i class="fa fa-check"></i><b>6.8</b> Parallel computing and clusters</a></li>
+<li class="chapter" data-level="6.9" data-path="bigdata.html"><a href="bigdata.html#cloud-computing"><i class="fa fa-check"></i><b>6.9</b> Cloud computing</a></li>
+<li class="chapter" data-level="6.10" data-path="bigdata.html"><a href="bigdata.html#h2o-fast-scalable-machine-learning"><i class="fa fa-check"></i><b>6.10</b> <code>h2o</code>: “Fast Scalable Machine Learning”</a><ul>
+<li class="chapter" data-level="6.10.1" data-path="bigdata.html"><a href="bigdata.html#ecosystem"><i class="fa fa-check"></i><b>6.10.1</b> Ecosystem</a></li>
+</ul></li>
+<li class="chapter" data-level="6.11" data-path="bigdata.html"><a href="bigdata.html#running-h20-locally-within-r"><i class="fa fa-check"></i><b>6.11</b> Running h20 locally within R</a></li>
+<li class="chapter" data-level="6.12" data-path="bigdata.html"><a href="bigdata.html#state-of-the-jvm"><i class="fa fa-check"></i><b>6.12</b> State of the JVM</a></li>
+<li class="chapter" data-level="6.13" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.13</b> Spark</a></li>
+<li class="chapter" data-level="6.14" data-path="bigdata.html"><a href="bigdata.html#sparkling-water"><i class="fa fa-check"></i><b>6.14</b> <code>Sparkling Water</code></a><ul>
+<li class="chapter" data-level="6.14.1" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.14.1</b> More?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>7</b> Visualization</a><ul>
@@ -276,7 +288,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">Computing for Big Data (BST-262)</h1>
 <h4 class="author"><em>Christine Choirat</em></h4>
-<h4 class="date"><em>2017-11-11</em></h4>
+<h4 class="date"><em>2017-11-15</em></h4>
 </div>
 <div id="intro" class="section level1">
 <h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
