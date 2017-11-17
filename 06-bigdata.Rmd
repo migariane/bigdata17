@@ -253,13 +253,110 @@ localH2O <- h2o.init(min_mem_size = "20g")
 
 (No persistence beyond the R session when h2O is started from R.)
 
-## State of the JVM
+```{r eval=FALSE}
+ Connection successful!
+
+R is connected to the H2O cluster: 
+    H2O cluster uptime:         19 days 12 hours 
+    H2O cluster version:        3.14.0.3 
+    H2O cluster version age:    1 month and 24 days  
+    H2O cluster name:           H2O_started_from_R_cchoirat_bgt310 
+    H2O cluster total nodes:    1 
+    H2O cluster total memory:   15.18 GB 
+    H2O cluster total cores:    8 
+    H2O cluster allowed cores:  8 
+    H2O cluster healthy:        TRUE 
+    H2O Connection ip:          localhost 
+    H2O Connection port:        54321 
+    H2O Connection proxy:       NA 
+    H2O Internal Security:      FALSE 
+    H2O API Extensions:         XGBoost, Algos, AutoML, Core V3, Core V4 
+    R Version:                  R version 3.4.2 (2017-09-28) 
+```
+
+## JVM (from Wikipedia)
+
+A Java virtual machine (JVM) is an abstract computing machine that enables a computer to run a Java program. There are three notions of the JVM: specification, implementation, and instance. The specification is a document that formally describes what is required of a JVM implementation.
+
+(https://en.wikipedia.org/wiki/Java_virtual_machine)
+
+## Which languages? (from Wikipedia)
+
+This list of JVM Languages comprises notable computer programming languages that are used to produce software that runs on the Java Virtual Machine (JVM). Some of these languages are interpreted by a Java program, and some are compiled to Java bytecode and JIT-compiled during execution as regular Java programs to improve performance.
+
+## Which languages?
+
+https://en.wikipedia.org/wiki/List_of_JVM_languages
+
+- Java
+- Scala, an object-oriented and functional programming language
+- Jython
+- R (an implementation of R: https://en.wikipedia.org/wiki/Renjin)
+- ...
+
+## State of the h2o JVM
 
 ```{r eval=FALSE}
 h2o.clusterInfo()
 ```
 
-Let's check http://localhost:54321/.
+```{r eval=FALSE}
+R is connected to the H2O cluster: 
+    H2O cluster uptime:         19 days 13 hours 
+    H2O cluster version:        3.14.0.3 
+    H2O cluster version age:    1 month and 24 days  
+    H2O cluster name:           H2O_started_from_R_cchoirat_bgt310 
+    H2O cluster total nodes:    1 
+    H2O cluster total memory:   15.18 GB 
+    H2O cluster total cores:    8 
+    H2O cluster allowed cores:  8 
+    H2O cluster healthy:        TRUE 
+    H2O Connection ip:          localhost 
+    H2O Connection port:        54321 
+    H2O Connection proxy:       NA 
+    H2O Internal Security:      FALSE 
+    H2O API Extensions:         XGBoost, Algos, AutoML, Core V3, Core V4 
+    R Version:                  R version 3.4.2 (2017-09-28) 
+```
+
+Let's check http://localhost:54321/flow/index.html.
+
+```{r echo=FALSE, fig.align="center", h2o_flow}
+knitr::include_graphics("images/ch6_h2o_flow.png")
+```
+
+### Importing data into h2o from the R session
+
+```{r eval=FALSE}
+data(cars)
+cars_to_h2o <- as.h2o(cars, destination_frame = "cars_from_r")
+is.data.frame(cars_to_h2o) # FALSE
+class(cars_to_h2o) # H2OFrame
+```
+
+### h2o functions
+
+```{r eval=FALSE}
+summary(cars_to_h2o) # actually calls h2o:::summary.H2OFrame(cars_to_h2o)
+```
+
+```{r eval=FALSE}
+Approximated quantiles computed! If you are interested in exact quantiles, please pass the `exact_quantiles=TRUE` parameter. speed          dist            
+ Min.   : 4.0   Min.   :  2.00  
+ 1st Qu.:12.0   1st Qu.: 26.00  
+ Median :15.0   Median : 36.00  
+ Mean   :15.4   Mean   : 42.98  
+ 3rd Qu.:19.0   3rd Qu.: 56.00  
+ Max.   :25.0   Max.   :120.00  
+```
+
+### Let's check from the h2o JVM
+
+From the browser: 'Data' -> 'List All Frames'
+
+```{r echo=FALSE, fig.align="center", h2o_list_data}
+knitr::include_graphics("images/ch6_h2o_list_data.png")
+```
 
 ## Spark
 

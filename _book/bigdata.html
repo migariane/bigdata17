@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-11-15">
+<meta name="date" content="2017-11-16">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -254,10 +254,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.10.1" data-path="bigdata.html"><a href="bigdata.html#ecosystem"><i class="fa fa-check"></i><b>6.10.1</b> Ecosystem</a></li>
 </ul></li>
 <li class="chapter" data-level="6.11" data-path="bigdata.html"><a href="bigdata.html#running-h20-locally-within-r"><i class="fa fa-check"></i><b>6.11</b> Running h20 locally within R</a></li>
-<li class="chapter" data-level="6.12" data-path="bigdata.html"><a href="bigdata.html#state-of-the-jvm"><i class="fa fa-check"></i><b>6.12</b> State of the JVM</a></li>
-<li class="chapter" data-level="6.13" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.13</b> Spark</a></li>
-<li class="chapter" data-level="6.14" data-path="bigdata.html"><a href="bigdata.html#sparkling-water"><i class="fa fa-check"></i><b>6.14</b> <code>Sparkling Water</code></a><ul>
-<li class="chapter" data-level="6.14.1" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.14.1</b> More?</a></li>
+<li class="chapter" data-level="6.12" data-path="bigdata.html"><a href="bigdata.html#jvm-from-wikipedia"><i class="fa fa-check"></i><b>6.12</b> JVM (from Wikipedia)</a></li>
+<li class="chapter" data-level="6.13" data-path="bigdata.html"><a href="bigdata.html#which-languages-from-wikipedia"><i class="fa fa-check"></i><b>6.13</b> Which languages? (from Wikipedia)</a></li>
+<li class="chapter" data-level="6.14" data-path="bigdata.html"><a href="bigdata.html#which-languages"><i class="fa fa-check"></i><b>6.14</b> Which languages?</a></li>
+<li class="chapter" data-level="6.15" data-path="bigdata.html"><a href="bigdata.html#state-of-the-h2o-jvm"><i class="fa fa-check"></i><b>6.15</b> State of the h2o JVM</a><ul>
+<li class="chapter" data-level="6.15.1" data-path="bigdata.html"><a href="bigdata.html#importing-data-into-h2o-from-the-r-session"><i class="fa fa-check"></i><b>6.15.1</b> Importing data into h2o from the R session</a></li>
+<li class="chapter" data-level="6.15.2" data-path="bigdata.html"><a href="bigdata.html#h2o-functions"><i class="fa fa-check"></i><b>6.15.2</b> h2o functions</a></li>
+<li class="chapter" data-level="6.15.3" data-path="bigdata.html"><a href="bigdata.html#lets-check-from-the-h2o-jvm"><i class="fa fa-check"></i><b>6.15.3</b> Let’s check from the h2o JVM</a></li>
+</ul></li>
+<li class="chapter" data-level="6.16" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.16</b> Spark</a></li>
+<li class="chapter" data-level="6.17" data-path="bigdata.html"><a href="bigdata.html#sparkling-water"><i class="fa fa-check"></i><b>6.17</b> <code>Sparkling Water</code></a><ul>
+<li class="chapter" data-level="6.17.1" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.17.1</b> More?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>7</b> Visualization</a><ul>
@@ -509,14 +516,92 @@ localH2O &lt;-<span class="st"> </span><span class="kw">h2o.init</span>(<span cl
 <span class="co">#          proxy = NA_character_, https = FALSE, insecure = FALSE,</span>
 <span class="co">#          username = NA_character_, password = NA_character_)</span></code></pre></div>
 <p>(No persistence beyond the R session when h2O is started from R.)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> Connection successful<span class="op">!</span>
+
+R is connected to the H2O cluster<span class="op">:</span><span class="st"> </span>
+<span class="st">    </span>H2O cluster uptime<span class="op">:</span><span class="st">         </span><span class="dv">19</span> days <span class="dv">12</span> hours 
+    H2O cluster version<span class="op">:</span><span class="st">        </span><span class="fl">3.14</span>.<span class="fl">0.3</span> 
+    H2O cluster version age<span class="op">:</span><span class="st">    </span><span class="dv">1</span> month and <span class="dv">24</span> days  
+    H2O cluster name<span class="op">:</span><span class="st">           </span>H2O_started_from_R_cchoirat_bgt310 
+    H2O cluster total nodes<span class="op">:</span><span class="st">    </span><span class="dv">1</span> 
+    H2O cluster total memory<span class="op">:</span><span class="st">   </span><span class="fl">15.18</span> GB 
+    H2O cluster total cores<span class="op">:</span><span class="st">    </span><span class="dv">8</span> 
+    H2O cluster allowed cores<span class="op">:</span><span class="st">  </span><span class="dv">8</span> 
+    H2O cluster healthy<span class="op">:</span><span class="st">        </span><span class="ot">TRUE</span> 
+    H2O Connection ip<span class="op">:</span><span class="st">          </span>localhost 
+    H2O Connection port<span class="op">:</span><span class="st">        </span><span class="dv">54321</span> 
+    H2O Connection proxy<span class="op">:</span><span class="st">       </span><span class="ot">NA</span> 
+    H2O Internal Security<span class="op">:</span><span class="st">      </span><span class="ot">FALSE</span> 
+    H2O API Extensions<span class="op">:</span><span class="st">         </span>XGBoost, Algos, AutoML, Core V3, Core V4 
+    R Version<span class="op">:</span><span class="st">                  </span>R version <span class="fl">3.4</span>.<span class="dv">2</span> (<span class="dv">2017</span><span class="op">-</span><span class="dv">09</span><span class="op">-</span><span class="dv">28</span>) </code></pre></div>
 </div>
-<div id="state-of-the-jvm" class="section level2">
-<h2><span class="header-section-number">6.12</span> State of the JVM</h2>
+<div id="jvm-from-wikipedia" class="section level2">
+<h2><span class="header-section-number">6.12</span> JVM (from Wikipedia)</h2>
+<p>A Java virtual machine (JVM) is an abstract computing machine that enables a computer to run a Java program. There are three notions of the JVM: specification, implementation, and instance. The specification is a document that formally describes what is required of a JVM implementation.</p>
+<p>(<a href="https://en.wikipedia.org/wiki/Java_virtual_machine" class="uri">https://en.wikipedia.org/wiki/Java_virtual_machine</a>)</p>
+</div>
+<div id="which-languages-from-wikipedia" class="section level2">
+<h2><span class="header-section-number">6.13</span> Which languages? (from Wikipedia)</h2>
+<p>This list of JVM Languages comprises notable computer programming languages that are used to produce software that runs on the Java Virtual Machine (JVM). Some of these languages are interpreted by a Java program, and some are compiled to Java bytecode and JIT-compiled during execution as regular Java programs to improve performance.</p>
+</div>
+<div id="which-languages" class="section level2">
+<h2><span class="header-section-number">6.14</span> Which languages?</h2>
+<p><a href="https://en.wikipedia.org/wiki/List_of_JVM_languages" class="uri">https://en.wikipedia.org/wiki/List_of_JVM_languages</a></p>
+<ul>
+<li>Java</li>
+<li>Scala, an object-oriented and functional programming language</li>
+<li>Jython</li>
+<li>R (an implementation of R: <a href="https://en.wikipedia.org/wiki/Renjin" class="uri">https://en.wikipedia.org/wiki/Renjin</a>)</li>
+<li>…</li>
+</ul>
+</div>
+<div id="state-of-the-h2o-jvm" class="section level2">
+<h2><span class="header-section-number">6.15</span> State of the h2o JVM</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">h2o.clusterInfo</span>()</code></pre></div>
-<p>Let’s check <a href="http://localhost:54321/" class="uri">http://localhost:54321/</a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">R is connected to the H2O cluster<span class="op">:</span><span class="st"> </span>
+<span class="st">    </span>H2O cluster uptime<span class="op">:</span><span class="st">         </span><span class="dv">19</span> days <span class="dv">13</span> hours 
+    H2O cluster version<span class="op">:</span><span class="st">        </span><span class="fl">3.14</span>.<span class="fl">0.3</span> 
+    H2O cluster version age<span class="op">:</span><span class="st">    </span><span class="dv">1</span> month and <span class="dv">24</span> days  
+    H2O cluster name<span class="op">:</span><span class="st">           </span>H2O_started_from_R_cchoirat_bgt310 
+    H2O cluster total nodes<span class="op">:</span><span class="st">    </span><span class="dv">1</span> 
+    H2O cluster total memory<span class="op">:</span><span class="st">   </span><span class="fl">15.18</span> GB 
+    H2O cluster total cores<span class="op">:</span><span class="st">    </span><span class="dv">8</span> 
+    H2O cluster allowed cores<span class="op">:</span><span class="st">  </span><span class="dv">8</span> 
+    H2O cluster healthy<span class="op">:</span><span class="st">        </span><span class="ot">TRUE</span> 
+    H2O Connection ip<span class="op">:</span><span class="st">          </span>localhost 
+    H2O Connection port<span class="op">:</span><span class="st">        </span><span class="dv">54321</span> 
+    H2O Connection proxy<span class="op">:</span><span class="st">       </span><span class="ot">NA</span> 
+    H2O Internal Security<span class="op">:</span><span class="st">      </span><span class="ot">FALSE</span> 
+    H2O API Extensions<span class="op">:</span><span class="st">         </span>XGBoost, Algos, AutoML, Core V3, Core V4 
+    R Version<span class="op">:</span><span class="st">                  </span>R version <span class="fl">3.4</span>.<span class="dv">2</span> (<span class="dv">2017</span><span class="op">-</span><span class="dv">09</span><span class="op">-</span><span class="dv">28</span>) </code></pre></div>
+<p>Let’s check <a href="http://localhost:54321/flow/index.html" class="uri">http://localhost:54321/flow/index.html</a>.</p>
+<p><img src="images/ch6_h2o_flow.png" width="1407" style="display: block; margin: auto;" /></p>
+<div id="importing-data-into-h2o-from-the-r-session" class="section level3">
+<h3><span class="header-section-number">6.15.1</span> Importing data into h2o from the R session</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(cars)
+cars_to_h2o &lt;-<span class="st"> </span><span class="kw">as.h2o</span>(cars, <span class="dt">destination_frame =</span> <span class="st">&quot;cars_from_r&quot;</span>)
+<span class="kw">is.data.frame</span>(cars_to_h2o) <span class="co"># FALSE</span>
+<span class="kw">class</span>(cars_to_h2o) <span class="co"># H2OFrame</span></code></pre></div>
+</div>
+<div id="h2o-functions" class="section level3">
+<h3><span class="header-section-number">6.15.2</span> h2o functions</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(cars_to_h2o) <span class="co"># actually calls h2o:::summary.H2OFrame(cars_to_h2o)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Approximated quantiles computed<span class="op">!</span><span class="st"> </span>If you are interested <span class="cf">in</span> exact quantiles, please pass the <span class="st">`</span><span class="dt">exact_quantiles=TRUE</span><span class="st">`</span> parameter. speed          dist            
+ Min.   <span class="op">:</span><span class="st"> </span><span class="fl">4.0</span>   Min.   <span class="op">:</span><span class="st">  </span><span class="fl">2.00</span>  
+ 1st Qu.<span class="op">:</span><span class="fl">12.0</span>   1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">26.00</span>  
+ Median <span class="op">:</span><span class="fl">15.0</span>   Median <span class="op">:</span><span class="st"> </span><span class="fl">36.00</span>  
+ Mean   <span class="op">:</span><span class="fl">15.4</span>   Mean   <span class="op">:</span><span class="st"> </span><span class="fl">42.98</span>  
+ 3rd Qu.<span class="op">:</span><span class="fl">19.0</span>   3rd Qu.<span class="op">:</span><span class="st"> </span><span class="fl">56.00</span>  
+ Max.   <span class="op">:</span><span class="fl">25.0</span>   Max.   <span class="op">:</span><span class="fl">120.00</span>  </code></pre></div>
+</div>
+<div id="lets-check-from-the-h2o-jvm" class="section level3">
+<h3><span class="header-section-number">6.15.3</span> Let’s check from the h2o JVM</h3>
+<p>From the browser: ‘Data’ -&gt; ‘List All Frames’</p>
+<p><img src="images/ch6_h2o_list_data.png" width="1023" style="display: block; margin: auto;" /></p>
+</div>
 </div>
 <div id="spark" class="section level2">
-<h2><span class="header-section-number">6.13</span> Spark</h2>
+<h2><span class="header-section-number">6.16</span> Spark</h2>
 <p>Reading: <a href="https://spark.rstudio.com/" class="uri">https://spark.rstudio.com/</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sparklyr)
 <span class="kw">spark_install</span>(<span class="dt">version =</span> <span class="st">&quot;2.1.0&quot;</span>)</code></pre></div>
@@ -560,10 +645,10 @@ flights_table <span class="op">%&gt;%</span><span class="st"> </span>head</code>
 <p>TODOL change the <code>config</code> arguments of the connection</p>
 </div>
 <div id="sparkling-water" class="section level2">
-<h2><span class="header-section-number">6.14</span> <code>Sparkling Water</code></h2>
+<h2><span class="header-section-number">6.17</span> <code>Sparkling Water</code></h2>
 <p>Reading: <a href="https://spark.rstudio.com/h2o.html" class="uri">https://spark.rstudio.com/h2o.html</a></p>
 <div id="more" class="section level3">
-<h3><span class="header-section-number">6.14.1</span> More?</h3>
+<h3><span class="header-section-number">6.17.1</span> More?</h3>
 <p>GPU</p>
 
 </div>
