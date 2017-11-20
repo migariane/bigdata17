@@ -513,6 +513,17 @@ src_tbls(sc)
 ```
 
 ```{r eval=FALSE}
+[1] "batting" "flights" "iris"
+```
+
+You can use SQL:
+
+```{r eval=FALSE}
+library(DBI)
+iris_preview <- dbGetQuery(sc, "SELECT * FROM iris LIMIT 10")
+```
+
+```{r eval=FALSE}
 top_rows <- read.csv("~/Dropbox/Data17/AirFlights/allyears.csv", nrows = 5)
 file_columns <- top_rows %>% 
   purrr::map(function(x)"character")
@@ -529,11 +540,34 @@ sp_flights <- spark_read_csv(sc,
 ```
 
 ```{r eval=FALSE}
+# Source:   table<flights2> [?? x 31]
+# Database: spark_connection
+    Year Month DayofMonth DayOfWeek DepTime CRSDepTime ArrTime CRSArrTime UniqueCarrier
+   <chr> <chr>      <chr>     <chr>   <chr>      <chr>   <chr>      <chr>         <chr>
+ 1  1987    10         14         3     741        730     912        849            PS
+ 2  1987    10         15         4     729        730     903        849            PS
+ 3  1987    10         17         6     741        730     918        849            PS
+ 4  1987    10         18         7     729        730     847        849            PS
+ 5  1987    10         19         1     749        730     922        849            PS
+ 6  1987    10         21         3     728        730     848        849            PS
+ 7  1987    10         22         4     728        730     852        849            PS
+ 8  1987    10         23         5     731        730     902        849            PS
+ 9  1987    10         24         6     744        730     908        849            PS
+10  1987    10         25         7     729        730     851        849            PS
+# ... with more rows, and 22 more variables: FlightNum <chr>, TailNum <chr>,
+#   ActualElapsedTime <chr>, CRSElapsedTime <chr>, AirTime <chr>, ArrDelay <chr>,
+#   DepDelay <chr>, Origin <chr>, Dest <chr>, Distance <chr>, TaxiIn <chr>,
+#   TaxiOut <chr>, Cancelled <chr>, CancellationCode <chr>, Diverted <chr>,
+#   CarrierDelay <chr>, WeatherDelay <chr>, NASDelay <chr>, SecurityDelay <chr>,
+#   LateAircraftDelay <chr>, IsArrDelayed <chr>, IsDepDelayed <chr>
+```
+
+```{r eval=FALSE}
 flights_table <- sp_flights %>%
   mutate(DepDelay = as.numeric(DepDelay),
          ArrDelay = as.numeric(ArrDelay),
          SchedDeparture = as.numeric(CRSDepTime)) %>%
-  select(Origin, Dest, SchedDeparture, ArrDelay, DepDelay, Month, DayofMonth)
+  select(Origin, Dest, SchedDeparture, ArrDelay, DepDelay, Month, DayofMonth, Distance)
 
 flights_table %>% head
 ```
@@ -548,6 +582,7 @@ sp_flights %>%
 123534969...
 
 ```{r eval=FALSE}
+# might take a while...
 subset_table <- flights_table %>% 
   compute("flights_subset")
 ```
@@ -559,17 +594,23 @@ subset_table %>%
 
 123534969 as well!
 
+### Run a statistical model
+
 ```{r eval=FALSE}
-lm(arr_delay ~ distance, data = flights_tbl)
-ml_linear_regression(subset_table, response = "ArrDelay", features = "SchedDeparture")
+# lm(arr_delay ~ distance, data = flights_tbl)
+ml_linear_regression(subset_table, response = "ArrDelay", features = "Distance")
 ```
 
-TODOL change the `config` arguments of the connection
+### Deployment
+
+Reading: https://spark.rstudio.com/deployment.html
 
 ## `Sparkling Water`
 
 Reading: https://spark.rstudio.com/h2o.html
 
-### More?
+## Adding new models to `h2o` and `spark`
+
+## More?
 
 GPU
