@@ -461,28 +461,35 @@ Coefficients:
 Distance    0.0022045  0.0002487   8.865   <2e-16 ***
 ```
 
-## Running a GLM model
-
-```{r eval=FALSE}
-h2ofit <- h2o.glm(y = "IsArrDelayed", x = "Distance",
-                  training_frame = airlines_to_h2o,
-                  standardize = FALSE,
-                  family = "binomial")
-h2ofit
-```
-
-```{r eval=FALSE}
-Coefficients: glm coefficients
-      names coefficients
-1 Intercept     0.175590
-2  Distance     0.000066
-```
-
 ### `h2o` models
 
 ```{r echo=FALSE, fig.align="center", h2o_models}
 knitr::include_graphics("images/ch6_h2o_models.png")
 ```
+
+
+### Closing the h2o session
+
+```{r eval=FALSE}
+h2o.shutdown()
+```
+
+### Available algorithms
+
+- Deep learning
+- Distributed randon forest
+- Gradient boosting method
+- Generalized linear modeling
+- Generalized low rank modeling
+- K-means
+- Naive Bayes
+- Principal component analysis
+
+### How to incorporate new models in h2o?
+
+__(+)__ built-in models behave very much like R and are scalable
+
+__(-)__ not easy to extend (*e.g*., GLM https://github.com/h2oai/h2o-3/blob/master/h2o-algos/src/main/java/hex/glm/GLM.java)
 
 ```{exercise}
 Run the same analysis with the whole dataset `allyears.csv`.
