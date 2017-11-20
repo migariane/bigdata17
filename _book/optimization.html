@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-11-16">
+<meta name="date" content="2017-11-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -261,10 +261,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.15.1" data-path="bigdata.html"><a href="bigdata.html#importing-data-into-h2o-from-the-r-session"><i class="fa fa-check"></i><b>6.15.1</b> Importing data into h2o from the R session</a></li>
 <li class="chapter" data-level="6.15.2" data-path="bigdata.html"><a href="bigdata.html#h2o-functions"><i class="fa fa-check"></i><b>6.15.2</b> h2o functions</a></li>
 <li class="chapter" data-level="6.15.3" data-path="bigdata.html"><a href="bigdata.html#lets-check-from-the-h2o-jvm"><i class="fa fa-check"></i><b>6.15.3</b> Let’s check from the h2o JVM</a></li>
+<li class="chapter" data-level="6.15.4" data-path="bigdata.html"><a href="bigdata.html#importing-data-into-h2o-from-disk"><i class="fa fa-check"></i><b>6.15.4</b> Importing data into h2o from disk</a></li>
+<li class="chapter" data-level="6.15.5" data-path="bigdata.html"><a href="bigdata.html#running-a-statistical-model"><i class="fa fa-check"></i><b>6.15.5</b> Running a statistical model</a></li>
 </ul></li>
-<li class="chapter" data-level="6.16" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.16</b> Spark</a></li>
-<li class="chapter" data-level="6.17" data-path="bigdata.html"><a href="bigdata.html#sparkling-water"><i class="fa fa-check"></i><b>6.17</b> <code>Sparkling Water</code></a><ul>
-<li class="chapter" data-level="6.17.1" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.17.1</b> More?</a></li>
+<li class="chapter" data-level="6.16" data-path="bigdata.html"><a href="bigdata.html#running-a-glm-model"><i class="fa fa-check"></i><b>6.16</b> Running a GLM model</a><ul>
+<li class="chapter" data-level="6.16.1" data-path="bigdata.html"><a href="bigdata.html#h2o-models"><i class="fa fa-check"></i><b>6.16.1</b> <code>h2o</code> models</a></li>
+</ul></li>
+<li class="chapter" data-level="6.17" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.17</b> Spark</a></li>
+<li class="chapter" data-level="6.18" data-path="bigdata.html"><a href="bigdata.html#sparkling-water"><i class="fa fa-check"></i><b>6.18</b> <code>Sparkling Water</code></a><ul>
+<li class="chapter" data-level="6.18.1" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.18.1</b> More?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>7</b> Visualization</a><ul>
@@ -313,12 +318,12 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: nanoseconds
-##           expr  min     lq     mean median     uq     max neval cld
-##       [32, 11] 7437 8934.5 9730.843 9375.0 9897.5   59125  1000   c
-##      $carb[32] 4289 5135.0 5755.655 5555.5 6076.0   23279  1000  b 
-##  [[c(11, 32)]] 3429 4236.5 4763.011 4644.5 5065.0   22804  1000  b 
-##     [[11]][32] 3297 3966.0 5847.420 4301.5 4716.5 1414158  1000  b 
-##       .subset2  188  232.0  296.933  260.0  308.0    1894  1000 a</code></pre>
+##           expr  min     lq      mean  median      uq      max neval
+##       [32, 11] 8459 9907.5 11802.711 10580.0 11423.5   145381  1000
+##      $carb[32] 4667 5869.0  6861.008  6416.0  6965.0    68027  1000
+##  [[c(11, 32)]] 3813 4810.0  7227.801  5232.0  5726.5  1517345  1000
+##     [[11]][32] 3575 4554.5 32174.626  4970.5  5417.0 26431118  1000
+##       .subset2  214  296.0   406.789   344.0   408.5     9885  1000</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
@@ -651,14 +656,14 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ## [2,]  4.0340627</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m</code></pre></div>
 <pre><code>## Unit: microseconds
-##                                             expr     min       lq     mean
-##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 648.968 697.0900 784.8310
-##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 511.167 552.2650 695.1069
-##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  98.047 114.9405 137.4287
-##    median       uq      max neval cld
-##  730.1830 810.4765 3759.716   100   b
-##  580.2375 657.0800 8582.422   100   b
-##  130.6510 150.7255  280.892   100  a</code></pre>
+##                                             expr     min       lq
+##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 687.455 777.6580
+##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 533.346 579.9510
+##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  92.852 115.6955
+##       mean   median       uq       max neval
+##  1013.3303 898.0940 1051.726  4150.234   100
+##   845.9201 626.0270  738.132 12107.820   100
+##   180.2181 137.4255  174.717  2695.975   100</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 </div>
@@ -742,7 +747,7 @@ out0 &lt;-<span class="st"> </span><span class="kw">vacc0</span>(age, female, il
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(parallel)
 cores &lt;-<span class="st"> </span><span class="kw">detectCores</span>()
 cores</code></pre></div>
-<pre><code>## [1] 8</code></pre>
+<pre><code>## [1] 4</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vacc3 &lt;-<span class="st"> </span><span class="cf">function</span>(age, female, ily) {
   <span class="kw">mcmapply</span>(<span class="cf">function</span>(i) <span class="kw">vacc1a</span>(age[i], female[i], ily[i]), <span class="dv">1</span><span class="op">:</span>n, <span class="dt">mc.cores =</span> cores <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
 }
@@ -757,16 +762,16 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: microseconds
-##   expr       min        lq       mean     median        uq        max
-##  vacc0  1867.198  2894.573  5429.5208  3339.1580  4021.019 194993.651
-##  vacc1  1938.397  2223.296  3051.4952  2594.3495  3334.192  10903.003
-##  vacc2   117.215   157.995   542.4538   221.0025   729.548   6351.458
-##  vacc3 11251.930 20133.037 21665.2308 22097.3880 23855.845  34448.818
-##  neval cld
-##    100  b 
-##    100 ab 
-##    100 a  
-##    100   c</code></pre>
+##   expr       min        lq       mean     median         uq       max
+##  vacc0  2269.915  3522.003  4708.3923  4108.4670  5541.5185 10333.432
+##  vacc1  2065.384  2579.641  3618.0936  3167.9575  4025.7975 10403.524
+##  vacc2    94.689   157.356   577.1991   208.2275   341.5475  6996.122
+##  vacc3 15781.729 20110.658 23790.5911 22522.3465 25307.2775 47039.999
+##  neval
+##    100
+##    100
+##    100
+##    100</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
 <p>So, what’s going on?</p>
@@ -802,7 +807,7 @@ m</code></pre></div>
 <span class="st">}&#39;</span>)
 hello</code></pre></div>
 <pre><code>## function () 
-## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x10e24a100&gt;))</code></pre>
+## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x10860fcc0&gt;))</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hello</span>()</code></pre></div>
 <pre><code>## Hello, world!</code></pre>
 <p><code>Rprintf</code> is the counterpart of C++ <a href="http://www.cplusplus.com/reference/cstdio/printf/"><code>printf</code></a> function.</p>

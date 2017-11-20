@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-11-16}
+  \date{2017-11-20}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -2031,12 +2031,12 @@ Let's start with an example from \citet{Wickham2014}.
 
 \begin{verbatim}
 ## Unit: nanoseconds
-##           expr  min     lq      mean  median      uq   max neval   cld
-##       [32, 11] 8742 9760.5 10981.424 10406.0 11617.5 63196  1000     e
-##      $carb[32] 4355 5537.0  6317.541  6115.5  6818.0 31148  1000    d 
-##  [[c(11, 32)]] 3598 4544.5  5209.066  5036.0  5620.5 20888  1000   c  
-##     [[11]][32] 3370 4224.5  4942.880  4697.0  5308.5 59784  1000  b   
-##       .subset2  187  252.0   328.241   300.0   362.0 10511  1000 a
+##           expr  min      lq      mean  median      uq    max neval
+##       [32, 11] 8962 10253.0 11876.268 10727.5 11436.5  72681  1000
+##      $carb[32] 4579  5919.5  7146.879  6374.5  6888.5 135047  1000
+##  [[c(11, 32)]] 3814  4796.5  5646.803  5201.0  5638.5  86632  1000
+##     [[11]][32] 3561  4543.0  5323.011  4907.5  5284.5  43629  1000
+##       .subset2  205   280.0   404.527   326.5   395.0  11174  1000
 \end{verbatim}
 
 \begin{Shaded}
@@ -2420,13 +2420,13 @@ built-in \texttt{lm} and with two functions we defined in package
 \begin{verbatim}
 ## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 <- lm(Hwt ~ Bwt, data = cats) 646.628 672.8640 739.4639
-##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 514.311 536.1520 604.3039
-##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  99.370 118.0265 132.6574
-##    median       uq      max neval cld
-##  697.3575 770.9850 1325.828   100   c
-##  550.2295 633.6295 1611.840   100  b 
-##  127.0395 137.2735  262.125   100 a
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 666.573 699.7115 820.9289
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 528.605 554.9735 615.7111
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  96.846 120.2085 140.6272
+##    median       uq      max neval
+##  742.3940 847.2425 3636.144   100
+##  586.8095 652.8445  927.836   100
+##  134.1755 155.4200  312.654   100
 \end{verbatim}
 
 \begin{Shaded}
@@ -2625,7 +2625,7 @@ or we can rely on base R functions that accept vector inputs
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 8
+## [1] 4
 \end{verbatim}
 
 \begin{Shaded}
@@ -2653,16 +2653,11 @@ or we can rely on base R functions that accept vector inputs
 
 \begin{verbatim}
 ## Unit: microseconds
-##   expr       min         lq       mean    median         uq       max
-##  vacc0  1958.306  3318.8395  4820.8838  4207.614  5047.4830 54284.494
-##  vacc1  1966.963  2283.9290  3302.5990  3040.963  3917.6425  9034.687
-##  vacc2   117.251   157.9805   512.7771   200.859   521.6105  6147.073
-##  vacc3 14100.910 19808.5095 21916.5820 22403.471 24170.6880 34937.594
-##  neval  cld
-##    100   c 
-##    100  b  
-##    100 a   
-##    100    d
+##   expr       min        lq       mean     median        uq       max neval
+##  vacc0  2399.701  3612.383  4674.6925  4206.2740  4720.835 17692.829   100
+##  vacc1  2091.525  2658.894  3519.8335  3091.9810  4024.894 10996.034   100
+##  vacc2   106.483   166.242   646.9759   227.0705   712.890  7849.273   100
+##  vacc3 14835.231 21244.273 24740.3021 23228.2650 27309.717 38817.280   100
 \end{verbatim}
 
 \begin{Shaded}
@@ -2735,7 +2730,7 @@ Reading: \url{http://adv-r.had.co.nz/Rcpp.html}
 
 \begin{verbatim}
 ## function () 
-## invisible(.Primitive(".Call")(<pointer: 0x10d6a6100>))
+## invisible(.Primitive(".Call")(<pointer: 0x10860fcc0>))
 \end{verbatim}
 
 \begin{Shaded}
@@ -3510,7 +3505,75 @@ evaluation}\label{database-connections-and-lazy-evaluation}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{D <-}\StringTok{ }\KeywordTok{fread}\NormalTok{(}\StringTok{"~/Dropbox/Data17/AirFlights/"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(data.table)}
+\NormalTok{D <-}\StringTok{ }\KeywordTok{fread}\NormalTok{(}\StringTok{"~/Dropbox/Data17/ml-20m/ratings.csv"}\NormalTok{)}
+
+\KeywordTok{library}\NormalTok{(sqldf)}
+\KeywordTok{read.csv.sql}\NormalTok{(}\DataTypeTok{file =} \StringTok{"~/Dropbox/Data17/ml-20m/ratings.csv"}\NormalTok{,}
+             \DataTypeTok{sql =} \KeywordTok{c}\NormalTok{(}\StringTok{"ATTACH 'ratings.sqlite3' AS NEW"}\NormalTok{))}
+\KeywordTok{read.csv.sql}\NormalTok{(}\DataTypeTok{file =} \StringTok{"~/Dropbox/Data17/ml-20m/ratings.csv"}\NormalTok{,}
+             \DataTypeTok{sql =} \StringTok{"CREATE TABLE ratings_table AS SELECT * FROM file"}\NormalTok{,}
+             \DataTypeTok{dbname =} \StringTok{"ratings.sqlite3"}\NormalTok{)}
+
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(DBI)}
+
+\NormalTok{con <-}\StringTok{ }\NormalTok{DBI}\OperatorTok{::}\KeywordTok{dbConnect}\NormalTok{(RSQLite}\OperatorTok{::}\KeywordTok{SQLite}\NormalTok{(), }\DataTypeTok{dbname =} \StringTok{"ratings.sqlite3"}\NormalTok{)}
+
+\NormalTok{ratings_db <-}\StringTok{ }\KeywordTok{tbl}\NormalTok{(con, }\StringTok{"ratings_table"}\NormalTok{)}
+\NormalTok{ratings_db }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{ends_with}\NormalTok{(}\StringTok{"Id"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(movieId }\OperatorTok{<}\StringTok{ }\DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Source:   lazy query [?? x 2]}
+\CommentTok{# Database: sqlite 3.19.3}
+\CommentTok{#   [/Users/cchoirat/Documents/LocalGit/bigdata17/ratings.sqlite3]}
+\NormalTok{   userId movieId}
+    \OperatorTok{<}\NormalTok{int}\OperatorTok{>}\StringTok{   }\ErrorTok{<}\NormalTok{int}\OperatorTok{>}
+\StringTok{ }\DecValTok{1}      \DecValTok{1}       \DecValTok{2}
+ \DecValTok{2}      \DecValTok{1}      \DecValTok{29}
+ \DecValTok{3}      \DecValTok{1}      \DecValTok{32}
+ \DecValTok{4}      \DecValTok{1}      \DecValTok{47}
+ \DecValTok{5}      \DecValTok{1}      \DecValTok{50}
+ \DecValTok{6}      \DecValTok{2}       \DecValTok{3}
+ \DecValTok{7}      \DecValTok{2}      \DecValTok{62}
+ \DecValTok{8}      \DecValTok{2}      \DecValTok{70}
+ \DecValTok{9}      \DecValTok{3}       \DecValTok{1}
+\DecValTok{10}      \DecValTok{3}      \DecValTok{24}
+\CommentTok{# ... with more rows}
+\CommentTok{# ... with more rows}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ratings_db }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\KeywordTok{ends_with}\NormalTok{(}\StringTok{"Id"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(movieId }\OperatorTok{<}\StringTok{ }\DecValTok{100}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{collect}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# A tibble: 790,226 x 2}
+\NormalTok{   userId movieId}
+    \OperatorTok{<}\NormalTok{int}\OperatorTok{>}\StringTok{   }\ErrorTok{<}\NormalTok{int}\OperatorTok{>}
+\StringTok{ }\DecValTok{1}      \DecValTok{1}       \DecValTok{2}
+ \DecValTok{2}      \DecValTok{1}      \DecValTok{29}
+ \DecValTok{3}      \DecValTok{1}      \DecValTok{32}
+ \DecValTok{4}      \DecValTok{1}      \DecValTok{47}
+ \DecValTok{5}      \DecValTok{1}      \DecValTok{50}
+ \DecValTok{6}      \DecValTok{2}       \DecValTok{3}
+ \DecValTok{7}      \DecValTok{2}      \DecValTok{62}
+ \DecValTok{8}      \DecValTok{2}      \DecValTok{70}
+ \DecValTok{9}      \DecValTok{3}       \DecValTok{1}
+\DecValTok{10}      \DecValTok{3}      \DecValTok{24}
+\CommentTok{# ... with 790,216 more rows}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3583,8 +3646,6 @@ R}\label{running-h20-locally-within-r}
 \CommentTok{#          username = NA_character_, password = NA_character_)}
 \end{Highlighting}
 \end{Shaded}
-
-(No persistence beyond the R session when h2O is started from R.)
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3691,6 +3752,8 @@ session}\label{importing-data-into-h2o-from-the-r-session}
 \end{Highlighting}
 \end{Shaded}
 
+(No persistence beyond the R session when h2O is started from R.)
+
 \subsection{h2o functions}\label{h2o-functions}
 
 \begin{Shaded}
@@ -3717,6 +3780,89 @@ JVM}\label{lets-check-from-the-h2o-jvm}
 From the browser: `Data' -\textgreater{} `List All Frames'
 
 \begin{center}\includegraphics[width=28.42in]{images/ch6_h2o_list_data} \end{center}
+
+\subsection{Importing data into h2o from
+disk}\label{importing-data-into-h2o-from-disk}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{airlines_path <-}\StringTok{ "/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.csv"} \CommentTok{# full path}
+\NormalTok{airlines_to_h2o <-}\StringTok{ }\KeywordTok{h2o.importFile}\NormalTok{(}\DataTypeTok{path =}\NormalTok{ airlines_path,}
+                                  \DataTypeTok{destination_frame =} \StringTok{"airlines_from_r"}\NormalTok{)}
+\KeywordTok{summary}\NormalTok{(airlines_to_h2o)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Running a statistical
+model}\label{running-a-statistical-model}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{h2ofit <-}\StringTok{ }\KeywordTok{h2o.glm}\NormalTok{(}\DataTypeTok{y =} \StringTok{"ArrDelay"}\NormalTok{, }\DataTypeTok{x =} \StringTok{"Distance"}\NormalTok{,}
+                  \DataTypeTok{training_frame =}\NormalTok{ airlines_to_h2o,}
+                  \DataTypeTok{intercept =} \OtherTok{TRUE}\NormalTok{, }\CommentTok{# default is TRUE}
+                  \DataTypeTok{family =} \StringTok{"gaussian"}\NormalTok{)}
+\NormalTok{h2ofit}
+\KeywordTok{summary}\NormalTok{(h2ofit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Coefficients}\OperatorTok{:}\StringTok{ }\NormalTok{glm coefficients}
+\NormalTok{      names coefficients standardized_coefficients}
+\DecValTok{1}\NormalTok{ Intercept     }\FloatTok{7.702657}                  \FloatTok{9.308665}
+\DecValTok{2}\NormalTok{  Distance     }\FloatTok{0.002199}                  \FloatTok{1.272253}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{airlines <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"~/Dropbox/Data17/AirFlights/allyears2k.csv"}\NormalTok{)}
+\NormalTok{rfit <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(ArrDelay }\OperatorTok{~}\StringTok{ }\NormalTok{Distance, }\DataTypeTok{data =}\NormalTok{ airlines)}
+\KeywordTok{summary}\NormalTok{(rfit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Coefficients}\OperatorTok{:}
+\StringTok{             }\NormalTok{Estimate Std. Error t value }\KeywordTok{Pr}\NormalTok{(}\OperatorTok{>}\ErrorTok{|}\NormalTok{t}\OperatorTok{|}\NormalTok{)    }
+\NormalTok{(Intercept) }\FloatTok{7.7011553}  \FloatTok{0.2326198}  \FloatTok{33.106}   \OperatorTok{<}\FloatTok{2e-16} \OperatorTok{**}\ErrorTok{*}
+\NormalTok{Distance    }\FloatTok{0.0022045}  \FloatTok{0.0002487}   \FloatTok{8.865}   \OperatorTok{<}\FloatTok{2e-16} \OperatorTok{**}\ErrorTok{*}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Running a GLM model}\label{running-a-glm-model}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{h2ofit <-}\StringTok{ }\KeywordTok{h2o.glm}\NormalTok{(}\DataTypeTok{y =} \StringTok{"IsArrDelayed"}\NormalTok{, }\DataTypeTok{x =} \StringTok{"Distance"}\NormalTok{,}
+                  \DataTypeTok{training_frame =}\NormalTok{ airlines_to_h2o,}
+                  \DataTypeTok{standardize =} \OtherTok{FALSE}\NormalTok{,}
+                  \DataTypeTok{family =} \StringTok{"binomial"}\NormalTok{)}
+\NormalTok{h2ofit}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Coefficients}\OperatorTok{:}\StringTok{ }\NormalTok{glm coefficients}
+\NormalTok{      names coefficients}
+\DecValTok{1}\NormalTok{ Intercept     }\FloatTok{0.175590}
+\DecValTok{2}\NormalTok{  Distance     }\FloatTok{0.000066}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{\texorpdfstring{\texttt{h2o}
+models}{h2o models}}\label{h2o-models}
+
+\begin{center}\includegraphics[width=27.51in]{images/ch6_h2o_models} \end{center}
+
+\BeginKnitrBlock{exercise}
+\protect\hypertarget{exr:unnamed-chunk-134}{}{\label{exr:unnamed-chunk-134}
+}Run the same analysis with the whole dataset \texttt{allyears.csv}.
+\EndKnitrBlock{exercise}
 
 \section{Spark}\label{spark}
 

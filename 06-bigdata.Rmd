@@ -193,9 +193,71 @@ summary(fit)
 ### Database connections and lazy evaluation
 
 ```{r eval=FALSE}
-D <- fread("~/Dropbox/Data17/AirFlights/")
+library(data.table)
+D <- fread("~/Dropbox/Data17/ml-20m/ratings.csv")
+
+library(sqldf)
+read.csv.sql(file = "~/Dropbox/Data17/ml-20m/ratings.csv",
+             sql = c("ATTACH 'ratings.sqlite3' AS NEW"))
+read.csv.sql(file = "~/Dropbox/Data17/ml-20m/ratings.csv",
+             sql = "CREATE TABLE ratings_table AS SELECT * FROM file",
+             dbname = "ratings.sqlite3")
+
+library(dplyr)
+library(DBI)
+
+con <- DBI::dbConnect(RSQLite::SQLite(), dbname = "ratings.sqlite3")
+
+ratings_db <- tbl(con, "ratings_table")
+ratings_db %>% 
+  select(ends_with("Id")) %>% 
+  filter(movieId < 100)
+
 ```
 
+```{r eval=FALSE}
+# Source:   lazy query [?? x 2]
+# Database: sqlite 3.19.3
+#   [/Users/cchoirat/Documents/LocalGit/bigdata17/ratings.sqlite3]
+   userId movieId
+    <int>   <int>
+ 1      1       2
+ 2      1      29
+ 3      1      32
+ 4      1      47
+ 5      1      50
+ 6      2       3
+ 7      2      62
+ 8      2      70
+ 9      3       1
+10      3      24
+# ... with more rows
+# ... with more rows
+```
+
+```{r eval=FALSE}
+ratings_db %>% 
+  select(ends_with("Id")) %>% 
+  filter(movieId < 100) %>% 
+  collect()
+```
+
+```{r eval=FALSE}
+# A tibble: 790,226 x 2
+   userId movieId
+    <int>   <int>
+ 1      1       2
+ 2      1      29
+ 3      1      32
+ 4      1      47
+ 5      1      50
+ 6      2       3
+ 7      2      62
+ 8      2      70
+ 9      3       1
+10      3      24
+# ... with 790,216 more rows
+```
 
 ## Scaling up
 
@@ -250,8 +312,6 @@ localH2O <- h2o.init(min_mem_size = "20g")
 #          proxy = NA_character_, https = FALSE, insecure = FALSE,
 #          username = NA_character_, password = NA_character_)
 ```
-
-(No persistence beyond the R session when h2O is started from R.)
 
 ```{r eval=FALSE}
  Connection successful!
@@ -334,6 +394,8 @@ is.data.frame(cars_to_h2o) # FALSE
 class(cars_to_h2o) # H2OFrame
 ```
 
+(No persistence beyond the R session when h2O is started from R.)
+
 ### h2o functions
 
 ```{r eval=FALSE}
@@ -356,6 +418,74 @@ From the browser: 'Data' -> 'List All Frames'
 
 ```{r echo=FALSE, fig.align="center", h2o_list_data}
 knitr::include_graphics("images/ch6_h2o_list_data.png")
+```
+
+### Importing data into h2o from disk
+
+```{r eval=FALSE}
+airlines_path <- "/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.csv" # full path
+airlines_to_h2o <- h2o.importFile(path = airlines_path,
+                                  destination_frame = "airlines_from_r")
+summary(airlines_to_h2o)
+```
+
+### Running a statistical model
+
+```{r eval=FALSE}
+h2ofit <- h2o.glm(y = "ArrDelay", x = "Distance",
+                  training_frame = airlines_to_h2o,
+                  intercept = TRUE, # default is TRUE
+                  family = "gaussian")
+h2ofit
+summary(h2ofit)
+```
+
+```{r eval=FALSE}
+Coefficients: glm coefficients
+      names coefficients standardized_coefficients
+1 Intercept     7.702657                  9.308665
+2  Distance     0.002199                  1.272253
+```
+
+
+```{r eval=FALSE}
+airlines <- read.csv("~/Dropbox/Data17/AirFlights/allyears2k.csv")
+rfit <- lm(ArrDelay ~ Distance, data = airlines)
+summary(rfit)
+```
+
+```{r eval=FALSE}
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 7.7011553  0.2326198  33.106   <2e-16 ***
+Distance    0.0022045  0.0002487   8.865   <2e-16 ***
+```
+
+## Running a GLM model
+
+```{r eval=FALSE}
+h2ofit <- h2o.glm(y = "IsArrDelayed", x = "Distance",
+                  training_frame = airlines_to_h2o,
+                  standardize = FALSE,
+                  family = "binomial")
+h2ofit
+```
+
+```{r eval=FALSE}
+Coefficients: glm coefficients
+      names coefficients
+1 Intercept     0.175590
+2  Distance     0.000066
+```
+
+### `h2o` models
+
+```{r echo=FALSE, fig.align="center", h2o_models}
+knitr::include_graphics("images/ch6_h2o_models.png")
+```
+
+```{exercise}
+Run the same analysis with the whole dataset `allyears.csv`.
 ```
 
 ## Spark

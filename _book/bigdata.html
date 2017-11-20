@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-11-16">
+<meta name="date" content="2017-11-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -261,10 +261,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.15.1" data-path="bigdata.html"><a href="bigdata.html#importing-data-into-h2o-from-the-r-session"><i class="fa fa-check"></i><b>6.15.1</b> Importing data into h2o from the R session</a></li>
 <li class="chapter" data-level="6.15.2" data-path="bigdata.html"><a href="bigdata.html#h2o-functions"><i class="fa fa-check"></i><b>6.15.2</b> h2o functions</a></li>
 <li class="chapter" data-level="6.15.3" data-path="bigdata.html"><a href="bigdata.html#lets-check-from-the-h2o-jvm"><i class="fa fa-check"></i><b>6.15.3</b> Let’s check from the h2o JVM</a></li>
+<li class="chapter" data-level="6.15.4" data-path="bigdata.html"><a href="bigdata.html#importing-data-into-h2o-from-disk"><i class="fa fa-check"></i><b>6.15.4</b> Importing data into h2o from disk</a></li>
+<li class="chapter" data-level="6.15.5" data-path="bigdata.html"><a href="bigdata.html#running-a-statistical-model"><i class="fa fa-check"></i><b>6.15.5</b> Running a statistical model</a></li>
 </ul></li>
-<li class="chapter" data-level="6.16" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.16</b> Spark</a></li>
-<li class="chapter" data-level="6.17" data-path="bigdata.html"><a href="bigdata.html#sparkling-water"><i class="fa fa-check"></i><b>6.17</b> <code>Sparkling Water</code></a><ul>
-<li class="chapter" data-level="6.17.1" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.17.1</b> More?</a></li>
+<li class="chapter" data-level="6.16" data-path="bigdata.html"><a href="bigdata.html#running-a-glm-model"><i class="fa fa-check"></i><b>6.16</b> Running a GLM model</a><ul>
+<li class="chapter" data-level="6.16.1" data-path="bigdata.html"><a href="bigdata.html#h2o-models"><i class="fa fa-check"></i><b>6.16.1</b> <code>h2o</code> models</a></li>
+</ul></li>
+<li class="chapter" data-level="6.17" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.17</b> Spark</a></li>
+<li class="chapter" data-level="6.18" data-path="bigdata.html"><a href="bigdata.html#sparkling-water"><i class="fa fa-check"></i><b>6.18</b> <code>Sparkling Water</code></a><ul>
+<li class="chapter" data-level="6.18.1" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.18.1</b> More?</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>7</b> Visualization</a><ul>
@@ -470,7 +475,60 @@ fit
 </div>
 <div id="database-connections-and-lazy-evaluation" class="section level3">
 <h3><span class="header-section-number">6.6.4</span> Database connections and lazy evaluation</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">D &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;~/Dropbox/Data17/AirFlights/&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table)
+D &lt;-<span class="st"> </span><span class="kw">fread</span>(<span class="st">&quot;~/Dropbox/Data17/ml-20m/ratings.csv&quot;</span>)
+
+<span class="kw">library</span>(sqldf)
+<span class="kw">read.csv.sql</span>(<span class="dt">file =</span> <span class="st">&quot;~/Dropbox/Data17/ml-20m/ratings.csv&quot;</span>,
+             <span class="dt">sql =</span> <span class="kw">c</span>(<span class="st">&quot;ATTACH &#39;ratings.sqlite3&#39; AS NEW&quot;</span>))
+<span class="kw">read.csv.sql</span>(<span class="dt">file =</span> <span class="st">&quot;~/Dropbox/Data17/ml-20m/ratings.csv&quot;</span>,
+             <span class="dt">sql =</span> <span class="st">&quot;CREATE TABLE ratings_table AS SELECT * FROM file&quot;</span>,
+             <span class="dt">dbname =</span> <span class="st">&quot;ratings.sqlite3&quot;</span>)
+
+<span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(DBI)
+
+con &lt;-<span class="st"> </span>DBI<span class="op">::</span><span class="kw">dbConnect</span>(RSQLite<span class="op">::</span><span class="kw">SQLite</span>(), <span class="dt">dbname =</span> <span class="st">&quot;ratings.sqlite3&quot;</span>)
+
+ratings_db &lt;-<span class="st"> </span><span class="kw">tbl</span>(con, <span class="st">&quot;ratings_table&quot;</span>)
+ratings_db <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="kw">ends_with</span>(<span class="st">&quot;Id&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(movieId <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Source:   lazy query [?? x 2]</span>
+<span class="co"># Database: sqlite 3.19.3</span>
+<span class="co">#   [/Users/cchoirat/Documents/LocalGit/bigdata17/ratings.sqlite3]</span>
+   userId movieId
+    <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>int<span class="op">&gt;</span>
+<span class="st"> </span><span class="dv">1</span>      <span class="dv">1</span>       <span class="dv">2</span>
+ <span class="dv">2</span>      <span class="dv">1</span>      <span class="dv">29</span>
+ <span class="dv">3</span>      <span class="dv">1</span>      <span class="dv">32</span>
+ <span class="dv">4</span>      <span class="dv">1</span>      <span class="dv">47</span>
+ <span class="dv">5</span>      <span class="dv">1</span>      <span class="dv">50</span>
+ <span class="dv">6</span>      <span class="dv">2</span>       <span class="dv">3</span>
+ <span class="dv">7</span>      <span class="dv">2</span>      <span class="dv">62</span>
+ <span class="dv">8</span>      <span class="dv">2</span>      <span class="dv">70</span>
+ <span class="dv">9</span>      <span class="dv">3</span>       <span class="dv">1</span>
+<span class="dv">10</span>      <span class="dv">3</span>      <span class="dv">24</span>
+<span class="co"># ... with more rows</span>
+<span class="co"># ... with more rows</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ratings_db <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="kw">ends_with</span>(<span class="st">&quot;Id&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(movieId <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">collect</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># A tibble: 790,226 x 2</span>
+   userId movieId
+    <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>int<span class="op">&gt;</span>
+<span class="st"> </span><span class="dv">1</span>      <span class="dv">1</span>       <span class="dv">2</span>
+ <span class="dv">2</span>      <span class="dv">1</span>      <span class="dv">29</span>
+ <span class="dv">3</span>      <span class="dv">1</span>      <span class="dv">32</span>
+ <span class="dv">4</span>      <span class="dv">1</span>      <span class="dv">47</span>
+ <span class="dv">5</span>      <span class="dv">1</span>      <span class="dv">50</span>
+ <span class="dv">6</span>      <span class="dv">2</span>       <span class="dv">3</span>
+ <span class="dv">7</span>      <span class="dv">2</span>      <span class="dv">62</span>
+ <span class="dv">8</span>      <span class="dv">2</span>      <span class="dv">70</span>
+ <span class="dv">9</span>      <span class="dv">3</span>       <span class="dv">1</span>
+<span class="dv">10</span>      <span class="dv">3</span>      <span class="dv">24</span>
+<span class="co"># ... with 790,216 more rows</span></code></pre></div>
 </div>
 </div>
 <div id="scaling-up" class="section level2">
@@ -515,7 +573,6 @@ localH2O &lt;-<span class="st"> </span><span class="kw">h2o.init</span>(<span cl
 <span class="co">#          ice_root = tempdir(), strict_version_check = TRUE,</span>
 <span class="co">#          proxy = NA_character_, https = FALSE, insecure = FALSE,</span>
 <span class="co">#          username = NA_character_, password = NA_character_)</span></code></pre></div>
-<p>(No persistence beyond the R session when h2O is started from R.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> Connection successful<span class="op">!</span>
 
 R is connected to the H2O cluster<span class="op">:</span><span class="st"> </span>
@@ -582,6 +639,7 @@ R is connected to the H2O cluster<span class="op">:</span><span class="st"> </sp
 cars_to_h2o &lt;-<span class="st"> </span><span class="kw">as.h2o</span>(cars, <span class="dt">destination_frame =</span> <span class="st">&quot;cars_from_r&quot;</span>)
 <span class="kw">is.data.frame</span>(cars_to_h2o) <span class="co"># FALSE</span>
 <span class="kw">class</span>(cars_to_h2o) <span class="co"># H2OFrame</span></code></pre></div>
+<p>(No persistence beyond the R session when h2O is started from R.)</p>
 </div>
 <div id="h2o-functions" class="section level3">
 <h3><span class="header-section-number">6.15.2</span> h2o functions</h3>
@@ -599,9 +657,57 @@ cars_to_h2o &lt;-<span class="st"> </span><span class="kw">as.h2o</span>(cars, <
 <p>From the browser: ‘Data’ -&gt; ‘List All Frames’</p>
 <p><img src="images/ch6_h2o_list_data.png" width="1023" style="display: block; margin: auto;" /></p>
 </div>
+<div id="importing-data-into-h2o-from-disk" class="section level3">
+<h3><span class="header-section-number">6.15.4</span> Importing data into h2o from disk</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airlines_path &lt;-<span class="st"> &quot;/Users/cchoirat/Dropbox/Data17/AirFlights/allyears2k.csv&quot;</span> <span class="co"># full path</span>
+airlines_to_h2o &lt;-<span class="st"> </span><span class="kw">h2o.importFile</span>(<span class="dt">path =</span> airlines_path,
+                                  <span class="dt">destination_frame =</span> <span class="st">&quot;airlines_from_r&quot;</span>)
+<span class="kw">summary</span>(airlines_to_h2o)</code></pre></div>
+</div>
+<div id="running-a-statistical-model" class="section level3">
+<h3><span class="header-section-number">6.15.5</span> Running a statistical model</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h2ofit &lt;-<span class="st"> </span><span class="kw">h2o.glm</span>(<span class="dt">y =</span> <span class="st">&quot;ArrDelay&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Distance&quot;</span>,
+                  <span class="dt">training_frame =</span> airlines_to_h2o,
+                  <span class="dt">intercept =</span> <span class="ot">TRUE</span>, <span class="co"># default is TRUE</span>
+                  <span class="dt">family =</span> <span class="st">&quot;gaussian&quot;</span>)
+h2ofit
+<span class="kw">summary</span>(h2ofit)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Coefficients<span class="op">:</span><span class="st"> </span>glm coefficients
+      names coefficients standardized_coefficients
+<span class="dv">1</span> Intercept     <span class="fl">7.702657</span>                  <span class="fl">9.308665</span>
+<span class="dv">2</span>  Distance     <span class="fl">0.002199</span>                  <span class="fl">1.272253</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">airlines &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/Data17/AirFlights/allyears2k.csv&quot;</span>)
+rfit &lt;-<span class="st"> </span><span class="kw">lm</span>(ArrDelay <span class="op">~</span><span class="st"> </span>Distance, <span class="dt">data =</span> airlines)
+<span class="kw">summary</span>(rfit)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Coefficients<span class="op">:</span>
+<span class="st">             </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept) <span class="fl">7.7011553</span>  <span class="fl">0.2326198</span>  <span class="fl">33.106</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+Distance    <span class="fl">0.0022045</span>  <span class="fl">0.0002487</span>   <span class="fl">8.865</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></code></pre></div>
+</div>
+</div>
+<div id="running-a-glm-model" class="section level2">
+<h2><span class="header-section-number">6.16</span> Running a GLM model</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h2ofit &lt;-<span class="st"> </span><span class="kw">h2o.glm</span>(<span class="dt">y =</span> <span class="st">&quot;IsArrDelayed&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Distance&quot;</span>,
+                  <span class="dt">training_frame =</span> airlines_to_h2o,
+                  <span class="dt">standardize =</span> <span class="ot">FALSE</span>,
+                  <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
+h2ofit</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Coefficients<span class="op">:</span><span class="st"> </span>glm coefficients
+      names coefficients
+<span class="dv">1</span> Intercept     <span class="fl">0.175590</span>
+<span class="dv">2</span>  Distance     <span class="fl">0.000066</span></code></pre></div>
+<div id="h2o-models" class="section level3">
+<h3><span class="header-section-number">6.16.1</span> <code>h2o</code> models</h3>
+<p><img src="images/ch6_h2o_models.png" width="990" style="display: block; margin: auto;" /></p>
+
+<div class="exercise">
+<span id="exr:unnamed-chunk-134" class="exercise"><strong>Exercise 6.2  </strong></span>Run the same analysis with the whole dataset <code>allyears.csv</code>.
+</div>
+
+</div>
 </div>
 <div id="spark" class="section level2">
-<h2><span class="header-section-number">6.16</span> Spark</h2>
+<h2><span class="header-section-number">6.17</span> Spark</h2>
 <p>Reading: <a href="https://spark.rstudio.com/" class="uri">https://spark.rstudio.com/</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sparklyr)
 <span class="kw">spark_install</span>(<span class="dt">version =</span> <span class="st">&quot;2.1.0&quot;</span>)</code></pre></div>
@@ -645,10 +751,10 @@ flights_table <span class="op">%&gt;%</span><span class="st"> </span>head</code>
 <p>TODOL change the <code>config</code> arguments of the connection</p>
 </div>
 <div id="sparkling-water" class="section level2">
-<h2><span class="header-section-number">6.17</span> <code>Sparkling Water</code></h2>
+<h2><span class="header-section-number">6.18</span> <code>Sparkling Water</code></h2>
 <p>Reading: <a href="https://spark.rstudio.com/h2o.html" class="uri">https://spark.rstudio.com/h2o.html</a></p>
 <div id="more" class="section level3">
-<h3><span class="header-section-number">6.17.1</span> More?</h3>
+<h3><span class="header-section-number">6.18.1</span> More?</h3>
 <p>GPU</p>
 
 </div>
