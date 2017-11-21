@@ -301,7 +301,7 @@ install.packages("h2o")
 
 ```{r eval=FALSE}
 library(h2o)
-localH2O <- h2o.init(min_mem_size = "20g")
+localH2O <- h2o.init(min_mem_size = "32g")
 ```
 
 ```{r eval=FALSE}
@@ -322,7 +322,7 @@ R is connected to the H2O cluster:
     H2O cluster version age:    1 month and 24 days  
     H2O cluster name:           H2O_started_from_R_cchoirat_bgt310 
     H2O cluster total nodes:    1 
-    H2O cluster total memory:   15.18 GB 
+    H2O cluster total memory:   30.67 GB 
     H2O cluster total cores:    8 
     H2O cluster allowed cores:  8 
     H2O cluster healthy:        TRUE 
@@ -367,7 +367,7 @@ R is connected to the H2O cluster:
     H2O cluster version age:    1 month and 24 days  
     H2O cluster name:           H2O_started_from_R_cchoirat_bgt310 
     H2O cluster total nodes:    1 
-    H2O cluster total memory:   15.18 GB 
+    H2O cluster total memory:   30.67 GB
     H2O cluster total cores:    8 
     H2O cluster allowed cores:  8 
     H2O cluster healthy:        TRUE 
