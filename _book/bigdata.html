@@ -263,14 +263,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="6.15.3" data-path="bigdata.html"><a href="bigdata.html#lets-check-from-the-h2o-jvm"><i class="fa fa-check"></i><b>6.15.3</b> Let’s check from the h2o JVM</a></li>
 <li class="chapter" data-level="6.15.4" data-path="bigdata.html"><a href="bigdata.html#importing-data-into-h2o-from-disk"><i class="fa fa-check"></i><b>6.15.4</b> Importing data into h2o from disk</a></li>
 <li class="chapter" data-level="6.15.5" data-path="bigdata.html"><a href="bigdata.html#running-a-statistical-model"><i class="fa fa-check"></i><b>6.15.5</b> Running a statistical model</a></li>
+<li class="chapter" data-level="6.15.6" data-path="bigdata.html"><a href="bigdata.html#h2o-models"><i class="fa fa-check"></i><b>6.15.6</b> <code>h2o</code> models</a></li>
+<li class="chapter" data-level="6.15.7" data-path="bigdata.html"><a href="bigdata.html#closing-the-h2o-session"><i class="fa fa-check"></i><b>6.15.7</b> Closing the h2o session</a></li>
+<li class="chapter" data-level="6.15.8" data-path="bigdata.html"><a href="bigdata.html#available-algorithms"><i class="fa fa-check"></i><b>6.15.8</b> Available algorithms</a></li>
+<li class="chapter" data-level="6.15.9" data-path="bigdata.html"><a href="bigdata.html#how-to-incorporate-new-models-in-h2o"><i class="fa fa-check"></i><b>6.15.9</b> How to incorporate new models in h2o?</a></li>
 </ul></li>
-<li class="chapter" data-level="6.16" data-path="bigdata.html"><a href="bigdata.html#running-a-glm-model"><i class="fa fa-check"></i><b>6.16</b> Running a GLM model</a><ul>
-<li class="chapter" data-level="6.16.1" data-path="bigdata.html"><a href="bigdata.html#h2o-models"><i class="fa fa-check"></i><b>6.16.1</b> <code>h2o</code> models</a></li>
+<li class="chapter" data-level="6.16" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.16</b> Spark</a><ul>
+<li class="chapter" data-level="6.16.1" data-path="bigdata.html"><a href="bigdata.html#run-a-statistical-model"><i class="fa fa-check"></i><b>6.16.1</b> Run a statistical model</a></li>
+<li class="chapter" data-level="6.16.2" data-path="bigdata.html"><a href="bigdata.html#deployment"><i class="fa fa-check"></i><b>6.16.2</b> Deployment</a></li>
 </ul></li>
-<li class="chapter" data-level="6.17" data-path="bigdata.html"><a href="bigdata.html#spark"><i class="fa fa-check"></i><b>6.17</b> Spark</a></li>
-<li class="chapter" data-level="6.18" data-path="bigdata.html"><a href="bigdata.html#sparkling-water"><i class="fa fa-check"></i><b>6.18</b> <code>Sparkling Water</code></a><ul>
-<li class="chapter" data-level="6.18.1" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.18.1</b> More?</a></li>
-</ul></li>
+<li class="chapter" data-level="6.17" data-path="bigdata.html"><a href="bigdata.html#sparkling-water"><i class="fa fa-check"></i><b>6.17</b> <code>Sparkling Water</code></a></li>
+<li class="chapter" data-level="6.18" data-path="bigdata.html"><a href="bigdata.html#adding-new-models-to-h2o-and-spark"><i class="fa fa-check"></i><b>6.18</b> Adding new models to <code>h2o</code> and <code>spark</code></a></li>
+<li class="chapter" data-level="6.19" data-path="bigdata.html"><a href="bigdata.html#more"><i class="fa fa-check"></i><b>6.19</b> More?</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>7</b> Visualization</a><ul>
 <li class="chapter" data-level="7.1" data-path="visualization.html"><a href="visualization.html#principles-of-visualization"><i class="fa fa-check"></i><b>7.1</b> Principles of visualization</a></li>
@@ -684,30 +688,40 @@ rfit &lt;-<span class="st"> </span><span class="kw">lm</span>(ArrDelay <span cla
 (Intercept) <span class="fl">7.7011553</span>  <span class="fl">0.2326198</span>  <span class="fl">33.106</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
 Distance    <span class="fl">0.0022045</span>  <span class="fl">0.0002487</span>   <span class="fl">8.865</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></code></pre></div>
 </div>
-</div>
-<div id="running-a-glm-model" class="section level2">
-<h2><span class="header-section-number">6.16</span> Running a GLM model</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">h2ofit &lt;-<span class="st"> </span><span class="kw">h2o.glm</span>(<span class="dt">y =</span> <span class="st">&quot;IsArrDelayed&quot;</span>, <span class="dt">x =</span> <span class="st">&quot;Distance&quot;</span>,
-                  <span class="dt">training_frame =</span> airlines_to_h2o,
-                  <span class="dt">standardize =</span> <span class="ot">FALSE</span>,
-                  <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)
-h2ofit</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Coefficients<span class="op">:</span><span class="st"> </span>glm coefficients
-      names coefficients
-<span class="dv">1</span> Intercept     <span class="fl">0.175590</span>
-<span class="dv">2</span>  Distance     <span class="fl">0.000066</span></code></pre></div>
 <div id="h2o-models" class="section level3">
-<h3><span class="header-section-number">6.16.1</span> <code>h2o</code> models</h3>
+<h3><span class="header-section-number">6.15.6</span> <code>h2o</code> models</h3>
 <p><img src="images/ch6_h2o_models.png" width="990" style="display: block; margin: auto;" /></p>
+</div>
+<div id="closing-the-h2o-session" class="section level3">
+<h3><span class="header-section-number">6.15.7</span> Closing the h2o session</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">h2o.shutdown</span>()</code></pre></div>
+</div>
+<div id="available-algorithms" class="section level3">
+<h3><span class="header-section-number">6.15.8</span> Available algorithms</h3>
+<ul>
+<li>Deep learning</li>
+<li>Distributed randon forest</li>
+<li>Gradient boosting method</li>
+<li>Generalized linear modeling</li>
+<li>Generalized low rank modeling</li>
+<li>K-means</li>
+<li>Naive Bayes</li>
+<li>Principal component analysis</li>
+</ul>
+</div>
+<div id="how-to-incorporate-new-models-in-h2o" class="section level3">
+<h3><span class="header-section-number">6.15.9</span> How to incorporate new models in h2o?</h3>
+<p><strong>(+)</strong> built-in models behave very much like R and are scalable</p>
+<p><strong>(-)</strong> not easy to extend (<em>e.g</em>., GLM <a href="https://github.com/h2oai/h2o-3/blob/master/h2o-algos/src/main/java/hex/glm/GLM.java" class="uri">https://github.com/h2oai/h2o-3/blob/master/h2o-algos/src/main/java/hex/glm/GLM.java</a>)</p>
 
 <div class="exercise">
-<span id="exr:unnamed-chunk-134" class="exercise"><strong>Exercise 6.2  </strong></span>Run the same analysis with the whole dataset <code>allyears.csv</code>.
+<span id="exr:unnamed-chunk-133" class="exercise"><strong>Exercise 6.2  </strong></span>Run the same analysis with the whole dataset <code>allyears.csv</code>.
 </div>
 
 </div>
 </div>
 <div id="spark" class="section level2">
-<h2><span class="header-section-number">6.17</span> Spark</h2>
+<h2><span class="header-section-number">6.16</span> Spark</h2>
 <p>Reading: <a href="https://spark.rstudio.com/" class="uri">https://spark.rstudio.com/</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(sparklyr)
 <span class="kw">spark_install</span>(<span class="dt">version =</span> <span class="st">&quot;2.1.0&quot;</span>)</code></pre></div>
@@ -720,6 +734,12 @@ iris_tbl &lt;-<span class="st"> </span><span class="kw">copy_to</span>(sc, iris)
 flights_tbl &lt;-<span class="st"> </span><span class="kw">copy_to</span>(sc, nycflights13<span class="op">::</span>flights, <span class="st">&quot;flights&quot;</span>)
 batting_tbl &lt;-<span class="st"> </span><span class="kw">copy_to</span>(sc, Lahman<span class="op">::</span>Batting, <span class="st">&quot;batting&quot;</span>)
 <span class="kw">src_tbls</span>(sc)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">[<span class="dv">1</span>] <span class="st">&quot;batting&quot;</span> <span class="st">&quot;flights&quot;</span> <span class="st">&quot;iris&quot;</span></code></pre></div>
+<p>You can use SQL:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(DBI)
+iris_preview &lt;-<span class="st"> </span><span class="kw">dbGetQuery</span>(sc, <span class="st">&quot;SELECT * FROM iris LIMIT 10&quot;</span>)</code></pre></div>
+<p>Like h2o, you can open a web interface:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">spark_web</span>(sc)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">top_rows &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/Dropbox/Data17/AirFlights/allyears.csv&quot;</span>, <span class="dt">nrows =</span> <span class="dv">5</span>)
 file_columns &lt;-<span class="st"> </span>top_rows <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(<span class="cf">function</span>(x)<span class="st">&quot;character&quot;</span>)
@@ -730,34 +750,83 @@ file_columns &lt;-<span class="st"> </span>top_rows <span class="op">%&gt;%</spa
                              <span class="dt">memory =</span> <span class="ot">FALSE</span>, 
                              <span class="dt">columns =</span> file_columns, 
                              <span class="dt">infer_schema =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Source:   table&lt;flights2&gt; [?? x 31]</span>
+<span class="co"># Database: spark_connection</span>
+    Year Month DayofMonth DayOfWeek DepTime CRSDepTime ArrTime CRSArrTime UniqueCarrier
+   <span class="op">&lt;</span>chr<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">      </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">         </span><span class="er">&lt;</span>chr<span class="op">&gt;</span>
+<span class="st"> </span><span class="dv">1</span>  <span class="dv">1987</span>    <span class="dv">10</span>         <span class="dv">14</span>         <span class="dv">3</span>     <span class="dv">741</span>        <span class="dv">730</span>     <span class="dv">912</span>        <span class="dv">849</span>            PS
+ <span class="dv">2</span>  <span class="dv">1987</span>    <span class="dv">10</span>         <span class="dv">15</span>         <span class="dv">4</span>     <span class="dv">729</span>        <span class="dv">730</span>     <span class="dv">903</span>        <span class="dv">849</span>            PS
+ <span class="dv">3</span>  <span class="dv">1987</span>    <span class="dv">10</span>         <span class="dv">17</span>         <span class="dv">6</span>     <span class="dv">741</span>        <span class="dv">730</span>     <span class="dv">918</span>        <span class="dv">849</span>            PS
+ <span class="dv">4</span>  <span class="dv">1987</span>    <span class="dv">10</span>         <span class="dv">18</span>         <span class="dv">7</span>     <span class="dv">729</span>        <span class="dv">730</span>     <span class="dv">847</span>        <span class="dv">849</span>            PS
+ <span class="dv">5</span>  <span class="dv">1987</span>    <span class="dv">10</span>         <span class="dv">19</span>         <span class="dv">1</span>     <span class="dv">749</span>        <span class="dv">730</span>     <span class="dv">922</span>        <span class="dv">849</span>            PS
+ <span class="dv">6</span>  <span class="dv">1987</span>    <span class="dv">10</span>         <span class="dv">21</span>         <span class="dv">3</span>     <span class="dv">728</span>        <span class="dv">730</span>     <span class="dv">848</span>        <span class="dv">849</span>            PS
+ <span class="dv">7</span>  <span class="dv">1987</span>    <span class="dv">10</span>         <span class="dv">22</span>         <span class="dv">4</span>     <span class="dv">728</span>        <span class="dv">730</span>     <span class="dv">852</span>        <span class="dv">849</span>            PS
+ <span class="dv">8</span>  <span class="dv">1987</span>    <span class="dv">10</span>         <span class="dv">23</span>         <span class="dv">5</span>     <span class="dv">731</span>        <span class="dv">730</span>     <span class="dv">902</span>        <span class="dv">849</span>            PS
+ <span class="dv">9</span>  <span class="dv">1987</span>    <span class="dv">10</span>         <span class="dv">24</span>         <span class="dv">6</span>     <span class="dv">744</span>        <span class="dv">730</span>     <span class="dv">908</span>        <span class="dv">849</span>            PS
+<span class="dv">10</span>  <span class="dv">1987</span>    <span class="dv">10</span>         <span class="dv">25</span>         <span class="dv">7</span>     <span class="dv">729</span>        <span class="dv">730</span>     <span class="dv">851</span>        <span class="dv">849</span>            PS
+<span class="co"># ... with more rows, and 22 more variables: FlightNum &lt;chr&gt;, TailNum &lt;chr&gt;,</span>
+<span class="co">#   ActualElapsedTime &lt;chr&gt;, CRSElapsedTime &lt;chr&gt;, AirTime &lt;chr&gt;, ArrDelay &lt;chr&gt;,</span>
+<span class="co">#   DepDelay &lt;chr&gt;, Origin &lt;chr&gt;, Dest &lt;chr&gt;, Distance &lt;chr&gt;, TaxiIn &lt;chr&gt;,</span>
+<span class="co">#   TaxiOut &lt;chr&gt;, Cancelled &lt;chr&gt;, CancellationCode &lt;chr&gt;, Diverted &lt;chr&gt;,</span>
+<span class="co">#   CarrierDelay &lt;chr&gt;, WeatherDelay &lt;chr&gt;, NASDelay &lt;chr&gt;, SecurityDelay &lt;chr&gt;,</span>
+<span class="co">#   LateAircraftDelay &lt;chr&gt;, IsArrDelayed &lt;chr&gt;, IsDepDelayed &lt;chr&gt;</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">flights_table &lt;-<span class="st"> </span>sp_flights <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">mutate</span>(<span class="dt">DepDelay =</span> <span class="kw">as.numeric</span>(DepDelay),
          <span class="dt">ArrDelay =</span> <span class="kw">as.numeric</span>(ArrDelay),
+         <span class="dt">Distance =</span> <span class="kw">as.numeric</span>(Distance),
          <span class="dt">SchedDeparture =</span> <span class="kw">as.numeric</span>(CRSDepTime)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">select</span>(Origin, Dest, SchedDeparture, ArrDelay, DepDelay, Month, DayofMonth)
+<span class="st">  </span><span class="kw">select</span>(Origin, Dest, SchedDeparture, ArrDelay, DepDelay, Month, DayofMonth, Distance)
 
 flights_table <span class="op">%&gt;%</span><span class="st"> </span>head</code></pre></div>
 <p>Cache data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sp_flights <span class="op">%&gt;%</span>
 <span class="st">  </span>tally <span class="co"># takes a looooong time</span></code></pre></div>
 <p>123534969…</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">subset_table &lt;-<span class="st"> </span>flights_table <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># might take a while...</span>
+subset_table &lt;-<span class="st"> </span>flights_table <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">compute</span>(<span class="st">&quot;flights_subset&quot;</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">subset_table <span class="op">%&gt;%</span>
 <span class="st">  </span>tally <span class="co"># a bit faster.</span></code></pre></div>
 <p>123534969 as well!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lm</span>(arr_delay <span class="op">~</span><span class="st"> </span>distance, <span class="dt">data =</span> flights_tbl)
-<span class="kw">ml_linear_regression</span>(subset_table, <span class="dt">response =</span> <span class="st">&quot;ArrDelay&quot;</span>, <span class="dt">features =</span> <span class="st">&quot;SchedDeparture&quot;</span>)</code></pre></div>
-<p>TODOL change the <code>config</code> arguments of the connection</p>
+<div id="run-a-statistical-model" class="section level3">
+<h3><span class="header-section-number">6.16.1</span> Run a statistical model</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># small_flights &lt;- spark_read_csv(sc, </span>
+<span class="co">#                              name = &quot;flights2&quot;, </span>
+<span class="co">#                              path = &quot;~/Dropbox/Data17/AirFlights/allyears2k.csv&quot;, </span>
+<span class="co">#                              memory = FALSE, </span>
+<span class="co">#                              columns = file_columns, </span>
+<span class="co">#                              infer_schema = FALSE)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># small_flights_table &lt;- small_flights %&gt;%</span>
+<span class="co">#   mutate(DepDelay = as.numeric(DepDelay),</span>
+<span class="co">#          ArrDelay = as.numeric(ArrDelay),</span>
+<span class="co">#          Distance = as.numeric(Distance),</span>
+<span class="co">#          SchedDeparture = as.numeric(CRSDepTime)) %&gt;%</span>
+<span class="co">#   select(Origin, Dest, SchedDeparture, ArrDelay, DepDelay, Month, DayofMonth, Distance)</span>
+<span class="co"># </span>
+<span class="co"># small_flights_table %&gt;% head</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># lm(arr_delay ~ distance, data = flights_tbl)</span>
+ <span class="kw">ml_linear_regression</span>(flights_table, <span class="dt">response =</span> <span class="st">&quot;ArrDelay&quot;</span>, <span class="dt">features =</span> <span class="st">&quot;Distance&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Coefficients<span class="op">:</span>
+<span class="st"> </span>(Intercept)     Distance 
+<span class="fl">6.9707048955</span> <span class="fl">0.0001100521</span></code></pre></div>
+<p><img src="images/ch6_spark_jobs.png" width="1420" style="display: block; margin: auto;" /></p>
+</div>
+<div id="deployment" class="section level3">
+<h3><span class="header-section-number">6.16.2</span> Deployment</h3>
+<p>Reading: <a href="https://spark.rstudio.com/deployment.html" class="uri">https://spark.rstudio.com/deployment.html</a></p>
+</div>
 </div>
 <div id="sparkling-water" class="section level2">
-<h2><span class="header-section-number">6.18</span> <code>Sparkling Water</code></h2>
+<h2><span class="header-section-number">6.17</span> <code>Sparkling Water</code></h2>
 <p>Reading: <a href="https://spark.rstudio.com/h2o.html" class="uri">https://spark.rstudio.com/h2o.html</a></p>
-<div id="more" class="section level3">
-<h3><span class="header-section-number">6.18.1</span> More?</h3>
+</div>
+<div id="adding-new-models-to-h2o-and-spark" class="section level2">
+<h2><span class="header-section-number">6.18</span> Adding new models to <code>h2o</code> and <code>spark</code></h2>
+</div>
+<div id="more" class="section level2">
+<h2><span class="header-section-number">6.19</span> More?</h2>
 <p>GPU</p>
 
-</div>
 </div>
 </div>
 <h3>References</h3>

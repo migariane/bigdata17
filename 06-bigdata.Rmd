@@ -530,6 +530,13 @@ library(DBI)
 iris_preview <- dbGetQuery(sc, "SELECT * FROM iris LIMIT 10")
 ```
 
+Like h2o, you can open a web interface:
+
+```{r eval=FALSE}
+spark_web(sc)
+```
+
+
 ```{r eval=FALSE}
 top_rows <- read.csv("~/Dropbox/Data17/AirFlights/allyears.csv", nrows = 5)
 file_columns <- top_rows %>% 
@@ -573,6 +580,7 @@ sp_flights <- spark_read_csv(sc,
 flights_table <- sp_flights %>%
   mutate(DepDelay = as.numeric(DepDelay),
          ArrDelay = as.numeric(ArrDelay),
+         Distance = as.numeric(Distance),
          SchedDeparture = as.numeric(CRSDepTime)) %>%
   select(Origin, Dest, SchedDeparture, ArrDelay, DepDelay, Month, DayofMonth, Distance)
 
@@ -604,8 +612,39 @@ subset_table %>%
 ### Run a statistical model
 
 ```{r eval=FALSE}
+# small_flights <- spark_read_csv(sc, 
+#                              name = "flights2", 
+#                              path = "~/Dropbox/Data17/AirFlights/allyears2k.csv", 
+#                              memory = FALSE, 
+#                              columns = file_columns, 
+#                              infer_schema = FALSE)
+```
+
+```{r eval=FALSE}
+# small_flights_table <- small_flights %>%
+#   mutate(DepDelay = as.numeric(DepDelay),
+#          ArrDelay = as.numeric(ArrDelay),
+#          Distance = as.numeric(Distance),
+#          SchedDeparture = as.numeric(CRSDepTime)) %>%
+#   select(Origin, Dest, SchedDeparture, ArrDelay, DepDelay, Month, DayofMonth, Distance)
+# 
+# small_flights_table %>% head
+```
+
+```{r eval=FALSE}
 # lm(arr_delay ~ distance, data = flights_tbl)
-ml_linear_regression(subset_table, response = "ArrDelay", features = "Distance")
+ ml_linear_regression(flights_table, response = "ArrDelay", features = "Distance")
+```
+
+```{r eval=FALSE}
+Coefficients:
+ (Intercept)     Distance 
+6.9707048955 0.0001100521
+```
+
+
+```{r echo=FALSE, fig.align="center", spark_jobs, fig.cap=""}
+knitr::include_graphics("images/ch6_spark_jobs.png")
 ```
 
 ### Deployment

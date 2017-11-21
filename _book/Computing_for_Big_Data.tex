@@ -2031,12 +2031,12 @@ Let's start with an example from \citet{Wickham2014}.
 
 \begin{verbatim}
 ## Unit: nanoseconds
-##           expr  min      lq      mean  median      uq    max neval
-##       [32, 11] 8962 10253.0 11876.268 10727.5 11436.5  72681  1000
-##      $carb[32] 4579  5919.5  7146.879  6374.5  6888.5 135047  1000
-##  [[c(11, 32)]] 3814  4796.5  5646.803  5201.0  5638.5  86632  1000
-##     [[11]][32] 3561  4543.0  5323.011  4907.5  5284.5  43629  1000
-##       .subset2  205   280.0   404.527   326.5   395.0  11174  1000
+##           expr  min     lq      mean median      uq   max neval   cld
+##       [32, 11] 8337 9615.5 10850.044  10100 10781.5 44466  1000     e
+##      $carb[32] 4436 5576.5  6357.447   6076  6608.5 27300  1000    d 
+##  [[c(11, 32)]] 3513 4546.5  5137.518   4884  5344.0 22885  1000   c  
+##     [[11]][32] 3395 4250.5  4844.385   4661  5053.5 38198  1000  b   
+##       .subset2  184  252.0   340.795    289   355.0 10973  1000 a
 \end{verbatim}
 
 \begin{Shaded}
@@ -2420,13 +2420,13 @@ built-in \texttt{lm} and with two functions we defined in package
 \begin{verbatim}
 ## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 <- lm(Hwt ~ Bwt, data = cats) 666.573 699.7115 820.9289
-##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 528.605 554.9735 615.7111
-##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  96.846 120.2085 140.6272
-##    median       uq      max neval
-##  742.3940 847.2425 3636.144   100
-##  586.8095 652.8445  927.836   100
-##  134.1755 155.4200  312.654   100
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 650.644 675.0495 729.6880
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 521.849 536.5205 561.8568
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt) 100.468 112.9180 125.8971
+##    median       uq      max neval cld
+##  691.0415 714.4695 1343.869   100   c
+##  546.3840 572.2600  955.370   100  b 
+##  123.8705 133.8100  199.352   100 a
 \end{verbatim}
 
 \begin{Shaded}
@@ -2625,7 +2625,7 @@ or we can rely on base R functions that accept vector inputs
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 4
+## [1] 8
 \end{verbatim}
 
 \begin{Shaded}
@@ -2653,11 +2653,16 @@ or we can rely on base R functions that accept vector inputs
 
 \begin{verbatim}
 ## Unit: microseconds
-##   expr       min        lq       mean     median        uq       max neval
-##  vacc0  2399.701  3612.383  4674.6925  4206.2740  4720.835 17692.829   100
-##  vacc1  2091.525  2658.894  3519.8335  3091.9810  4024.894 10996.034   100
-##  vacc2   106.483   166.242   646.9759   227.0705   712.890  7849.273   100
-##  vacc3 14835.231 21244.273 24740.3021 23228.2650 27309.717 38817.280   100
+##   expr       min        lq       mean     median         uq       max
+##  vacc0  2017.526  3667.337  5167.3386  4912.2940  5662.9285 19351.297
+##  vacc1  2042.652  2620.314  3711.0110  3441.9660  4005.1105 14949.497
+##  vacc2   110.141   196.981   539.8737   290.1065   609.5075  8748.849
+##  vacc3 13862.866 18034.712 21042.2865 19783.4960 22939.9520 45103.446
+##  neval  cld
+##    100   c 
+##    100  b  
+##    100 a   
+##    100    d
 \end{verbatim}
 
 \begin{Shaded}
@@ -2730,7 +2735,7 @@ Reading: \url{http://adv-r.had.co.nz/Rcpp.html}
 
 \begin{verbatim}
 ## function () 
-## invisible(.Primitive(".Call")(<pointer: 0x10860fcc0>))
+## invisible(.Primitive(".Call")(<pointer: 0x103355100>))
 \end{verbatim}
 
 \begin{Shaded}
@@ -3833,34 +3838,51 @@ model}\label{running-a-statistical-model}
 \end{Highlighting}
 \end{Shaded}
 
-\section{Running a GLM model}\label{running-a-glm-model}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{h2ofit <-}\StringTok{ }\KeywordTok{h2o.glm}\NormalTok{(}\DataTypeTok{y =} \StringTok{"IsArrDelayed"}\NormalTok{, }\DataTypeTok{x =} \StringTok{"Distance"}\NormalTok{,}
-                  \DataTypeTok{training_frame =}\NormalTok{ airlines_to_h2o,}
-                  \DataTypeTok{standardize =} \OtherTok{FALSE}\NormalTok{,}
-                  \DataTypeTok{family =} \StringTok{"binomial"}\NormalTok{)}
-\NormalTok{h2ofit}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{Coefficients}\OperatorTok{:}\StringTok{ }\NormalTok{glm coefficients}
-\NormalTok{      names coefficients}
-\DecValTok{1}\NormalTok{ Intercept     }\FloatTok{0.175590}
-\DecValTok{2}\NormalTok{  Distance     }\FloatTok{0.000066}
-\end{Highlighting}
-\end{Shaded}
-
 \subsection{\texorpdfstring{\texttt{h2o}
 models}{h2o models}}\label{h2o-models}
 
 \begin{center}\includegraphics[width=27.51in]{images/ch6_h2o_models} \end{center}
 
+\subsection{Closing the h2o session}\label{closing-the-h2o-session}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{h2o.shutdown}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Available algorithms}\label{available-algorithms}
+
+\begin{itemize}
+\tightlist
+\item
+  Deep learning
+\item
+  Distributed randon forest
+\item
+  Gradient boosting method
+\item
+  Generalized linear modeling
+\item
+  Generalized low rank modeling
+\item
+  K-means
+\item
+  Naive Bayes
+\item
+  Principal component analysis
+\end{itemize}
+
+\subsection{How to incorporate new models in
+h2o?}\label{how-to-incorporate-new-models-in-h2o}
+
+\textbf{(+)} built-in models behave very much like R and are scalable
+
+\textbf{(-)} not easy to extend (\emph{e.g}., GLM
+\url{https://github.com/h2oai/h2o-3/blob/master/h2o-algos/src/main/java/hex/glm/GLM.java})
+
 \BeginKnitrBlock{exercise}
-\protect\hypertarget{exr:unnamed-chunk-134}{}{\label{exr:unnamed-chunk-134}
+\protect\hypertarget{exr:unnamed-chunk-133}{}{\label{exr:unnamed-chunk-133}
 }Run the same analysis with the whole dataset \texttt{allyears.csv}.
 \EndKnitrBlock{exercise}
 
@@ -3896,6 +3918,29 @@ Reading: \url{https://spark.rstudio.com/}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\NormalTok{[}\DecValTok{1}\NormalTok{] }\StringTok{"batting"} \StringTok{"flights"} \StringTok{"iris"}
+\end{Highlighting}
+\end{Shaded}
+
+You can use SQL:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(DBI)}
+\NormalTok{iris_preview <-}\StringTok{ }\KeywordTok{dbGetQuery}\NormalTok{(sc, }\StringTok{"SELECT * FROM iris LIMIT 10"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Like h2o, you can open a web interface:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{spark_web}\NormalTok{(sc)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{top_rows <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"~/Dropbox/Data17/AirFlights/allyears.csv"}\NormalTok{, }\DataTypeTok{nrows =} \DecValTok{5}\NormalTok{)}
 \NormalTok{file_columns <-}\StringTok{ }\NormalTok{top_rows }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\NormalTok{purrr}\OperatorTok{::}\KeywordTok{map}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(x)}\StringTok{"character"}\NormalTok{)}
@@ -3916,11 +3961,37 @@ Reading: \url{https://spark.rstudio.com/}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# Source:   table<flights2> [?? x 31]}
+\CommentTok{# Database: spark_connection}
+\NormalTok{    Year Month DayofMonth DayOfWeek DepTime CRSDepTime ArrTime CRSArrTime UniqueCarrier}
+   \OperatorTok{<}\NormalTok{chr}\OperatorTok{>}\StringTok{ }\ErrorTok{<}\NormalTok{chr}\OperatorTok{>}\StringTok{      }\ErrorTok{<}\NormalTok{chr}\OperatorTok{>}\StringTok{     }\ErrorTok{<}\NormalTok{chr}\OperatorTok{>}\StringTok{   }\ErrorTok{<}\NormalTok{chr}\OperatorTok{>}\StringTok{      }\ErrorTok{<}\NormalTok{chr}\OperatorTok{>}\StringTok{   }\ErrorTok{<}\NormalTok{chr}\OperatorTok{>}\StringTok{      }\ErrorTok{<}\NormalTok{chr}\OperatorTok{>}\StringTok{         }\ErrorTok{<}\NormalTok{chr}\OperatorTok{>}
+\StringTok{ }\DecValTok{1}  \DecValTok{1987}    \DecValTok{10}         \DecValTok{14}         \DecValTok{3}     \DecValTok{741}        \DecValTok{730}     \DecValTok{912}        \DecValTok{849}\NormalTok{            PS}
+ \DecValTok{2}  \DecValTok{1987}    \DecValTok{10}         \DecValTok{15}         \DecValTok{4}     \DecValTok{729}        \DecValTok{730}     \DecValTok{903}        \DecValTok{849}\NormalTok{            PS}
+ \DecValTok{3}  \DecValTok{1987}    \DecValTok{10}         \DecValTok{17}         \DecValTok{6}     \DecValTok{741}        \DecValTok{730}     \DecValTok{918}        \DecValTok{849}\NormalTok{            PS}
+ \DecValTok{4}  \DecValTok{1987}    \DecValTok{10}         \DecValTok{18}         \DecValTok{7}     \DecValTok{729}        \DecValTok{730}     \DecValTok{847}        \DecValTok{849}\NormalTok{            PS}
+ \DecValTok{5}  \DecValTok{1987}    \DecValTok{10}         \DecValTok{19}         \DecValTok{1}     \DecValTok{749}        \DecValTok{730}     \DecValTok{922}        \DecValTok{849}\NormalTok{            PS}
+ \DecValTok{6}  \DecValTok{1987}    \DecValTok{10}         \DecValTok{21}         \DecValTok{3}     \DecValTok{728}        \DecValTok{730}     \DecValTok{848}        \DecValTok{849}\NormalTok{            PS}
+ \DecValTok{7}  \DecValTok{1987}    \DecValTok{10}         \DecValTok{22}         \DecValTok{4}     \DecValTok{728}        \DecValTok{730}     \DecValTok{852}        \DecValTok{849}\NormalTok{            PS}
+ \DecValTok{8}  \DecValTok{1987}    \DecValTok{10}         \DecValTok{23}         \DecValTok{5}     \DecValTok{731}        \DecValTok{730}     \DecValTok{902}        \DecValTok{849}\NormalTok{            PS}
+ \DecValTok{9}  \DecValTok{1987}    \DecValTok{10}         \DecValTok{24}         \DecValTok{6}     \DecValTok{744}        \DecValTok{730}     \DecValTok{908}        \DecValTok{849}\NormalTok{            PS}
+\DecValTok{10}  \DecValTok{1987}    \DecValTok{10}         \DecValTok{25}         \DecValTok{7}     \DecValTok{729}        \DecValTok{730}     \DecValTok{851}        \DecValTok{849}\NormalTok{            PS}
+\CommentTok{# ... with more rows, and 22 more variables: FlightNum <chr>, TailNum <chr>,}
+\CommentTok{#   ActualElapsedTime <chr>, CRSElapsedTime <chr>, AirTime <chr>, ArrDelay <chr>,}
+\CommentTok{#   DepDelay <chr>, Origin <chr>, Dest <chr>, Distance <chr>, TaxiIn <chr>,}
+\CommentTok{#   TaxiOut <chr>, Cancelled <chr>, CancellationCode <chr>, Diverted <chr>,}
+\CommentTok{#   CarrierDelay <chr>, WeatherDelay <chr>, NASDelay <chr>, SecurityDelay <chr>,}
+\CommentTok{#   LateAircraftDelay <chr>, IsArrDelayed <chr>, IsDepDelayed <chr>}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \NormalTok{flights_table <-}\StringTok{ }\NormalTok{sp_flights }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{DepDelay =} \KeywordTok{as.numeric}\NormalTok{(DepDelay),}
          \DataTypeTok{ArrDelay =} \KeywordTok{as.numeric}\NormalTok{(ArrDelay),}
+         \DataTypeTok{Distance =} \KeywordTok{as.numeric}\NormalTok{(Distance),}
          \DataTypeTok{SchedDeparture =} \KeywordTok{as.numeric}\NormalTok{(CRSDepTime)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(Origin, Dest, SchedDeparture, ArrDelay, DepDelay, Month, DayofMonth)}
+\StringTok{  }\KeywordTok{select}\NormalTok{(Origin, Dest, SchedDeparture, ArrDelay, DepDelay, Month, DayofMonth, Distance)}
 
 \NormalTok{flights_table }\OperatorTok{%>%}\StringTok{ }\NormalTok{head}
 \end{Highlighting}
@@ -3939,6 +4010,7 @@ Cache data:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# might take a while...}
 \NormalTok{subset_table <-}\StringTok{ }\NormalTok{flights_table }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{compute}\NormalTok{(}\StringTok{"flights_subset"}\NormalTok{)}
 \end{Highlighting}
@@ -3953,20 +4025,67 @@ Cache data:
 
 123534969 as well!
 
+\subsection{Run a statistical model}\label{run-a-statistical-model}
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{lm}\NormalTok{(arr_delay }\OperatorTok{~}\StringTok{ }\NormalTok{distance, }\DataTypeTok{data =}\NormalTok{ flights_tbl)}
-\KeywordTok{ml_linear_regression}\NormalTok{(subset_table, }\DataTypeTok{response =} \StringTok{"ArrDelay"}\NormalTok{, }\DataTypeTok{features =} \StringTok{"SchedDeparture"}\NormalTok{)}
+\CommentTok{# small_flights <- spark_read_csv(sc, }
+\CommentTok{#                              name = "flights2", }
+\CommentTok{#                              path = "~/Dropbox/Data17/AirFlights/allyears2k.csv", }
+\CommentTok{#                              memory = FALSE, }
+\CommentTok{#                              columns = file_columns, }
+\CommentTok{#                              infer_schema = FALSE)}
 \end{Highlighting}
 \end{Shaded}
 
-TODOL change the \texttt{config} arguments of the connection
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# small_flights_table <- small_flights %>%}
+\CommentTok{#   mutate(DepDelay = as.numeric(DepDelay),}
+\CommentTok{#          ArrDelay = as.numeric(ArrDelay),}
+\CommentTok{#          Distance = as.numeric(Distance),}
+\CommentTok{#          SchedDeparture = as.numeric(CRSDepTime)) %>%}
+\CommentTok{#   select(Origin, Dest, SchedDeparture, ArrDelay, DepDelay, Month, DayofMonth, Distance)}
+\CommentTok{# }
+\CommentTok{# small_flights_table %>% head}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# lm(arr_delay ~ distance, data = flights_tbl)}
+ \KeywordTok{ml_linear_regression}\NormalTok{(flights_table, }\DataTypeTok{response =} \StringTok{"ArrDelay"}\NormalTok{, }\DataTypeTok{features =} \StringTok{"Distance"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Coefficients}\OperatorTok{:}
+\StringTok{ }\NormalTok{(Intercept)     Distance }
+\FloatTok{6.9707048955} \FloatTok{0.0001100521}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+
+{\centering \includegraphics[width=39.44in]{images/ch6_spark_jobs} 
+
+}
+
+\end{figure}
+
+\subsection{Deployment}\label{deployment}
+
+Reading: \url{https://spark.rstudio.com/deployment.html}
 
 \section{\texorpdfstring{\texttt{Sparkling\ Water}}{Sparkling Water}}\label{sparkling-water}
 
 Reading: \url{https://spark.rstudio.com/h2o.html}
 
-\subsection{More?}\label{more}
+\section{\texorpdfstring{Adding new models to \texttt{h2o} and
+\texttt{spark}}{Adding new models to h2o and spark}}\label{adding-new-models-to-h2o-and-spark}
+
+\section{More?}\label{more}
 
 GPU
 
