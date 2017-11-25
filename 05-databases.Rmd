@@ -1,4 +1,4 @@
-# SQL {#databases}
+# Databases {#databases}
 
 ## What is SQL?
 
@@ -8,9 +8,7 @@ SQL is an imperative computer language. This means that it describes the output 
   
 ### What is a database?
   
-A database is simply an organized structure for storing and accessing data on disk. There are a number of structures used to store data on disk, each with their own languages. However, despite the variations in structure, the goals (and song) remain the same. The process of data storage on disk is controlled by the database management system (DBMS).  
-
-
+A database is simply an organized structure for storing and accessing data on disk. There are a number of structures used to store data on disk, each with their own languages. However, despite the variations in structure, the goals (and song) remain the same. The process of data storage on disk is controlled by the database management system (DBMS). 
 
 ### Relational Databases (SQL)
 
@@ -142,8 +140,6 @@ movies_table <- copy_to(db, movies)
 db
 ```
 
-
-
 ## Non-Relational Databases (noSQL)
 
 ### Drawbacks of Relational Databases
@@ -152,7 +148,6 @@ db
 - Require a large amount of overhead
 - Difficult to distribute across multiple disks
 - Considered to by some to be inflexible
-
 
 ### Common Types of NoSQL Databases
 - Graph Databases
@@ -164,13 +159,82 @@ db
     - JSON Databases
     - XML Databases
   
-
 ## References
-
 
 The Oscar movie example comes from this lecture by Rafa Irizarry:
 https://github.com/datasciencelabs/2016/blob/master/lectures/wrangling/data-wrangling-with-dplyr.Rmd
   
+## NoSQL: MongoDB
 
+### JSON format
 
+JSON: **J**ava**S**cript **O**bject **N**otation.
+
+Readings:
+
+- http://www.json.org/
+- http://json.org/example.html
+
+```{r}
+library(jsonlite)
+l <- fromJSON(
+  '{
+    "glossary": {
+        "title": "example glossary",
+		"GlossDiv": {
+            "title": "S",
+			"GlossList": {
+                "GlossEntry": {
+                    "ID": "SGML",
+					"SortAs": "SGML",
+					"GlossTerm": "Standard Generalized Markup Language",
+					"Acronym": "SGML",
+					"Abbrev": "ISO 8879:1986",
+					"GlossDef": {
+                        "para": "A meta-markup language, used to create markup languages such as DocBook.",
+						"GlossSeeAlso": ["GML", "XML"]
+                    },
+					"GlossSee": "markup"
+                }
+            }
+        }
+    }
+}'
+)
+l$glossary$title
+l$glossary$GlossDiv$GlossList$GlossEntry$GlossDef
+```
+
+```{r}
+l <- fromJSON("src/example.json")
+```
+
+### MongoDB
+
+Reading: https://docs.mongodb.com/manual/administration/install-community/
+
+With `homebrew` on OS X:
+
+```{r engine="bash", eval=FALSE}
+brew update
+brew install mongodb
+brew tap homebrew/services # once
+brew services start mongodb
+```
+
+## Reading a large JSON file
+
+https://catalog.data.gov/dataset/traffic-violations-56dda
+https://www.dataquest.io/blog/python-json-tutorial/
+
+https://github.com/zemirco/sf-city-lots-json
+
+It's going to take a very long time...
+
+```{r eval=FALSE}
+l <- fromJSON("~/Downloads/rows.json")
+```
+```{r eval=FALSE}
+system("mongoimport --db traffic --collection violations --drop --file ~/Downloads/rows.json")
+```
 

@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-11-20">
+<meta name="date" content="2017-11-24">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -230,6 +230,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.4.2" data-path="databases.html"><a href="databases.html#common-types-of-nosql-databases"><i class="fa fa-check"></i><b>5.4.2</b> Common Types of NoSQL Databases</a></li>
 </ul></li>
 <li class="chapter" data-level="5.5" data-path="databases.html"><a href="databases.html#references"><i class="fa fa-check"></i><b>5.5</b> References</a></li>
+<li class="chapter" data-level="5.6" data-path="databases.html"><a href="databases.html#nosql-mondodb"><i class="fa fa-check"></i><b>5.6</b> NoSQL: MondoDB</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="databases.html"><a href="databases.html#json-format"><i class="fa fa-check"></i><b>5.6.1</b> JSON format</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="bigdata.html"><a href="bigdata.html"><i class="fa fa-check"></i><b>6</b> Big data</a><ul>
 <li class="chapter" data-level="6.1" data-path="bigdata.html"><a href="bigdata.html#how-to-deal-with-very-too-large-datasets"><i class="fa fa-check"></i><b>6.1</b> How to deal with (very / too) large datasets?</a></li>
@@ -322,12 +325,12 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: nanoseconds
-##           expr  min     lq      mean  median      uq     max neval cld
-##       [32, 11] 7973 9432.0 11712.344 10046.5 12461.5  102848  1000   c
-##      $carb[32] 4426 5616.5  6996.589  6148.0  7307.0   38806  1000  b 
-##  [[c(11, 32)]] 3528 4563.5  5656.530  5034.5  6036.0   46515  1000  b 
-##     [[11]][32] 3371 4289.5  6880.696  4762.5  5765.0 1560476  1000  b 
-##       .subset2  203  265.0   404.789   328.5   424.0   12876  1000 a</code></pre>
+##           expr  min      lq      mean  median    uq      max neval cld
+##       [32, 11] 9115 19296.0 49595.349 23448.5 30602 10233420  1000   b
+##      $carb[32] 5332 11278.5 31612.477 13705.0 17200 12657449  1000  ab
+##  [[c(11, 32)]] 4350  9332.5 16733.645 11287.0 14725  1190572  1000  ab
+##     [[11]][32] 3967  8551.0 29651.500 10190.5 13110  9460066  1000  ab
+##       .subset2  205   498.0  1021.551   638.5   857    52986  1000  a</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
@@ -660,14 +663,14 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ## [2,]  4.0340627</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m</code></pre></div>
 <pre><code>## Unit: microseconds
-##                                             expr     min      lq     mean
-##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 637.736 679.399 780.9107
-##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 516.885 545.889 693.2469
-##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  96.450 113.522 131.9749
-##   median       uq      max neval cld
-##  705.119 778.4670 3525.783   100   b
-##  564.699 668.9750 8687.633   100   b
-##  126.872 137.2315  329.192   100  a</code></pre>
+##                                             expr     min       lq     mean
+##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 676.222 739.5975 899.1520
+##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 534.903 580.8595 907.8573
+##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt) 101.703 122.7390 173.2803
+##   median      uq       max neval cld
+##  794.485 950.209  1618.055   100   b
+##  670.765 926.097 10726.445   100   b
+##  144.697 203.532   780.896   100  a</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 </div>
@@ -766,16 +769,16 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: microseconds
-##   expr       min        lq       mean    median         uq        max
-##  vacc0  1963.778  3238.971  6569.1415  3892.376  4590.9310 258956.782
-##  vacc1  1994.628  2517.249  3429.2613  3092.079  3618.3925  12026.067
-##  vacc2   132.070   176.779   533.2003   235.234   504.2295   7873.004
-##  vacc3 12378.503 15497.166 20499.7108 21135.479 23586.8300  40913.425
-##  neval cld
-##    100  b 
-##    100 ab 
-##    100 a  
-##    100   c</code></pre>
+##   expr       min         lq       mean    median        uq       max neval
+##  vacc0  2154.050  3156.5420  4473.2009  4229.350  5018.481 12646.593   100
+##  vacc1  1886.919  2489.3675  3494.0034  3224.059  3839.798 11233.277   100
+##  vacc2   118.992   181.8775   607.6479   272.326   816.241  6934.297   100
+##  vacc3 14082.848 18140.0760 21289.0952 20192.773 23292.768 39778.653   100
+##  cld
+##   b 
+##   b 
+##  a  
+##    c</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
 <p>So, what’s going on?</p>
@@ -811,7 +814,7 @@ m</code></pre></div>
 <span class="st">}&#39;</span>)
 hello</code></pre></div>
 <pre><code>## function () 
-## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x103ef9100&gt;))</code></pre>
+## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x105f12de0&gt;))</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hello</span>()</code></pre></div>
 <pre><code>## Hello, world!</code></pre>
 <p><code>Rprintf</code> is the counterpart of C++ <a href="http://www.cplusplus.com/reference/cstdio/printf/"><code>printf</code></a> function.</p>

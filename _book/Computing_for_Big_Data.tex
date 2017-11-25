@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-11-20}
+  \date{2017-11-24}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -2031,12 +2031,12 @@ Let's start with an example from \citet{Wickham2014}.
 
 \begin{verbatim}
 ## Unit: nanoseconds
-##           expr  min     lq      mean median      uq   max neval   cld
-##       [32, 11] 8337 9615.5 10850.044  10100 10781.5 44466  1000     e
-##      $carb[32] 4436 5576.5  6357.447   6076  6608.5 27300  1000    d 
-##  [[c(11, 32)]] 3513 4546.5  5137.518   4884  5344.0 22885  1000   c  
-##     [[11]][32] 3395 4250.5  4844.385   4661  5053.5 38198  1000  b   
-##       .subset2  184  252.0   340.795    289   355.0 10973  1000 a
+##           expr  min      lq      mean  median      uq    max neval  cld
+##       [32, 11] 9075 10396.5 13225.101 10942.5 11938.0 154637  1000    d
+##      $carb[32] 4653  5842.5  7378.601  6465.0  7190.0  54374  1000   c 
+##  [[c(11, 32)]] 3670  4714.0  6021.797  5205.0  5843.5 117164  1000  b  
+##     [[11]][32] 3449  4429.0  5561.624  4915.0  5485.5  52227  1000  b  
+##       .subset2  198   263.0   359.939   296.5   400.5   1267  1000 a
 \end{verbatim}
 
 \begin{Shaded}
@@ -2420,13 +2420,13 @@ built-in \texttt{lm} and with two functions we defined in package
 \begin{verbatim}
 ## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 <- lm(Hwt ~ Bwt, data = cats) 650.644 675.0495 729.6880
-##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 521.849 536.5205 561.8568
-##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt) 100.468 112.9180 125.8971
-##    median       uq      max neval cld
-##  691.0415 714.4695 1343.869   100   c
-##  546.3840 572.2600  955.370   100  b 
-##  123.8705 133.8100  199.352   100 a
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 687.603 729.5860 919.2828
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 545.708 591.0920 810.3153
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt) 101.732 128.6265 160.1851
+##    median        uq      max neval cld
+##  848.4855 1114.0380 1623.928   100   c
+##  687.5625  944.7065 4178.842   100  b 
+##  143.3700  186.3020  315.696   100 a
 \end{verbatim}
 
 \begin{Shaded}
@@ -2653,16 +2653,16 @@ or we can rely on base R functions that accept vector inputs
 
 \begin{verbatim}
 ## Unit: microseconds
-##   expr       min        lq       mean     median         uq       max
-##  vacc0  2017.526  3667.337  5167.3386  4912.2940  5662.9285 19351.297
-##  vacc1  2042.652  2620.314  3711.0110  3441.9660  4005.1105 14949.497
-##  vacc2   110.141   196.981   539.8737   290.1065   609.5075  8748.849
-##  vacc3 13862.866 18034.712 21042.2865 19783.4960 22939.9520 45103.446
-##  neval  cld
-##    100   c 
-##    100  b  
-##    100 a   
-##    100    d
+##   expr       min        lq      mean    median        uq      max neval
+##  vacc0  2786.032  4380.040  6417.818  5907.273  7882.742 19437.16   100
+##  vacc1  2067.147  3328.137  4778.119  4396.369  5260.566 16917.05   100
+##  vacc2   122.904   223.865   749.117   384.335   874.297  8442.18   100
+##  vacc3 15581.865 25301.957 31650.155 30181.679 34733.643 79763.07   100
+##  cld
+##   b 
+##   b 
+##  a  
+##    c
 \end{verbatim}
 
 \begin{Shaded}
@@ -2735,7 +2735,7 @@ Reading: \url{http://adv-r.had.co.nz/Rcpp.html}
 
 \begin{verbatim}
 ## function () 
-## invisible(.Primitive(".Call")(<pointer: 0x103355100>))
+## invisible(.Primitive(".Call")(<pointer: 0x105f12de0>))
 \end{verbatim}
 
 \begin{Shaded}
@@ -3243,6 +3243,51 @@ Databases}\label{common-types-of-nosql-databases}
 The Oscar movie example comes from this lecture by Rafa Irizarry:
 \url{https://github.com/datasciencelabs/2016/blob/master/lectures/wrangling/data-wrangling-with-dplyr.Rmd}
 
+\section{NoSQL: MondoDB}\label{nosql-mondodb}
+
+\subsection{JSON format}\label{json-format}
+
+Readings:
+
+\begin{itemize}
+\tightlist
+\item
+  \url{http://www.json.org/}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{\{}
+    \StringTok{"glossary"}\OperatorTok{:}\StringTok{ }\NormalTok{\{}
+        \StringTok{"title"}\OperatorTok{:}\StringTok{ "example glossary"}\NormalTok{,}
+        \StringTok{"GlossDiv"}\OperatorTok{:}\StringTok{ }\NormalTok{\{}
+            \StringTok{"title"}\OperatorTok{:}\StringTok{ "S"}\NormalTok{,}
+            \StringTok{"GlossList"}\OperatorTok{:}\StringTok{ }\NormalTok{\{}
+                \StringTok{"GlossEntry"}\OperatorTok{:}\StringTok{ }\NormalTok{\{}
+                    \StringTok{"ID"}\OperatorTok{:}\StringTok{ "SGML"}\NormalTok{,}
+                    \StringTok{"SortAs"}\OperatorTok{:}\StringTok{ "SGML"}\NormalTok{,}
+                    \StringTok{"GlossTerm"}\OperatorTok{:}\StringTok{ "Standard Generalized Markup Language"}\NormalTok{,}
+                    \StringTok{"Acronym"}\OperatorTok{:}\StringTok{ "SGML"}\NormalTok{,}
+                    \StringTok{"Abbrev"}\OperatorTok{:}\StringTok{ "ISO 8879:1986"}\NormalTok{,}
+                    \StringTok{"GlossDef"}\OperatorTok{:}\StringTok{ }\NormalTok{\{}
+                        \StringTok{"para"}\OperatorTok{:}\StringTok{ "A meta-markup language, used to create markup languages such as DocBook."}\NormalTok{,}
+                        \StringTok{"GlossSeeAlso"}\OperatorTok{:}\StringTok{ }\NormalTok{[}\StringTok{"GML"}\NormalTok{, }\StringTok{"XML"}\NormalTok{]}
+\NormalTok{                    \},}
+                    \StringTok{"GlossSee"}\OperatorTok{:}\StringTok{ "markup"}
+\NormalTok{                \}}
+\NormalTok{            \}}
+\NormalTok{        \}}
+\NormalTok{    \}}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \url{http://json.org/example.html}
+\end{itemize}
+
 \chapter{Big data}\label{bigdata}
 
 \section{How to deal with (very / too) large
@@ -3364,7 +3409,7 @@ also tends to perform better than \texttt{read.csv}.
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-108}I/O comparison}
+\caption{\label{tab:unnamed-chunk-109}I/O comparison}
 \centering
 \begin{tabular}[t]{l|l|l|l}
 \hline
@@ -3425,7 +3470,7 @@ Reading:
 \url{https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html}
 
 \BeginKnitrBlock{exercise}
-\protect\hypertarget{exr:unnamed-chunk-111}{}{\label{exr:unnamed-chunk-111}
+\protect\hypertarget{exr:unnamed-chunk-112}{}{\label{exr:unnamed-chunk-112}
 }Benchmark adding a column to a large data frame vs a large data table.
 \EndKnitrBlock{exercise}
 
@@ -3637,7 +3682,7 @@ R}\label{running-h20-locally-within-r}
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(h2o)}
-\NormalTok{localH2O <-}\StringTok{ }\KeywordTok{h2o.init}\NormalTok{(}\DataTypeTok{min_mem_size =} \StringTok{"20g"}\NormalTok{)}
+\NormalTok{localH2O <-}\StringTok{ }\KeywordTok{h2o.init}\NormalTok{(}\DataTypeTok{min_mem_size =} \StringTok{"32g"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3662,7 +3707,7 @@ R}\label{running-h20-locally-within-r}
 \NormalTok{    H2O cluster version age}\OperatorTok{:}\StringTok{    }\DecValTok{1}\NormalTok{ month and }\DecValTok{24}\NormalTok{ days  }
 \NormalTok{    H2O cluster name}\OperatorTok{:}\StringTok{           }\NormalTok{H2O_started_from_R_cchoirat_bgt310 }
 \NormalTok{    H2O cluster total nodes}\OperatorTok{:}\StringTok{    }\DecValTok{1} 
-\NormalTok{    H2O cluster total memory}\OperatorTok{:}\StringTok{   }\FloatTok{15.18}\NormalTok{ GB }
+\NormalTok{    H2O cluster total memory}\OperatorTok{:}\StringTok{   }\FloatTok{30.67}\NormalTok{ GB }
 \NormalTok{    H2O cluster total cores}\OperatorTok{:}\StringTok{    }\DecValTok{8} 
 \NormalTok{    H2O cluster allowed cores}\OperatorTok{:}\StringTok{  }\DecValTok{8} 
 \NormalTok{    H2O cluster healthy}\OperatorTok{:}\StringTok{        }\OtherTok{TRUE} 
@@ -3728,7 +3773,7 @@ execution as regular Java programs to improve performance.
 \NormalTok{    H2O cluster version age}\OperatorTok{:}\StringTok{    }\DecValTok{1}\NormalTok{ month and }\DecValTok{24}\NormalTok{ days  }
 \NormalTok{    H2O cluster name}\OperatorTok{:}\StringTok{           }\NormalTok{H2O_started_from_R_cchoirat_bgt310 }
 \NormalTok{    H2O cluster total nodes}\OperatorTok{:}\StringTok{    }\DecValTok{1} 
-\NormalTok{    H2O cluster total memory}\OperatorTok{:}\StringTok{   }\FloatTok{15.18}\NormalTok{ GB }
+\NormalTok{    H2O cluster total memory}\OperatorTok{:}\StringTok{   }\FloatTok{30.67}\NormalTok{ GB}
 \NormalTok{    H2O cluster total cores}\OperatorTok{:}\StringTok{    }\DecValTok{8} 
 \NormalTok{    H2O cluster allowed cores}\OperatorTok{:}\StringTok{  }\DecValTok{8} 
 \NormalTok{    H2O cluster healthy}\OperatorTok{:}\StringTok{        }\OtherTok{TRUE} 
@@ -3882,7 +3927,7 @@ h2o?}\label{how-to-incorporate-new-models-in-h2o}
 \url{https://github.com/h2oai/h2o-3/blob/master/h2o-algos/src/main/java/hex/glm/GLM.java})
 
 \BeginKnitrBlock{exercise}
-\protect\hypertarget{exr:unnamed-chunk-133}{}{\label{exr:unnamed-chunk-133}
+\protect\hypertarget{exr:unnamed-chunk-134}{}{\label{exr:unnamed-chunk-134}
 }Run the same analysis with the whole dataset \texttt{allyears.csv}.
 \EndKnitrBlock{exercise}
 
