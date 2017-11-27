@@ -1,5 +1,30 @@
 # Visualization {#visualization}
 
+## Maps and GIS
+
+### Longitudes, latitudes and CRS
+
+### Shapefiles
+
+### Backends
+
+#### `gdal`
+
+#### `geos`
+
+### R packages
+
+#### `sp`
+
+#### `sf`
+
+#### `ggmap`
+
+#### `leaflet`
+
+#### `Shiny`
+
 ## Principles of visualization
 
-## Maps and GIS
+Guest lecture (James Honaker)
+

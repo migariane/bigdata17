@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-11-24}
+  \date{2017-11-26}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -2031,12 +2031,12 @@ Let's start with an example from \citet{Wickham2014}.
 
 \begin{verbatim}
 ## Unit: nanoseconds
-##           expr  min      lq      mean  median      uq    max neval  cld
-##       [32, 11] 9075 10396.5 13225.101 10942.5 11938.0 154637  1000    d
-##      $carb[32] 4653  5842.5  7378.601  6465.0  7190.0  54374  1000   c 
-##  [[c(11, 32)]] 3670  4714.0  6021.797  5205.0  5843.5 117164  1000  b  
-##     [[11]][32] 3449  4429.0  5561.624  4915.0  5485.5  52227  1000  b  
-##       .subset2  198   263.0   359.939   296.5   400.5   1267  1000 a
+##           expr  min     lq      mean  median      uq   max neval  cld
+##       [32, 11] 8727 9870.0 11074.690 10325.5 10930.5 69375  1000    d
+##      $carb[32] 4349 5534.5  6257.022  6017.5  6547.5 19547  1000   c 
+##  [[c(11, 32)]] 3661 4488.0  5077.097  4864.5  5339.5 16351  1000  b  
+##     [[11]][32] 3335 4276.5  4898.156  4676.0  5037.0 44020  1000  b  
+##       .subset2  188  252.0   308.724   281.5   345.5   895  1000 a
 \end{verbatim}
 
 \begin{Shaded}
@@ -2420,13 +2420,13 @@ built-in \texttt{lm} and with two functions we defined in package
 \begin{verbatim}
 ## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 <- lm(Hwt ~ Bwt, data = cats) 687.603 729.5860 919.2828
-##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 545.708 591.0920 810.3153
-##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt) 101.732 128.6265 160.1851
-##    median        uq      max neval cld
-##  848.4855 1114.0380 1623.928   100   c
-##  687.5625  944.7065 4178.842   100  b 
-##  143.3700  186.3020  315.696   100 a
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 643.763 665.1025 700.7188
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 518.061 534.8200 573.6917
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  98.808 115.4065 130.3427
+##    median      uq      max neval cld
+##  678.3470 691.299 1342.294   100   c
+##  541.8945 553.228 1676.272   100  b 
+##  123.8450 133.241  273.503   100 a
 \end{verbatim}
 
 \begin{Shaded}
@@ -2653,11 +2653,11 @@ or we can rely on base R functions that accept vector inputs
 
 \begin{verbatim}
 ## Unit: microseconds
-##   expr       min        lq      mean    median        uq      max neval
-##  vacc0  2786.032  4380.040  6417.818  5907.273  7882.742 19437.16   100
-##  vacc1  2067.147  3328.137  4778.119  4396.369  5260.566 16917.05   100
-##  vacc2   122.904   223.865   749.117   384.335   874.297  8442.18   100
-##  vacc3 15581.865 25301.957 31650.155 30181.679 34733.643 79763.07   100
+##   expr       min        lq       mean    median         uq       max neval
+##  vacc0  2684.441  3750.994  5186.5022  4416.331  5875.4315 16263.365   100
+##  vacc1  2076.634  2393.475  3836.4736  3141.947  4419.8295 18217.850   100
+##  vacc2   124.627   195.803   775.9779   301.646   769.5255  7305.132   100
+##  vacc3 14267.925 21099.465 25982.8554 24616.304 29204.2075 49977.009   100
 ##  cld
 ##   b 
 ##   b 
@@ -2735,7 +2735,7 @@ Reading: \url{http://adv-r.had.co.nz/Rcpp.html}
 
 \begin{verbatim}
 ## function () 
-## invisible(.Primitive(".Call")(<pointer: 0x105f12de0>))
+## invisible(.Primitive(".Call")(<pointer: 0x10a828de0>))
 \end{verbatim}
 
 \begin{Shaded}
@@ -2975,7 +2975,7 @@ Reading: \url{https://rstudio.github.io/profvis/}
 \end{Highlighting}
 \end{Shaded}
 
-\chapter{SQL}\label{databases}
+\chapter{Databases}\label{databases}
 
 \section{What is SQL?}\label{what-is-sql}
 
@@ -3243,9 +3243,11 @@ Databases}\label{common-types-of-nosql-databases}
 The Oscar movie example comes from this lecture by Rafa Irizarry:
 \url{https://github.com/datasciencelabs/2016/blob/master/lectures/wrangling/data-wrangling-with-dplyr.Rmd}
 
-\section{NoSQL: MondoDB}\label{nosql-mondodb}
+\section{NoSQL: MongoDB}\label{nosql-mongodb}
 
 \subsection{JSON format}\label{json-format}
+
+JSON: \textbf{J}ava\textbf{S}cript \textbf{O}bject \textbf{N}otation.
 
 Readings:
 
@@ -3253,40 +3255,192 @@ Readings:
 \tightlist
 \item
   \url{http://www.json.org/}
+\item
+  \url{http://json.org/example.html}
 \end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{\{}
-    \StringTok{"glossary"}\OperatorTok{:}\StringTok{ }\NormalTok{\{}
-        \StringTok{"title"}\OperatorTok{:}\StringTok{ "example glossary"}\NormalTok{,}
-        \StringTok{"GlossDiv"}\OperatorTok{:}\StringTok{ }\NormalTok{\{}
-            \StringTok{"title"}\OperatorTok{:}\StringTok{ "S"}\NormalTok{,}
-            \StringTok{"GlossList"}\OperatorTok{:}\StringTok{ }\NormalTok{\{}
-                \StringTok{"GlossEntry"}\OperatorTok{:}\StringTok{ }\NormalTok{\{}
-                    \StringTok{"ID"}\OperatorTok{:}\StringTok{ "SGML"}\NormalTok{,}
-                    \StringTok{"SortAs"}\OperatorTok{:}\StringTok{ "SGML"}\NormalTok{,}
-                    \StringTok{"GlossTerm"}\OperatorTok{:}\StringTok{ "Standard Generalized Markup Language"}\NormalTok{,}
-                    \StringTok{"Acronym"}\OperatorTok{:}\StringTok{ "SGML"}\NormalTok{,}
-                    \StringTok{"Abbrev"}\OperatorTok{:}\StringTok{ "ISO 8879:1986"}\NormalTok{,}
-                    \StringTok{"GlossDef"}\OperatorTok{:}\StringTok{ }\NormalTok{\{}
-                        \StringTok{"para"}\OperatorTok{:}\StringTok{ "A meta-markup language, used to create markup languages such as DocBook."}\NormalTok{,}
-                        \StringTok{"GlossSeeAlso"}\OperatorTok{:}\StringTok{ }\NormalTok{[}\StringTok{"GML"}\NormalTok{, }\StringTok{"XML"}\NormalTok{]}
-\NormalTok{                    \},}
-                    \StringTok{"GlossSee"}\OperatorTok{:}\StringTok{ "markup"}
-\NormalTok{                \}}
-\NormalTok{            \}}
-\NormalTok{        \}}
-\NormalTok{    \}}
-\NormalTok{\}}
+\KeywordTok{library}\NormalTok{(jsonlite)}
+\NormalTok{l <-}\StringTok{ }\KeywordTok{fromJSON}\NormalTok{(}
+  \StringTok{'\{}
+\StringTok{    "glossary": \{}
+\StringTok{        "title": "example glossary",}
+\StringTok{        "GlossDiv": \{}
+\StringTok{            "title": "S",}
+\StringTok{            "GlossList": \{}
+\StringTok{                "GlossEntry": \{}
+\StringTok{                    "ID": "SGML",}
+\StringTok{                    "SortAs": "SGML",}
+\StringTok{                    "GlossTerm": "Standard Generalized Markup Language",}
+\StringTok{                    "Acronym": "SGML",}
+\StringTok{                    "Abbrev": "ISO 8879:1986",}
+\StringTok{                    "GlossDef": \{}
+\StringTok{                        "para": "A meta-markup language, used to create markup languages such as DocBook.",}
+\StringTok{                        "GlossSeeAlso": ["GML", "XML"]}
+\StringTok{                    \},}
+\StringTok{                    "GlossSee": "markup"}
+\StringTok{                \}}
+\StringTok{            \}}
+\StringTok{        \}}
+\StringTok{    \}}
+\StringTok{\}'}
+\NormalTok{)}
+\NormalTok{l}\OperatorTok{$}\NormalTok{glossary}\OperatorTok{$}\NormalTok{title}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{itemize}
-\tightlist
-\item
-  \url{http://json.org/example.html}
-\end{itemize}
+\begin{verbatim}
+## [1] "example glossary"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{l}\OperatorTok{$}\NormalTok{glossary}\OperatorTok{$}\NormalTok{GlossDiv}\OperatorTok{$}\NormalTok{GlossList}\OperatorTok{$}\NormalTok{GlossEntry}\OperatorTok{$}\NormalTok{GlossDef}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $para
+## [1] "A meta-markup language, used to create markup languages such as DocBook."
+## 
+## $GlossSeeAlso
+## [1] "GML" "XML"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{l <-}\StringTok{ }\KeywordTok{fromJSON}\NormalTok{(}\StringTok{"src/example.json"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Reading a JSON file}\label{reading-a-json-file}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{l <-}\StringTok{ }\KeywordTok{fromJSON}\NormalTok{(}\StringTok{"~/Dropbox/Data17/citibike/stations_2017-11-25.json"")}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{l <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
+  \DataTypeTok{a =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{v1 =} \DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{, }\DataTypeTok{v2 =}\NormalTok{ letters[}\DecValTok{1}\OperatorTok{:}\DecValTok{5}\NormalTok{]),}
+  \DataTypeTok{b =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{el1 =} \DecValTok{4}\NormalTok{, }\DataTypeTok{el2 =} \StringTok{"hello"}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{l}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $a
+##   v1 v2
+## 1  1  a
+## 2  2  b
+## 3  3  c
+## 4  4  d
+## 5  5  e
+## 
+## $b
+## $b$el1
+## [1] 4
+## 
+## $b$el2
+## [1] "hello"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{toJSON}\NormalTok{(l)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## {"a":[{"v1":1,"v2":"a"},{"v1":2,"v2":"b"},{"v1":3,"v2":"c"},{"v1":4,"v2":"d"},{"v1":5,"v2":"e"}],"b":{"el1":[4],"el2":["hello"]}}
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{toJSON}\NormalTok{(l, }\DataTypeTok{pretty =} \OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## {
+##   "a": [
+##     {
+##       "v1": 1,
+##       "v2": "a"
+##     },
+##     {
+##       "v1": 2,
+##       "v2": "b"
+##     },
+##     {
+##       "v1": 3,
+##       "v2": "c"
+##     },
+##     {
+##       "v1": 4,
+##       "v2": "d"
+##     },
+##     {
+##       "v1": 5,
+##       "v2": "e"
+##     }
+##   ],
+##   "b": {
+##     "el1": [4],
+##     "el2": ["hello"]
+##   }
+## }
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ll <-}\StringTok{ }\KeywordTok{fromJSON}\NormalTok{(}\KeywordTok{toJSON}\NormalTok{(l))}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{MongoDB}\label{mongodb}
+
+Reading:
+\url{https://docs.mongodb.com/manual/administration/install-community/}
+
+With \texttt{homebrew} on OS X:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{brew}\NormalTok{ update}
+\ExtensionTok{brew}\NormalTok{ install mongodb}
+\ExtensionTok{brew}\NormalTok{ tap homebrew/services }\CommentTok{# once}
+\ExtensionTok{brew}\NormalTok{ services start mongodb}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Introduction}\label{introduction}
+
+Reading: \url{https://jeroen.github.io/mongolite/query-data.html}
+
+\subsection{Example: mHealth data}\label{example-mhealth-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{system}\NormalTok{(}\StringTok{"mongoimport --db mhealth --collection sleep --drop --file ~/Dropbox/Data17/mHealth/sleep-duration.json"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(mongolite)}
+\NormalTok{mhealth <-}\StringTok{ }\KeywordTok{mongo}\NormalTok{(}\DataTypeTok{db =} \StringTok{"mhealth"}\NormalTok{)}
+\NormalTok{sleep <-}\StringTok{ }\KeywordTok{mongo}\NormalTok{(}\DataTypeTok{collection =} \StringTok{"sleep"}\NormalTok{, }\DataTypeTok{db =} \StringTok{"mhealth"}\NormalTok{)}
+\NormalTok{sleep}\OperatorTok{$}\KeywordTok{count}\NormalTok{(}\StringTok{'\{\}'}\NormalTok{) }\CommentTok{# 52 records}
+\NormalTok{alldata <-}\StringTok{ }\NormalTok{sleep}\OperatorTok{$}\KeywordTok{find}\NormalTok{(}\StringTok{'\{\}'}\NormalTok{)}
+\NormalTok{alldata}
+\NormalTok{sleep}\OperatorTok{$}\KeywordTok{find}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
 
 \chapter{Big data}\label{bigdata}
 
@@ -3409,7 +3563,7 @@ also tends to perform better than \texttt{read.csv}.
 
 \begin{table}
 
-\caption{\label{tab:unnamed-chunk-109}I/O comparison}
+\caption{\label{tab:unnamed-chunk-115}I/O comparison}
 \centering
 \begin{tabular}[t]{l|l|l|l}
 \hline
@@ -3470,7 +3624,7 @@ Reading:
 \url{https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html}
 
 \BeginKnitrBlock{exercise}
-\protect\hypertarget{exr:unnamed-chunk-112}{}{\label{exr:unnamed-chunk-112}
+\protect\hypertarget{exr:unnamed-chunk-118}{}{\label{exr:unnamed-chunk-118}
 }Benchmark adding a column to a large data frame vs a large data table.
 \EndKnitrBlock{exercise}
 
@@ -3927,7 +4081,7 @@ h2o?}\label{how-to-incorporate-new-models-in-h2o}
 \url{https://github.com/h2oai/h2o-3/blob/master/h2o-algos/src/main/java/hex/glm/GLM.java})
 
 \BeginKnitrBlock{exercise}
-\protect\hypertarget{exr:unnamed-chunk-134}{}{\label{exr:unnamed-chunk-134}
+\protect\hypertarget{exr:unnamed-chunk-140}{}{\label{exr:unnamed-chunk-140}
 }Run the same analysis with the whole dataset \texttt{allyears.csv}.
 \EndKnitrBlock{exercise}
 
@@ -4134,11 +4288,153 @@ Reading: \url{https://spark.rstudio.com/h2o.html}
 
 GPU
 
+\section{Amazon Web Services (AWS)}\label{amazon-web-services-aws}
+
+AWS Management Console: \url{https://aws.amazon.com/console/}
+
+\begin{itemize}
+\tightlist
+\item
+  Amazon EC2
+\end{itemize}
+
+\begin{quote}
+Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides
+secure, resizable compute capacity in the cloud. It is designed to make
+web-scale cloud computing easier for developers.
+\end{quote}
+
+Let's launch an \texttt{Amazon\ Linux} instance (\texttt{t2.micro} free
+tier eligible) and configure a security group (Custom TCP, port 8787).
+
+\begin{figure}
+
+{\centering \includegraphics[width=30.36in]{images/ch6_aws_security_groups} 
+
+}
+
+\end{figure}
+
+To connect:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{chmod }\DecValTok{400} \OperatorTok{~}\ErrorTok{/}\NormalTok{Downloads}\OperatorTok{/}\NormalTok{bst262}\OperatorTok{-}\NormalTok{demo.pem}
+\NormalTok{ssh }\OperatorTok{-}\NormalTok{i }\StringTok{"~/Downloads/bst262-demo.pem"}\NormalTok{ ec2}\OperatorTok{-}\NormalTok{user}\OperatorTok{@}\NormalTok{ec2}\OperatorTok{-}\DecValTok{18}\OperatorTok{-}\DecValTok{217}\OperatorTok{-}\DecValTok{97}\OperatorTok{-}\FloatTok{206.}\NormalTok{us}\OperatorTok{-}\NormalTok{east}\OperatorTok{-}\FloatTok{2.}\NormalTok{compute.amazonaws.com}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+       __|  __|_  )
+       _|  (     /   Amazon Linux AMI
+      ___|\___|___|
+\end{verbatim}
+
+We install \texttt{R}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sudo yum update}
+\NormalTok{sudo yum list R}\OperatorTok{-}\NormalTok{\textbackslash{}}\OperatorTok{*}
+\NormalTok{sudo yum install R}
+\end{Highlighting}
+\end{Shaded}
+
+and \texttt{Rstudio\ server} (\#
+\url{https://www.rstudio.com/products/rstudio/download-server/})
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wget https}\OperatorTok{:}\ErrorTok{//}\NormalTok{download2.rstudio.org}\OperatorTok{/}\NormalTok{rstudio}\OperatorTok{-}\NormalTok{server}\OperatorTok{-}\NormalTok{rhel}\OperatorTok{-}\FloatTok{1.1}\NormalTok{.}\DecValTok{383}\OperatorTok{-}\NormalTok{x86_}\FloatTok{64.}\NormalTok{rpm}
+\NormalTok{sudo yum install }\OperatorTok{--}\NormalTok{nogpgcheck rstudio}\OperatorTok{-}\NormalTok{server}\OperatorTok{-}\NormalTok{rhel}\OperatorTok{-}\FloatTok{1.1}\NormalTok{.}\DecValTok{383}\OperatorTok{-}\NormalTok{x86_}\FloatTok{64.}\NormalTok{rpm}
+\end{Highlighting}
+\end{Shaded}
+
+We need to add user and password:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sudo useradd rserver}
+\NormalTok{sudo passwd rserver}
+\end{Highlighting}
+\end{Shaded}
+
+RStudio server uses port 8787. Let's fix the security groups:
+
+\begin{figure}
+
+{\centering \includegraphics[width=33.28in]{images/ch6_aws_change_security_groups} 
+
+}
+
+\end{figure}
+
+\begin{figure}
+
+{\centering \includegraphics[width=33.86in]{images/ch6_aws_inbound_rules} 
+
+}
+
+\end{figure}
+
+We can now connect to RStudio server:
+
+\url{http://ec2-18-217-97-206.us-east-2.compute.amazonaws.com:8787/}
+
+\begin{figure}
+
+{\centering \includegraphics[width=12.94in]{images/ch6_aws_rstudio_signin} 
+
+}
+
+\end{figure}
+
+\section{Spark on AWS: Amazon Elastic MapReduce
+(EMR)}\label{spark-on-aws-amazon-elastic-mapreduce-emr}
+
+\url{https://aws.amazon.com/emr/}
+
+\url{https://aws.amazon.com/blogs/big-data/running-sparklyr-rstudios-r-interface-to-spark-on-amazon-emr/}
+
+\subsection{Amazon S3}\label{amazon-s3}
+
+GUI or CLI
+
+\subsection{Amazon CLI}\label{amazon-cli}
+
+\url{https://aws.amazon.com/cli/}
+
 \chapter{Visualization}\label{visualization}
+
+\section{Maps and GIS}\label{maps-and-gis}
+
+\subsection{Longitudes, latitudes and
+CRS}\label{longitudes-latitudes-and-crs}
+
+\subsection{Shapefiles}\label{shapefiles}
+
+\subsection{Backends}\label{backends}
+
+\subsubsection{\texorpdfstring{\texttt{gdal}}{gdal}}\label{gdal}
+
+\subsubsection{\texorpdfstring{\texttt{geos}}{geos}}\label{geos}
+
+\subsection{R packages}\label{r-packages}
+
+\subsubsection{\texorpdfstring{\texttt{sp}}{sp}}\label{sp}
+
+\subsubsection{\texorpdfstring{\texttt{sf}}{sf}}\label{sf}
+
+\subsubsection{\texorpdfstring{\texttt{ggmap}}{ggmap}}\label{ggmap}
+
+\subsubsection{\texorpdfstring{\texttt{leaflet}}{leaflet}}\label{leaflet}
+
+\subsubsection{\texorpdfstring{\texttt{Shiny}}{Shiny}}\label{shiny}
 
 \section{Principles of visualization}\label{principles-of-visualization}
 
-\section{Maps and GIS}\label{maps-and-gis}
+Guest lecture (James Honaker)
 
 \bibliography{book.bib,packages.bib}
 

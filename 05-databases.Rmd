@@ -209,6 +209,24 @@ l$glossary$GlossDiv$GlossList$GlossEntry$GlossDef
 l <- fromJSON("src/example.json")
 ```
 
+## Reading a JSON file
+
+```{r eval=FALSE}
+l <- fromJSON("~/Dropbox/Data17/citibike/stations_2017-11-25.json"")
+```
+
+```{r}
+l <- list(
+  a = data.frame(v1 = 1:5, v2 = letters[1:5]),
+  b = list(el1 = 4, el2 = "hello")
+)
+l
+toJSON(l)
+toJSON(l, pretty = TRUE)
+
+ll <- fromJSON(toJSON(l))
+```
+
 ### MongoDB
 
 Reading: https://docs.mongodb.com/manual/administration/install-community/
@@ -222,19 +240,23 @@ brew tap homebrew/services # once
 brew services start mongodb
 ```
 
-## Reading a large JSON file
+### Introduction
 
-https://catalog.data.gov/dataset/traffic-violations-56dda
-https://www.dataquest.io/blog/python-json-tutorial/
+Reading: https://jeroen.github.io/mongolite/query-data.html
 
-https://github.com/zemirco/sf-city-lots-json
-
-It's going to take a very long time...
+### Example: mHealth data
 
 ```{r eval=FALSE}
-l <- fromJSON("~/Downloads/rows.json")
+system("mongoimport --db mhealth --collection sleep --drop --file ~/Dropbox/Data17/mHealth/sleep-duration.json")
 ```
+
 ```{r eval=FALSE}
-system("mongoimport --db traffic --collection violations --drop --file ~/Downloads/rows.json")
+library(mongolite)
+mhealth <- mongo(db = "mhealth")
+sleep <- mongo(collection = "sleep", db = "mhealth")
+sleep$count('{}') # 52 records
+alldata <- sleep$find('{}')
+alldata
+sleep$find()
 ```
 
