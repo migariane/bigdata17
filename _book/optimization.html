@@ -342,11 +342,11 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 m</code></pre></div>
 <pre><code>## Unit: nanoseconds
 ##           expr  min     lq      mean  median      uq      max neval
-##       [32, 11] 8329 9593.0 11164.557 10046.5 10730.5   156374  1000
-##      $carb[32] 4390 5530.5  6470.164  6013.5  6486.5    36168  1000
-##  [[c(11, 32)]] 3523 4555.0  5401.640  4953.0  5367.0    50680  1000
-##     [[11]][32] 3427 4293.0 35290.695  4644.0  5014.5 30094746  1000
-##       .subset2  207  267.0   380.922   313.0   372.0    12321  1000</code></pre>
+##       [32, 11] 8582 9641.5 10505.040 10018.0 10510.5    72365  1000
+##      $carb[32] 4533 5669.5  6283.743  6058.0  6495.5    18792  1000
+##  [[c(11, 32)]] 3841 4685.5  5365.267  5024.5  5379.0    41614  1000
+##     [[11]][32] 3575 4368.5 36921.770  4670.5  4981.0 32060346  1000
+##       .subset2  213  268.0   381.193   309.0   366.5    10267  1000</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
@@ -679,14 +679,14 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ## [2,]  4.0340627</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m</code></pre></div>
 <pre><code>## Unit: microseconds
-##                                             expr     min       lq     mean
-##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 647.075 676.5180 751.5768
-##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 522.909 540.4245 721.4877
-##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  96.232 108.8430 133.4295
-##    median       uq      max neval
-##  710.3860 764.6335 1272.544   100
-##  558.3480 605.6555 8873.567   100
-##  126.5005 137.6310  458.709   100</code></pre>
+##                                             expr     min       lq
+##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 660.891 736.2685
+##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 521.056 562.2010
+##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  93.828 112.1905
+##       mean  median       uq       max neval
+##   963.1293 843.604 982.7015  3292.410   100
+##  1094.9235 692.165 809.7375 13133.732   100
+##   212.2148 146.990 176.7700  5013.467   100</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 </div>
@@ -785,16 +785,11 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: microseconds
-##   expr       min         lq       mean    median         uq       max
-##  vacc0  1988.187  3330.7330  4538.1536  3692.253  4846.3650 13425.614
-##  vacc1  2174.813  2453.7855  3491.1994  2774.398  3542.8090 12297.096
-##  vacc2   113.004   156.6735   540.8593   206.736   310.9155  6772.596
-##  vacc3 12590.573 17165.6200 19699.3417 18601.276 21566.8270 37502.586
-##  neval
-##    100
-##    100
-##    100
-##    100</code></pre>
+##   expr       min         lq       mean    median        uq       max neval
+##  vacc0  1951.010  3119.5365  4159.0356  3540.418  4926.235 12093.807   100
+##  vacc1  1929.865  2298.2310  3219.4012  2576.026  3453.535 11643.043   100
+##  vacc2    93.255   150.6385   578.7925   203.518   551.191  7077.723   100
+##  vacc3 13145.535 16438.6570 19039.1062 17829.493 20037.198 47388.102   100</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
 <p>So, what’s going on?</p>
@@ -830,7 +825,7 @@ m</code></pre></div>
 <span class="st">}&#39;</span>)
 hello</code></pre></div>
 <pre><code>## function () 
-## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x112989cc0&gt;))</code></pre>
+## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x10ef4fcc0&gt;))</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hello</span>()</code></pre></div>
 <pre><code>## Hello, world!</code></pre>
 <p><code>Rprintf</code> is the counterpart of C++ <a href="http://www.cplusplus.com/reference/cstdio/printf/"><code>printf</code></a> function.</p>

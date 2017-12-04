@@ -844,7 +844,7 @@ subset_table &lt;-<span class="st"> </span>flights_table <span class="op">%&gt;%
 </div>
 <div id="more" class="section level2">
 <h2><span class="header-section-number">6.19</span> More?</h2>
-<p>GPU</p>
+<p>Reading: <a href="http://www.parallelr.com/r-gpu-programming-for-all-with-gpur/" class="uri">http://www.parallelr.com/r-gpu-programming-for-all-with-gpur/</a></p>
 </div>
 <div id="amazon-web-services-aws" class="section level2">
 <h2><span class="header-section-number">6.20</span> Amazon Web Services (AWS)</h2>
@@ -855,11 +855,12 @@ subset_table &lt;-<span class="st"> </span>flights_table <span class="op">%&gt;%
 <blockquote>
 <p>Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure, resizable compute capacity in the cloud. It is designed to make web-scale cloud computing easier for developers.</p>
 </blockquote>
-<p>Let’s launch an <code>Amazon Linux</code> instance (<code>t2.micro</code> free tier eligible) and configure a security group (Custom TCP, port 8787).</p>
-<p><img src="images/ch6_aws_security_groups.png" width="1093" style="display: block; margin: auto;" /></p>
+<p>Let’s launch an <code>Amazon Linux</code> instance (<code>t2.micro</code> free tier eligible) and configure a key pair.</p>
+<p>File permissions: <a href="https://www.tutorialspoint.com/unix/unix-file-permission.htm" class="uri">https://www.tutorialspoint.com/unix/unix-file-permission.htm</a></p>
+<p>Key pairs: <a href="http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html" class="uri">http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html</a></p>
 <p>To connect:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chmod <span class="dv">400</span> <span class="op">~</span><span class="er">/</span>Downloads<span class="op">/</span>bst262<span class="op">-</span>demo.pem
-ssh <span class="op">-</span>i <span class="st">&quot;~/Downloads/bst262-demo.pem&quot;</span> ec2<span class="op">-</span>user<span class="op">@</span>ec2<span class="op">-</span><span class="dv">18</span><span class="op">-</span><span class="dv">217</span><span class="op">-</span><span class="dv">97</span><span class="op">-</span><span class="fl">206.</span>us<span class="op">-</span>east<span class="op">-</span><span class="fl">2.</span>compute.amazonaws.com</code></pre></div>
+ssh <span class="op">-</span>i <span class="op">~</span><span class="er">/</span>Downloads<span class="op">/</span>bst262<span class="op">-</span>demo.pem ec2<span class="op">-</span>user<span class="op">@</span>ec2<span class="op">-</span><span class="dv">18</span><span class="op">-</span><span class="dv">217</span><span class="op">-</span><span class="dv">97</span><span class="op">-</span><span class="fl">206.</span>us<span class="op">-</span>east<span class="op">-</span><span class="fl">2.</span>compute.amazonaws.com</code></pre></div>
 <pre class="txt"><code>
        __|  __|_  )
        _|  (     /   Amazon Linux AMI

@@ -659,7 +659,7 @@ Reading: https://spark.rstudio.com/h2o.html
 
 ## More?
 
-GPU
+Reading: http://www.parallelr.com/r-gpu-programming-for-all-with-gpur/
 
 ## Amazon Web Services (AWS)
 
@@ -669,17 +669,17 @@ AWS Management Console: https://aws.amazon.com/console/
 
 > Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure, resizable compute capacity in the cloud. It is designed to make web-scale cloud computing easier for developers.
 
-Let's launch an `Amazon Linux` instance (`t2.micro` free tier eligible) and configure a security group (Custom TCP, port 8787).
+Let's launch an `Amazon Linux` instance (`t2.micro` free tier eligible) and configure a key pair.
 
-```{r echo=FALSE, fig.align="center", aws_security_groups, fig.cap=""}
-knitr::include_graphics("images/ch6_aws_security_groups.png")
-```
+File permissions: https://www.tutorialspoint.com/unix/unix-file-permission.htm
+
+Key pairs: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
 
 To connect:
 
 ```{r eval=FALSE}
 chmod 400 ~/Downloads/bst262-demo.pem
-ssh -i "~/Downloads/bst262-demo.pem" ec2-user@ec2-18-217-97-206.us-east-2.compute.amazonaws.com
+ssh -i ~/Downloads/bst262-demo.pem ec2-user@ec2-18-217-97-206.us-east-2.compute.amazonaws.com
 ```
 
 ```{txt}

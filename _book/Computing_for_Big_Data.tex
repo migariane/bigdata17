@@ -2032,11 +2032,11 @@ Let's start with an example from \citet{Wickham2014}.
 \begin{verbatim}
 ## Unit: nanoseconds
 ##           expr  min      lq      mean  median      uq   max neval
-##       [32, 11] 8783 10046.0 11326.018 10673.5 11362.5 73789  1000
-##      $carb[32] 4536  5697.5  6763.718  6214.0  6865.0 50683  1000
-##  [[c(11, 32)]] 3732  4628.5  5377.422  5029.5  5507.0 33802  1000
-##     [[11]][32] 3467  4287.5  5093.947  4712.5  5166.5 45145  1000
-##       .subset2  207   275.0   378.369   323.0   394.5 16201  1000
+##       [32, 11] 8990 10230.5 11516.197 10661.5 11281.0 49440  1000
+##      $carb[32] 4580  6015.0  6788.920  6393.0  6833.5 44899  1000
+##  [[c(11, 32)]] 4006  4921.5  5720.973  5242.0  5633.5 37630  1000
+##     [[11]][32] 3634  4674.0  5458.291  4966.5  5296.0 60712  1000
+##       .subset2  211   287.0   398.196   331.5   394.0 10142  1000
 \end{verbatim}
 
 \begin{Shaded}
@@ -2420,13 +2420,13 @@ built-in \texttt{lm} and with two functions we defined in package
 \begin{verbatim}
 ## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 <- lm(Hwt ~ Bwt, data = cats) 659.109 702.1150 829.7587
-##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 529.747 559.7500 630.6565
-##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  98.156 111.7955 143.3574
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 666.847 683.1800 755.4713
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 528.484 546.3545 584.6910
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  97.794 109.0210 131.2484
 ##    median       uq      max neval
-##  768.0775 873.1060 2734.605   100
-##  582.0360 674.5525 1096.898   100
-##  134.1585 156.2835  299.011   100
+##  695.5490 767.7480 3153.755   100
+##  555.4405 591.1710 1244.258   100
+##  124.7095 138.1405  251.516   100
 \end{verbatim}
 
 \begin{Shaded}
@@ -2653,11 +2653,11 @@ or we can rely on base R functions that accept vector inputs
 
 \begin{verbatim}
 ## Unit: microseconds
-##   expr       min        lq       mean    median        uq       max neval
-##  vacc0  2042.355  3349.736  4552.8067  3803.228  5320.949 19835.006   100
-##  vacc1  2106.299  2475.339  3477.1346  2762.795  3389.323 13232.481   100
-##  vacc2   112.700   160.636   546.3875   221.698   614.314  7536.343   100
-##  vacc3 12891.545 19432.145 22898.9777 21261.046 23412.436 82110.084   100
+##   expr       min         lq       mean    median        uq       max neval
+##  vacc0  2126.850  3194.5280  4364.0011  3604.374  5325.344 14113.201   100
+##  vacc1  1920.665  2372.7435  3481.5503  2823.345  3562.289 17408.633   100
+##  vacc2   115.833   156.9005   589.8281   207.438   669.993  6684.966   100
+##  vacc3 12271.616 17963.0550 20943.7606 19205.949 22167.056 73343.494   100
 \end{verbatim}
 
 \begin{Shaded}
@@ -2730,7 +2730,7 @@ Reading: \url{http://adv-r.had.co.nz/Rcpp.html}
 
 \begin{verbatim}
 ## function () 
-## invisible(.Primitive(".Call")(<pointer: 0x11081dcc0>))
+## invisible(.Primitive(".Call")(<pointer: 0x10cddfcc0>))
 \end{verbatim}
 
 \begin{Shaded}
@@ -4301,7 +4301,8 @@ Reading: \url{https://spark.rstudio.com/h2o.html}
 
 \section{More?}\label{more}
 
-GPU
+Reading:
+\url{http://www.parallelr.com/r-gpu-programming-for-all-with-gpur/}
 
 \section{Amazon Web Services (AWS)}\label{amazon-web-services-aws}
 
@@ -4320,22 +4321,20 @@ web-scale cloud computing easier for developers.
 \end{quote}
 
 Let's launch an \texttt{Amazon\ Linux} instance (\texttt{t2.micro} free
-tier eligible) and configure a security group (Custom TCP, port 8787).
+tier eligible) and configure a key pair.
 
-\begin{figure}
+File permissions:
+\url{https://www.tutorialspoint.com/unix/unix-file-permission.htm}
 
-{\centering \includegraphics[width=30.36in]{images/ch6_aws_security_groups} 
-
-}
-
-\end{figure}
+Key pairs:
+\url{http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html}
 
 To connect:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{chmod }\DecValTok{400} \OperatorTok{~}\ErrorTok{/}\NormalTok{Downloads}\OperatorTok{/}\NormalTok{bst262}\OperatorTok{-}\NormalTok{demo.pem}
-\NormalTok{ssh }\OperatorTok{-}\NormalTok{i }\StringTok{"~/Downloads/bst262-demo.pem"}\NormalTok{ ec2}\OperatorTok{-}\NormalTok{user}\OperatorTok{@}\NormalTok{ec2}\OperatorTok{-}\DecValTok{18}\OperatorTok{-}\DecValTok{217}\OperatorTok{-}\DecValTok{97}\OperatorTok{-}\FloatTok{206.}\NormalTok{us}\OperatorTok{-}\NormalTok{east}\OperatorTok{-}\FloatTok{2.}\NormalTok{compute.amazonaws.com}
+\NormalTok{ssh }\OperatorTok{-}\NormalTok{i }\OperatorTok{~}\ErrorTok{/}\NormalTok{Downloads}\OperatorTok{/}\NormalTok{bst262}\OperatorTok{-}\NormalTok{demo.pem ec2}\OperatorTok{-}\NormalTok{user}\OperatorTok{@}\NormalTok{ec2}\OperatorTok{-}\DecValTok{18}\OperatorTok{-}\DecValTok{217}\OperatorTok{-}\DecValTok{97}\OperatorTok{-}\FloatTok{206.}\NormalTok{us}\OperatorTok{-}\NormalTok{east}\OperatorTok{-}\FloatTok{2.}\NormalTok{compute.amazonaws.com}
 \end{Highlighting}
 \end{Shaded}
 
