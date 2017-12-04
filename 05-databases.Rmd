@@ -16,7 +16,6 @@ The most common type of DBMS is a relational database (RDBMS). A Relational Data
 
 ### Types of Relational Databases
 
-
 - Commercial
     - Oracle Database
     - Microsoft
@@ -56,7 +55,6 @@ To Select the name and birthday of all students in classes taught by Dr. Choirat
             pc.profid = p.id
     WHERE p.lastname = "Choirat"
     ```
-        
         
 ## SQLite: An Exercise
 
@@ -174,6 +172,7 @@ Readings:
 
 - http://www.json.org/
 - http://json.org/example.html
+- https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html
 
 ```{r}
 library(jsonlite)
@@ -209,11 +208,23 @@ l$glossary$GlossDiv$GlossList$GlossEntry$GlossDef
 l <- fromJSON("src/example.json")
 ```
 
-## Reading a JSON file
+### Reading a JSON file
 
 ```{r eval=FALSE}
 l <- fromJSON("~/Dropbox/Data17/citibike/stations_2017-11-25.json"")
 ```
+
+### RESTful APIs
+
+REST: **Re**presentational **S**tate **T**ransfer
+
+Readings:
+
+- https://spring.io/understanding/REST
+- https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services
+- https://cran.r-project.org/web/packages/jsonlite/vignettes/json-apis.html
+
+### Back and forth
 
 ```{r}
 l <- list(
@@ -240,7 +251,7 @@ brew tap homebrew/services # once
 brew services start mongodb
 ```
 
-### Introduction
+### Querying data
 
 Reading: https://jeroen.github.io/mongolite/query-data.html
 
@@ -259,4 +270,3 @@ alldata <- sleep$find('{}')
 alldata
 sleep$find()
 ```
-

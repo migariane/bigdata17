@@ -124,7 +124,7 @@
   \postauthor{\par}
   \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-11-26}
+  \date{2017-12-04}
 
 \usepackage{booktabs}
 \usepackage{amsthm}
@@ -2031,12 +2031,12 @@ Let's start with an example from \citet{Wickham2014}.
 
 \begin{verbatim}
 ## Unit: nanoseconds
-##           expr  min     lq      mean  median      uq   max neval  cld
-##       [32, 11] 8727 9870.0 11074.690 10325.5 10930.5 69375  1000    d
-##      $carb[32] 4349 5534.5  6257.022  6017.5  6547.5 19547  1000   c 
-##  [[c(11, 32)]] 3661 4488.0  5077.097  4864.5  5339.5 16351  1000  b  
-##     [[11]][32] 3335 4276.5  4898.156  4676.0  5037.0 44020  1000  b  
-##       .subset2  188  252.0   308.724   281.5   345.5   895  1000 a
+##           expr  min      lq      mean  median      uq   max neval
+##       [32, 11] 8783 10046.0 11326.018 10673.5 11362.5 73789  1000
+##      $carb[32] 4536  5697.5  6763.718  6214.0  6865.0 50683  1000
+##  [[c(11, 32)]] 3732  4628.5  5377.422  5029.5  5507.0 33802  1000
+##     [[11]][32] 3467  4287.5  5093.947  4712.5  5166.5 45145  1000
+##       .subset2  207   275.0   378.369   323.0   394.5 16201  1000
 \end{verbatim}
 
 \begin{Shaded}
@@ -2420,13 +2420,13 @@ built-in \texttt{lm} and with two functions we defined in package
 \begin{verbatim}
 ## Unit: microseconds
 ##                                             expr     min       lq     mean
-##               fit1 <- lm(Hwt ~ Bwt, data = cats) 643.763 665.1025 700.7188
-##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 518.061 534.8200 573.6917
-##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  98.808 115.4065 130.3427
-##    median      uq      max neval cld
-##  678.3470 691.299 1342.294   100   c
-##  541.8945 553.228 1676.272   100  b 
-##  123.8450 133.241  273.503   100 a
+##               fit1 <- lm(Hwt ~ Bwt, data = cats) 659.109 702.1150 829.7587
+##           fit2 <- linmod(Hwt ~ Bwt, data = cats) 529.747 559.7500 630.6565
+##  fit3 <- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  98.156 111.7955 143.3574
+##    median       uq      max neval
+##  768.0775 873.1060 2734.605   100
+##  582.0360 674.5525 1096.898   100
+##  134.1585 156.2835  299.011   100
 \end{verbatim}
 
 \begin{Shaded}
@@ -2625,7 +2625,7 @@ or we can rely on base R functions that accept vector inputs
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 8
+## [1] 4
 \end{verbatim}
 
 \begin{Shaded}
@@ -2653,16 +2653,11 @@ or we can rely on base R functions that accept vector inputs
 
 \begin{verbatim}
 ## Unit: microseconds
-##   expr       min        lq       mean    median         uq       max neval
-##  vacc0  2684.441  3750.994  5186.5022  4416.331  5875.4315 16263.365   100
-##  vacc1  2076.634  2393.475  3836.4736  3141.947  4419.8295 18217.850   100
-##  vacc2   124.627   195.803   775.9779   301.646   769.5255  7305.132   100
-##  vacc3 14267.925 21099.465 25982.8554 24616.304 29204.2075 49977.009   100
-##  cld
-##   b 
-##   b 
-##  a  
-##    c
+##   expr       min        lq       mean    median        uq       max neval
+##  vacc0  2042.355  3349.736  4552.8067  3803.228  5320.949 19835.006   100
+##  vacc1  2106.299  2475.339  3477.1346  2762.795  3389.323 13232.481   100
+##  vacc2   112.700   160.636   546.3875   221.698   614.314  7536.343   100
+##  vacc3 12891.545 19432.145 22898.9777 21261.046 23412.436 82110.084   100
 \end{verbatim}
 
 \begin{Shaded}
@@ -2735,7 +2730,7 @@ Reading: \url{http://adv-r.had.co.nz/Rcpp.html}
 
 \begin{verbatim}
 ## function () 
-## invisible(.Primitive(".Call")(<pointer: 0x10a828de0>))
+## invisible(.Primitive(".Call")(<pointer: 0x11081dcc0>))
 \end{verbatim}
 
 \begin{Shaded}
@@ -3257,6 +3252,8 @@ Readings:
   \url{http://www.json.org/}
 \item
   \url{http://json.org/example.html}
+\item
+  \url{https://cran.r-project.org/web/packages/jsonlite/vignettes/json-aaquickstart.html}
 \end{itemize}
 
 \begin{Shaded}
@@ -3314,13 +3311,31 @@ Readings:
 \end{Highlighting}
 \end{Shaded}
 
-\section{Reading a JSON file}\label{reading-a-json-file}
+\subsection{Reading a JSON file}\label{reading-a-json-file}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{l <-}\StringTok{ }\KeywordTok{fromJSON}\NormalTok{(}\StringTok{"~/Dropbox/Data17/citibike/stations_2017-11-25.json"")}
 \end{Highlighting}
 \end{Shaded}
+
+\subsection{RESTful APIs}\label{restful-apis}
+
+REST: \textbf{Re}presentational \textbf{S}tate \textbf{T}ransfer
+
+Readings:
+
+\begin{itemize}
+\tightlist
+\item
+  \url{https://spring.io/understanding/REST}
+\item
+  \url{https://en.wikipedia.org/wiki/Representational_state_transfer\#Applied_to_Web_services}
+\item
+  \url{https://cran.r-project.org/web/packages/jsonlite/vignettes/json-apis.html}
+\end{itemize}
+
+\subsection{Back and forth}\label{back-and-forth}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3418,7 +3433,7 @@ With \texttt{homebrew} on OS X:
 \end{Highlighting}
 \end{Shaded}
 
-\subsection{Introduction}\label{introduction}
+\subsection{Querying data}\label{querying-data}
 
 Reading: \url{https://jeroen.github.io/mongolite/query-data.html}
 
