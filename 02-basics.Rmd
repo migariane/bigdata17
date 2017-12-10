@@ -64,9 +64,7 @@ head(iris_subset)
 
 With the tidyverse, we can use *pipes*.  The `%>%` operator allows for performing chained operations.
 
-```{r}
-suppressMessages(library(dplyr))
-
+```{r eval=FALSE}
 iris %>%
   select(1, 5) %>% 
   head()
@@ -80,7 +78,7 @@ cut -f 1,5 ~/Dropbox/Data17/iris/iris.tab | head -n 7
 
 To keep observations with "Sepal.Length" greater than 5:
 
-```{r}
+```{r eval=FALSE}
 iris %>%
   filter(Sepal.Length > 5) %>% 
   head()

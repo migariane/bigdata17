@@ -25,7 +25,7 @@
 <meta name="author" content="Christine Choirat">
 
 
-<meta name="date" content="2017-12-04">
+<meta name="date" content="2017-12-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -293,9 +293,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7" data-path="visualization.html"><a href="visualization.html"><i class="fa fa-check"></i><b>7</b> Visualization</a><ul>
 <li class="chapter" data-level="7.1" data-path="visualization.html"><a href="visualization.html#maps-and-gis"><i class="fa fa-check"></i><b>7.1</b> Maps and GIS</a><ul>
 <li class="chapter" data-level="7.1.1" data-path="visualization.html"><a href="visualization.html#longitudes-latitudes-and-crs"><i class="fa fa-check"></i><b>7.1.1</b> Longitudes, latitudes and CRS</a></li>
-<li class="chapter" data-level="7.1.2" data-path="visualization.html"><a href="visualization.html#shapefiles"><i class="fa fa-check"></i><b>7.1.2</b> Shapefiles</a></li>
-<li class="chapter" data-level="7.1.3" data-path="visualization.html"><a href="visualization.html#backends"><i class="fa fa-check"></i><b>7.1.3</b> Backends</a></li>
-<li class="chapter" data-level="7.1.4" data-path="visualization.html"><a href="visualization.html#r-packages"><i class="fa fa-check"></i><b>7.1.4</b> R packages</a></li>
+<li class="chapter" data-level="7.1.2" data-path="visualization.html"><a href="visualization.html#vector-data-and-shapefiles"><i class="fa fa-check"></i><b>7.1.2</b> Vector data and shapefiles</a></li>
+<li class="chapter" data-level="7.1.3" data-path="visualization.html"><a href="visualization.html#raster-data"><i class="fa fa-check"></i><b>7.1.3</b> Raster data</a></li>
+<li class="chapter" data-level="7.1.4" data-path="visualization.html"><a href="visualization.html#backends"><i class="fa fa-check"></i><b>7.1.4</b> Backends</a></li>
+<li class="chapter" data-level="7.1.5" data-path="visualization.html"><a href="visualization.html#r-as-a-gis-packages"><i class="fa fa-check"></i><b>7.1.5</b> R as a GIS: packages</a></li>
+<li class="chapter" data-level="7.1.6" data-path="visualization.html"><a href="visualization.html#example-1"><i class="fa fa-check"></i><b>7.1.6</b> Example</a></li>
+<li class="chapter" data-level="7.1.7" data-path="visualization.html"><a href="visualization.html#from-sp-to-sf"><i class="fa fa-check"></i><b>7.1.7</b> From <code>sp</code> to <code>sf</code></a></li>
 </ul></li>
 <li class="chapter" data-level="7.2" data-path="visualization.html"><a href="visualization.html#principles-of-visualization"><i class="fa fa-check"></i><b>7.2</b> Principles of visualization</a></li>
 </ul></li>
@@ -341,12 +344,12 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: nanoseconds
-##           expr  min     lq      mean  median      uq      max neval
-##       [32, 11] 8582 9641.5 10505.040 10018.0 10510.5    72365  1000
-##      $carb[32] 4533 5669.5  6283.743  6058.0  6495.5    18792  1000
-##  [[c(11, 32)]] 3841 4685.5  5365.267  5024.5  5379.0    41614  1000
-##     [[11]][32] 3575 4368.5 36921.770  4670.5  4981.0 32060346  1000
-##       .subset2  213  268.0   381.193   309.0   366.5    10267  1000</code></pre>
+##           expr  min     lq      mean  median      uq     max neval cld
+##       [32, 11] 8064 9821.0 11523.650 10500.0 11800.5   96373  1000   c
+##      $carb[32] 4368 5754.0  6775.816  6345.0  7128.0   54158  1000  b 
+##  [[c(11, 32)]] 3713 4776.5  5658.275  5248.0  5915.5   53616  1000  b 
+##     [[11]][32] 3280 4451.0  7652.222  4876.5  5528.5 2470991  1000  bc
+##       .subset2  193  272.0   362.460   314.0   380.0    3034  1000 a</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-67-1.png" width="672" /></p>
 </div>
@@ -679,14 +682,14 @@ fit3 &lt;-<span class="st"> </span><span class="kw">linmodEst</span>(<span class
 ## [2,]  4.0340627</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m</code></pre></div>
 <pre><code>## Unit: microseconds
-##                                             expr     min       lq
-##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 660.891 736.2685
-##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 521.056 562.2010
-##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  93.828 112.1905
-##       mean  median       uq       max neval
-##   963.1293 843.604 982.7015  3292.410   100
-##  1094.9235 692.165 809.7375 13133.732   100
-##   212.2148 146.990 176.7700  5013.467   100</code></pre>
+##                                             expr     min       lq     mean
+##               fit1 &lt;- lm(Hwt ~ Bwt, data = cats) 660.859 707.9735 944.8127
+##           fit2 &lt;- linmod(Hwt ~ Bwt, data = cats) 514.046 567.9420 818.8203
+##  fit3 &lt;- linmodEst(cbind(1, cats$Bwt), cats$Hwt)  95.260 123.2410 163.6884
+##    median       uq      max neval cld
+##  785.4320 950.9625 3434.681   100   b
+##  624.2415 765.1990 8361.887   100   b
+##  140.8255 173.2055  505.600   100  a</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
 </div>
@@ -770,7 +773,7 @@ out0 &lt;-<span class="st"> </span><span class="kw">vacc0</span>(age, female, il
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(parallel)
 cores &lt;-<span class="st"> </span><span class="kw">detectCores</span>()
 cores</code></pre></div>
-<pre><code>## [1] 4</code></pre>
+<pre><code>## [1] 8</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">vacc3 &lt;-<span class="st"> </span><span class="cf">function</span>(age, female, ily) {
   <span class="kw">mcmapply</span>(<span class="cf">function</span>(i) <span class="kw">vacc1a</span>(age[i], female[i], ily[i]), <span class="dv">1</span><span class="op">:</span>n, <span class="dt">mc.cores =</span> cores <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
 }
@@ -785,11 +788,16 @@ m &lt;-<span class="st"> </span><span class="kw">microbenchmark</span>(
 )
 m</code></pre></div>
 <pre><code>## Unit: microseconds
-##   expr       min         lq       mean    median        uq       max neval
-##  vacc0  1951.010  3119.5365  4159.0356  3540.418  4926.235 12093.807   100
-##  vacc1  1929.865  2298.2310  3219.4012  2576.026  3453.535 11643.043   100
-##  vacc2    93.255   150.6385   578.7925   203.518   551.191  7077.723   100
-##  vacc3 13145.535 16438.6570 19039.1062 17829.493 20037.198 47388.102   100</code></pre>
+##   expr       min        lq       mean    median        uq       max neval
+##  vacc0  1894.204  3398.816  4418.2977  3882.422  5096.124 11246.478   100
+##  vacc1  2154.973  2478.707  3439.0037  2941.113  3860.746 18848.996   100
+##  vacc2    91.445   173.395   745.3954   267.081  1035.971  6067.985   100
+##  vacc3 22240.615 24451.540 28646.5685 27403.684 31510.960 57419.594   100
+##  cld
+##   b 
+##   b 
+##  a  
+##    c</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ggplot2<span class="op">::</span><span class="kw">autoplot</span>(m)</code></pre></div>
 <p><img src="Computing_for_Big_Data_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
 <p>So, what’s going on?</p>
@@ -825,7 +833,7 @@ m</code></pre></div>
 <span class="st">}&#39;</span>)
 hello</code></pre></div>
 <pre><code>## function () 
-## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x10ef4fcc0&gt;))</code></pre>
+## invisible(.Primitive(&quot;.Call&quot;)(&lt;pointer: 0x10e1c4de0&gt;))</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hello</span>()</code></pre></div>
 <pre><code>## Hello, world!</code></pre>
 <p><code>Rprintf</code> is the counterpart of C++ <a href="http://www.cplusplus.com/reference/cstdio/printf/"><code>printf</code></a> function.</p>
